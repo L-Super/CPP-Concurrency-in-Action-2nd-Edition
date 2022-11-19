@@ -1,0 +1,2881 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>D.3 atomic头文件 · C++并发编程实战（第2版）</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="陈晓伟 chenxiaowei">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="D.4-chinese.html" />
+    
+    
+    <link rel="prev" href="D.2-chinese.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Praise_for_the_first_edition.html">
+            
+                <a href="../Praise_for_the_first_edition.html">
+            
+                    
+                    第一版的赞许
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../preface-chinese.html">
+            
+                <a href="../preface-chinese.html">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../acknowledgments-chinese.html">
+            
+                <a href="../acknowledgments-chinese.html">
+            
+                    
+                    感谢
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../about_this_book-chinese.html">
+            
+                <a href="../about_this_book-chinese.html">
+            
+                    
+                    关于本书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../about_the_author-chinese.html">
+            
+                <a href="../about_the_author-chinese.html">
+            
+                    
+                    关于作者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../about_cover_illustration-chinese.html">
+            
+                <a href="../about_cover_illustration-chinese.html">
+            
+                    
+                    关于封面
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../chapter1/1.0-chinese.html">
+            
+                <a href="../chapter1/1.0-chinese.html">
+            
+                    
+                    第1章 你好，并发世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../chapter1/1.1-chinese.html">
+            
+                <a href="../chapter1/1.1-chinese.html">
+            
+                    
+                    1.1 何谓并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../chapter1/1.2-chinese.html">
+            
+                <a href="../chapter1/1.2-chinese.html">
+            
+                    
+                    1.2 为什么使用并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../chapter1/1.3-chinese.html">
+            
+                <a href="../chapter1/1.3-chinese.html">
+            
+                    
+                    1.3 并发和多线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../chapter1/1.4-chinese.html">
+            
+                <a href="../chapter1/1.4-chinese.html">
+            
+                    
+                    1.4 开始入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../chapter1/1.5-chinese.html">
+            
+                <a href="../chapter1/1.5-chinese.html">
+            
+                    
+                    1.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../chapter2/2.0-chinese.html">
+            
+                <a href="../chapter2/2.0-chinese.html">
+            
+                    
+                    第2章 线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../chapter2/2.1-chinese.html">
+            
+                <a href="../chapter2/2.1-chinese.html">
+            
+                    
+                    2.1 线程的基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../chapter2/2.2-chinese.html">
+            
+                <a href="../chapter2/2.2-chinese.html">
+            
+                    
+                    2.2 传递参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../chapter2/2.3-chinese.html">
+            
+                <a href="../chapter2/2.3-chinese.html">
+            
+                    
+                    2.3 转移所有权
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../chapter2/2.4-chinese.html">
+            
+                <a href="../chapter2/2.4-chinese.html">
+            
+                    
+                    2.4 确定线程数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../chapter2/2.5-chinese.html">
+            
+                <a href="../chapter2/2.5-chinese.html">
+            
+                    
+                    2.5 线程标识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../chapter2/2.6-chinese.html">
+            
+                <a href="../chapter2/2.6-chinese.html">
+            
+                    
+                    2.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../chapter3/3.0-chinese.html">
+            
+                <a href="../chapter3/3.0-chinese.html">
+            
+                    
+                    第3章 共享数据
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../chapter3/3.1-chinese.html">
+            
+                <a href="../chapter3/3.1-chinese.html">
+            
+                    
+                    3.1 共享数据的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../chapter3/3.2-chinese.html">
+            
+                <a href="../chapter3/3.2-chinese.html">
+            
+                    
+                    3.2 使用互斥量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../chapter3/3.3-chinese.html">
+            
+                <a href="../chapter3/3.3-chinese.html">
+            
+                    
+                    3.3 保护共享数据的方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../chapter3/3.4-chinese.html">
+            
+                <a href="../chapter3/3.4-chinese.html">
+            
+                    
+                    3.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../chapter4/4.0-chinese.html">
+            
+                <a href="../chapter4/4.0-chinese.html">
+            
+                    
+                    第4章 同步操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../chapter4/4.1-chinese.html">
+            
+                <a href="../chapter4/4.1-chinese.html">
+            
+                    
+                    4.1 等待事件或条件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../chapter4/4.2-chinese.html">
+            
+                <a href="../chapter4/4.2-chinese.html">
+            
+                    
+                    4.2 使用future
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../chapter4/4.3-chinese.html">
+            
+                <a href="../chapter4/4.3-chinese.html">
+            
+                    
+                    4.3 限时等待
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../chapter4/4.4-chinese.html">
+            
+                <a href="../chapter4/4.4-chinese.html">
+            
+                    
+                    4.4 简化代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../chapter4/4.5-chinese.html">
+            
+                <a href="../chapter4/4.5-chinese.html">
+            
+                    
+                    4.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../chapter5/5.0-chinese.html">
+            
+                <a href="../chapter5/5.0-chinese.html">
+            
+                    
+                    第5章 内存模型和原子操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../chapter5/5.1-chinese.html">
+            
+                <a href="../chapter5/5.1-chinese.html">
+            
+                    
+                    5.1 内存模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../chapter5/5.2-chinese.html">
+            
+                <a href="../chapter5/5.2-chinese.html">
+            
+                    
+                    5.2 原子操作和原子类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../chapter5/5.3-chinese.html">
+            
+                <a href="../chapter5/5.3-chinese.html">
+            
+                    
+                    5.3 同步操作和强制排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../chapter5/5.4-chinese.html">
+            
+                <a href="../chapter5/5.4-chinese.html">
+            
+                    
+                    5.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../chapter6/6.0-chinese.html">
+            
+                <a href="../chapter6/6.0-chinese.html">
+            
+                    
+                    第6章 设计基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../chapter6/6.1-chinese.html">
+            
+                <a href="../chapter6/6.1-chinese.html">
+            
+                    
+                    6.1 并发设计的意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../chapter6/6.2-chinese.html">
+            
+                <a href="../chapter6/6.2-chinese.html">
+            
+                    
+                    6.2 基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../chapter6/6.3-chinese.html">
+            
+                <a href="../chapter6/6.3-chinese.html">
+            
+                    
+                    6.3 设计更加复杂的数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../chapter6/6.4-chinese.html">
+            
+                <a href="../chapter6/6.4-chinese.html">
+            
+                    
+                    6.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../chapter7/7.0-chinese.html">
+            
+                <a href="../chapter7/7.0-chinese.html">
+            
+                    
+                    第7章 设计无锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../chapter7/7.1-chinese.html">
+            
+                <a href="../chapter7/7.1-chinese.html">
+            
+                    
+                    7.1 定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../chapter7/7.2-chinese.html">
+            
+                <a href="../chapter7/7.2-chinese.html">
+            
+                    
+                    7.2 无锁数据结构的例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../chapter7/7.3-chinese.html">
+            
+                <a href="../chapter7/7.3-chinese.html">
+            
+                    
+                    7.3 设计无锁数据结构的指导建议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../chapter7/7.4-chinese.html">
+            
+                <a href="../chapter7/7.4-chinese.html">
+            
+                    
+                    7.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../chapter8/8.0-chinese.html">
+            
+                <a href="../chapter8/8.0-chinese.html">
+            
+                    
+                    第8章 并发设计
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../chapter8/8.1-chinese.html">
+            
+                <a href="../chapter8/8.1-chinese.html">
+            
+                    
+                    8.1 线程间划分工作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../chapter8/8.2-chinese.html">
+            
+                <a href="../chapter8/8.2-chinese.html">
+            
+                    
+                    8.2 并发代码的性能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../chapter8/8.3-chinese.html">
+            
+                <a href="../chapter8/8.3-chinese.html">
+            
+                    
+                    8.3 为多线程性能设计数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="../chapter8/8.4-chinese.html">
+            
+                <a href="../chapter8/8.4-chinese.html">
+            
+                    
+                    8.4 设计并发代码的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.5" data-path="../chapter8/8.5-chinese.html">
+            
+                <a href="../chapter8/8.5-chinese.html">
+            
+                    
+                    8.5 在实践中设计并发代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.6" data-path="../chapter8/8.6-chinese.html">
+            
+                <a href="../chapter8/8.6-chinese.html">
+            
+                    
+                    8.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../chapter9/9.0-chinese.html">
+            
+                <a href="../chapter9/9.0-chinese.html">
+            
+                    
+                    第9章 高级线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../chapter9/9.1-chinese.html">
+            
+                <a href="../chapter9/9.1-chinese.html">
+            
+                    
+                    9.1 线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../chapter9/9.2-chinese.html">
+            
+                <a href="../chapter9/9.2-chinese.html">
+            
+                    
+                    9.2 中断线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../chapter9/9.3-chinese.html">
+            
+                <a href="../chapter9/9.3-chinese.html">
+            
+                    
+                    9.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../chapter10/10.0-chinese.html">
+            
+                <a href="../chapter10/10.0-chinese.html">
+            
+                    
+                    第10章 并行算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../chapter10/10.1-chinese.html">
+            
+                <a href="../chapter10/10.1-chinese.html">
+            
+                    
+                    10.1 并行化标准库算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../chapter10/10.2-chinese.html">
+            
+                <a href="../chapter10/10.2-chinese.html">
+            
+                    
+                    10.2 执行策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="../chapter10/10.3-chinese.html">
+            
+                <a href="../chapter10/10.3-chinese.html">
+            
+                    
+                    10.3 C++标准库中的并行算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="../chapter10/10.4-chinese.html">
+            
+                <a href="../chapter10/10.4-chinese.html">
+            
+                    
+                    10.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../chapter11/11.0-chinese.html">
+            
+                <a href="../chapter11/11.0-chinese.html">
+            
+                    
+                    第11章 测试和调试多线程应用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../chapter11/11.1-chinese.html">
+            
+                <a href="../chapter11/11.1-chinese.html">
+            
+                    
+                    11.1 与并发相关的Bug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.2" data-path="../chapter11/11.2-chinese.html">
+            
+                <a href="../chapter11/11.2-chinese.html">
+            
+                    
+                    11.2 定位并发Bug的技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.3" data-path="../chapter11/11.3-chinese.html">
+            
+                <a href="../chapter11/11.3-chinese.html">
+            
+                    
+                    11.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="../appendix_A/A.0-chinese.html">
+            
+                <a href="../appendix_A/A.0-chinese.html">
+            
+                    
+                    附录A C++11特性简明参考(部分)
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.19.1" data-path="../appendix_A/A.1-chinese.html">
+            
+                <a href="../appendix_A/A.1-chinese.html">
+            
+                    
+                    A.1 右值引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.2" data-path="../appendix_A/A.2-chinese.html">
+            
+                <a href="../appendix_A/A.2-chinese.html">
+            
+                    
+                    A.2 删除函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.3" data-path="../appendix_A/A.3-chinese.html">
+            
+                <a href="../appendix_A/A.3-chinese.html">
+            
+                    
+                    A.3 默认函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.4" data-path="../appendix_A/A.4-chinese.html">
+            
+                <a href="../appendix_A/A.4-chinese.html">
+            
+                    
+                    A.4 常量表达式函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.5" data-path="../appendix_A/A.5-chinese.html">
+            
+                <a href="../appendix_A/A.5-chinese.html">
+            
+                    
+                    A.5 Lambda函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.6" data-path="../appendix_A/A.6-chinese.html">
+            
+                <a href="../appendix_A/A.6-chinese.html">
+            
+                    
+                    A.6 变参模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.7" data-path="../appendix_A/A.7-chinese.html">
+            
+                <a href="../appendix_A/A.7-chinese.html">
+            
+                    
+                    A.7 自动推导变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.8" data-path="../appendix_A/A.8-chinese.html">
+            
+                <a href="../appendix_A/A.8-chinese.html">
+            
+                    
+                    A.8 线程本地变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.9" data-path="../appendix_A/A.9-chinese.html">
+            
+                <a href="../appendix_A/A.9-chinese.html">
+            
+                    
+                    A.9 模板类参数的推导
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.10" data-path="../appendix_A/A.10-chinese.html">
+            
+                <a href="../appendix_A/A.10-chinese.html">
+            
+                    
+                    A.10 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="../appendix_B/B.0-chinese.html">
+            
+                <a href="../appendix_B/B.0-chinese.html">
+            
+                    
+                    附录B 并发库简要对比
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="../appendix_C/C.0-chinese.html">
+            
+                <a href="../appendix_C/C.0-chinese.html">
+            
+                    
+                    附录C 消息传递框架与完整的ATM示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="D.0-chinese.html">
+            
+                <a href="D.0-chinese.html">
+            
+                    
+                    附录D C++线程类库参考
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.22.1" data-path="D.1-chinese.html">
+            
+                <a href="D.1-chinese.html">
+            
+                    
+                    D.1 chrono头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.2" data-path="D.2-chinese.html">
+            
+                <a href="D.2-chinese.html">
+            
+                    
+                    D.2 condition_variable头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.22.3" data-path="D.3-chinese.html">
+            
+                <a href="D.3-chinese.html">
+            
+                    
+                    D.3 atomic头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.4" data-path="D.4-chinese.html">
+            
+                <a href="D.4-chinese.html">
+            
+                    
+                    D.4 future头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.5" data-path="D.5-chinese.html">
+            
+                <a href="D.5-chinese.html">
+            
+                    
+                    D.5 mutex头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.6" data-path="D.6-chinese.html">
+            
+                <a href="D.6-chinese.html">
+            
+                    
+                    D.6 ratio头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.7" data-path="D.7-chinese.html">
+            
+                <a href="D.7-chinese.html">
+            
+                    
+                    D.7 thread头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >D.3 atomic头文件</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="d3-atomic&#x5934;&#x6587;&#x4EF6;">D.3 &lt;atomic&gt;&#x5934;&#x6587;&#x4EF6;</h1>
+<p>&lt;atomic&gt;&#x5934;&#x6587;&#x4EF6;&#x63D0;&#x4F9B;&#x4E00;&#x7EC4;&#x57FA;&#x7840;&#x7684;&#x539F;&#x5B50;&#x7C7B;&#x578B;&#xFF0C;&#x548C;&#x63D0;&#x4F9B;&#x5BF9;&#x8FD9;&#x4E9B;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x539F;&#x5B50;&#x6A21;&#x677F;&#x51FD;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x63A5;&#x6536;&#x7528;&#x6237;&#x5B9A;&#x4E49;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4EE5;&#x9002;&#x7528;&#x4E8E;&#x67D0;&#x4E9B;&#x6807;&#x51C6;&#x3002;</p>
+<h3 id="&#x5934;&#x6587;&#x4EF6;&#x5185;&#x5BB9;">&#x5934;&#x6587;&#x4EF6;&#x5185;&#x5BB9;</h3>
+<pre><code>#define ATOMIC_BOOL_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_CHAR_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_SHORT_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_INT_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_LONG_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_LLONG_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_CHAR16_T_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_CHAR32_T_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_WCHAR_T_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_POINTER_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+
+#define ATOMIC_VAR_INIT(value) &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+
+namespace std
+{
+  enum memory_order;
+
+  struct atomic_flag;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_bool;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_char;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_char16_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_char32_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_schar;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uchar;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_short;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_ushort;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_long;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_ulong;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_llong;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_ullong;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_wchar_t;
+
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int_least8_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint_least8_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int_least16_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint_least16_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int_least32_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint_least32_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int_least64_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint_least64_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int_fast8_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint_fast8_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int_fast16_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint_fast16_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int_fast32_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint_fast32_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int_fast64_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint_fast64_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int8_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint8_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int16_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint16_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int32_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint32_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_int64_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uint64_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_intptr_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uintptr_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_size_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_ssize_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_ptrdiff_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_intmax_t;
+  &#x53C2;&#x89C1;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x8BE6;&#x8FF0; atomic_uintmax_t;
+
+  template&lt;typename T&gt;
+  struct atomic;
+
+  extern &quot;C&quot; void atomic_thread_fence(memory_order order);
+  extern &quot;C&quot; void atomic_signal_fence(memory_order order);
+
+  template&lt;typename T&gt;
+  T kill_dependency(T);
+}
+</code></pre><h2 id="stdatomicxxx&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">std::atomic_xxx&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h2>
+<p>&#x4E3A;&#x4E86;&#x517C;&#x5BB9;&#x65B0;&#x7684;C&#x6807;&#x51C6;(C11)&#xFF0C;C++&#x652F;&#x6301;&#x5B9A;&#x4E49;&#x539F;&#x5B50;&#x6574;&#x578B;&#x7C7B;&#x578B;&#x3002;&#x8FD9;&#x4E9B;&#x7C7B;&#x578B;&#x90FD;&#x4E0E;<code>std::atimic&lt;T&gt;;</code>&#x7279;&#x5316;&#x7C7B;&#x76F8;&#x5BF9;&#x5E94;&#xFF0C;&#x6216;&#x662F;&#x7528;&#x540C;&#x4E00;&#x63A5;&#x53E3;&#x7279;&#x5316;&#x7684;&#x4E00;&#x4E2A;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#x3002;</p>
+<p><strong>Table D.1 &#x539F;&#x5B50;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x548C;&#x4E0E;&#x4E4B;&#x76F8;&#x5173;&#x7684;std::atmoic&lt;&gt;&#x7279;&#x5316;&#x6A21;&#x677F;</strong></p>
+<table>
+<thead>
+<tr>
+<th>std::atomic_itype &#x539F;&#x5B50;&#x7C7B;&#x578B;</th>
+<th>std::atomic&lt;&gt; &#x76F8;&#x5173;&#x7279;&#x5316;&#x7C7B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>atomic_char</td>
+<td>std::atomic&lt;char&gt;</td>
+</tr>
+<tr>
+<td>atomic_schar</td>
+<td>std::atomic&lt;signed char&gt;</td>
+</tr>
+<tr>
+<td>atomic_uchar</td>
+<td>std::atomic&lt;unsigned char&gt;</td>
+</tr>
+<tr>
+<td>atomic_int</td>
+<td>std::atomic&lt;int&gt;</td>
+</tr>
+<tr>
+<td>atomic_uint</td>
+<td>std::atomic&lt;unsigned&gt;</td>
+</tr>
+<tr>
+<td>atomic_short</td>
+<td>std::atomic&lt;short&gt;</td>
+</tr>
+<tr>
+<td>atomic_ushort</td>
+<td>std::atomic&lt;unsigned short&gt;</td>
+</tr>
+<tr>
+<td>atomic_long</td>
+<td>std::atomic&lt;long&gt;</td>
+</tr>
+<tr>
+<td>atomic_ulong</td>
+<td>std::atomic&lt;unsigned long&gt;</td>
+</tr>
+<tr>
+<td>atomic_llong</td>
+<td>std::atomic&lt;long long&gt;</td>
+</tr>
+<tr>
+<td>atomic_ullong</td>
+<td>std::atomic&lt;unsigned long long&gt;</td>
+</tr>
+<tr>
+<td>atomic_wchar_t</td>
+<td>std::atomic&lt;wchar_t&gt;</td>
+</tr>
+<tr>
+<td>atomic_char16_t</td>
+<td>std::atomic&lt;char16_t&gt;</td>
+</tr>
+<tr>
+<td>atomic_char32_t</td>
+<td>std::atomic&lt;char32_t&gt;</td>
+</tr>
+</tbody>
+</table>
+<p>(&#x8BD1;&#x8005;&#x6CE8;&#xFF1A;&#x8BE5;&#x8868;&#x4E0E;&#x7B2C;5&#x7AE0;&#x4E2D;&#x7684;&#x8868;5.1&#x51E0;&#x4E4E;&#x4E00;&#x81F4;)</p>
+<h2 id="d32-atomicxxxlockfree&#x5B8F;">D.3.2 ATOMIC_xxx_LOCK_FREE&#x5B8F;</h2>
+<p>&#x8FD9;&#x91CC;&#x7684;&#x5B8F;&#x6307;&#x5B9A;&#x4E86;&#x539F;&#x5B50;&#x7C7B;&#x578B;&#x4E0E;&#x5176;&#x5185;&#x7F6E;&#x7C7B;&#x578B;&#x662F;&#x5426;&#x662F;&#x65E0;&#x9501;&#x7684;&#x3002;</p>
+<p><strong>&#x5B8F;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>#define ATOMIC_BOOL_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_CHAR_LOCK_FREE&#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_SHORT_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_INT_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_LONG_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_LLONG_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_CHAR16_T_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_CHAR32_T_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_WCHAR_T_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+#define ATOMIC_POINTER_LOCK_FREE &#x53C2;&#x89C1;&#x8BE6;&#x8FF0;
+</code></pre><p><code>ATOMIC_xxx_LOCK_FREE</code>&#x7684;&#x503C;&#x65E0;&#x975E;&#x5C31;&#x662F;0&#xFF0C;1&#xFF0C;2&#x3002;0&#x610F;&#x5473;&#x7740;&#xFF0C;&#x5728;&#x5BF9;&#x6709;&#x65E0;&#x7B26;&#x53F7;&#x7684;&#x76F8;&#x5173;&#x539F;&#x5B50;&#x7C7B;&#x578B;&#x64CD;&#x4F5C;&#x662F;&#x6709;&#x9501;&#x7684;&#xFF1B;1&#x610F;&#x5473;&#x7740;&#xFF0C;&#x64CD;&#x4F5C;&#x53EA;&#x5BF9;&#x4E00;&#x4E9B;&#x7279;&#x5B9A;&#x7684;&#x7C7B;&#x578B;&#x4E0A;&#x9501;&#xFF0C;&#x800C;&#x5BF9;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x7684;&#x7C7B;&#x578B;&#x4E0D;&#x4E0A;&#x9501;&#xFF1B;2&#x610F;&#x5473;&#x7740;&#xFF0C;&#x6240;&#x6709;&#x64CD;&#x4F5C;&#x90FD;&#x662F;&#x65E0;&#x9501;&#x7684;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5F53;<code>ATOMIC_INT_LOCK_FREE</code>&#x662F;2&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5728;<code>std::atomic&amp;lt;int&amp;gt;</code>&#x548C;<code>std::atomic&amp;lt;unsigned&amp;gt;</code>&#x4E0A;&#x7684;&#x64CD;&#x4F5C;&#x59CB;&#x7EC8;&#x65E0;&#x9501;&#x3002;</p>
+<p>&#x5B8F;<code>ATOMIC_POINTER_LOCK_FREE</code>&#x63CF;&#x8FF0;&#x4E86;&#xFF0C;&#x5BF9;&#x4E8E;&#x7279;&#x5316;&#x7684;&#x539F;&#x5B50;&#x7C7B;&#x578B;&#x6307;&#x9488;<code>std::atomic&lt;T*&gt;</code>&#x64CD;&#x4F5C;&#x7684;&#x65E0;&#x9501;&#x7279;&#x6027;&#x3002;</p>
+<h2 id="d33-atomicvarinit&#x5B8F;">D.3.3 ATOMIC_VAR_INIT&#x5B8F;</h2>
+<p><code>ATOMIC_VAR_INIT</code>&#x5B8F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x503C;&#x6765;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E2A;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong>
+<code>#define ATOMIC_VAR_INIT(value)&#x53C2;&#x89C1;&#x8BE6;&#x8FF0;</code></p>
+<p>&#x5B8F;&#x53EF;&#x4EE5;&#x6269;&#x5C55;&#x6210;&#x4E00;&#x7CFB;&#x5217;&#x7B26;&#x53F7;&#xFF0C;&#x8FD9;&#x4E2A;&#x5B8F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x7ED9;&#x5B9A;&#x503C;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E2A;&#x6807;&#x51C6;&#x539F;&#x5B50;&#x7C7B;&#x578B;&#xFF0C;&#x8868;&#x8FBE;&#x5F0F;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<pre><code>std::atomic&lt;type&gt; x = ATOMIC_VAR_INIT(val);
+</code></pre><p>&#x7ED9;&#x5B9A;&#x503C;&#x53EF;&#x4EE5;&#x517C;&#x5BB9;&#x4E0E;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x76F8;&#x5173;&#x7684;&#x975E;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>std::atomic&amp;lt;int&gt; i = ATOMIC_VAR_INIT(42);
+std::string s;
+std::atomic&amp;lt;std::string*&gt; p = ATOMIC_VAR_INIT(&amp;s);
+</code></pre><p>&#x8FD9;&#x6837;&#x521D;&#x59CB;&#x5316;&#x7684;&#x53D8;&#x91CF;&#x662F;&#x975E;&#x539F;&#x5B50;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x53D8;&#x91CF;&#x521D;&#x59CB;&#x5316;&#x4E4B;&#x540E;&#xFF0C;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x968F;&#x610F;&#x7684;&#x8BBF;&#x95EE;&#x8BE5;&#x53D8;&#x91CF;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x6761;&#x4EF6;&#x7ADE;&#x4E89;&#x548C;&#x672A;&#x5B9A;&#x4E49;&#x884C;&#x4E3A;&#x7684;&#x53D1;&#x751F;&#x3002;</p>
+<h2 id="d34-stdmemoryorder&#x679A;&#x4E3E;&#x7C7B;&#x578B;">D.3.4 std::memory_order&#x679A;&#x4E3E;&#x7C7B;&#x578B;</h2>
+<p><code>std::memory_order</code>&#x679A;&#x4E3E;&#x7C7B;&#x578B;&#x7528;&#x6765;&#x8868;&#x660E;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#x7684;&#x7EA6;&#x675F;&#x987A;&#x5E8F;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>typedef enum memory_order
+{
+  memory_order_relaxed,memory_order_consume,
+  memory_order_acquire,memory_order_release,
+  memory_order_acq_rel,memory_order_seq_cst
+} memory_order;
+</code></pre><p>&#x901A;&#x8FC7;&#x6807;&#x8BB0;&#x5404;&#x79CD;&#x5185;&#x5B58;&#x5E8F;&#x53D8;&#x91CF;&#x6765;&#x6807;&#x8BB0;&#x64CD;&#x4F5C;&#x7684;&#x987A;&#x5E8F;(&#x8BE6;&#x89C1;&#x7B2C;5&#x7AE0;&#xFF0C;&#x5728;&#x8BE5;&#x7AE0;&#x8282;&#x4E2D;&#x6709;&#x5BF9;&#x4E66;&#x5E8F;&#x7EA6;&#x675F;&#x66F4;&#x52A0;&#x8BE6;&#x5C3D;&#x7684;&#x4ECB;&#x7ECD;)</p>
+<h3 id="stdmemoryorderrelaxed">std::memory_order_relaxed</h3>
+<p>&#x64CD;&#x4F5C;&#x4E0D;&#x53D7;&#x4EFB;&#x4F55;&#x989D;&#x5916;&#x7684;&#x9650;&#x5236;&#x3002;</p>
+<h3 id="stdmemoryorderrelease">std::memory_order_release</h3>
+<p>&#x5BF9;&#x4E8E;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;&#x4E0A;&#x7684;&#x5185;&#x5B58;&#x53EF;&#x8FDB;&#x884C;&#x91CA;&#x653E;&#x64CD;&#x4F5C;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x4E0E;&#x83B7;&#x53D6;&#x64CD;&#x4F5C;&#x8BFB;&#x53D6;&#x540C;&#x4E00;&#x5185;&#x5B58;&#x4F4D;&#x7F6E;&#x6240;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x3002;</p>
+<h3 id="stdmemoryorderacquire">std::memory_order_acquire</h3>
+<p>&#x64CD;&#x4F5C;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x5185;&#x5B58;&#x4F4D;&#x7F6E;&#x4E0A;&#x7684;&#x503C;&#x3002;&#x5F53;&#x9700;&#x8981;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x901A;&#x8FC7;&#x91CA;&#x653E;&#x64CD;&#x4F5C;&#x5199;&#x5165;&#x65F6;&#xFF0C;&#x662F;&#x4E0E;&#x5B58;&#x50A8;&#x64CD;&#x540C;&#x6B65;&#x7684;&#x3002;</p>
+<h3 id="stdmemoryorderacqrel">std::memory_order_acq_rel</h3>
+<p>&#x64CD;&#x4F5C;&#x5FC5;&#x987B;&#x662F;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#xFF0C;&#x5E76;&#x4E14;&#x5176;&#x884C;&#x4E3A;&#x9700;&#x8981;&#x5728;<code>std::memory_order_acquire</code>&#x548C;<code>std::memory_order_release</code>&#x5E8F;&#x6307;&#x5B9A;&#x7684;&#x5185;&#x5B58;&#x4F4D;&#x7F6E;&#x4E0A;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdmemoryorderseqcst">std::memory_order_seq_cst</h3>
+<p>&#x64CD;&#x4F5C;&#x5728;&#x5168;&#x5C40;&#x5E8F;&#x4E0A;&#x90FD;&#x4F1A;&#x53D7;&#x5230;&#x7EA6;&#x675F;&#x3002;&#x8FD8;&#x6709;&#xFF0C;&#x5F53;&#x4E3A;&#x5B58;&#x50A8;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x5176;&#x884C;&#x4E3A;&#x597D;&#x6BD4;<code>std::memory_order_release</code>&#x64CD;&#x4F5C;&#xFF1B;&#x5F53;&#x4E3A;&#x52A0;&#x8F7D;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x5176;&#x884C;&#x4E3A;&#x597D;&#x6BD4;<code>std::memory_order_acquire</code>&#x64CD;&#x4F5C;&#xFF1B;&#x5E76;&#x4E14;&#xFF0C;&#x5F53;&#x5176;&#x662F;&#x4E00;&#x4E2A;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x5176;&#x884C;&#x4E3A;&#x548C;<code>std::memory_order_acquire</code>&#x548C;<code>std::memory_order_release</code>&#x7C7B;&#x4F3C;&#x3002;&#x5BF9;&#x4E8E;&#x6240;&#x6709;&#x987A;&#x5E8F;&#x6765;&#x8BF4;&#xFF0C;&#x8BE5;&#x987A;&#x5E8F;&#x4E3A;&#x9ED8;&#x8BA4;&#x5E8F;&#x3002;</p>
+<h3 id="stdmemoryorderconsume">std::memory_order_consume</h3>
+<p>&#x5BF9;&#x4E8E;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;&#x7684;&#x5185;&#x5B58;&#x8FDB;&#x884C;&#x6D88;&#x8017;&#x64CD;&#x4F5C;(consume operation)&#x3002;</p>
+<p>(&#x8BD1;&#x8005;&#x6CE8;&#xFF1A;&#x4E0E;memory_order_acquire&#x7C7B;&#x4F3C;)</p>
+<h2 id="d35-stdatomicthreadfence&#x51FD;&#x6570;">D.3.5 std::atomic_thread_fence&#x51FD;&#x6570;</h2>
+<p><code>std::atomic_thread_fence()</code>&#x4F1A;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x63D2;&#x5165;&#x201C;&#x5185;&#x5B58;&#x6805;&#x680F;&#x201D;&#xFF0C;&#x5F3A;&#x5236;&#x4E24;&#x4E2A;&#x64CD;&#x4F5C;&#x4FDD;&#x6301;&#x5185;&#x5B58;&#x7EA6;&#x675F;&#x987A;&#x5E8F;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>extern &quot;C&quot; void atomic_thread_fence(std::memory_order order);
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x63D2;&#x5165;&#x6805;&#x680F;&#x7684;&#x76EE;&#x7684;&#x662F;&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x5185;&#x5B58;&#x5E8F;&#x7684;&#x7EA6;&#x675F;&#x6027;&#x3002;</p>
+<p>&#x6805;&#x680F;&#x4F7F;&#x7528;<code>std::memory_order_release</code>, <code>std::memory_order_acq_rel</code>, &#x6216; <code>std::memory_order_seq_cst</code>&#x5185;&#x5B58;&#x5E8F;&#xFF0C;&#x4F1A;&#x540C;&#x6B65;&#x4E0E;&#x4E00;&#x4E9B;&#x5185;&#x5B58;&#x4F4D;&#x7F6E;&#x4E0A;&#x7684;&#x83B7;&#x53D6;&#x64CD;&#x4F5C;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#xFF0C;&#x5982;&#x679C;&#x8FD9;&#x4E9B;&#x83B7;&#x53D6;&#x64CD;&#x4F5C;&#x8981;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x5DF2;&#x5B58;&#x50A8;&#x7684;&#x503C;(&#x901A;&#x8FC7;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#x8FDB;&#x884C;&#x7684;&#x5B58;&#x50A8;)&#xFF0C;&#x5C31;&#x4F1A;&#x901A;&#x8FC7;&#x6805;&#x680F;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#x3002;</p>
+<p>&#x91CA;&#x653E;&#x64CD;&#x4F5C;&#x53EF;&#x5BF9;<code>std::memory_order_acquire</code>, <code>std::memory_order_acq_rel</code>, &#x6216; <code>std::memory_order_seq_cst</code>&#x8FDB;&#x884C;&#x6805;&#x680F;&#x540C;&#x6B65;&#xFF0C;&#xFF1B;&#x5F53;&#x91CA;&#x653E;&#x64CD;&#x4F5C;&#x5B58;&#x50A8;&#x7684;&#x503C;&#xFF0C;&#x5728;&#x4E00;&#x4E2A;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#x4E4B;&#x524D;&#x8BFB;&#x53D6;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x901A;&#x8FC7;&#x6805;&#x680F;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h2 id="d36-stdatomicsignalfence&#x51FD;&#x6570;">D.3.6 std::atomic_signal_fence&#x51FD;&#x6570;</h2>
+<p><code>std::atomic_signal_fence()</code>&#x4F1A;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x63D2;&#x5165;&#x201C;&#x5185;&#x5B58;&#x6805;&#x680F;&#x201D;&#xFF0C;&#x5F3A;&#x5236;&#x4E24;&#x4E2A;&#x64CD;&#x4F5C;&#x4FDD;&#x6301;&#x5185;&#x5B58;&#x7EA6;&#x675F;&#x987A;&#x5E8F;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x5BF9;&#x5E94;&#x7EBF;&#x7A0B;&#x4E0A;&#x6267;&#x884C;&#x4FE1;&#x53F7;&#x5904;&#x7406;&#x64CD;&#x4F5C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>extern &quot;C&quot; void atomic_signal_fence(std::memory_order order);
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6839;&#x636E;&#x9700;&#x8981;&#x7684;&#x5185;&#x5B58;&#x7EA6;&#x675F;&#x5E8F;&#x63D2;&#x5165;&#x4E00;&#x4E2A;&#x6805;&#x680F;&#x3002;&#x9664;&#x975E;&#x7EA6;&#x675F;&#x5E8F;&#x5E94;&#x7528;&#x4E8E;&#x201C;&#x64CD;&#x4F5C;&#x548C;&#x4FE1;&#x53F7;&#x5904;&#x7406;&#x51FD;&#x6570;&#x5728;&#x540C;&#x4E00;&#x7EBF;&#x7A0B;&#x201D;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5426;&#x5219;&#xFF0C;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B49;&#x4EF7;&#x4E8E;<code>std::atomic_thread_fence(order)</code>&#x64CD;&#x4F5C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h2 id="d37-stdatomicflag&#x7C7B;">D.3.7 std::atomic_flag&#x7C7B;</h2>
+<p><code>std::atomic_flag</code>&#x7C7B;&#x7B97;&#x662F;&#x539F;&#x5B50;&#x6807;&#x8BC6;&#x7684;&#x9AA8;&#x67B6;&#x3002;&#x5728;C++11&#x6807;&#x51C6;&#x4E0B;&#xFF0C;&#x53EA;&#x6709;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x662F;&#x65E0;&#x9501;&#x7684;(&#x5F53;&#x7136;&#xFF0C;&#x66F4;&#x591A;&#x7684;&#x539F;&#x5B50;&#x7C7B;&#x578B;&#x5728;&#x672A;&#x6765;&#x7684;&#x5B9E;&#x73B0;&#x4E2D;&#x5C06;&#x91C7;&#x53D6;&#x65E0;&#x9501;&#x5B9E;&#x73B0;)&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;<code>std::atomic_flag</code>&#x6765;&#x8BF4;&#xFF0C;&#x5176;&#x72B6;&#x6001;&#x4E0D;&#x662F;set&#xFF0C;&#x5C31;&#x662F;clear&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>struct atomic_flag
+{
+  atomic_flag() noexcept = default;
+  atomic_flag(const atomic_flag&amp;) = delete;
+  atomic_flag&amp; operator=(const atomic_flag&amp;) = delete;
+  atomic_flag&amp; operator=(const atomic_flag&amp;) volatile = delete;
+
+  bool test_and_set(memory_order = memory_order_seq_cst) volatile
+    noexcept;
+  bool test_and_set(memory_order = memory_order_seq_cst) noexcept;
+  void clear(memory_order = memory_order_seq_cst) volatile noexcept;
+  void clear(memory_order = memory_order_seq_cst) noexcept;
+};
+
+bool atomic_flag_test_and_set(volatile atomic_flag*) noexcept;
+bool atomic_flag_test_and_set(atomic_flag*) noexcept;
+bool atomic_flag_test_and_set_explicit(
+  volatile atomic_flag*, memory_order) noexcept;
+bool atomic_flag_test_and_set_explicit(
+  atomic_flag*, memory_order) noexcept;
+void atomic_flag_clear(volatile atomic_flag*) noexcept;
+void atomic_flag_clear(atomic_flag*) noexcept;
+void atomic_flag_clear_explicit(
+  volatile atomic_flag*, memory_order) noexcept;
+void atomic_flag_clear_explicit(
+  atomic_flag*, memory_order) noexcept;
+
+#define ATOMIC_FLAG_INIT unspecified
+</code></pre><h3 id="stdatomicflag-&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;">std::atomic_flag &#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x8FD9;&#x91CC;&#x672A;&#x6307;&#x5B9A;&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FA;&#x6765;&#x7684;<code>std::atomic_flag</code>&#x5B9E;&#x4F8B;&#x662F;clear&#x72B6;&#x6001;&#xFF0C;&#x8FD8;&#x662F;set&#x72B6;&#x6001;&#x3002;&#x56E0;&#x4E3A;&#x5BF9;&#x8C61;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x662F;&#x9759;&#x6001;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x521D;&#x59CB;&#x5316;&#x5FC5;&#x987B;&#x662F;&#x9759;&#x6001;&#x7684;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>std::atomic_flag() noexcept = default;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;<code>std::atomic_flag</code>&#x5BF9;&#x8C61;&#xFF0C;&#x4E0D;&#x8FC7;&#x672A;&#x6307;&#x660E;&#x72B6;&#x6001;&#x3002;(&#x859B;&#x5B9A;&#x8C14;&#x7684;&#x732B;&#xFF1F;)</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdatomicflag-&#x4F7F;&#x7528;atomicflaginit&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;">std::atomic_flag &#x4F7F;&#x7528;ATOMIC_FLAG_INIT&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;</h3>
+<p><code>std::atomic_flag</code>&#x5B9E;&#x4F8B;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>ATOMIC_FLAG_INIT</code>&#x5B8F;&#x8FDB;&#x884C;&#x521B;&#x5EFA;&#xFF0C;&#x8FD9;&#x6837;&#x6784;&#x9020;&#x51FA;&#x6765;&#x7684;&#x5B9E;&#x4F8B;&#x72B6;&#x6001;&#x4E3A;clear&#x3002;&#x56E0;&#x4E3A;&#x5BF9;&#x8C61;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x662F;&#x9759;&#x6001;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x521D;&#x59CB;&#x5316;&#x5FC5;&#x987B;&#x662F;&#x9759;&#x6001;&#x7684;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>#define ATOMIC_FLAG_INIT unspecified
+</code></pre><p><strong>&#x7528;&#x6CD5;</strong></p>
+<pre><code>std::atomic_flag flag=ATOMIC_FLAG_INIT;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;<code>std::atomic_flag</code>&#x5BF9;&#x8C61;&#xFF0C;&#x72B6;&#x6001;&#x4E3A;clear&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>&#xFF1A;
+&#x5BF9;&#x4E8E;&#x5185;&#x5B58;&#x4F4D;&#x7F6E;&#x4E0A;&#x7684;*this&#xFF0C;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x5C5E;&#x4E8E;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicflagtestandset-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_flag::test_and_set &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x81EA;&#x52A8;&#x8BBE;&#x7F6E;&#x5B9E;&#x4F8B;&#x72B6;&#x6001;&#x6807;&#x8BC6;&#xFF0C;&#x5E76;&#x4E14;&#x68C0;&#x67E5;&#x5B9E;&#x4F8B;&#x7684;&#x72B6;&#x6001;&#x6807;&#x8BC6;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>bool atomic_flag_test_and_set(volatile atomic_flag* flag) noexcept;
+bool atomic_flag_test_and_set(atomic_flag* flag) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return flag-&gt;test_and_set();
+</code></pre><h3 id="stdatomicflagtestandset-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_flag_test_and_set &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x81EA;&#x52A8;&#x8BBE;&#x7F6E;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7684;&#x72B6;&#x6001;&#x6807;&#x8BC6;&#xFF0C;&#x5E76;&#x4E14;&#x68C0;&#x67E5;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7684;&#x72B6;&#x6001;&#x6807;&#x8BC6;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>bool atomic_flag_test_and_set_explicit(
+    volatile atomic_flag* flag, memory_order order) noexcept;
+bool atomic_flag_test_and_set_explicit(
+    atomic_flag* flag, memory_order order) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return flag-&gt;test_and_set(order);
+</code></pre><h3 id="stdatomicflagtestandsetexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_flag_test_and_set_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x81EA;&#x52A8;&#x8BBE;&#x7F6E;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7684;&#x72B6;&#x6001;&#x6807;&#x8BC6;&#xFF0C;&#x5E76;&#x4E14;&#x68C0;&#x67E5;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7684;&#x72B6;&#x6001;&#x6807;&#x8BC6;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>bool atomic_flag_test_and_set_explicit(
+    volatile atomic_flag* flag, memory_order order) noexcept;
+bool atomic_flag_test_and_set_explicit(
+    atomic_flag* flag, memory_order order) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return flag-&gt;test_and_set(order);
+</code></pre><h3 id="stdatomicflagclear-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_flag::clear &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x81EA;&#x52A8;&#x6E05;&#x9664;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7684;&#x72B6;&#x6001;&#x6807;&#x8BC6;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void clear(memory_order order = memory_order_seq_cst) volatile noexcept;
+void clear(memory_order order = memory_order_seq_cst) noexcept;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x652F;&#x6301;<code>std::memory_order_relaxed</code>,<code>std::memory_order_release</code>&#x548C;<code>std::memory_order_seq_cst</code>&#x4E2D;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x81EA;&#x52A8;&#x6E05;&#x9664;&#x53D8;&#x91CF;&#x72B6;&#x6001;&#x6807;&#x8BC6;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x5BF9;&#x4E8E;&#x5185;&#x5B58;&#x4F4D;&#x7F6E;&#x4E0A;&#x7684;*this&#xFF0C;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x5C5E;&#x4E8E;&#x201C;&#x5199;&#x201D;&#x64CD;&#x4F5C;(&#x5B58;&#x50A8;&#x64CD;&#x4F5C;)&#x3002;</p>
+<h3 id="stdatomicflagclear-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_flag_clear &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x81EA;&#x52A8;&#x6E05;&#x9664;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7684;&#x72B6;&#x6001;&#x6807;&#x8BC6;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void atomic_flag_clear(volatile atomic_flag* flag) noexcept;
+void atomic_flag_clear(atomic_flag* flag) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>flag-&gt;clear();
+</code></pre><h3 id="stdatomicflagclearexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_flag_clear_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x81EA;&#x52A8;&#x6E05;&#x9664;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7684;&#x72B6;&#x6001;&#x6807;&#x8BC6;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void atomic_flag_clear_explicit(
+    volatile atomic_flag* flag, memory_order order) noexcept;
+void atomic_flag_clear_explicit(
+    atomic_flag* flag, memory_order order) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return flag-&gt;clear(order);
+</code></pre><h2 id="d38-stdatomic&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.3.8 std::atomic&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::atomic</code>&#x63D0;&#x4F9B;&#x4E86;&#x5BF9;&#x4EFB;&#x610F;&#x7C7B;&#x578B;&#x7684;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#x7684;&#x5305;&#x88C5;&#xFF0C;&#x4EE5;&#x6EE1;&#x8DB3;&#x4E0B;&#x9762;&#x7684;&#x9700;&#x6C42;&#x3002;</p>
+<p>&#x6A21;&#x677F;&#x53C2;&#x6570;BaseType&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;&#x4E0B;&#x9762;&#x7684;&#x6761;&#x4EF6;&#x3002;</p>
+<ul>
+<li>&#x5177;&#x6709;&#x7B80;&#x5355;&#x7684;&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;</li>
+<li>&#x5177;&#x6709;&#x7B80;&#x5355;&#x7684;&#x62F7;&#x8D1D;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</li>
+<li>&#x5177;&#x6709;&#x7B80;&#x5355;&#x7684;&#x6790;&#x6784;&#x51FD;&#x6570;</li>
+<li>&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x4F4D;&#x6BD4;&#x8F83;</li>
+</ul>
+<p>&#x8FD9;&#x5C31;&#x610F;&#x5473;&#x7740;<code>std::atomic&amp;lt;some-simple-struct&amp;gt;</code>&#x4F1A;&#x548C;&#x4F7F;&#x7528;<code>std::atomic&lt;some-built-in-type&gt;</code>&#x4E00;&#x6837;&#x7B80;&#x5355;&#xFF1B;&#x4E0D;&#x8FC7;&#x5BF9;&#x4E8E;<code>std::atomic&lt;std::string&gt;</code>&#x5C31;&#x4E0D;&#x540C;&#x4E86;&#x3002;</p>
+<p>&#x9664;&#x4E86;&#x4E3B;&#x6A21;&#x677F;&#xFF0C;&#x5BF9;&#x4E8E;&#x5185;&#x7F6E;&#x6574;&#x578B;&#x548C;&#x6307;&#x9488;&#x7684;&#x7279;&#x5316;&#xFF0C;&#x6A21;&#x677F;&#x4E5F;&#x652F;&#x6301;&#x7C7B;&#x4F3C;x++&#x8FD9;&#x6837;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<p><code>std::atomic</code>&#x5B9E;&#x4F8B;&#x662F;&#x4E0D;&#x652F;&#x6301;<code>CopyConstructible</code>(&#x62F7;&#x8D1D;&#x6784;&#x9020;)&#x548C;<code>CopyAssignable</code>(&#x62F7;&#x8D1D;&#x8D4B;&#x503C;)&#xFF0C;&#x539F;&#x56E0;&#x4F60;&#x61C2;&#x5F97;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x6837;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#x5C31;&#x65E0;&#x6CD5;&#x6267;&#x884C;&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+struct atomic
+{
+  atomic() noexcept = default;
+  constexpr atomic(BaseType) noexcept;
+  BaseType operator=(BaseType) volatile noexcept;
+  BaseType operator=(BaseType) noexcept;
+
+  atomic(const atomic&amp;) = delete;
+  atomic&amp; operator=(const atomic&amp;) = delete;
+  atomic&amp; operator=(const atomic&amp;) volatile = delete;
+
+  bool is_lock_free() const volatile noexcept;
+  bool is_lock_free() const noexcept;
+
+  void store(BaseType,memory_order = memory_order_seq_cst)
+      volatile noexcept;
+  void store(BaseType,memory_order = memory_order_seq_cst) noexcept;
+  BaseType load(memory_order = memory_order_seq_cst)
+      const volatile noexcept;
+  BaseType load(memory_order = memory_order_seq_cst) const noexcept;
+  BaseType exchange(BaseType,memory_order = memory_order_seq_cst)
+      volatile noexcept;
+  BaseType exchange(BaseType,memory_order = memory_order_seq_cst)
+      noexcept;
+
+  bool compare_exchange_strong(
+      BaseType &amp; old_value, BaseType new_value,
+      memory_order order = memory_order_seq_cst) volatile noexcept;
+  bool compare_exchange_strong(
+      BaseType &amp; old_value, BaseType new_value,
+      memory_order order = memory_order_seq_cst) noexcept;
+  bool compare_exchange_strong(
+      BaseType &amp; old_value, BaseType new_value,
+      memory_order success_order,
+      memory_order failure_order) volatile noexcept;
+  bool compare_exchange_strong(
+      BaseType &amp; old_value, BaseType new_value,
+      memory_order success_order,
+      memory_order failure_order) noexcept;
+  bool compare_exchange_weak(
+      BaseType &amp; old_value, BaseType new_value,
+      memory_order order = memory_order_seq_cst)
+      volatile noexcept;
+  bool compare_exchange_weak(
+      BaseType &amp; old_value, BaseType new_value,
+      memory_order order = memory_order_seq_cst) noexcept;
+  bool compare_exchange_weak(
+      BaseType &amp; old_value, BaseType new_value,
+      memory_order success_order,
+      memory_order failure_order) volatile noexcept;
+  bool compare_exchange_weak(
+      BaseType &amp; old_value, BaseType new_value,
+      memory_order success_order,
+      memory_order failure_order) noexcept;
+      operator BaseType () const volatile noexcept;
+      operator BaseType () const noexcept;
+};
+
+template&lt;typename BaseType&gt;
+bool atomic_is_lock_free(volatile const atomic&lt;BaseType&gt;*) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_is_lock_free(const atomic&lt;BaseType&gt;*) noexcept;
+template&lt;typename BaseType&gt;
+void atomic_init(volatile atomic&lt;BaseType&gt;*, void*) noexcept;
+template&lt;typename BaseType&gt;
+void atomic_init(atomic&lt;BaseType&gt;*, void*) noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_exchange(volatile atomic&lt;BaseType&gt;*, memory_order)
+  noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_exchange(atomic&lt;BaseType&gt;*, memory_order) noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_exchange_explicit(
+  volatile atomic&lt;BaseType&gt;*, memory_order) noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_exchange_explicit(
+  atomic&lt;BaseType&gt;*, memory_order) noexcept;
+template&lt;typename BaseType&gt;
+void atomic_store(volatile atomic&lt;BaseType&gt;*, BaseType) noexcept;
+template&lt;typename BaseType&gt;
+void atomic_store(atomic&lt;BaseType&gt;*, BaseType) noexcept;
+template&lt;typename BaseType&gt;
+void atomic_store_explicit(
+  volatile atomic&lt;BaseType&gt;*, BaseType, memory_order) noexcept;
+template&lt;typename BaseType&gt;
+void atomic_store_explicit(
+  atomic&lt;BaseType&gt;*, BaseType, memory_order) noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_load(volatile const atomic&lt;BaseType&gt;*) noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_load(const atomic&lt;BaseType&gt;*) noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_load_explicit(
+  volatile const atomic&lt;BaseType&gt;*, memory_order) noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_load_explicit(
+  const atomic&lt;BaseType&gt;*, memory_order) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_strong(
+  volatile atomic&lt;BaseType&gt;*,BaseType * old_value,
+  BaseType new_value) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_strong(
+  atomic&lt;BaseType&gt;*,BaseType * old_value,
+  BaseType new_value) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_strong_explicit(
+  volatile atomic&lt;BaseType&gt;*,BaseType * old_value,
+  BaseType new_value, memory_order success_order,
+  memory_order failure_order) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_strong_explicit(
+  atomic&lt;BaseType&gt;*,BaseType * old_value,
+  BaseType new_value, memory_order success_order,
+  memory_order failure_order) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_weak(
+  volatile atomic&lt;BaseType&gt;*,BaseType * old_value,BaseType new_value)
+  noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_weak(
+  atomic&lt;BaseType&gt;*,BaseType * old_value,BaseType new_value) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_weak_explicit(
+  volatile atomic&lt;BaseType&gt;*,BaseType * old_value,
+  BaseType new_value, memory_order success_order,
+  memory_order failure_order) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_weak_explicit(
+  atomic&lt;BaseType&gt;*,BaseType * old_value,
+  BaseType new_value, memory_order success_order,
+  memory_order failure_order) noexcept;
+</code></pre><p><strong>NOTE</strong>:&#x867D;&#x7136;&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;&#x901A;&#x8FC7;&#x6A21;&#x677F;&#x7684;&#x65B9;&#x5F0F;&#x6307;&#x5B9A;&#xFF0C;&#x4E0D;&#x8FC7;&#x4ED6;&#x4EEC;&#x53EA;&#x4F5C;&#x4E3A;&#x4ECE;&#x5728;&#x51FD;&#x6570;&#x63D0;&#x4F9B;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9;&#x4E8E;&#x8FD9;&#x4E9B;&#x51FD;&#x6570;&#xFF0C;&#x4E0D;&#x80FD;&#x663E;&#x793A;&#x7684;&#x6307;&#x5B9A;&#x6A21;&#x677F;&#x7684;&#x53C2;&#x6570;&#x3002;</p>
+<h3 id="stdatomic-&#x6784;&#x9020;&#x51FD;&#x6570;">std::atomic &#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x521D;&#x59CB;&#x503C;&#xFF0C;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::atomic</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>atomic() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x521D;&#x59CB;&#x503C;&#xFF0C;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;<code>std::atomic</code>&#x5B9E;&#x4F8B;&#x3002;&#x56E0;&#x5BF9;&#x8C61;&#x662F;&#x9759;&#x6001;&#x5B58;&#x50A8;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;&#x4E5F;&#x662F;&#x9759;&#x6001;&#x7684;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x5F53;<code>std::atomic</code>&#x5B9E;&#x4F8B;&#x4EE5;&#x975E;&#x9759;&#x6001;&#x65B9;&#x5F0F;&#x521D;&#x59CB;&#x5316;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x5176;&#x503C;&#x5C31;&#x662F;&#x4E0D;&#x53EF;&#x4F30;&#x8BA1;&#x7684;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdatomicinit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_init &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p><code>std::atomic&lt;BaseType&gt;</code>&#x5B9E;&#x4F8B;&#x63D0;&#x4F9B;&#x7684;&#x503C;&#xFF0C;&#x53EF;&#x975E;&#x539F;&#x5B50;&#x7684;&#x8FDB;&#x884C;&#x5B58;&#x50A8;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+void atomic_init(atomic&lt;BaseType&gt; volatile* p, BaseType v) noexcept;
+template&lt;typename BaseType&gt;
+void atomic_init(atomic&lt;BaseType&gt;* p, BaseType v) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;&#x503C;v&#x4EE5;&#x975E;&#x539F;&#x5B50;&#x5B58;&#x50A8;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5B58;&#x50A8;&#x5728;*p&#x4E2D;&#x3002;&#x8C03;&#x7528;<code>atomic&lt;BaseType&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;atomic_init()&#xFF0C;&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x5B9E;&#x4F8B;&#x4E0D;&#x662F;&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FA;&#x6765;&#x7684;&#xFF0C;&#x6216;&#x8005;&#x5728;&#x6784;&#x9020;&#x51FA;&#x6765;&#x7684;&#x65F6;&#x5019;&#x88AB;&#x6267;&#x884C;&#x4E86;&#x67D0;&#x4E9B;&#x64CD;&#x4F5C;&#xFF0C;&#x5426;&#x5219;&#x5C06;&#x4F1A;&#x5F15;&#x53D1;&#x672A;&#x5B9A;&#x4E49;&#x884C;&#x4E3A;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x56E0;&#x4E3A;&#x5B58;&#x50A8;&#x662F;&#x975E;&#x539F;&#x5B50;&#x7684;&#xFF0C;&#x5BF9;&#x5BF9;&#x8C61;&#x6307;&#x9488;p&#x4EFB;&#x610F;&#x7684;&#x5E76;&#x53D1;&#x8BBF;&#x95EE;(&#x5373;&#x4F7F;&#x662F;&#x539F;&#x5B50;&#x64CD;&#x4F5C;)&#x90FD;&#x4F1A;&#x5F15;&#x53D1;&#x6570;&#x636E;&#x7ADE;&#x4E89;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdatomic-&#x8F6C;&#x6362;&#x6784;&#x9020;&#x51FD;&#x6570;">std::atomic &#x8F6C;&#x6362;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x4F7F;&#x7528;&#x63D0;&#x4F9B;&#x7684;BaseType&#x503C;&#x53BB;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::atomic</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>constexpr atomic(BaseType b) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x901A;&#x8FC7;b&#x503C;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;&#x7684;<code>std::atomic</code>&#x5BF9;&#x8C61;&#x3002;&#x56E0;&#x5BF9;&#x8C61;&#x662F;&#x9759;&#x6001;&#x5B58;&#x50A8;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;&#x4E5F;&#x662F;&#x9759;&#x6001;&#x7684;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdatomic-&#x8F6C;&#x6362;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;">std::atomic &#x8F6C;&#x6362;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</h3>
+<p>&#x5728;*this&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>BaseType operator=(BaseType b) volatile noexcept;
+BaseType operator=(BaseType b) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;store(b);
+</code></pre><h3 id="stdatomicislockfree-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic::is_lock_free &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x786E;&#x5B9A;&#x5BF9;&#x4E8E;*this&#x662F;&#x5426;&#x662F;&#x65E0;&#x9501;&#x64CD;&#x4F5C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>bool is_lock_free() const volatile noexcept;
+bool is_lock_free() const noexcept;
+</code></pre><p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;&#x64CD;&#x4F5C;&#x662F;&#x65E0;&#x9501;&#x64CD;&#x4F5C;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x8FD4;&#x56DE;true&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdatomicislockfree-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_is_lock_free &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x786E;&#x5B9A;&#x5BF9;&#x4E8E;*this&#x662F;&#x5426;&#x662F;&#x65E0;&#x9501;&#x64CD;&#x4F5C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+bool atomic_is_lock_free(volatile const atomic&lt;BaseType&gt;* p) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_is_lock_free(const atomic&lt;BaseType&gt;* p) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;is_lock_free();
+</code></pre><h3 id="stdatomicload-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic::load &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x52A0;&#x8F7D;<code>std::atomic</code>&#x5B9E;&#x4F8B;&#x5F53;&#x524D;&#x7684;&#x503C;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>BaseType load(memory_order order = memory_order_seq_cst)
+    const volatile noexcept;
+BaseType load(memory_order order = memory_order_seq_cst) const noexcept;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x652F;&#x6301;<code>std::memory_order_relaxed</code>&#x3001;<code>std::memory_order_acquire</code>&#x3001;<code>std::memory_order_consume</code>&#x6216;<code>std::memory_order_seq_cst</code>&#x5185;&#x5B58;&#x5E8F;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x539F;&#x5B50;&#x7684;&#x52A0;&#x8F7D;&#x5DF2;&#x5B58;&#x50A8;&#x5230;*this&#x4E0A;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x8FD4;&#x56DE;&#x5B58;&#x50A8;&#x5728;*this&#x4E0A;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x662F;&#x5BF9;&#x4E8E;*this&#x5185;&#x5B58;&#x5730;&#x5740;&#x539F;&#x5B50;&#x52A0;&#x8F7D;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicload-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_load &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x52A0;&#x8F7D;<code>std::atomic</code>&#x5B9E;&#x4F8B;&#x5F53;&#x524D;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+BaseType atomic_load(volatile const atomic&lt;BaseType&gt;* p) noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_load(const atomic&lt;BaseType&gt;* p) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;load();
+</code></pre><h3 id="stdatomicloadexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_load_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x52A0;&#x8F7D;<code>std::atomic</code>&#x5B9E;&#x4F8B;&#x5F53;&#x524D;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+BaseType atomic_load_explicit(
+    volatile const atomic&lt;BaseType&gt;* p, memory_order order) noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_load_explicit(
+    const atomic&lt;BaseType&gt;* p, memory_order order) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;load(order);
+</code></pre><h3 id="stdatomicoperator-basttype&#x8F6C;&#x6362;&#x64CD;&#x4F5C;">std::atomic::operator BastType&#x8F6C;&#x6362;&#x64CD;&#x4F5C;</h3>
+<p>&#x52A0;&#x8F7D;&#x5B58;&#x50A8;&#x5728;*this&#x4E2D;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>operator BaseType() const volatile noexcept;
+operator BaseType() const noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;load();
+</code></pre><h3 id="stdatomicstore-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic::store &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4EE5;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#x7684;&#x65B9;&#x5F0F;&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x65B0;&#x503C;&#x5230;<code>atomic&lt;BaseType&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void store(BaseType new_value,memory_order order = memory_order_seq_cst)
+    volatile noexcept;
+void store(BaseType new_value,memory_order order = memory_order_seq_cst)
+    noexcept;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x652F;&#x6301;<code>std::memory_order_relaxed</code>&#x3001;<code>std::memory_order_release</code>&#x6216;<code>std::memory_order_seq_cst</code>&#x5185;&#x5B58;&#x5E8F;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;new_value&#x539F;&#x5B50;&#x7684;&#x5B58;&#x50A8;&#x5230;*this&#x4E2D;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x662F;&#x5BF9;&#x4E8E;*this&#x5185;&#x5B58;&#x5730;&#x5740;&#x539F;&#x5B50;&#x52A0;&#x8F7D;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicstore-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_store &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4EE5;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#x7684;&#x65B9;&#x5F0F;&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x65B0;&#x503C;&#x5230;<code>atomic&amp;lt;BaseType&amp;gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+void atomic_store(volatile atomic&lt;BaseType&gt;* p, BaseType new_value)
+    noexcept;
+template&lt;typename BaseType&gt;
+void atomic_store(atomic&lt;BaseType&gt;* p, BaseType new_value) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>p-&gt;store(new_value);
+</code></pre><h3 id="stdatomicexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4EE5;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#x7684;&#x65B9;&#x5F0F;&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x65B0;&#x503C;&#x5230;<code>atomic&amp;lt;BaseType&amp;gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+void atomic_store_explicit(
+    volatile atomic&lt;BaseType&gt;* p, BaseType new_value, memory_order order)
+    noexcept;
+template&lt;typename BaseType&gt;
+void atomic_store_explicit(
+    atomic&lt;BaseType&gt;* p, BaseType new_value, memory_order order) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>p-&gt;store(new_value,order);
+</code></pre><h3 id="stdatomicexchange-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic::exchange &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x65B0;&#x503C;&#xFF0C;&#x5E76;&#x8BFB;&#x53D6;&#x65E7;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>BaseType exchange(
+    BaseType new_value,
+    memory_order order = memory_order_seq_cst)
+    volatile noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x539F;&#x5B50;&#x7684;&#x5C06;new_value&#x5B58;&#x50A8;&#x5728;<em>this&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x53D6;&#x51FA;</em>this&#x4E2D;&#x5DF2;&#x7ECF;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x8FD4;&#x56DE;*this&#x4E4B;&#x524D;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x8FD9;&#x662F;&#x5BF9;*this&#x5185;&#x5B58;&#x5730;&#x5740;&#x7684;&#x539F;&#x5B50;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicexchange-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_exchange &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x65B0;&#x503C;&#x5230;<code>atomic&lt;BaseType&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x8BFB;&#x53D6;&#x65E7;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+BaseType atomic_exchange(volatile atomic&lt;BaseType&gt;* p, BaseType new_value)
+    noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_exchange(atomic&lt;BaseType&gt;* p, BaseType new_value) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;exchange(new_value);
+</code></pre><h3 id="stdatomicexchangeexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_exchange_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x65B0;&#x503C;&#x5230;<code>atomic&lt;BaseType&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x8BFB;&#x53D6;&#x65E7;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+BaseType atomic_exchange_explicit(
+    volatile atomic&lt;BaseType&gt;* p, BaseType new_value, memory_order order)
+    noexcept;
+template&lt;typename BaseType&gt;
+BaseType atomic_exchange_explicit(
+    atomic&lt;BaseType&gt;* p, BaseType new_value, memory_order order) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;exchange(new_value,order);
+</code></pre><h3 id="stdatomiccompareexchangestrong-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic::compare_exchange_strong &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5F53;&#x671F;&#x671B;&#x503C;&#x548C;&#x65B0;&#x503C;&#x4E00;&#x6837;&#x65F6;&#xFF0C;&#x5C06;&#x65B0;&#x503C;&#x5B58;&#x50A8;&#x5230;&#x5B9E;&#x4F8B;&#x4E2D;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x76F8;&#x7B49;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x5B9E;&#x7528;&#x65B0;&#x503C;&#x66F4;&#x65B0;&#x671F;&#x671B;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>bool compare_exchange_strong(
+    BaseType&amp; expected,BaseType new_value,
+    memory_order order = std::memory_order_seq_cst) volatile noexcept;
+bool compare_exchange_strong(
+    BaseType&amp; expected,BaseType new_value,
+    memory_order order = std::memory_order_seq_cst) noexcept;
+bool compare_exchange_strong(
+    BaseType&amp; expected,BaseType new_value,
+    memory_order success_order,memory_order failure_order)
+    volatile noexcept;
+bool compare_exchange_strong(
+    BaseType&amp; expected,BaseType new_value,
+    memory_order success_order,memory_order failure_order) noexcept;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+failure_order&#x4E0D;&#x80FD;&#x662F;<code>std::memory_order_release</code>&#x6216;<code>std::memory_order_acq_rel</code>&#x5185;&#x5B58;&#x5E8F;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;&#x5B58;&#x50A8;&#x5728;<em>this&#x4E2D;&#x7684;expected&#x503C;&#x4E0E;new_value&#x503C;&#x8FDB;&#x884C;&#x9010;&#x4F4D;&#x5BF9;&#x6BD4;&#xFF0C;&#x5F53;&#x76F8;&#x7B49;&#x65F6;&#x95F4;new_value&#x5B58;&#x50A8;&#x5728;</em>this&#x4E2D;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x66F4;&#x65B0;expected&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;new_value&#x7684;&#x503C;&#x4E0E;*this&#x4E2D;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;&#x503C;&#x76F8;&#x540C;&#xFF0C;&#x5C31;&#x8FD4;&#x56DE;true&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x5728;success_order==order&#x548C;failure_order==order&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x91CD;&#x8F7D;&#x51FD;&#x6570;&#x4E0E;&#x56DB;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x91CD;&#x8F7D;&#x51FD;&#x6570;&#x7B49;&#x4EF7;&#x3002;&#x9664;&#x975E;&#xFF0C;order&#x662F;<code>std::memory_order_acq_rel</code>&#x65F6;&#xFF0C;failure_order&#x662F;<code>std::memory_order_acquire</code>&#xFF0C;&#x4E14;&#x5F53;order&#x662F;<code>std::memory_order_release</code>&#x65F6;&#xFF0C;failure_order&#x662F;<code>std::memory_order_relaxed</code>&#x3002;</p>
+<p><strong>NOTE</strong>:&#x5F53;&#x8FD4;&#x56DE;true&#x548C;success_order&#x5185;&#x5B58;&#x5E8F;&#x65F6;&#xFF0C;&#x662F;&#x5BF9;<em>this&#x5185;&#x5B58;&#x5730;&#x5740;&#x7684;&#x539F;&#x5B50;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#xFF1B;&#x53CD;&#x4E4B;&#xFF0C;&#x8FD9;&#x662F;&#x5BF9;</em>this&#x5185;&#x5B58;&#x5730;&#x5740;&#x7684;&#x539F;&#x5B50;&#x52A0;&#x8F7D;&#x64CD;&#x4F5C;(failure_order)&#x3002;</p>
+<h3 id="stdatomiccompareexchangestrong-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_compare_exchange_strong &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5F53;&#x671F;&#x671B;&#x503C;&#x548C;&#x65B0;&#x503C;&#x4E00;&#x6837;&#x65F6;&#xFF0C;&#x5C06;&#x65B0;&#x503C;&#x5B58;&#x50A8;&#x5230;&#x5B9E;&#x4F8B;&#x4E2D;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x76F8;&#x7B49;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x5B9E;&#x7528;&#x65B0;&#x503C;&#x66F4;&#x65B0;&#x671F;&#x671B;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_strong(
+    volatile atomic&lt;BaseType&gt;* p,BaseType * old_value,BaseType new_value)
+    noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_strong(  
+    atomic&lt;BaseType&gt;* p,BaseType * old_value,BaseType new_value) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;compare_exchange_strong(*old_value,new_value);
+</code></pre><h3 id="stdatomiccompareexchangestrongexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_compare_exchange_strong_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5F53;&#x671F;&#x671B;&#x503C;&#x548C;&#x65B0;&#x503C;&#x4E00;&#x6837;&#x65F6;&#xFF0C;&#x5C06;&#x65B0;&#x503C;&#x5B58;&#x50A8;&#x5230;&#x5B9E;&#x4F8B;&#x4E2D;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x76F8;&#x7B49;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x5B9E;&#x7528;&#x65B0;&#x503C;&#x66F4;&#x65B0;&#x671F;&#x671B;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_strong_explicit(
+    volatile atomic&lt;BaseType&gt;* p,BaseType * old_value,
+    BaseType new_value, memory_order success_order,
+    memory_order failure_order) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_strong_explicit(
+    atomic&lt;BaseType&gt;* p,BaseType * old_value,
+    BaseType new_value, memory_order success_order,
+    memory_order failure_order) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;compare_exchange_strong(
+    *old_value,new_value,success_order,failure_order) noexcept;
+</code></pre><h3 id="stdatomiccompareexchangeweak-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic::compare_exchange_weak &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x6BD4;&#x8F83;&#x65B0;&#x503C;&#x548C;&#x671F;&#x671B;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x76F8;&#x7B49;&#xFF0C;&#x90A3;&#x4E48;&#x5B58;&#x50A8;&#x65B0;&#x503C;&#x5E76;&#x4E14;&#x8FDB;&#x884C;&#x539F;&#x5B50;&#x5316;&#x66F4;&#x65B0;&#x3002;&#x5F53;&#x4E24;&#x503C;&#x4E0D;&#x76F8;&#x7B49;&#xFF0C;&#x6216;&#x66F4;&#x65B0;&#x672A;&#x8FDB;&#x884C;&#xFF0C;&#x90A3;&#x671F;&#x671B;&#x503C;&#x4F1A;&#x66F4;&#x65B0;&#x4E3A;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>bool compare_exchange_weak(
+    BaseType&amp; expected,BaseType new_value,
+    memory_order order = std::memory_order_seq_cst) volatile noexcept;
+bool compare_exchange_weak(
+    BaseType&amp; expected,BaseType new_value,
+    memory_order order = std::memory_order_seq_cst) noexcept;
+bool compare_exchange_weak(
+    BaseType&amp; expected,BaseType new_value,
+    memory_order success_order,memory_order failure_order)
+    volatile noexcept;
+bool compare_exchange_weak(
+    BaseType&amp; expected,BaseType new_value,
+    memory_order success_order,memory_order failure_order) noexcept;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+failure_order&#x4E0D;&#x80FD;&#x662F;<code>std::memory_order_release</code>&#x6216;<code>std::memory_order_acq_rel</code>&#x5185;&#x5B58;&#x5E8F;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;&#x5B58;&#x50A8;&#x5728;<em>this&#x4E2D;&#x7684;expected&#x503C;&#x4E0E;new_value&#x503C;&#x8FDB;&#x884C;&#x9010;&#x4F4D;&#x5BF9;&#x6BD4;&#xFF0C;&#x5F53;&#x76F8;&#x7B49;&#x65F6;&#x95F4;new_value&#x5B58;&#x50A8;&#x5728;</em>this&#x4E2D;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x66F4;&#x65B0;expected&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;new_value&#x7684;&#x503C;&#x4E0E;*this&#x4E2D;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;&#x503C;&#x76F8;&#x540C;&#xFF0C;&#x5C31;&#x8FD4;&#x56DE;true&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x5728;success_order==order&#x548C;failure_order==order&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x91CD;&#x8F7D;&#x51FD;&#x6570;&#x4E0E;&#x56DB;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x91CD;&#x8F7D;&#x51FD;&#x6570;&#x7B49;&#x4EF7;&#x3002;&#x9664;&#x975E;&#xFF0C;order&#x662F;<code>std::memory_order_acq_rel</code>&#x65F6;&#xFF0C;failure_order&#x662F;<code>std::memory_order_acquire</code>&#xFF0C;&#x4E14;&#x5F53;order&#x662F;<code>std::memory_order_release</code>&#x65F6;&#xFF0C;failure_order&#x662F;<code>std::memory_order_relaxed</code>&#x3002;</p>
+<p><strong>NOTE</strong>:&#x5F53;&#x8FD4;&#x56DE;true&#x548C;success_order&#x5185;&#x5B58;&#x5E8F;&#x65F6;&#xFF0C;&#x662F;&#x5BF9;<em>this&#x5185;&#x5B58;&#x5730;&#x5740;&#x7684;&#x539F;&#x5B50;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#xFF1B;&#x53CD;&#x4E4B;&#xFF0C;&#x8FD9;&#x662F;&#x5BF9;</em>this&#x5185;&#x5B58;&#x5730;&#x5740;&#x7684;&#x539F;&#x5B50;&#x52A0;&#x8F7D;&#x64CD;&#x4F5C;(failure_order)&#x3002;</p>
+<h3 id="stdatomiccompareexchangeweak-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_compare_exchange_weak &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x6BD4;&#x8F83;&#x65B0;&#x503C;&#x548C;&#x671F;&#x671B;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x76F8;&#x7B49;&#xFF0C;&#x90A3;&#x4E48;&#x5B58;&#x50A8;&#x65B0;&#x503C;&#x5E76;&#x4E14;&#x8FDB;&#x884C;&#x539F;&#x5B50;&#x5316;&#x66F4;&#x65B0;&#x3002;&#x5F53;&#x4E24;&#x503C;&#x4E0D;&#x76F8;&#x7B49;&#xFF0C;&#x6216;&#x66F4;&#x65B0;&#x672A;&#x8FDB;&#x884C;&#xFF0C;&#x90A3;&#x671F;&#x671B;&#x503C;&#x4F1A;&#x66F4;&#x65B0;&#x4E3A;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_weak(
+    volatile atomic&lt;BaseType&gt;* p,BaseType * old_value,BaseType new_value)
+    noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_weak(
+    atomic&lt;BaseType&gt;* p,BaseType * old_value,BaseType new_value) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;compare_exchange_weak(*old_value,new_value);
+</code></pre><h3 id="stdatomiccompareexchangeweakexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_compare_exchange_weak_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x6BD4;&#x8F83;&#x65B0;&#x503C;&#x548C;&#x671F;&#x671B;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x76F8;&#x7B49;&#xFF0C;&#x90A3;&#x4E48;&#x5B58;&#x50A8;&#x65B0;&#x503C;&#x5E76;&#x4E14;&#x8FDB;&#x884C;&#x539F;&#x5B50;&#x5316;&#x66F4;&#x65B0;&#x3002;&#x5F53;&#x4E24;&#x503C;&#x4E0D;&#x76F8;&#x7B49;&#xFF0C;&#x6216;&#x66F4;&#x65B0;&#x672A;&#x8FDB;&#x884C;&#xFF0C;&#x90A3;&#x671F;&#x671B;&#x503C;&#x4F1A;&#x66F4;&#x65B0;&#x4E3A;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_weak_explicit(
+    volatile atomic&lt;BaseType&gt;* p,BaseType * old_value,
+    BaseType new_value, memory_order success_order,
+    memory_order failure_order) noexcept;
+template&lt;typename BaseType&gt;
+bool atomic_compare_exchange_weak_explicit(
+    atomic&lt;BaseType&gt;* p,BaseType * old_value,
+    BaseType new_value, memory_order success_order,
+    memory_order failure_order) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;compare_exchange_weak(
+   *old_value,new_value,success_order,failure_order);
+</code></pre><h2 id="d39-stdatomic&#x6A21;&#x677F;&#x7C7B;&#x578B;&#x7684;&#x7279;&#x5316;">D.3.9 std::atomic&#x6A21;&#x677F;&#x7C7B;&#x578B;&#x7684;&#x7279;&#x5316;</h2>
+<p><code>std::atomic</code>&#x7C7B;&#x6A21;&#x677F;&#x7684;&#x7279;&#x5316;&#x7C7B;&#x578B;&#x6709;&#x6574;&#x578B;&#x548C;&#x6307;&#x9488;&#x7C7B;&#x578B;&#x3002;&#x5BF9;&#x4E8E;&#x6574;&#x578B;&#x6765;&#x8BF4;&#xFF0C;&#x7279;&#x5316;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x539F;&#x5B50;&#x52A0;&#x51CF;&#xFF0C;&#x4EE5;&#x53CA;&#x4F4D;&#x57DF;&#x64CD;&#x4F5C;(&#x4E3B;&#x6A21;&#x677F;&#x672A;&#x63D0;&#x4F9B;)&#x3002;&#x5BF9;&#x4E8E;&#x6307;&#x9488;&#x7C7B;&#x578B;&#x6765;&#x8BF4;&#xFF0C;&#x7279;&#x5316;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x539F;&#x5B50;&#x6307;&#x9488;&#x7684;&#x8FD0;&#x7B97;(&#x4E3B;&#x6A21;&#x677F;&#x672A;&#x63D0;&#x4F9B;)&#x3002;</p>
+<p>&#x7279;&#x5316;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x5982;&#x4E0B;&#x6574;&#x578B;&#xFF1A;</p>
+<pre><code>std::atomic&lt;bool&gt;
+std::atomic&lt;char&gt;
+std::atomic&lt;signed char&gt;
+std::atomic&lt;unsigned char&gt;
+std::atomic&lt;short&gt;
+std::atomic&lt;unsigned short&gt;
+std::atomic&lt;int&gt;
+std::atomic&lt;unsigned&gt;
+std::atomic&lt;long&gt;
+std::atomic&lt;unsigned long&gt;
+std::atomic&lt;long long&gt;
+std::atomic&lt;unsigned long long&gt;
+std::atomic&lt;wchar_t&gt;
+std::atomic&lt;char16_t&gt;
+std::atomic&lt;char32_t&amp;gt;
+</code></pre><p><code>std::atomic&lt;T*&gt;</code>&#x539F;&#x5B50;&#x6307;&#x9488;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EE5;&#x4E0A;&#x7684;&#x7C7B;&#x578B;&#x4F5C;&#x4E3A;T&#x3002;</p>
+<h2 id="d310-&#x7279;&#x5316;stdatomicintegral-type">D.3.10 &#x7279;&#x5316;std::atomic&lt;integral-type&gt;</h2>
+<p><code>std::atomic&amp;lt;integral-type&amp;gt;</code>&#x662F;&#x4E3A;&#x6BCF;&#x4E00;&#x4E2A;&#x57FA;&#x7840;&#x6574;&#x578B;&#x63D0;&#x4F9B;&#x7684;<code>std::atomic</code>&#x7C7B;&#x6A21;&#x677F;&#xFF0C;&#x5176;&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x5957;&#x5B8C;&#x6574;&#x7684;&#x6574;&#x578B;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x7684;&#x7279;&#x5316;&#x6A21;&#x677F;&#x4E5F;&#x9002;&#x7528;&#x4E8E;<code>std::atomic&lt;&gt;</code>&#x7C7B;&#x6A21;&#x677F;&#xFF1A;</p>
+<pre><code>std::atomic&lt;char&gt;
+std::atomic&lt;signed char&gt;
+std::atomic&lt;unsigned char&gt;
+std::atomic&lt;short&gt;
+std::atomic&lt;unsigned short&gt;
+std::atomic&lt;int&gt;
+std::atomic&lt;unsigned&gt;
+std::atomic&lt;long&gt;
+std::atomic&lt;unsigned long&gt;
+std::atomic&lt;long long&gt;
+std::atomic&lt;unsigned long long&gt;
+std::atomic&lt;wchar_t&gt;
+std::atomic&lt;char16_t&gt;
+std::atomic&lt;char32_t&gt;
+</code></pre><p>&#x56E0;&#x4E3A;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#x53EA;&#x80FD;&#x6267;&#x884C;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#xFF0C;&#x6240;&#x4EE5;&#x7279;&#x5316;&#x6A21;&#x677F;&#x7684;&#x5B9E;&#x4F8B;&#x4E0D;&#x53EF;<code>CopyConstructible</code>(&#x62F7;&#x8D1D;&#x6784;&#x9020;)&#x548C;<code>CopyAssignable</code>(&#x62F7;&#x8D1D;&#x8D4B;&#x503C;)&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template&lt;&gt;
+struct atomic&lt;integral-type&gt;
+{
+  atomic() noexcept = default;
+  constexpr atomic(integral-type) noexcept;
+  bool operator=(integral-type) volatile noexcept;
+
+  atomic(const atomic&amp;) = delete;
+  atomic&amp; operator=(const atomic&amp;) = delete;
+  atomic&amp; operator=(const atomic&amp;) volatile = delete;
+
+  bool is_lock_free() const volatile noexcept;
+  bool is_lock_free() const noexcept;
+
+  void store(integral-type,memory_order = memory_order_seq_cst)
+      volatile noexcept;
+  void store(integral-type,memory_order = memory_order_seq_cst) noexcept;
+  integral-type load(memory_order = memory_order_seq_cst)
+      const volatile noexcept;
+  integral-type load(memory_order = memory_order_seq_cst) const noexcept;
+  integral-type exchange(
+      integral-type,memory_order = memory_order_seq_cst)
+      volatile noexcept;
+ integral-type exchange(
+      integral-type,memory_order = memory_order_seq_cst) noexcept;
+
+  bool compare_exchange_strong(
+      integral-type &amp; old_value,integral-type new_value,
+      memory_order order = memory_order_seq_cst) volatile noexcept;
+  bool compare_exchange_strong(
+      integral-type &amp; old_value,integral-type new_value,
+      memory_order order = memory_order_seq_cst) noexcept;
+  bool compare_exchange_strong(
+      integral-type &amp; old_value,integral-type new_value,
+      memory_order success_order,memory_order failure_order)
+      volatile noexcept;
+  bool compare_exchange_strong(
+      integral-type &amp; old_value,integral-type new_value,
+      memory_order success_order,memory_order failure_order) noexcept;
+  bool compare_exchange_weak(
+      integral-type &amp; old_value,integral-type new_value,
+      memory_order order = memory_order_seq_cst) volatile noexcept;
+  bool compare_exchange_weak(
+      integral-type &amp; old_value,integral-type new_value,
+      memory_order order = memory_order_seq_cst) noexcept;
+  bool compare_exchange_weak(
+      integral-type &amp; old_value,integral-type new_value,
+      memory_order success_order,memory_order failure_order)
+      volatile noexcept;
+  bool compare_exchange_weak(
+      integral-type &amp; old_value,integral-type new_value,
+      memory_order success_order,memory_order failure_order) noexcept;
+
+  operator integral-type() const volatile noexcept;
+  operator integral-type() const noexcept;
+
+  integral-type fetch_add(
+      integral-type,memory_order = memory_order_seq_cst)
+      volatile noexcept;
+  integral-type fetch_add(
+      integral-type,memory_order = memory_order_seq_cst) noexcept;
+  integral-type fetch_sub(
+      integral-type,memory_order = memory_order_seq_cst)
+      volatile noexcept;
+  integral-type fetch_sub(
+      integral-type,memory_order = memory_order_seq_cst) noexcept;
+  integral-type fetch_and(
+      integral-type,memory_order = memory_order_seq_cst)
+      volatile noexcept;
+  integral-type fetch_and(
+      integral-type,memory_order = memory_order_seq_cst) noexcept;
+  integral-type fetch_or(
+      integral-type,memory_order = memory_order_seq_cst)
+      volatile noexcept;
+  integral-type fetch_or(
+      integral-type,memory_order = memory_order_seq_cst) noexcept;
+  integral-type fetch_xor(
+      integral-type,memory_order = memory_order_seq_cst)
+      volatile noexcept;
+  integral-type fetch_xor(
+      integral-type,memory_order = memory_order_seq_cst) noexcept;
+
+  integral-type operator++() volatile noexcept;
+  integral-type operator++() noexcept;
+  integral-type operator++(int) volatile noexcept;
+  integral-type operator++(int) noexcept;
+  integral-type operator--() volatile noexcept;
+  integral-type operator--() noexcept;
+  integral-type operator--(int) volatile noexcept;
+  integral-type operator--(int) noexcept;
+  integral-type operator+=(integral-type) volatile noexcept;
+  integral-type operator+=(integral-type) noexcept;
+  integral-type operator-=(integral-type) volatile noexcept;
+  integral-type operator-=(integral-type) noexcept;
+  integral-type operator&amp;=(integral-type) volatile noexcept;
+  integral-type operator&amp;=(integral-type) noexcept;
+  integral-type operator|=(integral-type) volatile noexcept;
+  integral-type operator|=(integral-type) noexcept;
+  integral-type operator^=(integral-type) volatile noexcept;
+  integral-type operator^=(integral-type) noexcept;
+};
+
+bool atomic_is_lock_free(volatile const atomic&lt;integral-type&gt;*) noexcept;
+bool atomic_is_lock_free(const atomic&lt;integral-type&gt;*) noexcept;
+void atomic_init(volatile atomic&lt;integral-type&gt;*,integral-type) noexcept;
+void atomic_init(atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_exchange(
+    volatile atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_exchange(
+    atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_exchange_explicit(
+    volatile atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_exchange_explicit(
+    atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+void atomic_store(volatile atomic&lt;integral-type&gt;*,integral-type) noexcept;
+void atomic_store(atomic&lt;integral-type&gt;*,integral-type) noexcept;
+void atomic_store_explicit(
+    volatile atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+void atomic_store_explicit(
+    atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_load(volatile const atomic&lt;integral-type&gt;*) noexcept;
+integral-type atomic_load(const atomic&lt;integral-type&gt;*) noexcept;
+integral-type atomic_load_explicit(
+    volatile const atomic&lt;integral-type&gt;*,memory_order) noexcept;
+integral-type atomic_load_explicit(
+    const atomic&lt;integral-type&gt;*,memory_order) noexcept;
+bool atomic_compare_exchange_strong(
+    volatile atomic&lt;integral-type&gt;*,
+    integral-type * old_value,integral-type new_value) noexcept;
+bool atomic_compare_exchange_strong(
+    atomic&lt;integral-type&gt;*,
+    integral-type * old_value,integral-type new_value) noexcept;
+bool atomic_compare_exchange_strong_explicit(
+    volatile atomic&lt;integral-type&gt;*,
+    integral-type * old_value,integral-type new_value,
+    memory_order success_order,memory_order failure_order) noexcept;
+bool atomic_compare_exchange_strong_explicit(
+    atomic&lt;integral-type&gt;*,
+    integral-type * old_value,integral-type new_value,
+    memory_order success_order,memory_order failure_order) noexcept;
+bool atomic_compare_exchange_weak(
+    volatile atomic&lt;integral-type&gt;*,
+    integral-type * old_value,integral-type new_value) noexcept;
+bool atomic_compare_exchange_weak(
+    atomic&lt;integral-type&gt;*,
+    integral-type * old_value,integral-type new_value) noexcept;
+bool atomic_compare_exchange_weak_explicit(
+    volatile atomic&lt;integral-type&gt;*,
+    integral-type * old_value,integral-type new_value,
+    memory_order success_order,memory_order failure_order) noexcept;
+bool atomic_compare_exchange_weak_explicit(
+    atomic&lt;integral-type&gt;*,
+    integral-type * old_value,integral-type new_value,
+    memory_order success_order,memory_order failure_order) noexcept;
+
+integral-type atomic_fetch_add(
+    volatile atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_fetch_add(
+    atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_fetch_add_explicit(
+    volatile atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_fetch_add_explicit(
+    atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_fetch_sub(
+    volatile atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_fetch_sub(
+    atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_fetch_sub_explicit(
+    volatile atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_fetch_sub_explicit(
+    atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_fetch_and(
+    volatile atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_fetch_and(
+    atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_fetch_and_explicit(
+    volatile atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_fetch_and_explicit(
+    atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_fetch_or(
+    volatile atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_fetch_or(
+    atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_fetch_or_explicit(
+    volatile atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_fetch_or_explicit(
+    atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_fetch_xor(
+    volatile atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_fetch_xor(
+    atomic&lt;integral-type&gt;*,integral-type) noexcept;
+integral-type atomic_fetch_xor_explicit(
+    volatile atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+integral-type atomic_fetch_xor_explicit(
+    atomic&lt;integral-type&gt;*,integral-type, memory_order) noexcept;
+</code></pre><p>&#x8FD9;&#x4E9B;&#x64CD;&#x4F5C;&#x5728;&#x4E3B;&#x6A21;&#x677F;&#x4E2D;&#x4E5F;&#x6709;&#x63D0;&#x4F9B;(&#x89C1;D.3.8)&#x3002;</p>
+<h3 id="stdatomicintegral-typefetchadd-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic&lt;integral-type&gt;::fetch_add &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x52A0;&#x8F7D;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x4E0E;&#x63D0;&#x4F9B;i&#x76F8;&#x52A0;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x66FF;&#x6362;&#x6389;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type fetch_add(
+    integral-type i,memory_order order = memory_order_seq_cst)
+    volatile noexcept;
+integral-type fetch_add(
+    integral-type i,memory_order order = memory_order_seq_cst) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x539F;&#x5B50;&#x7684;&#x67E5;&#x8BE2;<em>this&#x4E2D;&#x7684;&#x503C;&#xFF0C;&#x5C06;old-value+i&#x7684;&#x548C;&#x5B58;&#x56DE;</em>this&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x8FD4;&#x56DE;*this&#x4E4B;&#x524D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x5BF9;&#x4E8E;*this&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicfetchadd-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_add &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x76F8;&#x52A0;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type atomic_fetch_add(
+    volatile atomic&lt;integral-type&gt;* p, integral-type i) noexcept;
+integral-type atomic_fetch_add(
+    atomic&lt;integral-type&gt;* p, integral-type i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_add(i);
+</code></pre><h3 id="stdatomicfetchaddexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_add_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x76F8;&#x52A0;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type atomic_fetch_add_explicit(
+    volatile atomic&lt;integral-type&gt;* p, integral-type i,
+    memory_order order) noexcept;
+integral-type atomic_fetch_add_explicit(
+    atomic&lt;integral-type&gt;* p, integral-type i, memory_order order)
+    noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_add(i,order);
+</code></pre><h3 id="stdatomicintegral-typefetchsub-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic&lt;integral-type&gt;::fetch_sub &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x52A0;&#x8F7D;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x4E0E;&#x63D0;&#x4F9B;i&#x76F8;&#x51CF;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x66FF;&#x6362;&#x6389;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type fetch_sub(
+    integral-type i,memory_order order = memory_order_seq_cst)
+    volatile noexcept;
+integral-type fetch_sub(
+    integral-type i,memory_order order = memory_order_seq_cst) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x539F;&#x5B50;&#x7684;&#x67E5;&#x8BE2;<em>this&#x4E2D;&#x7684;&#x503C;&#xFF0C;&#x5C06;old-value-i&#x7684;&#x548C;&#x5B58;&#x56DE;</em>this&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x8FD4;&#x56DE;*this&#x4E4B;&#x524D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x5BF9;&#x4E8E;*this&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicfetchsub-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_sub &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x76F8;&#x51CF;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type atomic_fetch_sub(
+    volatile atomic&lt;integral-type&gt;* p, integral-type i) noexcept;
+integral-type atomic_fetch_sub(
+    atomic&lt;integral-type&gt;* p, integral-type i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_sub(i);
+</code></pre><h3 id="stdatomicfetchsubexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_sub_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x76F8;&#x51CF;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type atomic_fetch_sub_explicit(
+    volatile atomic&lt;integral-type&gt;* p, integral-type i,
+    memory_order order) noexcept;
+integral-type atomic_fetch_sub_explicit(
+    atomic&lt;integral-type&gt;* p, integral-type i, memory_order order)
+    noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_sub(i,order);
+</code></pre><h3 id="stdatomicintegral-typefetchand-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic&lt;integral-type&gt;::fetch_and &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x4E0E;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type fetch_and(
+    integral-type i,memory_order order = memory_order_seq_cst)
+    volatile noexcept;
+integral-type fetch_and(
+    integral-type i,memory_order order = memory_order_seq_cst) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x539F;&#x5B50;&#x7684;&#x67E5;&#x8BE2;<em>this&#x4E2D;&#x7684;&#x503C;&#xFF0C;&#x5C06;old-value&amp;i&#x7684;&#x548C;&#x5B58;&#x56DE;</em>this&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x8FD4;&#x56DE;*this&#x4E4B;&#x524D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x5BF9;&#x4E8E;*this&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicfetchand-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_and &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x4E0E;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type atomic_fetch_and(
+    volatile atomic&lt;integral-type&gt;* p, integral-type i) noexcept;
+integral-type atomic_fetch_and(
+    atomic&lt;integral-type&gt;* p, integral-type i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_and(i);
+</code></pre><h3 id="stdatomicfetchandexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_and_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x4E0E;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type atomic_fetch_and_explicit(
+    volatile atomic&lt;integral-type&gt;* p, integral-type i,
+    memory_order order) noexcept;
+integral-type atomic_fetch_and_explicit(
+    atomic&lt;integral-type&gt;* p, integral-type i, memory_order order)
+    noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_and(i,order);
+</code></pre><h3 id="stdatomicintegral-typefetchor-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic&lt;integral-type&gt;::fetch_or &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x6216;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type fetch_or(
+    integral-type i,memory_order order = memory_order_seq_cst)
+    volatile noexcept;
+integral-type fetch_or(
+    integral-type i,memory_order order = memory_order_seq_cst) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x539F;&#x5B50;&#x7684;&#x67E5;&#x8BE2;<em>this&#x4E2D;&#x7684;&#x503C;&#xFF0C;&#x5C06;old-value|i&#x7684;&#x548C;&#x5B58;&#x56DE;</em>this&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x8FD4;&#x56DE;*this&#x4E4B;&#x524D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x5BF9;&#x4E8E;*this&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicfetchor-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_or &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x6216;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type atomic_fetch_or(
+    volatile atomic&lt;integral-type&gt;* p, integral-type i) noexcept;
+integral-type atomic_fetch_or(
+    atomic&lt;integral-type&gt;* p, integral-type i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_or(i);
+</code></pre><h3 id="stdatomicfetchorexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_or_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x6216;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type atomic_fetch_or_explicit(
+    volatile atomic&lt;integral-type&gt;* p, integral-type i,
+    memory_order order) noexcept;
+integral-type atomic_fetch_or_explicit(
+    atomic&lt;integral-type&gt;* p, integral-type i, memory_order order)
+    noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_or(i,order);
+</code></pre><h3 id="stdatomicintegral-typefetchxor-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic&lt;integral-type&gt;::fetch_xor &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x4EA6;&#x6216;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type fetch_xor(
+    integral-type i,memory_order order = memory_order_seq_cst)
+    volatile noexcept;
+integral-type fetch_xor(
+    integral-type i,memory_order order = memory_order_seq_cst) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x539F;&#x5B50;&#x7684;&#x67E5;&#x8BE2;<em>this&#x4E2D;&#x7684;&#x503C;&#xFF0C;&#x5C06;old-value^i&#x7684;&#x548C;&#x5B58;&#x56DE;</em>this&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x8FD4;&#x56DE;*this&#x4E4B;&#x524D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x5BF9;&#x4E8E;*this&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicfetchxor-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_xor &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x5F02;&#x6216;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type atomic_fetch_xor_explicit(
+    volatile atomic&lt;integral-type&gt;* p, integral-type i,
+    memory_order order) noexcept;
+integral-type atomic_fetch_xor_explicit(
+    atomic&lt;integral-type&gt;* p, integral-type i, memory_order order)
+    noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_xor(i,order);
+</code></pre><h3 id="stdatomicfetchxorexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_xor_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;integral-type&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x5F02;&#x6216;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type atomic_fetch_xor_explicit(
+    volatile atomic&lt;integral-type&gt;* p, integral-type i,
+    memory_order order) noexcept;
+integral-type atomic_fetch_xor_explicit(
+    atomic&lt;integral-type&gt;* p, integral-type i, memory_order order)
+    noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_xor(i,order);
+</code></pre><h3 id="stdatomicintegral-typeoperator-&#x524D;&#x7F6E;&#x9012;&#x589E;&#x64CD;&#x4F5C;">std::atomic&lt;integral-type&gt;::operator++ &#x524D;&#x7F6E;&#x9012;&#x589E;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;*this&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x52A0;1&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type operator++() volatile noexcept;
+integral-type operator++() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_add(1) + 1;
+</code></pre><h3 id="stdatomicintegral-typeoperator-&#x540E;&#x7F6E;&#x9012;&#x589E;&#x64CD;&#x4F5C;">std::atomic&lt;integral-type&gt;::operator++ &#x540E;&#x7F6E;&#x9012;&#x589E;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;*this&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x52A0;1&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65E7;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type operator++() volatile noexcept;
+integral-type operator++() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_add(1);
+</code></pre><h3 id="stdatomicintegral-typeoperator---&#x524D;&#x7F6E;&#x9012;&#x51CF;&#x64CD;&#x4F5C;">std::atomic&lt;integral-type&gt;::operator-- &#x524D;&#x7F6E;&#x9012;&#x51CF;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;*this&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x51CF;1&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type operator--() volatile noexcept;
+integral-type operator--() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_add(1) - 1;
+</code></pre><h3 id="stdatomicintegral-typeoperator---&#x540E;&#x7F6E;&#x9012;&#x51CF;&#x64CD;&#x4F5C;">std::atomic&lt;integral-type&gt;::operator-- &#x540E;&#x7F6E;&#x9012;&#x51CF;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;*this&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x51CF;1&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65E7;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type operator--() volatile noexcept;
+integral-type operator--() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_add(1);
+</code></pre><h3 id="stdatomicintegral-typeoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;">std::atomic&lt;integral-type&gt;::operator+= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;&#x7ED9;&#x5B9A;&#x503C;&#x4E0E;*this&#x4E2D;&#x7684;&#x503C;&#x76F8;&#x52A0;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type operator+=(integral-type i) volatile noexcept;
+integral-type operator+=(integral-type i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_add(i) + i;
+</code></pre><h3 id="stdatomicintegral-typeoperator--&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;">std::atomic&lt;integral-type&gt;::operator-= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;&#x7ED9;&#x5B9A;&#x503C;&#x4E0E;*this&#x4E2D;&#x7684;&#x503C;&#x76F8;&#x51CF;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type operator-=(integral-type i) volatile noexcept;
+integral-type operator-=(integral-type i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_sub(i,std::memory_order_seq_cst) &#x2013; i;
+</code></pre><h3 id="stdatomicintegral-typeoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;">std::atomic&lt;integral-type&gt;::operator&amp;= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;&#x7ED9;&#x5B9A;&#x503C;&#x4E0E;*this&#x4E2D;&#x7684;&#x503C;&#x76F8;&#x4E0E;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type operator&amp;=(integral-type i) volatile noexcept;
+integral-type operator&amp;=(integral-type i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_and(i) &amp; i;
+</code></pre><h3 id="stdatomicintegral-typeoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;">std::atomic&lt;integral-type&gt;::operator|= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;&#x7ED9;&#x5B9A;&#x503C;&#x4E0E;*this&#x4E2D;&#x7684;&#x503C;&#x76F8;&#x6216;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type operator|=(integral-type i) volatile noexcept;
+integral-type operator|=(integral-type i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_or(i,std::memory_order_seq_cst) | i;
+</code></pre><h3 id="stdatomicintegral-typeoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;">std::atomic&lt;integral-type&gt;::operator^= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;&#x7ED9;&#x5B9A;&#x503C;&#x4E0E;*this&#x4E2D;&#x7684;&#x503C;&#x76F8;&#x4EA6;&#x6216;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>integral-type operator^=(integral-type i) volatile noexcept;
+integral-type operator^=(integral-type i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_xor(i,std::memory_order_seq_cst) ^ i;
+</code></pre><h3 id="stdatomict-&#x5C40;&#x90E8;&#x7279;&#x5316;">std::atomic&lt;T*&gt; &#x5C40;&#x90E8;&#x7279;&#x5316;</h3>
+<p><code>std::atomic&lt;T*&gt;</code>&#x4E3A;<code>std::atomic</code>&#x7279;&#x5316;&#x4E86;&#x6307;&#x9488;&#x7C7B;&#x578B;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#xFF0C;&#x5E76;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x76F8;&#x5173;&#x64CD;&#x4F5C;&#x3002;</p>
+<p><code>std::atomic&lt;T*&gt;</code>&#x662F;CopyConstructible(&#x62F7;&#x8D1D;&#x6784;&#x9020;)&#x548C;CopyAssignable(&#x62F7;&#x8D1D;&#x8D4B;&#x503C;)&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x64CD;&#x4F5C;&#x662F;&#x539F;&#x5B50;&#x7684;&#xFF0C;&#x5728;&#x540C;&#x4E00;&#x65F6;&#x95F4;&#x53EA;&#x80FD;&#x6267;&#x884C;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template&lt;typename T&gt;
+struct atomic&lt;T*&gt;
+{
+  atomic() noexcept = default;
+  constexpr atomic(T*) noexcept;
+  bool operator=(T*) volatile;
+  bool operator=(T*);
+
+  atomic(const atomic&amp;) = delete;
+  atomic&amp; operator=(const atomic&amp;) = delete;
+  atomic&amp; operator=(const atomic&amp;) volatile = delete;
+
+  bool is_lock_free() const volatile noexcept;
+  bool is_lock_free() const noexcept;
+  void store(T*,memory_order = memory_order_seq_cst) volatile noexcept;
+  void store(T*,memory_order = memory_order_seq_cst) noexcept;
+  T* load(memory_order = memory_order_seq_cst) const volatile noexcept;
+  T* load(memory_order = memory_order_seq_cst) const noexcept;
+  T* exchange(T*,memory_order = memory_order_seq_cst) volatile noexcept;
+  T* exchange(T*,memory_order = memory_order_seq_cst) noexcept;
+
+  bool compare_exchange_strong(
+      T* &amp; old_value, T* new_value,
+      memory_order order = memory_order_seq_cst) volatile noexcept;
+  bool compare_exchange_strong(
+      T* &amp; old_value, T* new_value,
+      memory_order order = memory_order_seq_cst) noexcept;
+  bool compare_exchange_strong(
+      T* &amp; old_value, T* new_value,
+      memory_order success_order,memory_order failure_order)  
+      volatile noexcept;
+  bool compare_exchange_strong(
+      T* &amp; old_value, T* new_value,
+      memory_order success_order,memory_order failure_order) noexcept;
+  bool compare_exchange_weak(
+      T* &amp; old_value, T* new_value,
+      memory_order order = memory_order_seq_cst) volatile noexcept;
+  bool compare_exchange_weak(
+      T* &amp; old_value, T* new_value,
+      memory_order order = memory_order_seq_cst) noexcept;
+  bool compare_exchange_weak(
+      T* &amp; old_value, T* new_value,
+      memory_order success_order,memory_order failure_order)
+      volatile noexcept;
+  bool compare_exchange_weak(
+      T* &amp; old_value, T* new_value,
+      memory_order success_order,memory_order failure_order) noexcept;
+
+  operator T*() const volatile noexcept;
+  operator T*() const noexcept;
+
+  T* fetch_add(
+      ptrdiff_t,memory_order = memory_order_seq_cst) volatile noexcept;
+  T* fetch_add(
+      ptrdiff_t,memory_order = memory_order_seq_cst) noexcept;
+  T* fetch_sub(
+      ptrdiff_t,memory_order = memory_order_seq_cst) volatile noexcept;
+  T* fetch_sub(
+      ptrdiff_t,memory_order = memory_order_seq_cst) noexcept;
+
+  T* operator++() volatile noexcept;
+  T* operator++() noexcept;
+  T* operator++(int) volatile noexcept;
+  T* operator++(int) noexcept;
+  T* operator--() volatile noexcept;
+  T* operator--() noexcept;
+  T* operator--(int) volatile noexcept;
+  T* operator--(int) noexcept;
+
+  T* operator+=(ptrdiff_t) volatile noexcept;
+  T* operator+=(ptrdiff_t) noexcept;
+  T* operator-=(ptrdiff_t) volatile noexcept;
+  T* operator-=(ptrdiff_t) noexcept;
+};
+
+bool atomic_is_lock_free(volatile const atomic&lt;T*&gt;*) noexcept;
+bool atomic_is_lock_free(const atomic&lt;T*&gt;*) noexcept;
+void atomic_init(volatile atomic&lt;T*&gt;*, T*) noexcept;
+void atomic_init(atomic&lt;T*&gt;*, T*) noexcept;
+T* atomic_exchange(volatile atomic&lt;T*&gt;*, T*) noexcept;
+T* atomic_exchange(atomic&lt;T*&gt;*, T*) noexcept;
+T* atomic_exchange_explicit(volatile atomic&lt;T*&gt;*, T*, memory_order)
+  noexcept;
+T* atomic_exchange_explicit(atomic&lt;T*&gt;*, T*, memory_order) noexcept;
+void atomic_store(volatile atomic&lt;T*&gt;*, T*) noexcept;
+void atomic_store(atomic&lt;T*&gt;*, T*) noexcept;
+void atomic_store_explicit(volatile atomic&lt;T*&gt;*, T*, memory_order)
+  noexcept;
+void atomic_store_explicit(atomic&lt;T*&gt;*, T*, memory_order) noexcept;
+T* atomic_load(volatile const atomic&lt;T*&gt;*) noexcept;
+T* atomic_load(const atomic&lt;T*&gt;*) noexcept;
+T* atomic_load_explicit(volatile const atomic&lt;T*&gt;*, memory_order) noexcept;
+T* atomic_load_explicit(const atomic&lt;T*&gt;*, memory_order) noexcept;
+bool atomic_compare_exchange_strong(
+  volatile atomic&lt;T*&gt;*,T* * old_value,T* new_value) noexcept;
+bool atomic_compare_exchange_strong(
+  volatile atomic&lt;T*&gt;*,T* * old_value,T* new_value) noexcept;
+bool atomic_compare_exchange_strong_explicit(
+  atomic&lt;T*&gt;*,T* * old_value,T* new_value,
+  memory_order success_order,memory_order failure_order) noexcept;
+bool atomic_compare_exchange_strong_explicit(
+  atomic&lt;T*&gt;*,T* * old_value,T* new_value,
+  memory_order success_order,memory_order failure_order) noexcept;
+bool atomic_compare_exchange_weak(
+  volatile atomic&lt;T*&gt;*,T* * old_value,T* new_value) noexcept;
+bool atomic_compare_exchange_weak(
+  atomic&lt;T*&gt;*,T* * old_value,T* new_value) noexcept;
+bool atomic_compare_exchange_weak_explicit(
+  volatile atomic&lt;T*&gt;*,T* * old_value, T* new_value,
+  memory_order success_order,memory_order failure_order) noexcept;
+bool atomic_compare_exchange_weak_explicit(
+  atomic&lt;T*&gt;*,T* * old_value, T* new_value,
+  memory_order success_order,memory_order failure_order) noexcept;
+
+T* atomic_fetch_add(volatile atomic&lt;T*&gt;*, ptrdiff_t) noexcept;
+T* atomic_fetch_add(atomic&lt;T*&gt;*, ptrdiff_t) noexcept;
+T* atomic_fetch_add_explicit(
+  volatile atomic&lt;T*&gt;*, ptrdiff_t, memory_order) noexcept;
+T* atomic_fetch_add_explicit(
+  atomic&lt;T*&gt;*, ptrdiff_t, memory_order) noexcept;
+T* atomic_fetch_sub(volatile atomic&lt;T*&gt;*, ptrdiff_t) noexcept;
+T* atomic_fetch_sub(atomic&lt;T*&gt;*, ptrdiff_t) noexcept;
+T* atomic_fetch_sub_explicit(
+  volatile atomic&lt;T*&gt;*, ptrdiff_t, memory_order) noexcept;
+T* atomic_fetch_sub_explicit(
+  atomic&lt;T*&gt;*, ptrdiff_t, memory_order) noexcept;
+</code></pre><p>&#x5728;&#x4E3B;&#x6A21;&#x677F;&#x4E2D;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E9B;&#x76F8;&#x540C;&#x7684;&#x64CD;&#x4F5C;(&#x53EF;&#x89C1;11.3.8&#x8282;)&#x3002;</p>
+<h3 id="stdatomictfetchadd-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic&lt;T*&gt;::fetch_add &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x52A0;&#x8F7D;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x4E0E;&#x63D0;&#x4F9B;i&#x76F8;&#x52A0;(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x66FF;&#x6362;&#x6389;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* fetch_add(
+    ptrdiff_t i,memory_order order = memory_order_seq_cst)
+    volatile noexcept;
+T* fetch_add(
+    ptrdiff_t i,memory_order order = memory_order_seq_cst) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x539F;&#x5B50;&#x7684;&#x67E5;&#x8BE2;<em>this&#x4E2D;&#x7684;&#x503C;&#xFF0C;&#x5C06;old-value+i&#x7684;&#x548C;&#x5B58;&#x56DE;</em>this&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x8FD4;&#x56DE;*this&#x4E4B;&#x524D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x5BF9;&#x4E8E;*this&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicfetchadd-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_add &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;T*&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x76F8;&#x52A0;&#x64CD;&#x4F5C;(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* atomic_fetch_add(volatile atomic&lt;T*&gt;* p, ptrdiff_t i) noexcept;
+T* atomic_fetch_add(atomic&lt;T*&gt;* p, ptrdiff_t i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_add(i);
+</code></pre><h3 id="stdatomicfetchaddexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_add_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;T*&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x76F8;&#x52A0;&#x64CD;&#x4F5C;(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* atomic_fetch_add_explicit(
+     volatile atomic&lt;T*&gt;* p, ptrdiff_t i,memory_order order) noexcept;
+T* atomic_fetch_add_explicit(
+     atomic&lt;T*&gt;* p, ptrdiff_t i, memory_order order) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_add(i,order);
+</code></pre><h3 id="stdatomictfetchsub-&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic&lt;T*&gt;::fetch_sub &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x52A0;&#x8F7D;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x4E0E;&#x63D0;&#x4F9B;i&#x76F8;&#x51CF;(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x66FF;&#x6362;&#x6389;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* fetch_sub(
+    ptrdiff_t i,memory_order order = memory_order_seq_cst)
+    volatile noexcept;
+T* fetch_sub(
+    ptrdiff_t i,memory_order order = memory_order_seq_cst) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x539F;&#x5B50;&#x7684;&#x67E5;&#x8BE2;<em>this&#x4E2D;&#x7684;&#x503C;&#xFF0C;&#x5C06;old-value-i&#x7684;&#x548C;&#x5B58;&#x56DE;</em>this&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x8FD4;&#x56DE;*this&#x4E4B;&#x524D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<p><strong>NOTE</strong>:&#x5BF9;&#x4E8E;*this&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x201C;&#x8BFB;-&#x6539;-&#x5199;&#x201D;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="stdatomicfetchsub-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_sub &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;T*&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x76F8;&#x51CF;&#x64CD;&#x4F5C;(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* atomic_fetch_sub(volatile atomic&lt;T*&gt;* p, ptrdiff_t i) noexcept;
+T* atomic_fetch_sub(atomic&lt;T*&gt;* p, ptrdiff_t i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_sub(i);
+</code></pre><h3 id="stdatomicfetchsubexplicit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::atomic_fetch_sub_explicit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;<code>atomic&lt;T*&gt;</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x539F;&#x5B50;&#x7684;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5176;&#x4E0E;&#x7ED9;&#x5B9A;i&#x503C;&#x8FDB;&#x884C;&#x4F4D;&#x76F8;&#x51CF;&#x64CD;&#x4F5C;(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#x540E;&#xFF0C;&#x66FF;&#x6362;&#x539F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* atomic_fetch_sub_explicit(
+     volatile atomic&lt;T*&gt;* p, ptrdiff_t i,memory_order order) noexcept;
+T* atomic_fetch_sub_explicit(
+     atomic&lt;T*&gt;* p, ptrdiff_t i, memory_order order) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return p-&gt;fetch_sub(i,order);
+</code></pre><h3 id="stdatomictoperator-&#x524D;&#x7F6E;&#x9012;&#x589E;&#x64CD;&#x4F5C;">std::atomic&lt;T*&gt;::operator++ &#x524D;&#x7F6E;&#x9012;&#x589E;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;*this&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x52A0;1(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* operator++() volatile noexcept;
+T* operator++() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_add(1) + 1;
+</code></pre><h3 id="stdatomictoperator-&#x540E;&#x7F6E;&#x9012;&#x589E;&#x64CD;&#x4F5C;">std::atomic&lt;T*&gt;::operator++ &#x540E;&#x7F6E;&#x9012;&#x589E;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;*this&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x52A0;1(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65E7;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* operator++() volatile noexcept;
+T* operator++() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_add(1);
+</code></pre><h3 id="stdatomictoperator---&#x524D;&#x7F6E;&#x9012;&#x51CF;&#x64CD;&#x4F5C;">std::atomic&lt;T*&gt;::operator-- &#x524D;&#x7F6E;&#x9012;&#x51CF;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;*this&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x51CF;1(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* operator--() volatile noexcept;
+T* operator--() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_sub(1) - 1;
+</code></pre><h3 id="stdatomictoperator---&#x540E;&#x7F6E;&#x9012;&#x51CF;&#x64CD;&#x4F5C;">std::atomic&lt;T*&gt;::operator-- &#x540E;&#x7F6E;&#x9012;&#x51CF;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;*this&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x51CF;1(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65E7;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* operator--() volatile noexcept;
+T* operator--() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_sub(1);
+</code></pre><h3 id="stdatomictoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;">std::atomic&lt;T*&gt;::operator+= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;*this&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x4E0E;&#x7ED9;&#x5B9A;&#x503C;&#x76F8;&#x52A0;(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* operator+=(ptrdiff_t i) volatile noexcept;
+T* operator+=(ptrdiff_t i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_add(i) + i;
+</code></pre><h3 id="stdatomictoperator--&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;">std::atomic&lt;T*&gt;::operator-= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</h3>
+<p>&#x539F;&#x5B50;&#x7684;&#x5C06;*this&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x4E0E;&#x7ED9;&#x5B9A;&#x503C;&#x76F8;&#x51CF;(&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x6307;&#x9488;&#x8FD0;&#x7B97;&#x89C4;&#x5219;)&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x65B0;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>T* operator+=(ptrdiff_t i) volatile noexcept;
+T* operator+=(ptrdiff_t i) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong></p>
+<pre><code>return this-&gt;fetch_add(i) - i;
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="D.2-chinese.html" class="navigation navigation-prev " aria-label="Previous page: D.2 condition_variable头文件">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="D.4-chinese.html" class="navigation navigation-next " aria-label="Next page: D.4 future头文件">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"D.3 atomic头文件","level":"1.22.3","depth":2,"next":{"title":"D.4 future头文件","level":"1.22.4","depth":2,"path":"content/appendix_D/D.4-chinese.md","ref":"content/appendix_D/D.4-chinese.md","articles":[]},"previous":{"title":"D.2 condition_variable头文件","level":"1.22.2","depth":2,"path":"content/appendix_D/D.2-chinese.md","ref":"content/appendix_D/D.2-chinese.md","articles":[]},"dir":"ltr"},"config":{"plugins":["livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"plugins":["katex","ace"],"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"msyh","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"陈晓伟 chenxiaowei","pdf":{"pageNumbers":false,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":10,"left":10,"top":10,"bottom":20}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"C++并发编程实战（第2版）","language":"zh-hans","gitbook":"*","description":"《C++ Concurrency In Action - SECOND EDITION》英文版的中文翻译版。","direction":"ltr"},"file":{"path":"content/appendix_D/D.3-chinese.md","mtime":"2022-11-19T02:54:31.287Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-11-19T07:50:48.148Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

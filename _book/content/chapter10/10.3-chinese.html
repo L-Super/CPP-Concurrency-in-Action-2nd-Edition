@@ -1,0 +1,1602 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>10.3 C++标准库中的并行算法 · C++并发编程实战（第2版）</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="陈晓伟 chenxiaowei">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="10.4-chinese.html" />
+    
+    
+    <link rel="prev" href="10.2-chinese.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Praise_for_the_first_edition.html">
+            
+                <a href="../Praise_for_the_first_edition.html">
+            
+                    
+                    第一版的赞许
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../preface-chinese.html">
+            
+                <a href="../preface-chinese.html">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../acknowledgments-chinese.html">
+            
+                <a href="../acknowledgments-chinese.html">
+            
+                    
+                    感谢
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../about_this_book-chinese.html">
+            
+                <a href="../about_this_book-chinese.html">
+            
+                    
+                    关于本书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../about_the_author-chinese.html">
+            
+                <a href="../about_the_author-chinese.html">
+            
+                    
+                    关于作者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../about_cover_illustration-chinese.html">
+            
+                <a href="../about_cover_illustration-chinese.html">
+            
+                    
+                    关于封面
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../chapter1/1.0-chinese.html">
+            
+                <a href="../chapter1/1.0-chinese.html">
+            
+                    
+                    第1章 你好，并发世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../chapter1/1.1-chinese.html">
+            
+                <a href="../chapter1/1.1-chinese.html">
+            
+                    
+                    1.1 何谓并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../chapter1/1.2-chinese.html">
+            
+                <a href="../chapter1/1.2-chinese.html">
+            
+                    
+                    1.2 为什么使用并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../chapter1/1.3-chinese.html">
+            
+                <a href="../chapter1/1.3-chinese.html">
+            
+                    
+                    1.3 并发和多线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../chapter1/1.4-chinese.html">
+            
+                <a href="../chapter1/1.4-chinese.html">
+            
+                    
+                    1.4 开始入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../chapter1/1.5-chinese.html">
+            
+                <a href="../chapter1/1.5-chinese.html">
+            
+                    
+                    1.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../chapter2/2.0-chinese.html">
+            
+                <a href="../chapter2/2.0-chinese.html">
+            
+                    
+                    第2章 线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../chapter2/2.1-chinese.html">
+            
+                <a href="../chapter2/2.1-chinese.html">
+            
+                    
+                    2.1 线程的基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../chapter2/2.2-chinese.html">
+            
+                <a href="../chapter2/2.2-chinese.html">
+            
+                    
+                    2.2 传递参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../chapter2/2.3-chinese.html">
+            
+                <a href="../chapter2/2.3-chinese.html">
+            
+                    
+                    2.3 转移所有权
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../chapter2/2.4-chinese.html">
+            
+                <a href="../chapter2/2.4-chinese.html">
+            
+                    
+                    2.4 确定线程数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../chapter2/2.5-chinese.html">
+            
+                <a href="../chapter2/2.5-chinese.html">
+            
+                    
+                    2.5 线程标识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../chapter2/2.6-chinese.html">
+            
+                <a href="../chapter2/2.6-chinese.html">
+            
+                    
+                    2.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../chapter3/3.0-chinese.html">
+            
+                <a href="../chapter3/3.0-chinese.html">
+            
+                    
+                    第3章 共享数据
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../chapter3/3.1-chinese.html">
+            
+                <a href="../chapter3/3.1-chinese.html">
+            
+                    
+                    3.1 共享数据的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../chapter3/3.2-chinese.html">
+            
+                <a href="../chapter3/3.2-chinese.html">
+            
+                    
+                    3.2 使用互斥量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../chapter3/3.3-chinese.html">
+            
+                <a href="../chapter3/3.3-chinese.html">
+            
+                    
+                    3.3 保护共享数据的方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../chapter3/3.4-chinese.html">
+            
+                <a href="../chapter3/3.4-chinese.html">
+            
+                    
+                    3.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../chapter4/4.0-chinese.html">
+            
+                <a href="../chapter4/4.0-chinese.html">
+            
+                    
+                    第4章 同步操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../chapter4/4.1-chinese.html">
+            
+                <a href="../chapter4/4.1-chinese.html">
+            
+                    
+                    4.1 等待事件或条件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../chapter4/4.2-chinese.html">
+            
+                <a href="../chapter4/4.2-chinese.html">
+            
+                    
+                    4.2 使用future
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../chapter4/4.3-chinese.html">
+            
+                <a href="../chapter4/4.3-chinese.html">
+            
+                    
+                    4.3 限时等待
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../chapter4/4.4-chinese.html">
+            
+                <a href="../chapter4/4.4-chinese.html">
+            
+                    
+                    4.4 简化代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../chapter4/4.5-chinese.html">
+            
+                <a href="../chapter4/4.5-chinese.html">
+            
+                    
+                    4.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../chapter5/5.0-chinese.html">
+            
+                <a href="../chapter5/5.0-chinese.html">
+            
+                    
+                    第5章 内存模型和原子操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../chapter5/5.1-chinese.html">
+            
+                <a href="../chapter5/5.1-chinese.html">
+            
+                    
+                    5.1 内存模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../chapter5/5.2-chinese.html">
+            
+                <a href="../chapter5/5.2-chinese.html">
+            
+                    
+                    5.2 原子操作和原子类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../chapter5/5.3-chinese.html">
+            
+                <a href="../chapter5/5.3-chinese.html">
+            
+                    
+                    5.3 同步操作和强制排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../chapter5/5.4-chinese.html">
+            
+                <a href="../chapter5/5.4-chinese.html">
+            
+                    
+                    5.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../chapter6/6.0-chinese.html">
+            
+                <a href="../chapter6/6.0-chinese.html">
+            
+                    
+                    第6章 设计基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../chapter6/6.1-chinese.html">
+            
+                <a href="../chapter6/6.1-chinese.html">
+            
+                    
+                    6.1 并发设计的意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../chapter6/6.2-chinese.html">
+            
+                <a href="../chapter6/6.2-chinese.html">
+            
+                    
+                    6.2 基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../chapter6/6.3-chinese.html">
+            
+                <a href="../chapter6/6.3-chinese.html">
+            
+                    
+                    6.3 设计更加复杂的数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../chapter6/6.4-chinese.html">
+            
+                <a href="../chapter6/6.4-chinese.html">
+            
+                    
+                    6.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../chapter7/7.0-chinese.html">
+            
+                <a href="../chapter7/7.0-chinese.html">
+            
+                    
+                    第7章 设计无锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../chapter7/7.1-chinese.html">
+            
+                <a href="../chapter7/7.1-chinese.html">
+            
+                    
+                    7.1 定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../chapter7/7.2-chinese.html">
+            
+                <a href="../chapter7/7.2-chinese.html">
+            
+                    
+                    7.2 无锁数据结构的例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../chapter7/7.3-chinese.html">
+            
+                <a href="../chapter7/7.3-chinese.html">
+            
+                    
+                    7.3 设计无锁数据结构的指导建议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../chapter7/7.4-chinese.html">
+            
+                <a href="../chapter7/7.4-chinese.html">
+            
+                    
+                    7.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../chapter8/8.0-chinese.html">
+            
+                <a href="../chapter8/8.0-chinese.html">
+            
+                    
+                    第8章 并发设计
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../chapter8/8.1-chinese.html">
+            
+                <a href="../chapter8/8.1-chinese.html">
+            
+                    
+                    8.1 线程间划分工作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../chapter8/8.2-chinese.html">
+            
+                <a href="../chapter8/8.2-chinese.html">
+            
+                    
+                    8.2 并发代码的性能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../chapter8/8.3-chinese.html">
+            
+                <a href="../chapter8/8.3-chinese.html">
+            
+                    
+                    8.3 为多线程性能设计数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="../chapter8/8.4-chinese.html">
+            
+                <a href="../chapter8/8.4-chinese.html">
+            
+                    
+                    8.4 设计并发代码的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.5" data-path="../chapter8/8.5-chinese.html">
+            
+                <a href="../chapter8/8.5-chinese.html">
+            
+                    
+                    8.5 在实践中设计并发代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.6" data-path="../chapter8/8.6-chinese.html">
+            
+                <a href="../chapter8/8.6-chinese.html">
+            
+                    
+                    8.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../chapter9/9.0-chinese.html">
+            
+                <a href="../chapter9/9.0-chinese.html">
+            
+                    
+                    第9章 高级线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../chapter9/9.1-chinese.html">
+            
+                <a href="../chapter9/9.1-chinese.html">
+            
+                    
+                    9.1 线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../chapter9/9.2-chinese.html">
+            
+                <a href="../chapter9/9.2-chinese.html">
+            
+                    
+                    9.2 中断线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../chapter9/9.3-chinese.html">
+            
+                <a href="../chapter9/9.3-chinese.html">
+            
+                    
+                    9.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="10.0-chinese.html">
+            
+                <a href="10.0-chinese.html">
+            
+                    
+                    第10章 并行算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="10.1-chinese.html">
+            
+                <a href="10.1-chinese.html">
+            
+                    
+                    10.1 并行化标准库算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="10.2-chinese.html">
+            
+                <a href="10.2-chinese.html">
+            
+                    
+                    10.2 执行策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.17.3" data-path="10.3-chinese.html">
+            
+                <a href="10.3-chinese.html">
+            
+                    
+                    10.3 C++标准库中的并行算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="10.4-chinese.html">
+            
+                <a href="10.4-chinese.html">
+            
+                    
+                    10.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../chapter11/11.0-chinese.html">
+            
+                <a href="../chapter11/11.0-chinese.html">
+            
+                    
+                    第11章 测试和调试多线程应用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../chapter11/11.1-chinese.html">
+            
+                <a href="../chapter11/11.1-chinese.html">
+            
+                    
+                    11.1 与并发相关的Bug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.2" data-path="../chapter11/11.2-chinese.html">
+            
+                <a href="../chapter11/11.2-chinese.html">
+            
+                    
+                    11.2 定位并发Bug的技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.3" data-path="../chapter11/11.3-chinese.html">
+            
+                <a href="../chapter11/11.3-chinese.html">
+            
+                    
+                    11.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="../appendix_A/A.0-chinese.html">
+            
+                <a href="../appendix_A/A.0-chinese.html">
+            
+                    
+                    附录A C++11特性简明参考(部分)
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.19.1" data-path="../appendix_A/A.1-chinese.html">
+            
+                <a href="../appendix_A/A.1-chinese.html">
+            
+                    
+                    A.1 右值引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.2" data-path="../appendix_A/A.2-chinese.html">
+            
+                <a href="../appendix_A/A.2-chinese.html">
+            
+                    
+                    A.2 删除函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.3" data-path="../appendix_A/A.3-chinese.html">
+            
+                <a href="../appendix_A/A.3-chinese.html">
+            
+                    
+                    A.3 默认函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.4" data-path="../appendix_A/A.4-chinese.html">
+            
+                <a href="../appendix_A/A.4-chinese.html">
+            
+                    
+                    A.4 常量表达式函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.5" data-path="../appendix_A/A.5-chinese.html">
+            
+                <a href="../appendix_A/A.5-chinese.html">
+            
+                    
+                    A.5 Lambda函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.6" data-path="../appendix_A/A.6-chinese.html">
+            
+                <a href="../appendix_A/A.6-chinese.html">
+            
+                    
+                    A.6 变参模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.7" data-path="../appendix_A/A.7-chinese.html">
+            
+                <a href="../appendix_A/A.7-chinese.html">
+            
+                    
+                    A.7 自动推导变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.8" data-path="../appendix_A/A.8-chinese.html">
+            
+                <a href="../appendix_A/A.8-chinese.html">
+            
+                    
+                    A.8 线程本地变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.9" data-path="../appendix_A/A.9-chinese.html">
+            
+                <a href="../appendix_A/A.9-chinese.html">
+            
+                    
+                    A.9 模板类参数的推导
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.10" data-path="../appendix_A/A.10-chinese.html">
+            
+                <a href="../appendix_A/A.10-chinese.html">
+            
+                    
+                    A.10 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="../appendix_B/B.0-chinese.html">
+            
+                <a href="../appendix_B/B.0-chinese.html">
+            
+                    
+                    附录B 并发库简要对比
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="../appendix_C/C.0-chinese.html">
+            
+                <a href="../appendix_C/C.0-chinese.html">
+            
+                    
+                    附录C 消息传递框架与完整的ATM示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="../appendix_D/D.0-chinese.html">
+            
+                <a href="../appendix_D/D.0-chinese.html">
+            
+                    
+                    附录D C++线程类库参考
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.22.1" data-path="../appendix_D/D.1-chinese.html">
+            
+                <a href="../appendix_D/D.1-chinese.html">
+            
+                    
+                    D.1 chrono头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.2" data-path="../appendix_D/D.2-chinese.html">
+            
+                <a href="../appendix_D/D.2-chinese.html">
+            
+                    
+                    D.2 condition_variable头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.3" data-path="../appendix_D/D.3-chinese.html">
+            
+                <a href="../appendix_D/D.3-chinese.html">
+            
+                    
+                    D.3 atomic头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.4" data-path="../appendix_D/D.4-chinese.html">
+            
+                <a href="../appendix_D/D.4-chinese.html">
+            
+                    
+                    D.4 future头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.5" data-path="../appendix_D/D.5-chinese.html">
+            
+                <a href="../appendix_D/D.5-chinese.html">
+            
+                    
+                    D.5 mutex头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.6" data-path="../appendix_D/D.6-chinese.html">
+            
+                <a href="../appendix_D/D.6-chinese.html">
+            
+                    
+                    D.6 ratio头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.7" data-path="../appendix_D/D.7-chinese.html">
+            
+                <a href="../appendix_D/D.7-chinese.html">
+            
+                    
+                    D.7 thread头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >10.3 C++标准库中的并行算法</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="103-c&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x7684;&#x5E76;&#x884C;&#x7B97;&#x6CD5;">10.3 C++&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x7684;&#x5E76;&#x884C;&#x7B97;&#x6CD5;</h1>
+<p>&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x7684;&#x5927;&#x591A;&#x6570;&#x88AB;&#x6267;&#x884C;&#x7B56;&#x7565;&#x91CD;&#x8F7D;&#x7684;&#x7B97;&#x6CD5;&#x90FD;&#x5728;<code>&lt;algorithm&gt;</code>&#x548C;<code>&lt;numeric&gt;</code>&#x5934;&#x6587;&#x4EF6;&#x4E2D;&#x3002;&#x5305;&#x62EC;&#x6709;&#xFF1A;all_of&#xFF0C;any_of&#xFF0C;none_of&#xFF0C;for_each&#xFF0C;for_each_n&#xFF0C;find&#xFF0C;find_if&#xFF0C;find_end&#xFF0C;find_first_of&#xFF0C;adjacent_find&#xFF0C;count&#xFF0C;count_if&#xFF0C;mismatch&#xFF0C;equal&#xFF0C;search&#xFF0C;search_n&#xFF0C;copy&#xFF0C;copy_n&#xFF0C;copy_if&#xFF0C;move&#xFF0C;swap_ranges&#xFF0C;transform&#xFF0C;replace&#xFF0C;replace_if&#xFF0C;replace_copy&#xFF0C;replace_copy_if&#xFF0C;fill&#xFF0C;fill_n&#xFF0C;generate&#xFF0C;generate_n&#xFF0C;remove&#xFF0C;remove_if&#xFF0C;remove_copy&#xFF0C;remove_copy_if&#xFF0C;unique&#xFF0C;unique_copy&#xFF0C;reverse&#xFF0C;reverse_copy&#xFF0C;rotate&#xFF0C;rotate_copy&#xFF0C;is_partitioned&#xFF0C;partition&#xFF0C;stable_partition&#xFF0C;partition_copy&#xFF0C;sort&#xFF0C;stable_sort&#xFF0C;partial_sort&#xFF0C;partial_sort_copy&#xFF0C;is_sorted&#xFF0C;is_sorted_until&#xFF0C;nth_element&#xFF0C;merge&#xFF0C;inplace_merge&#xFF0C;includes&#xFF0C;set_union&#xFF0C;set_intersection&#xFF0C;set_difference&#xFF0C;set_symmetric_difference&#xFF0C;is_heap&#xFF0C;is_heap_until&#xFF0C;min_element&#xFF0C;max_element&#xFF0C;minmax_element&#xFF0C;lexicographical_compare&#xFF0C;reduce&#xFF0C;transform_reduce&#xFF0C;exclusive_scan&#xFF0C;inclusive_scan&#xFF0C;transform_exclusive_scan&#xFF0C;transform_inclusive_scan&#x548C;adjacent_difference &#x3002;</p>
+<p>&#x6240;&#x6709;C++&#x5E76;&#x53D1;&#x5316;&#x7684;&#x7B97;&#x6CD5;&#x90FD;&#x5728;&#x8FD9;&#x4E2A;&#x5217;&#x8868;&#x4E2D;&#x4E86;&#x3002;&#x50CF;<code>std::accumlate</code>&#x8FD9;&#x6837;&#x7684;&#x7B97;&#x6CD5;&#xFF0C;&#x4E25;&#x683C;&#x6765;&#x8BF4;&#x662F;&#x4E00;&#x4E2A;&#x8FDE;&#x7EED;&#x7684;&#x7D2F;&#x79EF;&#xFF0C;&#x4F46;&#x5E7F;&#x4E49;&#x7B97;&#x6CD5;<code>std::reduce</code>&#x4E5F;&#x51FA;&#x73B0;&#x4E86;&#x5728;&#x8FD9;&#x4E2A;&#x5217;&#x8868;&#x4E2D;&#x2014;&#x2014;&#x6807;&#x51C6;&#x4E2D;&#x9002;&#x5F53;&#x7684;&#x8B66;&#x544A;&#xFF0C;&#x5373;&#x5982;&#x679C;&#x7EA6;&#x7B80;&#x8FD0;&#x7B97;&#x4E0D;&#x540C;&#x65F6;&#x5177;&#x6709;&#x5173;&#x8054;&#x6027;&#x548C;&#x4EA4;&#x6362;&#x6027;&#x65F6;&#xFF0C;&#x7531;&#x4E8E;&#x672A;&#x6307;&#x5B9A;&#x7684;&#x8FD0;&#x7B97;&#x987A;&#x5E8F;&#xFF0C;&#x7ED3;&#x679C;&#x53EF;&#x80FD;&#x4E0D;&#x786E;&#x5B9A;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x7B97;&#x6CD5;&#xFF0C;&#x6BCF;&#x4E2A;&quot;&#x666E;&#x901A;&quot;&#x7B97;&#x6CD5;&#x7684;&#x91CD;&#x8F7D;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x53C2;&#x6570;(&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;)&#xFF0C;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x5C06;&#x4F20;&#x5165;&#x6267;&#x884C;&#x7B56;&#x7565;&#x2014;&#x2014;&#x201C;&#x666E;&#x901A;&#x201D;&#x91CD;&#x8F7D;&#x7684;&#x76F8;&#x5E94;&#x53C2;&#x6570;&#x5728;&#x6B64;&#x6267;&#x884C;&#x7B56;&#x7565;&#x53C2;&#x6570;&#x4E4B;&#x540E;&#x3002;&#x4F8B;&#x5982;&#xFF0C;<code>std::sort</code>&#x6709;&#x4E24;&#x4E2A;&#x6CA1;&#x6709;&#x6267;&#x884C;&#x7B56;&#x7565;&#x7684;&#x201C;&#x666E;&#x901A;&#x201D;&#x91CD;&#x8F7D;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> RandomAccessIterator&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(RandomAccessIterator first, RandomAccessIterator last)</span></span>;
+
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> RandomAccessIterator, <span class="hljs-keyword">class</span> Compare&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(
+  RandomAccessIterator first, RandomAccessIterator last, Compare comp)</span></span>;
+</code></pre>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x8FD8;&#x5177;&#x6709;&#x4E24;&#x4E2A;&#x6709;&#x6267;&#x884C;&#x7B56;&#x7565;&#x7684;&#x91CD;&#x8F7D;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> ExecutionPolicy, <span class="hljs-keyword">class</span> RandomAccessIterator&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(
+  ExecutionPolicy&amp;&amp; exec,
+  RandomAccessIterator first, RandomAccessIterator last)</span></span>;
+
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> ExecutionPolicy, <span class="hljs-keyword">class</span> RandomAccessIterator, <span class="hljs-keyword">class</span> Compare&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(
+  ExecutionPolicy&amp;&amp; exec,
+  RandomAccessIterator first, RandomAccessIterator last, Compare comp)</span></span>;
+</code></pre>
+<p>&#x6709;&#x6267;&#x884C;&#x7B56;&#x7565;&#x548C;&#x6CA1;&#x6709;&#x6267;&#x884C;&#x7B56;&#x7565;&#x7684;&#x51FD;&#x6570;&#x5217;&#x8868;&#x95F4;&#x6709;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x533A;&#x522B;&#xFF0C;&#x4F1A;&#x5F71;&#x54CD;&#x5230;&#x4E00;&#x4E9B;&#x7B97;&#x6CD5;&#xFF1A;&#x5982;&#x679C;&#x201C;&#x666E;&#x901A;&#x201D;&#x7B97;&#x6CD5;&#x5141;&#x8BB8;&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;&#x6216;&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x90A3;&#x6267;&#x884C;&#x7B56;&#x7565;&#x7684;&#x91CD;&#x8F7D;&#x5219;&#x9700;&#x8981;&#x524D;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x3002;&#x56E0;&#x4E3A;&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;&#x662F;&#x5355;&#x5411;&#x8FED;&#x4EE3;&#x7684;&#xFF1A;&#x53EA;&#x80FD;&#x8BBF;&#x95EE;&#x5F53;&#x524D;&#x5143;&#x7D20;&#xFF0C;&#x5E76;&#x4E14;&#x4E0D;&#x80FD;&#x5C06;&#x8FED;&#x4EE3;&#x5668;&#x5B58;&#x50A8;&#x5230;&#x4EE5;&#x524D;&#x7684;&#x5143;&#x7D20;&#x3002;&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x53EA;&#x5141;&#x8BB8;&#x5199;&#x5165;&#x5F53;&#x524D;&#x5143;&#x7D20;&#xFF1A;&#x4E0D;&#x80FD;&#x5728;&#x5199;&#x5165;&#x540E;&#x9762;&#x7684;&#x5143;&#x7D20;&#x540E;&#xFF0C;&#x540E;&#x9000;&#x518D;&#x5199;&#x5165;&#x524D;&#x9762;&#x7684;&#x5143;&#x7D20;&#x3002;</p>
+<blockquote>
+<p><strong>C++&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x7684;&#x8FED;&#x4EE3;&#x5668;&#x7C7B;&#x522B;</strong></p>
+<p>C++&#x6807;&#x51C6;&#x5E93;&#x5B9A;&#x4E49;&#x4E86;&#x4E94;&#x7C7B;&#x8FED;&#x4EE3;&#x5668;&#xFF1A;&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;&#x3001;&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x3001;&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x3001;&#x53CC;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x548C;&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x8FED;&#x4EE3;&#x5668;&#x3002;</p>
+<p>&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;&#x662F;&#x7528;&#x4E8E;&#x68C0;&#x7D22;&#x503C;&#x7684;&#x5355;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x3002;&#x901A;&#x5E38;&#x7528;&#x4E8E;&#x63A7;&#x5236;&#x53F0;&#x6216;&#x7F51;&#x7EDC;&#x7684;&#x8F93;&#x5165;&#xFF0C;&#x6216;&#x751F;&#x6210;&#x5E8F;&#x5217;&#x3002;&#x8BE5;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x4EFB;&#x4F55;&#x526F;&#x672C;&#x90FD;&#x662F;&#x65E0;&#x6548;&#x7684;&#x3002;</p>
+<p>&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x662F;&#x7528;&#x4E8E;&#x5411;&#x5355;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x5199;&#x5165;&#x503C;&#x3002;&#x901A;&#x5E38;&#x8F93;&#x51FA;&#x5230;&#x6587;&#x4EF6;&#x6216;&#x5411;&#x5BB9;&#x5668;&#x6DFB;&#x52A0;&#x503C;&#x3002;&#x8BE5;&#x8FED;&#x4EE3;&#x5668;&#x4F1A;&#x4F7F;&#x8BE5;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x4EFB;&#x4F55;&#x526F;&#x672C;&#x5931;&#x6548;&#x3002;</p>
+<p>&#x524D;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x662F;&#x901A;&#x8FC7;&#x6570;&#x636E;&#x4E0D;&#x53D8;&#x8FDB;&#x884C;&#x5355;&#x5411;&#x8FED;&#x4EE3;&#x7684;&#x591A;&#x8DEF;&#x5F84;&#x8FED;&#x4EE3;&#x5668;&#x3002;&#x867D;&#x7136;&#x8FED;&#x4EE3;&#x5668;&#x4E0D;&#x80FD;&#x8FD4;&#x56DE;&#x5230;&#x524D;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x4F46;&#x662F;&#x53EF;&#x4EE5;&#x5B58;&#x50A8;&#x524D;&#x9762;&#x5143;&#x7D20;&#x7684;&#x526F;&#x672C;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x5F15;&#x7528;&#x3002;&#x524D;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x8FD4;&#x56DE;&#x5BF9;&#x5143;&#x7D20;&#x7684;&#x5B9E;&#x9645;&#x5F15;&#x7528;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x8BFB;&#x5199;&#xFF08;&#x5982;&#x679C;&#x76EE;&#x6807;&#x662F;&#x4E0D;&#x662F;&#x5E38;&#x91CF;&#xFF09;&#x3002;</p>
+<p>&#x53CC;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x662F;&#x50CF;&#x524D;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x4E00;&#x6837;&#x7684;&#x591A;&#x8DEF;&#x5F84;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x4E5F;&#x53EF;&#x4EE5;&#x540E;&#x5411;&#x8BBF;&#x95EE;&#x4E4B;&#x524D;&#x7684;&#x5143;&#x7D20;&#x3002;</p>
+<p>&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x8FED;&#x4EE3;&#x5668;&#x662F;&#x53EF;&#x4EE5;&#x50CF;&#x53CC;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x4E00;&#x6837;&#x524D;&#x8FDB;&#x548C;&#x540E;&#x9000;&#x7684;&#x591A;&#x8DEF;&#x5F84;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x662F;&#x5B83;&#x4EEC;&#x6BD4;&#x5355;&#x4E2A;&#x5143;&#x7D20;&#x5927;&#x7684;&#x8DE8;&#x8DDD;&#x524D;&#x8FDB;&#x548C;&#x540E;&#x9000;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6570;&#x7EC4;&#x7D22;&#x5F15;&#x8FD0;&#x7B97;&#x7B26;&#xFF0C;&#x5728;&#x504F;&#x79FB;&#x4F4D;&#x7F6E;&#x76F4;&#x63A5;&#x8BBF;&#x95EE;&#x5143;&#x7D20;&#x3002;</p>
+</blockquote>
+<p>&#x5C55;&#x793A;&#x4E00;&#x4E0B;<code>std::copy</code>&#x7684;&#x201C;&#x666E;&#x901A;&#x201D;&#x51FD;&#x6570;&#x7B7E;&#x540D;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> InputIterator, <span class="hljs-keyword">class</span> OutputIterator&gt;
+<span class="hljs-function">OutputIterator <span class="hljs-title">copy</span><span class="hljs-params">(
+  InputIterator first, InputIterator last, OutputIterator result)</span></span>;
+</code></pre>
+<p>&#x5E26;&#x6709;&#x6267;&#x884C;&#x7B56;&#x7565;&#x7684;&#x7248;&#x672C;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> ExecutionPolicy,
+  <span class="hljs-keyword">class</span> ForwardIterator1, <span class="hljs-keyword">class</span> ForwardIterator2&gt;
+<span class="hljs-function">ForwardIterator2 <span class="hljs-title">copy</span><span class="hljs-params">(
+  ExecutionPolicy&amp;&amp; policy,
+  ForwardIterator1 first, ForwardIterator1 last,
+  ForwardIterator2 result)</span></span>;
+</code></pre>
+<p>&#x867D;&#x7136;&#xFF0C;&#x6A21;&#x677F;&#x53C2;&#x6570;&#x7684;&#x547D;&#x540D;&#x6CA1;&#x6709;&#x4ECE;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x89D2;&#x5EA6;&#x5E26;&#x6765;&#x4EFB;&#x4F55;&#x5F71;&#x54CD;&#xFF0C;&#x4F46;&#x4ECE;C++&#x6807;&#x51C6;&#x7684;&#x89D2;&#x5EA6;&#x6765;&#x770B;&#xFF1A;&#x6807;&#x51C6;&#x5E93;&#x7B97;&#x6CD5;&#x6A21;&#x677F;&#x53C2;&#x6570;&#x7684;&#x540D;&#x79F0;&#x8868;&#x793A;&#x8BED;&#x4E49;&#x7EA6;&#x675F;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x5E76;&#x4E14;&#x7B97;&#x6CD5;&#x7684;&#x64CD;&#x4F5C;&#x5C06;&#x4F9D;&#x8D56;&#x4E8E;&#x8FD9;&#x4E9B;&#x7EA6;&#x675F;&#xFF0C;&#x4E14;&#x5177;&#x6709;&#x7279;&#x5B9A;&#x7684;&#x8BED;&#x4E49;&#x3002;&#x5BF9;&#x4E8E;&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;&#x4E0E;&#x524D;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x524D;&#x8005;&#x5BF9;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x5F15;&#x7528;&#x8FD4;&#x56DE;&#x5141;&#x8BB8;&#x53D6;&#x6D88;&#x4EE3;&#x7406;&#x7C7B;&#x578B;&#xFF0C;&#x4EE3;&#x7406;&#x7C7B;&#x578B;&#x53EF;&#x8F6C;&#x6362;&#x4E3A;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x503C;&#x7C7B;&#x578B;&#xFF0C;&#x800C;&#x540E;&#x8005;&#x5BF9;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x5F15;&#x7528;&#x8FD4;&#x56DE;&#x8981;&#x6C42;&#x53D6;&#x6D88;&#x5BF9;&#x503C;&#x7684;&#x5B9E;&#x9645;&#x5F15;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x6240;&#x6709;&#x76F8;&#x540C;&#x7684;&#x8FED;&#x4EE3;&#x5668;&#x90FD;&#x8FD4;&#x56DE;&#x5BF9;&#x76F8;&#x4E00;&#x503C;&#x7684;&#x5F15;&#x7528;&#x3002;</p>
+<p>&#x8FD9;&#x5BF9;&#x4E8E;&#x5E76;&#x884C;&#x6027;&#x5F88;&#x91CD;&#x8981;&#xFF1A;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x8FED;&#x4EE3;&#x5668;&#x53EF;&#x4EE5;&#x81EA;&#x7531;&#x5730;&#x590D;&#x5236;&#xFF0C;&#x5E76;&#x7B49;&#x4EF7;&#x5730;&#x4F7F;&#x7528;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x589E;&#x52A0;&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x4E0D;&#x4F1A;&#x4F7F;&#x5176;&#x4ED6;&#x5931;&#x6548;&#x526F;&#x672C;&#x4E5F;&#x5F88;&#x91CD;&#x8981;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5355;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x5728;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x526F;&#x672C;&#x4E0A;&#x64CD;&#x4F5C;&#xFF0C;&#x9700;&#x8981;&#x65F6;&#x589E;&#x52A0;&#x526F;&#x672C;&#xFF0C;&#x800C;&#x4E0D;&#x5FC5;&#x62C5;&#x5FC3;&#x4F7F;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x7684;&#x8FED;&#x4EE3;&#x5668;&#x5931;&#x6548;&#x3002;&#x5982;&#x679C;&#x5E26;&#x6709;&#x6267;&#x884C;&#x7B56;&#x7565;&#x7684;&#x91CD;&#x8F7D;&#x5141;&#x8BB8;&#x4F7F;&#x7528;&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x5C06;&#x5F3A;&#x5236;&#x7EBF;&#x7A0B;&#x5E8F;&#x5217;&#x5316;&#xFF0C;&#x5BF9;&#x4E8E;&#x4ECE;&#x6E90;&#x5E8F;&#x5217;&#x8BFB;&#x53D6;&#x552F;&#x4E00;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x8BBF;&#x95EE;&#xFF0C;&#x4F1A;&#x9650;&#x5236;&#x5176;&#x5E76;&#x884C;&#x7684;&#x53EF;&#x80FD;&#x6027;&#x3002;</p>
+<h2 id="1031-&#x5E76;&#x884C;&#x7B97;&#x6CD5;&#x793A;&#x4F8B;">10.3.1 &#x5E76;&#x884C;&#x7B97;&#x6CD5;&#x793A;&#x4F8B;</h2>
+<p>&#x6700;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#x5C31;&#x662F;&#x5E76;&#x884C;&#x5FAA;&#x73AF;&#xFF1A;&#x5BF9;&#x5BB9;&#x5668;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;&#x8FD9;&#x662F;&#x4EE4;&#x4EBA;&#x5C34;&#x5C2C;&#x7684;&#x5E76;&#x884C;&#x573A;&#x666F;&#xFF1A;&#x6BCF;&#x4E2A;&#x9879;&#x76EE;&#x90FD;&#x662F;&#x72EC;&#x7ACB;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x6709;&#x6700;&#x5927;&#x7684;&#x5E76;&#x884C;&#x6027;&#x3002;&#x4F7F;&#x7528;&#x652F;&#x6301;OpenMP&#x7684;&#x7F16;&#x8BD1;&#x5668;&#xFF0C;&#x4EE3;&#x7801;&#x5C31;&#x53EF;&#x4EE5;&#x5199;&#x6210;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> omp parallel for</span>
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> i=<span class="hljs-number">0</span>;i&lt;v.size();++i){
+  do_stuff(v[i]);
+}
+</code></pre>
+<p>&#x4F7F;&#x7528;C++&#x6807;&#x51C6;&#x5E93;&#x7B97;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x6539;&#x5199;&#x6210;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-built_in">std</span>::for_each(<span class="hljs-built_in">std</span>::execution::par,v.begin(),v.end(),do_stuff);
+</code></pre>
+<p>&#x6807;&#x51C6;&#x5E93;&#x5C06;&#x521B;&#x5EFA;&#x5185;&#x90E8;&#x7EBF;&#x7A0B;&#xFF0C;&#x5E76;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x5212;&#x5206;&#xFF0C;&#x4E14;&#x5BF9;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;x&#x8C03;&#x7528;do_stuff(x)&#x3002;&#x5176;&#x4E2D;&#x5728;&#x7EBF;&#x7A0B;&#x95F4;&#x5212;&#x5206;&#x5143;&#x7D20;&#x662F;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x3002;</p>
+<p><strong>&#x6267;&#x884C;&#x7B56;&#x7565;&#x7684;&#x9009;&#x62E9;</strong></p>
+<p>std::execution::par&#x662F;&#x6700;&#x5E38;&#x4F7F;&#x7528;&#x7684;&#x7B56;&#x7565;&#xFF0C;&#x9664;&#x975E;&#x5B9E;&#x73B0;&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x9002;&#x5408;&#x7684;&#x975E;&#x6807;&#x51C6;&#x7B56;&#x7565;&#x3002;&#x5982;&#x679C;&#x4EE3;&#x7801;&#x9002;&#x5408;&#x5E76;&#x884C;&#x5316;&#xFF0C;&#x90A3;&#x5E94;&#x8BE5;&#x4E0E;std::execution::par&#x4E00;&#x8D77;&#x5DE5;&#x4F5C;&#x3002;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;std::execution::par_unseq&#x4EE3;&#x66FF;&#x3002;&#x8FD9;&#x53EF;&#x80FD;&#x6839;&#x672C;&#x6CA1;&#x4EC0;&#x4E48;&#x7528;(&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6807;&#x51C6;&#x7684;&#x6267;&#x884C;&#x7B56;&#x7565;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x80FD;&#x8FBE;&#x5230;&#x5E76;&#x884C;&#x6027;&#x7684;&#x7EA7;&#x522B;)&#xFF0C;&#x4F46;&#x5B83;&#x53EF;&#x4EE5;&#x7ED9;&#x5E93;&#x989D;&#x5916;&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x901A;&#x8FC7;&#x91CD;&#x65B0;&#x6392;&#x5E8F;&#x548C;&#x4EA4;&#x9519;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x6765;&#x63D0;&#x9AD8;&#x4EE3;&#x7801;&#x7684;&#x6027;&#x80FD;&#xFF0C;&#x4EE5;&#x6362;&#x53D6;&#x5BF9;&#x4EE3;&#x7801;&#x66F4;&#x4E25;&#x683C;&#x7684;&#x8981;&#x6C42;&#x3002;&#x66F4;&#x4E25;&#x683C;&#x7684;&#x8981;&#x6C42;&#x4E2D;&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x8BBF;&#x95EE;&#x5143;&#x7D20;&#x6216;&#x5BF9;&#x5143;&#x7D20;&#x6267;&#x884C;&#x64CD;&#x4F5C;&#x65F6;&#x4E0D;&#x4F7F;&#x7528;&#x540C;&#x6B65;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x4E92;&#x65A5;&#x91CF;&#x6216;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#xFF0C;&#x6216;&#x524D;&#x9762;&#x7AE0;&#x8282;&#x4E2D;&#x63CF;&#x8FF0;&#x7684;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;&#x540C;&#x6B65;&#x673A;&#x5236;&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x8BBF;&#x95EE;&#x662F;&#x5B89;&#x5168;&#x7684;&#x3002;&#x76F8;&#x53CD;&#xFF0C;&#x5FC5;&#x987B;&#x4F9D;&#x8D56;&#x4E8E;&#x7B97;&#x6CD5;&#x672C;&#x8EAB;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4F7F;&#x7528;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#x540C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5728;&#x8C03;&#x7528;&#x5E76;&#x884C;&#x7B97;&#x6CD5;&#x5916;&#x4F7F;&#x7528;&#x5916;&#x90E8;&#x540C;&#x6B65;&#xFF0C;&#x4ECE;&#x800C;&#x907F;&#x514D;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x4EE3;&#x7801;10.1&#x4E2D;&#x7684;&#x793A;&#x4F8B;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;std::execution::par&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;std::execution::par_unseq&#x3002;&#x4F7F;&#x7528;&#x5185;&#x90E8;&#x4E92;&#x65A5;&#x91CF;&#x540C;&#x6B65;&#x610F;&#x5473;&#x7740;&#x4F7F;&#x7528;std::execution:&#xFF1A;par_unseq&#xFF0C;&#x8FD9;&#x5C06;&#x4F1A;&#x5BFC;&#x81F4;&#x672A;&#x5B9A;&#x4E49;&#x884C;&#x4E3A;&#x7684;&#x53D1;&#x751F;&#x3002;</p>
+<p>&#x4EE3;&#x7801;10.1 &#x5177;&#x6709;&#x5185;&#x90E8;&#x540C;&#x6B65;&#x5E76;&#x884C;&#x7B97;&#x6CD5;&#x7684;&#x7C7B;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">class</span> X{
+  <span class="hljs-keyword">mutable</span> <span class="hljs-built_in">std</span>::mutex m;
+  <span class="hljs-keyword">int</span> data;
+<span class="hljs-keyword">public</span>:
+  X():data(<span class="hljs-number">0</span>){}
+  <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">get_value</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>{
+    <span class="hljs-built_in">std</span>::<span class="hljs-function">lock_guard <span class="hljs-title">guard</span><span class="hljs-params">(m)</span></span>;
+    <span class="hljs-keyword">return</span> data;
+  }
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">increment</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-built_in">std</span>::<span class="hljs-function">lock_guard <span class="hljs-title">guard</span><span class="hljs-params">(m)</span></span>;
+    ++data;
+  }
+};
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">increment_all</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;X&gt;&amp; v)</span></span>{
+  <span class="hljs-built_in">std</span>::for_each(<span class="hljs-built_in">std</span>::execution::par,v.begin(),v.end(),
+    [](X&amp; x){
+    x.increment();
+    });
+}
+</code></pre>
+<p>&#x4E0B;&#x4E2A;&#x4EE3;&#x7801;&#x5C55;&#x793A;&#x4E86;&#x53EF;&#x4F7F;&#x7528;std::execution::par_unseq&#x7684;&#x4EE3;&#x7801;&#x6BB5;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5185;&#x90E8;&#x5143;&#x7D20;&#x4E92;&#x65A5;&#x91CF;&#x66FF;&#x6362;&#x4E3A;&#x6574;&#x4E2A;&#x5BB9;&#x5668;&#x7684;&#x4E92;&#x65A5;&#x91CF;&#x3002;</p>
+<p>&#x4EE3;&#x7801;10.2 &#x65E0;&#x5185;&#x90E8;&#x540C;&#x6B65;&#x5E76;&#x884C;&#x7B97;&#x6CD5;&#x7684;&#x7C7B;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">class</span> Y{
+  <span class="hljs-keyword">int</span> data;
+<span class="hljs-keyword">public</span>:
+  Y():data(<span class="hljs-number">0</span>){}
+  <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">get_value</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>{
+    <span class="hljs-keyword">return</span> data;
+  }
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">increment</span><span class="hljs-params">()</span></span>{
+    ++data;
+  }
+};
+<span class="hljs-keyword">class</span> ProtectedY{
+  <span class="hljs-built_in">std</span>::mutex m;
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;Y&gt; v;
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span></span>{
+    m.lock();
+  }
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">()</span></span>{
+    m.unlock();
+  }
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;Y&gt;&amp; get_vec(){
+    <span class="hljs-keyword">return</span> v;
+  }
+};
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">increment_all</span><span class="hljs-params">(ProtectedY&amp; data)</span></span>{
+  <span class="hljs-built_in">std</span>::<span class="hljs-function">lock_guard <span class="hljs-title">guard</span><span class="hljs-params">(data)</span></span>;
+  <span class="hljs-keyword">auto</span>&amp; v=data.get_vec();
+  <span class="hljs-built_in">std</span>::for_each(<span class="hljs-built_in">std</span>::execution::par_unseq,v.begin(),v.end(),
+    [](Y&amp; y){
+      y.increment();
+    });
+}
+</code></pre>
+<p>&#x4EE3;&#x7801;10.2&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x8BBF;&#x95EE;&#x76EE;&#x524D;&#x6CA1;&#x6709;&#x540C;&#x6B65;&#xFF0C;&#x4F7F;&#x7528;std::execution::par_unseq&#x662F;&#x5B89;&#x5168;&#x7684;&#x3002;&#x7F3A;&#x70B9;&#x662F;&#xFF1A;&#x5E76;&#x884C;&#x7B97;&#x6CD5;&#x8C03;&#x7528;&#x4E4B;&#x5916;&#xFF0C;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x7684;&#x5E76;&#x53D1;&#x8BBF;&#x95EE;&#x73B0;&#x5728;&#x4E5F;&#x5FC5;&#x987B;&#x7B49;&#x5F85;&#x6574;&#x4E2A;&#x64CD;&#x4F5C;&#x5B8C;&#x6210;&#x3002;&#x4E92;&#x65A5;&#x9501;&#x7684;&#x7C92;&#x5EA6;&#x4E0E;&#x4EE3;&#x7801;10.1&#x4E2D;&#x4E0D;&#x540C;&#x3002;</p>
+<p>&#x73B0;&#x5728;&#x8BA9;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E2A;&#x73B0;&#x5B9E;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x8BE6;&#x8FF0;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5E76;&#x884C;&#x7B97;&#x6CD5;&#xFF1A;&#x8BB0;&#x5F55;&#x8BBF;&#x95EE;&#x7F51;&#x7AD9;&#x7684;&#x6B21;&#x6570;&#x3002;</p>
+<h2 id="1032-&#x8BA1;&#x6570;&#x8BBF;&#x95EE;">10.3.2 &#x8BA1;&#x6570;&#x8BBF;&#x95EE;</h2>
+<p>&#x5047;&#x8BBE;&#x6709;&#x4E00;&#x4E2A;&#x8FD0;&#x4F5C;&#x7E41;&#x5FD9;&#x7684;&#x7F51;&#x7AD9;&#xFF0C;&#x65E5;&#x5FD7;&#x6709;&#x6570;&#x767E;&#x4E07;&#x6761;&#x6761;&#x76EE;&#xFF0C;&#x4F60;&#x5E0C;&#x671B;&#x5BF9;&#x8FD9;&#x4E9B;&#x65E5;&#x5FD7;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x4EE5;&#x4FBF;&#x67E5;&#x770B;&#x76F8;&#x5173;&#x6570;&#x636E;&#xFF1A;&#x6BCF;&#x9875;&#x8BBF;&#x95EE;&#x591A;&#x5C11;&#x6B21;&#x3001;&#x8BBF;&#x95EE;&#x6765;&#x81EA;&#x4F55;&#x5904;&#x3001;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x54EA;&#x4E2A;&#x6D4F;&#x89C8;&#x5668;&#xFF0C;&#x7B49;&#x7B49;&#x3002;&#x5206;&#x6790;&#x65E5;&#x5FD7;&#x6709;&#x4E24;&#x4E2A;&#x90E8;&#x5206;&#xFF1A;&#x5904;&#x7406;&#x6BCF;&#x4E00;&#x884C;&#x4EE5;&#x63D0;&#x53D6;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#xFF0C;&#x5C06;&#x7ED3;&#x679C;&#x805A;&#x5408;&#x5728;&#x4E00;&#x8D77;&#x3002;&#x5BF9;&#x4E8E;&#x4F7F;&#x7528;&#x5E76;&#x884C;&#x7B97;&#x6CD5;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x7406;&#x60F3;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x56E0;&#x4E3A;&#x5904;&#x7406;&#x6BCF;&#x4E00;&#x6761;&#x5355;&#x72EC;&#x7684;&#x884C;&#x5B8C;&#x5168;&#x72EC;&#x7ACB;&#x4E8E;&#x5176;&#x4ED6;&#x6240;&#x6709;&#x884C;&#xFF0C;&#x5E76;&#x4E14;&#x5982;&#x679C;&#x6700;&#x7EC8;&#x7684;&#x5408;&#x8BA1;&#x662F;&#x6B63;&#x786E;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x9010;&#x4E2A;&#x6C47;&#x603B;&#x7ED3;&#x679C;&#x3002;</p>
+<p>&#x8FD9;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x4EFB;&#x52A1;&#x9002;&#x5408;transform_reduce&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5C55;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x5C06;&#x5176;&#x7528;&#x4E8E;&#x8BE5;&#x4EFB;&#x52A1;&#x3002;</p>
+<p>&#x4EE3;&#x7801;10.3 &#x4F7F;&#x7528;transform_reduce&#x6765;&#x8BB0;&#x5F55;&#x7F51;&#x7AD9;&#x7684;&#x9875;&#x9762;&#x88AB;&#x8BBF;&#x95EE;&#x7684;&#x6B21;&#x6570;</p>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;numeric&gt;</span></span>
+
+<span class="hljs-keyword">struct</span> log_info {
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> page;
+  <span class="hljs-keyword">time_t</span> visit_time;
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> browser;
+  <span class="hljs-comment">// any other fields</span>
+};
+
+<span class="hljs-function"><span class="hljs-keyword">extern</span> log_info <span class="hljs-title">parse_log_line</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> <span class="hljs-keyword">const</span> &amp;line)</span></span>; <span class="hljs-comment">// 1</span>
+<span class="hljs-keyword">using</span> visit_map_type= <span class="hljs-built_in">std</span>::<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>&gt;;
+<span class="hljs-function">visit_map_type
+<span class="hljs-title">count_visits_per_page</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&gt; <span class="hljs-keyword">const</span> &amp;log_lines)</span> </span>{
+  <span class="hljs-keyword">struct</span> combine_visits {
+    <span class="hljs-function">visit_map_type
+    <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(visit_map_type lhs, visit_map_type rhs)</span> <span class="hljs-keyword">const</span> </span>{ <span class="hljs-comment">// 3</span>
+      <span class="hljs-keyword">if</span>(lhs.size() &lt; rhs.size())
+        <span class="hljs-built_in">std</span>::swap(lhs, rhs);
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> <span class="hljs-keyword">const</span> &amp;entry : rhs) {
+        lhs[entry.first]+= entry.second;
+      }
+      <span class="hljs-keyword">return</span> lhs;
+    }
+    <span class="hljs-function">visit_map_type <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(log_info <span class="hljs-built_in">log</span>,visit_map_type <span class="hljs-built_in">map</span>)</span> <span class="hljs-keyword">const</span></span>{ <span class="hljs-comment">// 4</span>
+      ++<span class="hljs-built_in">map</span>[<span class="hljs-built_in">log</span>.page];
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">map</span>;
+    }
+    <span class="hljs-function">visit_map_type <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(visit_map_type <span class="hljs-built_in">map</span>,log_info <span class="hljs-built_in">log</span>)</span> <span class="hljs-keyword">const</span></span>{ <span class="hljs-comment">// 5</span>
+      ++<span class="hljs-built_in">map</span>[<span class="hljs-built_in">log</span>.page];
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">map</span>;
+    }
+    <span class="hljs-function">visit_map_type <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(log_info log1,log_info log2)</span> <span class="hljs-keyword">const</span></span>{ <span class="hljs-comment">// 6</span>
+      visit_map_type <span class="hljs-built_in">map</span>;
+      ++<span class="hljs-built_in">map</span>[log1.page];
+      ++<span class="hljs-built_in">map</span>[log2.page];
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">map</span>;
+    }
+  };
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">std</span>::transform_reduce( <span class="hljs-comment">// 2</span>
+    <span class="hljs-built_in">std</span>::execution::par, log_lines.begin(), log_lines.end(),
+    visit_map_type(), combine_visits(), parse_log_line);
+}
+</code></pre>
+<p>&#x5047;&#x8BBE;&#x51FD;&#x6570;parse_log_line&#x7684;&#x529F;&#x80FD;&#x662F;&#x4ECE;&#x65E5;&#x5FD7;&#x6761;&#x76EE;&#x4E2D;&#x63D0;&#x53D6;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#x2460;&#xFF0C;count_visits_per_page &#x51FD;&#x6570;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x5305;&#x88C5;&#x5668;&#xFF0C;&#x5C06;&#x5BF9;std::transform_reduce&#x7684;&#x8C03;&#x7528;&#x8FDB;&#x884C;&#x5305;&#x88C5;&#x2461;&#x3002;&#x590D;&#x6742;&#x5EA6;&#x6765;&#x6E90;&#x4E8E;&#x89C4;&#x7EA6;&#x64CD;&#x4F5C;&#xFF1A;&#x9700;&#x8981;&#x7EC4;&#x5408;&#x4E24;&#x4E2A;log_info&#x7ED3;&#x6784;&#x4F53;&#x6765;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x6620;&#x5C04;&#xFF0C;&#x4E00;&#x4E2A;log_info&#x7ED3;&#x6784;&#x4F53;&#x548C;&#x4E00;&#x4E2A;&#x6620;&#x5C04;(&#x65E0;&#x8BBA;&#x662F;&#x54EA;&#x79CD;&#x65B9;&#x5F0F;)&#xFF0C;&#x6216;&#x4E24;&#x4E2A;&#x6620;&#x5C04;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;combine_visits&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x9700;&#x8981;&#x91CD;&#x8F7D;4&#x4E2A;&#x51FD;&#x6570;&#x8FD0;&#x7B97;&#x7B26;&#xFF0C;&#x2462;&#x2463;&#x2464;&#x548C;&#x2465;&#x3002;&#x867D;&#x7136;&#x8FD9;&#x4E9B;&#x91CD;&#x8F7D;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x4F46;&#x8FD9;&#x91CC;&#x6CA1;&#x6709;&#x7528;Lambda&#x8868;&#x8FBE;&#x5F0F;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;std::transform_reduce&#x5C06;&#x4F7F;&#x7528;&#x786C;&#x4EF6;&#x5E76;&#x884C;&#x6267;&#x884C;&#x6B64;&#x8BA1;&#x7B97;(&#x56E0;&#x4E3A;&#x4F20;&#x4E86;std::execution::par)&#x3002;&#x4EBA;&#x5DE5;&#x7F16;&#x5199;&#x8FD9;&#x4E2A;&#x7B97;&#x6CD5;&#x662F;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#xFF0C;&#x6B63;&#x5982;&#x5728;&#x4E0A;&#x4E00;&#x7AE0;&#x4E2D;&#x770B;&#x5230;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x8FD9;&#x5141;&#x8BB8;&#x5C06;&#x5B9E;&#x73B0;&#x5E76;&#x884C;&#x6027;&#x7684;&#x8270;&#x82E6;&#x5DE5;&#x4F5C;&#x59D4;&#x6258;&#x7ED9;&#x6807;&#x51C6;&#x5E93;&#x5B9E;&#x73B0;&#x8005;&#xFF0C;&#x8FD9;&#x6837;&#x5F00;&#x53D1;&#x8005;&#x5C31;&#x53EF;&#x4EE5;&#x4E13;&#x6CE8;&#x4E8E;&#x671F;&#x671B;&#x7684;&#x7ED3;&#x679C;&#x4E86;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="10.2-chinese.html" class="navigation navigation-prev " aria-label="Previous page: 10.2 执行策略">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="10.4-chinese.html" class="navigation navigation-next " aria-label="Next page: 10.4 本章总结">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"10.3 C++标准库中的并行算法","level":"1.17.3","depth":2,"next":{"title":"10.4 本章总结","level":"1.17.4","depth":2,"path":"content/chapter10/10.4-chinese.md","ref":"content/chapter10/10.4-chinese.md","articles":[]},"previous":{"title":"10.2 执行策略","level":"1.17.2","depth":2,"path":"content/chapter10/10.2-chinese.md","ref":"content/chapter10/10.2-chinese.md","articles":[]},"dir":"ltr"},"config":{"plugins":["livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"plugins":["katex","ace"],"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"msyh","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"陈晓伟 chenxiaowei","pdf":{"pageNumbers":false,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":10,"left":10,"top":10,"bottom":20}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"C++并发编程实战（第2版）","language":"zh-hans","gitbook":"*","description":"《C++ Concurrency In Action - SECOND EDITION》英文版的中文翻译版。","direction":"ltr"},"file":{"path":"content/chapter10/10.3-chinese.md","mtime":"2022-11-19T02:54:31.299Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-11-19T07:50:48.148Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,1642 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>D.6 ratio头文件 · C++并发编程实战（第2版）</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="陈晓伟 chenxiaowei">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="D.7-chinese.html" />
+    
+    
+    <link rel="prev" href="D.5-chinese.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Praise_for_the_first_edition.html">
+            
+                <a href="../Praise_for_the_first_edition.html">
+            
+                    
+                    第一版的赞许
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../preface-chinese.html">
+            
+                <a href="../preface-chinese.html">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../acknowledgments-chinese.html">
+            
+                <a href="../acknowledgments-chinese.html">
+            
+                    
+                    感谢
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../about_this_book-chinese.html">
+            
+                <a href="../about_this_book-chinese.html">
+            
+                    
+                    关于本书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../about_the_author-chinese.html">
+            
+                <a href="../about_the_author-chinese.html">
+            
+                    
+                    关于作者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../about_cover_illustration-chinese.html">
+            
+                <a href="../about_cover_illustration-chinese.html">
+            
+                    
+                    关于封面
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../chapter1/1.0-chinese.html">
+            
+                <a href="../chapter1/1.0-chinese.html">
+            
+                    
+                    第1章 你好，并发世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../chapter1/1.1-chinese.html">
+            
+                <a href="../chapter1/1.1-chinese.html">
+            
+                    
+                    1.1 何谓并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../chapter1/1.2-chinese.html">
+            
+                <a href="../chapter1/1.2-chinese.html">
+            
+                    
+                    1.2 为什么使用并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../chapter1/1.3-chinese.html">
+            
+                <a href="../chapter1/1.3-chinese.html">
+            
+                    
+                    1.3 并发和多线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../chapter1/1.4-chinese.html">
+            
+                <a href="../chapter1/1.4-chinese.html">
+            
+                    
+                    1.4 开始入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../chapter1/1.5-chinese.html">
+            
+                <a href="../chapter1/1.5-chinese.html">
+            
+                    
+                    1.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../chapter2/2.0-chinese.html">
+            
+                <a href="../chapter2/2.0-chinese.html">
+            
+                    
+                    第2章 线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../chapter2/2.1-chinese.html">
+            
+                <a href="../chapter2/2.1-chinese.html">
+            
+                    
+                    2.1 线程的基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../chapter2/2.2-chinese.html">
+            
+                <a href="../chapter2/2.2-chinese.html">
+            
+                    
+                    2.2 传递参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../chapter2/2.3-chinese.html">
+            
+                <a href="../chapter2/2.3-chinese.html">
+            
+                    
+                    2.3 转移所有权
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../chapter2/2.4-chinese.html">
+            
+                <a href="../chapter2/2.4-chinese.html">
+            
+                    
+                    2.4 确定线程数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../chapter2/2.5-chinese.html">
+            
+                <a href="../chapter2/2.5-chinese.html">
+            
+                    
+                    2.5 线程标识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../chapter2/2.6-chinese.html">
+            
+                <a href="../chapter2/2.6-chinese.html">
+            
+                    
+                    2.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../chapter3/3.0-chinese.html">
+            
+                <a href="../chapter3/3.0-chinese.html">
+            
+                    
+                    第3章 共享数据
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../chapter3/3.1-chinese.html">
+            
+                <a href="../chapter3/3.1-chinese.html">
+            
+                    
+                    3.1 共享数据的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../chapter3/3.2-chinese.html">
+            
+                <a href="../chapter3/3.2-chinese.html">
+            
+                    
+                    3.2 使用互斥量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../chapter3/3.3-chinese.html">
+            
+                <a href="../chapter3/3.3-chinese.html">
+            
+                    
+                    3.3 保护共享数据的方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../chapter3/3.4-chinese.html">
+            
+                <a href="../chapter3/3.4-chinese.html">
+            
+                    
+                    3.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../chapter4/4.0-chinese.html">
+            
+                <a href="../chapter4/4.0-chinese.html">
+            
+                    
+                    第4章 同步操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../chapter4/4.1-chinese.html">
+            
+                <a href="../chapter4/4.1-chinese.html">
+            
+                    
+                    4.1 等待事件或条件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../chapter4/4.2-chinese.html">
+            
+                <a href="../chapter4/4.2-chinese.html">
+            
+                    
+                    4.2 使用future
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../chapter4/4.3-chinese.html">
+            
+                <a href="../chapter4/4.3-chinese.html">
+            
+                    
+                    4.3 限时等待
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../chapter4/4.4-chinese.html">
+            
+                <a href="../chapter4/4.4-chinese.html">
+            
+                    
+                    4.4 简化代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../chapter4/4.5-chinese.html">
+            
+                <a href="../chapter4/4.5-chinese.html">
+            
+                    
+                    4.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../chapter5/5.0-chinese.html">
+            
+                <a href="../chapter5/5.0-chinese.html">
+            
+                    
+                    第5章 内存模型和原子操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../chapter5/5.1-chinese.html">
+            
+                <a href="../chapter5/5.1-chinese.html">
+            
+                    
+                    5.1 内存模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../chapter5/5.2-chinese.html">
+            
+                <a href="../chapter5/5.2-chinese.html">
+            
+                    
+                    5.2 原子操作和原子类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../chapter5/5.3-chinese.html">
+            
+                <a href="../chapter5/5.3-chinese.html">
+            
+                    
+                    5.3 同步操作和强制排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../chapter5/5.4-chinese.html">
+            
+                <a href="../chapter5/5.4-chinese.html">
+            
+                    
+                    5.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../chapter6/6.0-chinese.html">
+            
+                <a href="../chapter6/6.0-chinese.html">
+            
+                    
+                    第6章 设计基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../chapter6/6.1-chinese.html">
+            
+                <a href="../chapter6/6.1-chinese.html">
+            
+                    
+                    6.1 并发设计的意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../chapter6/6.2-chinese.html">
+            
+                <a href="../chapter6/6.2-chinese.html">
+            
+                    
+                    6.2 基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../chapter6/6.3-chinese.html">
+            
+                <a href="../chapter6/6.3-chinese.html">
+            
+                    
+                    6.3 设计更加复杂的数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../chapter6/6.4-chinese.html">
+            
+                <a href="../chapter6/6.4-chinese.html">
+            
+                    
+                    6.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../chapter7/7.0-chinese.html">
+            
+                <a href="../chapter7/7.0-chinese.html">
+            
+                    
+                    第7章 设计无锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../chapter7/7.1-chinese.html">
+            
+                <a href="../chapter7/7.1-chinese.html">
+            
+                    
+                    7.1 定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../chapter7/7.2-chinese.html">
+            
+                <a href="../chapter7/7.2-chinese.html">
+            
+                    
+                    7.2 无锁数据结构的例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../chapter7/7.3-chinese.html">
+            
+                <a href="../chapter7/7.3-chinese.html">
+            
+                    
+                    7.3 设计无锁数据结构的指导建议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../chapter7/7.4-chinese.html">
+            
+                <a href="../chapter7/7.4-chinese.html">
+            
+                    
+                    7.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../chapter8/8.0-chinese.html">
+            
+                <a href="../chapter8/8.0-chinese.html">
+            
+                    
+                    第8章 并发设计
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../chapter8/8.1-chinese.html">
+            
+                <a href="../chapter8/8.1-chinese.html">
+            
+                    
+                    8.1 线程间划分工作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../chapter8/8.2-chinese.html">
+            
+                <a href="../chapter8/8.2-chinese.html">
+            
+                    
+                    8.2 并发代码的性能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../chapter8/8.3-chinese.html">
+            
+                <a href="../chapter8/8.3-chinese.html">
+            
+                    
+                    8.3 为多线程性能设计数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="../chapter8/8.4-chinese.html">
+            
+                <a href="../chapter8/8.4-chinese.html">
+            
+                    
+                    8.4 设计并发代码的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.5" data-path="../chapter8/8.5-chinese.html">
+            
+                <a href="../chapter8/8.5-chinese.html">
+            
+                    
+                    8.5 在实践中设计并发代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.6" data-path="../chapter8/8.6-chinese.html">
+            
+                <a href="../chapter8/8.6-chinese.html">
+            
+                    
+                    8.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../chapter9/9.0-chinese.html">
+            
+                <a href="../chapter9/9.0-chinese.html">
+            
+                    
+                    第9章 高级线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../chapter9/9.1-chinese.html">
+            
+                <a href="../chapter9/9.1-chinese.html">
+            
+                    
+                    9.1 线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../chapter9/9.2-chinese.html">
+            
+                <a href="../chapter9/9.2-chinese.html">
+            
+                    
+                    9.2 中断线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../chapter9/9.3-chinese.html">
+            
+                <a href="../chapter9/9.3-chinese.html">
+            
+                    
+                    9.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../chapter10/10.0-chinese.html">
+            
+                <a href="../chapter10/10.0-chinese.html">
+            
+                    
+                    第10章 并行算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../chapter10/10.1-chinese.html">
+            
+                <a href="../chapter10/10.1-chinese.html">
+            
+                    
+                    10.1 并行化标准库算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../chapter10/10.2-chinese.html">
+            
+                <a href="../chapter10/10.2-chinese.html">
+            
+                    
+                    10.2 执行策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="../chapter10/10.3-chinese.html">
+            
+                <a href="../chapter10/10.3-chinese.html">
+            
+                    
+                    10.3 C++标准库中的并行算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="../chapter10/10.4-chinese.html">
+            
+                <a href="../chapter10/10.4-chinese.html">
+            
+                    
+                    10.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../chapter11/11.0-chinese.html">
+            
+                <a href="../chapter11/11.0-chinese.html">
+            
+                    
+                    第11章 测试和调试多线程应用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../chapter11/11.1-chinese.html">
+            
+                <a href="../chapter11/11.1-chinese.html">
+            
+                    
+                    11.1 与并发相关的Bug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.2" data-path="../chapter11/11.2-chinese.html">
+            
+                <a href="../chapter11/11.2-chinese.html">
+            
+                    
+                    11.2 定位并发Bug的技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.3" data-path="../chapter11/11.3-chinese.html">
+            
+                <a href="../chapter11/11.3-chinese.html">
+            
+                    
+                    11.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="../appendix_A/A.0-chinese.html">
+            
+                <a href="../appendix_A/A.0-chinese.html">
+            
+                    
+                    附录A C++11特性简明参考(部分)
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.19.1" data-path="../appendix_A/A.1-chinese.html">
+            
+                <a href="../appendix_A/A.1-chinese.html">
+            
+                    
+                    A.1 右值引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.2" data-path="../appendix_A/A.2-chinese.html">
+            
+                <a href="../appendix_A/A.2-chinese.html">
+            
+                    
+                    A.2 删除函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.3" data-path="../appendix_A/A.3-chinese.html">
+            
+                <a href="../appendix_A/A.3-chinese.html">
+            
+                    
+                    A.3 默认函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.4" data-path="../appendix_A/A.4-chinese.html">
+            
+                <a href="../appendix_A/A.4-chinese.html">
+            
+                    
+                    A.4 常量表达式函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.5" data-path="../appendix_A/A.5-chinese.html">
+            
+                <a href="../appendix_A/A.5-chinese.html">
+            
+                    
+                    A.5 Lambda函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.6" data-path="../appendix_A/A.6-chinese.html">
+            
+                <a href="../appendix_A/A.6-chinese.html">
+            
+                    
+                    A.6 变参模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.7" data-path="../appendix_A/A.7-chinese.html">
+            
+                <a href="../appendix_A/A.7-chinese.html">
+            
+                    
+                    A.7 自动推导变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.8" data-path="../appendix_A/A.8-chinese.html">
+            
+                <a href="../appendix_A/A.8-chinese.html">
+            
+                    
+                    A.8 线程本地变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.9" data-path="../appendix_A/A.9-chinese.html">
+            
+                <a href="../appendix_A/A.9-chinese.html">
+            
+                    
+                    A.9 模板类参数的推导
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.10" data-path="../appendix_A/A.10-chinese.html">
+            
+                <a href="../appendix_A/A.10-chinese.html">
+            
+                    
+                    A.10 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="../appendix_B/B.0-chinese.html">
+            
+                <a href="../appendix_B/B.0-chinese.html">
+            
+                    
+                    附录B 并发库简要对比
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="../appendix_C/C.0-chinese.html">
+            
+                <a href="../appendix_C/C.0-chinese.html">
+            
+                    
+                    附录C 消息传递框架与完整的ATM示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="D.0-chinese.html">
+            
+                <a href="D.0-chinese.html">
+            
+                    
+                    附录D C++线程类库参考
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.22.1" data-path="D.1-chinese.html">
+            
+                <a href="D.1-chinese.html">
+            
+                    
+                    D.1 chrono头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.2" data-path="D.2-chinese.html">
+            
+                <a href="D.2-chinese.html">
+            
+                    
+                    D.2 condition_variable头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.3" data-path="D.3-chinese.html">
+            
+                <a href="D.3-chinese.html">
+            
+                    
+                    D.3 atomic头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.4" data-path="D.4-chinese.html">
+            
+                <a href="D.4-chinese.html">
+            
+                    
+                    D.4 future头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.5" data-path="D.5-chinese.html">
+            
+                <a href="D.5-chinese.html">
+            
+                    
+                    D.5 mutex头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.22.6" data-path="D.6-chinese.html">
+            
+                <a href="D.6-chinese.html">
+            
+                    
+                    D.6 ratio头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.7" data-path="D.7-chinese.html">
+            
+                <a href="D.7-chinese.html">
+            
+                    
+                    D.7 thread头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >D.6 ratio头文件</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="d6-ratio&#x5934;&#x6587;&#x4EF6;">D.6 &lt;ratio&gt;&#x5934;&#x6587;&#x4EF6;</h1>
+<p><code>&lt;ratio&gt;</code>&#x5934;&#x6587;&#x4EF6;&#x63D0;&#x4F9B;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x8FDB;&#x884C;&#x7684;&#x8BA1;&#x7B97;&#x3002;</p>
+<p><strong>&#x5934;&#x6587;&#x4EF6;&#x5185;&#x5BB9;</strong></p>
+<pre><code>namespace std
+{
+  template&lt;intmax_t N,intmax_t D=1&gt;
+  class ratio;
+
+  // ratio arithmetic
+  template &lt;class R1, class R2&gt;
+  using ratio_add = see description;
+
+  template &lt;class R1, class R2&gt;
+  using ratio_subtract = see description;
+
+  template &lt;class R1, class R2&gt;
+  using ratio_multiply = see description;
+
+  template &lt;class R1, class R2&gt;
+  using ratio_divide = see description;
+
+  // ratio comparison
+  template &lt;class R1, class R2&gt;
+  struct ratio_equal;
+
+  template &lt;class R1, class R2&gt;
+  struct ratio_not_equal;
+
+  template &lt;class R1, class R2&gt;
+  struct ratio_less;
+
+  template &lt;class R1, class R2&gt;
+  struct ratio_less_equal;
+
+  template &lt;class R1, class R2&gt;
+  struct ratio_greater;
+
+  template &lt;class R1, class R2&gt;
+  struct ratio_greater_equal;
+
+  typedef ratio&lt;1, 1000000000000000000&gt; atto;
+  typedef ratio&lt;1, 1000000000000000&gt; femto;
+  typedef ratio&lt;1, 1000000000000&gt; pico;
+  typedef ratio&lt;1, 1000000000&gt; nano;
+  typedef ratio&lt;1, 1000000&gt; micro;
+  typedef ratio&lt;1, 1000&gt; milli;
+  typedef ratio&lt;1, 100&gt; centi;
+  typedef ratio&lt;1, 10&gt; deci;
+  typedef ratio&lt;10, 1&gt; deca;
+  typedef ratio&lt;100, 1&gt; hecto;
+  typedef ratio&lt;1000, 1&gt; kilo;
+  typedef ratio&lt;1000000, 1&gt; mega;
+  typedef ratio&lt;1000000000, 1&gt; giga;
+  typedef ratio&lt;1000000000000, 1&gt; tera;
+  typedef ratio&lt;1000000000000000, 1&gt; peta;
+  typedef ratio&lt;1000000000000000000, 1&gt; exa;
+}
+</code></pre><h2 id="d61-stdratio&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.6.1 std::ratio&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::ratio</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x79CD;&#x5BF9;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#x7684;&#x673A;&#x5236;&#xFF0C;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x5408;&#x7406;&#x7684;&#x6570;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x534A;(<code>std::ratio&lt;1,2&gt;</code>),2/3(std::ratio<2, 3="">)&#x6216;15/43(std::ratio<15, 43="">)&#x3002;&#x5176;&#x4F7F;&#x7528;&#x5728;C++&#x6807;&#x51C6;&#x5E93;&#x5185;&#x90E8;&#xFF0C;&#x7528;&#x4E8E;&#x521D;&#x59CB;&#x5316;<code>std::chrono::duration</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x3002;</15,></2,></p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;intmax_t N, intmax_t D = 1&gt;
+class ratio
+{
+public:
+  typedef ratio&lt;num, den&gt; type;
+  static constexpr intmax_t num= see below;
+  static constexpr intmax_t den= see below;
+};
+</code></pre><p><strong>&#x8981;&#x6C42;</strong>
+D&#x4E0D;&#x80FD;&#x4E3A;0&#x3002;</p>
+<p><strong>&#x63CF;&#x8FF0;</strong>
+num&#x548C;den&#x5206;&#x522B;&#x4E3A;&#x5206;&#x5B50;&#x548C;&#x5206;&#x6BCD;&#xFF0C;&#x6784;&#x9020;&#x5206;&#x6570;N/D&#x3002;den&#x603B;&#x662F;&#x6B63;&#x6570;&#x3002;&#x5F53;N&#x548C;D&#x7684;&#x7B26;&#x53F7;&#x76F8;&#x540C;&#xFF0C;&#x90A3;&#x4E48;num&#x4E3A;&#x6B63;&#x6570;&#xFF1B;&#x5426;&#x5219;num&#x4E3A;&#x8D1F;&#x6570;&#x3002;</p>
+<p><strong>&#x4F8B;&#x5B50;</strong></p>
+<pre><code>ratio&lt;4,6&gt;::num == 2
+ratio&lt;4,6&gt;::den == 3
+ratio&lt;4,-6&gt;::num == -2
+ratio&lt;4,-6&gt;::den == 3
+</code></pre><h2 id="d62-stdratioadd&#x6A21;&#x677F;&#x522B;&#x540D;">D.6.2 std::ratio_add&#x6A21;&#x677F;&#x522B;&#x540D;</h2>
+<p><code>std::ratio_add</code>&#x6A21;&#x677F;&#x522B;&#x540D;&#x63D0;&#x4F9B;&#x4E86;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x76F8;&#x52A0;&#x7684;&#x673A;&#x5236;(&#x4F7F;&#x7528;&#x6709;&#x7406;&#x8BA1;&#x7B97;)&#x3002;</p>
+<p><strong>&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;class R1, class R2&gt;
+using ratio_add = std::ratio&lt;see below&gt;;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+R1&#x548C;R2&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>std::ratio</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+ratio_add<r1, r2="">&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;&#x4E00;&#x4E2A;&#x522B;&#x540D;&#xFF0C;&#x5982;&#x679C;&#x4E24;&#x6570;&#x53EF;&#x4EE5;&#x8BA1;&#x7B97;&#xFF0C;&#x4E14;&#x65E0;&#x6EA2;&#x51FA;&#xFF0C;&#x8BE5;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x5BF9;&#x8C61;R1&#x548C;R2&#x7684;&#x548C;&#x3002;&#x5982;&#x679C;&#x8BA1;&#x7B97;&#x51FA;&#x6765;&#x7684;&#x7ED3;&#x679C;&#x6EA2;&#x51FA;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x7A0B;&#x5E8F;&#x91CC;&#x9762;&#x5C31;&#x6709;&#x95EE;&#x9898;&#x4E86;&#x3002;&#x5728;&#x7B97;&#x672F;&#x6EA2;&#x51FA;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>std::ratio_add&lt;R1, R2&gt;</code>&#x5E94;&#x8BE5;&#x5E94;&#x8BE5;&#x4E0E;<code>std::ratio&lt;R1::num * R2::den + R2::num * R1::den, R1::den * R2::den&gt;</code>&#x76F8;&#x540C;&#x3002;</r1,></p>
+<p><strong>&#x4F8B;&#x5B50;</strong></p>
+<pre><code>std::ratio_add&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,5&gt; &gt;::num == 11
+std::ratio_add&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,5&gt; &gt;::den == 15
+
+std::ratio_add&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;7,6&gt; &gt;::num == 3
+std::ratio_add&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;7,6&gt; &gt;::den == 2
+</code></pre><h2 id="d63-stdratiosubtract&#x6A21;&#x677F;&#x522B;&#x540D;">D.6.3 std::ratio_subtract&#x6A21;&#x677F;&#x522B;&#x540D;</h2>
+<p><code>std::ratio_subtract</code>&#x6A21;&#x677F;&#x522B;&#x540D;&#x63D0;&#x4F9B;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x6570;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x8FDB;&#x884C;&#x76F8;&#x51CF;(&#x4F7F;&#x7528;&#x6709;&#x7406;&#x8BA1;&#x7B97;)&#x3002;</p>
+<p><strong>&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;class R1, class R2&gt;
+using ratio_subtract = std::ratio&lt;see below&gt;;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+R1&#x548C;R2&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>std::ratio</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+ratio_add<r1, r2="">&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;&#x4E00;&#x4E2A;&#x522B;&#x540D;&#xFF0C;&#x5982;&#x679C;&#x4E24;&#x6570;&#x53EF;&#x4EE5;&#x8BA1;&#x7B97;&#xFF0C;&#x4E14;&#x65E0;&#x6EA2;&#x51FA;&#xFF0C;&#x8BE5;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x5BF9;&#x8C61;R1&#x548C;R2&#x7684;&#x548C;&#x3002;&#x5982;&#x679C;&#x8BA1;&#x7B97;&#x51FA;&#x6765;&#x7684;&#x7ED3;&#x679C;&#x6EA2;&#x51FA;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x7A0B;&#x5E8F;&#x91CC;&#x9762;&#x5C31;&#x6709;&#x95EE;&#x9898;&#x4E86;&#x3002;&#x5728;&#x7B97;&#x672F;&#x6EA2;&#x51FA;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>std::ratio_subtract&lt;R1, R2&gt;</code>&#x5E94;&#x8BE5;&#x5E94;&#x8BE5;&#x4E0E;<code>std::ratio&lt;R1::num * R2::den - R2::num * R1::den, R1::den * R2::den&gt;</code>&#x76F8;&#x540C;&#x3002;</r1,></p>
+<p><strong>&#x4F8B;&#x5B50;</strong></p>
+<pre><code>std::ratio_subtract&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;1,5&gt; &gt;::num == 2
+std::ratio_subtract&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;1,5&gt; &gt;::den == 15
+
+std::ratio_subtract&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;7,6&gt; &gt;::num == -5
+std::ratio_subtract&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;7,6&gt; &gt;::den == 6
+</code></pre><h2 id="d64-stdratiomultiply&#x6A21;&#x677F;&#x522B;&#x540D;">D.6.4 std::ratio_multiply&#x6A21;&#x677F;&#x522B;&#x540D;</h2>
+<p><code>std::ratio_multiply</code>&#x6A21;&#x677F;&#x522B;&#x540D;&#x63D0;&#x4F9B;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x6570;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x8FDB;&#x884C;&#x76F8;&#x4E58;(&#x4F7F;&#x7528;&#x6709;&#x7406;&#x8BA1;&#x7B97;)&#x3002;</p>
+<p><strong>&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;class R1, class R2&gt;
+using ratio_multiply = std::ratio&lt;see below&gt;;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+R1&#x548C;R2&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>std::ratio</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+ratio_add<r1, r2="">&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;&#x4E00;&#x4E2A;&#x522B;&#x540D;&#xFF0C;&#x5982;&#x679C;&#x4E24;&#x6570;&#x53EF;&#x4EE5;&#x8BA1;&#x7B97;&#xFF0C;&#x4E14;&#x65E0;&#x6EA2;&#x51FA;&#xFF0C;&#x8BE5;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x5BF9;&#x8C61;R1&#x548C;R2&#x7684;&#x548C;&#x3002;&#x5982;&#x679C;&#x8BA1;&#x7B97;&#x51FA;&#x6765;&#x7684;&#x7ED3;&#x679C;&#x6EA2;&#x51FA;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x7A0B;&#x5E8F;&#x91CC;&#x9762;&#x5C31;&#x6709;&#x95EE;&#x9898;&#x4E86;&#x3002;&#x5728;&#x7B97;&#x672F;&#x6EA2;&#x51FA;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>std::ratio_multiply&lt;R1, R2&gt;</code>&#x5E94;&#x8BE5;&#x5E94;&#x8BE5;&#x4E0E;<code>std::ratio&lt;R1::num * R2::num, R1::den * R2::den&gt;</code>&#x76F8;&#x540C;&#x3002;</r1,></p>
+<p><strong>&#x4F8B;&#x5B50;</strong></p>
+<pre><code>std::ratio_multiply&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,5&gt; &gt;::num == 2
+std::ratio_multiply&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,5&gt; &gt;::den == 15
+
+std::ratio_multiply&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;15,7&gt; &gt;::num == 5
+std::ratio_multiply&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;15,7&gt; &gt;::den == 7
+</code></pre><h2 id="d65-stdratiodivide&#x6A21;&#x677F;&#x522B;&#x540D;">D.6.5 std::ratio_divide&#x6A21;&#x677F;&#x522B;&#x540D;</h2>
+<p><code>std::ratio_divide</code>&#x6A21;&#x677F;&#x522B;&#x540D;&#x63D0;&#x4F9B;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x6570;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x8FDB;&#x884C;&#x76F8;&#x9664;(&#x4F7F;&#x7528;&#x6709;&#x7406;&#x8BA1;&#x7B97;)&#x3002;</p>
+<p><strong>&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;class R1, class R2&gt;
+using ratio_multiply = std::ratio&lt;see below&gt;;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+R1&#x548C;R2&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>std::ratio</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+ratio_add<r1, r2="">&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;&#x4E00;&#x4E2A;&#x522B;&#x540D;&#xFF0C;&#x5982;&#x679C;&#x4E24;&#x6570;&#x53EF;&#x4EE5;&#x8BA1;&#x7B97;&#xFF0C;&#x4E14;&#x65E0;&#x6EA2;&#x51FA;&#xFF0C;&#x8BE5;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x5BF9;&#x8C61;R1&#x548C;R2&#x7684;&#x548C;&#x3002;&#x5982;&#x679C;&#x8BA1;&#x7B97;&#x51FA;&#x6765;&#x7684;&#x7ED3;&#x679C;&#x6EA2;&#x51FA;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x7A0B;&#x5E8F;&#x91CC;&#x9762;&#x5C31;&#x6709;&#x95EE;&#x9898;&#x4E86;&#x3002;&#x5728;&#x7B97;&#x672F;&#x6EA2;&#x51FA;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>std::ratio_multiply&lt;R1, R2&gt;</code>&#x5E94;&#x8BE5;&#x5E94;&#x8BE5;&#x4E0E;<code>std::ratio&lt;R1::num * R2::num * R2::den, R1::den * R2::den&gt;</code>&#x76F8;&#x540C;&#x3002;</r1,></p>
+<p><strong>&#x4F8B;&#x5B50;</strong></p>
+<pre><code>std::ratio_divide&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,5&gt; &gt;::num == 5
+std::ratio_divide&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,5&gt; &gt;::den == 6
+
+std::ratio_divide&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;15,7&gt; &gt;::num == 7
+std::ratio_divide&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;15,7&gt; &gt;::den == 45
+</code></pre><h2 id="d66-stdratioequal&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.6.6 std::ratio_equal&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::ratio_equal</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x6570;(&#x4F7F;&#x7528;&#x6709;&#x7406;&#x8BA1;&#x7B97;)&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;class R1, class R2&gt;
+class ratio_equal:
+  public std::integral_constant&lt;
+    bool,(R1::num == R2::num) &amp;&amp; (R1::den == R2::den)&gt;
+{};
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+R1&#x548C;R2&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>std::ratio</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p><strong>&#x4F8B;&#x5B50;</strong></p>
+<pre><code>std::ratio_equal&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,6&gt; &gt;::value == true
+std::ratio_equal&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;1,6&gt; &gt;::value == false
+std::ratio_equal&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,3&gt; &gt;::value == false
+std::ratio_equal&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;1,3&gt; &gt;::value == true
+</code></pre><h2 id="d67-stdrationotequal&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.6.7 std::ratio_not_equal&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::ratio_not_equal</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x6570;(&#x4F7F;&#x7528;&#x6709;&#x7406;&#x8BA1;&#x7B97;)&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;class R1, class R2&gt;
+class ratio_not_equal:
+  public std::integral_constant&lt;bool,!ratio_equal&lt;R1,R2&gt;::value&gt;
+{};
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+R1&#x548C;R2&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>std::ratio</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p><strong>&#x4F8B;&#x5B50;</strong></p>
+<pre><code>std::ratio_not_equal&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,6&gt; &gt;::value == false
+std::ratio_not_equal&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;1,6&gt; &gt;::value == true
+std::ratio_not_equal&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,3&gt; &gt;::value == true
+std::ratio_not_equal&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;1,3&gt; &gt;::value == false
+</code></pre><h2 id="d68-stdratioless&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.6.8 std::ratio_less&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::ratio_less</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x6570;(&#x4F7F;&#x7528;&#x6709;&#x7406;&#x8BA1;&#x7B97;)&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;class R1, class R2&gt;
+class ratio_less:
+  public std::integral_constant&lt;bool,see below&gt;
+{};
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+R1&#x548C;R2&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>std::ratio</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+std::ratio_less<r1,r2>&#x53EF;&#x901A;&#x8FC7;<code>std::integral_constant&lt;bool, value &gt;</code>&#x5BFC;&#x51FA;&#xFF0C;&#x8FD9;&#x91CC;value&#x4E3A;<code>(R1::num*R2::den) &lt; (R2::num*R1::den)</code>&#x3002;&#x5982;&#x679C;&#x6709;&#x53EF;&#x80FD;&#xFF0C;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x4F7F;&#x7528;&#x4E00;&#x79CD;&#x673A;&#x5236;&#x6765;&#x907F;&#x514D;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x5DF2;&#x51FA;&#x3002;&#x5F53;&#x6EA2;&#x51FA;&#x53D1;&#x751F;&#xFF0C;&#x90A3;&#x4E48;&#x7A0B;&#x5E8F;&#x4E2D;&#x5C31;&#x80AF;&#x5B9A;&#x6709;&#x9519;&#x8BEF;&#x3002;</r1,r2></p>
+<p><strong>&#x4F8B;&#x5B50;</strong></p>
+<pre><code>std::ratio_less&lt;std::ratio&lt;1,3&gt;, std::ratio&lt;2,6&gt; &gt;::value == false
+std::ratio_less&lt;std::ratio&lt;1,6&gt;, std::ratio&lt;1,3&gt; &gt;::value == true
+std::ratio_less&lt;
+  std::ratio&lt;999999999,1000000000&gt;,
+  std::ratio&lt;1000000001,1000000000&gt; &gt;::value == true
+std::ratio_less&lt;
+  std::ratio&lt;1000000001,1000000000&gt;,
+  std::ratio&lt;999999999,1000000000&gt; &gt;::value == false
+</code></pre><h2 id="d69-stdratiogreater&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.6.9 std::ratio_greater&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::ratio_greater</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x6570;(&#x4F7F;&#x7528;&#x6709;&#x7406;&#x8BA1;&#x7B97;)&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;class R1, class R2&gt;
+class ratio_greater:
+  public std::integral_constant&lt;bool,ratio_less&lt;R2,R1&gt;::value&gt;
+{};
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+R1&#x548C;R2&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>std::ratio</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<h2 id="d610-stdratiolessequal&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.6.10 std::ratio_less_equal&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::ratio_less_equal</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x6570;(&#x4F7F;&#x7528;&#x6709;&#x7406;&#x8BA1;&#x7B97;)&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;class R1, class R2&gt;
+class ratio_less_equal:
+  public std::integral_constant&lt;bool,!ratio_less&lt;R2,R1&gt;::value&gt;
+{};
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+R1&#x548C;R2&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>std::ratio</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<h2 id="d611-stdratiogreaterequal&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.6.11 std::ratio_greater_equal&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::ratio_greater_equal</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;<code>std::ratio</code>&#x6570;(&#x4F7F;&#x7528;&#x6709;&#x7406;&#x8BA1;&#x7B97;)&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template &lt;class R1, class R2&gt;
+class ratio_greater_equal:
+  public std::integral_constant&lt;bool,!ratio_less&lt;R1,R2&gt;::value&gt;
+{};
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+R1&#x548C;R2&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>std::ratio</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="D.5-chinese.html" class="navigation navigation-prev " aria-label="Previous page: D.5 mutex头文件">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="D.7-chinese.html" class="navigation navigation-next " aria-label="Next page: D.7 thread头文件">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"D.6 ratio头文件","level":"1.22.6","depth":2,"next":{"title":"D.7 thread头文件","level":"1.22.7","depth":2,"path":"content/appendix_D/D.7-chinese.md","ref":"content/appendix_D/D.7-chinese.md","articles":[]},"previous":{"title":"D.5 mutex头文件","level":"1.22.5","depth":2,"path":"content/appendix_D/D.5-chinese.md","ref":"content/appendix_D/D.5-chinese.md","articles":[]},"dir":"ltr"},"config":{"plugins":["livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"plugins":["katex","ace"],"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"msyh","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"陈晓伟 chenxiaowei","pdf":{"pageNumbers":false,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":10,"left":10,"top":10,"bottom":20}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"C++并发编程实战（第2版）","language":"zh-hans","gitbook":"*","description":"《C++ Concurrency In Action - SECOND EDITION》英文版的中文翻译版。","direction":"ltr"},"file":{"path":"content/appendix_D/D.6-chinese.md","mtime":"2022-11-19T02:54:31.289Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-11-19T07:50:48.148Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

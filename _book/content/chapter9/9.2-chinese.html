@@ -1,0 +1,1765 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>9.2 中断线程 · C++并发编程实战（第2版）</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="陈晓伟 chenxiaowei">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="9.3-chinese.html" />
+    
+    
+    <link rel="prev" href="9.1-chinese.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Praise_for_the_first_edition.html">
+            
+                <a href="../Praise_for_the_first_edition.html">
+            
+                    
+                    第一版的赞许
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../preface-chinese.html">
+            
+                <a href="../preface-chinese.html">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../acknowledgments-chinese.html">
+            
+                <a href="../acknowledgments-chinese.html">
+            
+                    
+                    感谢
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../about_this_book-chinese.html">
+            
+                <a href="../about_this_book-chinese.html">
+            
+                    
+                    关于本书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../about_the_author-chinese.html">
+            
+                <a href="../about_the_author-chinese.html">
+            
+                    
+                    关于作者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../about_cover_illustration-chinese.html">
+            
+                <a href="../about_cover_illustration-chinese.html">
+            
+                    
+                    关于封面
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../chapter1/1.0-chinese.html">
+            
+                <a href="../chapter1/1.0-chinese.html">
+            
+                    
+                    第1章 你好，并发世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../chapter1/1.1-chinese.html">
+            
+                <a href="../chapter1/1.1-chinese.html">
+            
+                    
+                    1.1 何谓并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../chapter1/1.2-chinese.html">
+            
+                <a href="../chapter1/1.2-chinese.html">
+            
+                    
+                    1.2 为什么使用并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../chapter1/1.3-chinese.html">
+            
+                <a href="../chapter1/1.3-chinese.html">
+            
+                    
+                    1.3 并发和多线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../chapter1/1.4-chinese.html">
+            
+                <a href="../chapter1/1.4-chinese.html">
+            
+                    
+                    1.4 开始入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../chapter1/1.5-chinese.html">
+            
+                <a href="../chapter1/1.5-chinese.html">
+            
+                    
+                    1.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../chapter2/2.0-chinese.html">
+            
+                <a href="../chapter2/2.0-chinese.html">
+            
+                    
+                    第2章 线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../chapter2/2.1-chinese.html">
+            
+                <a href="../chapter2/2.1-chinese.html">
+            
+                    
+                    2.1 线程的基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../chapter2/2.2-chinese.html">
+            
+                <a href="../chapter2/2.2-chinese.html">
+            
+                    
+                    2.2 传递参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../chapter2/2.3-chinese.html">
+            
+                <a href="../chapter2/2.3-chinese.html">
+            
+                    
+                    2.3 转移所有权
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../chapter2/2.4-chinese.html">
+            
+                <a href="../chapter2/2.4-chinese.html">
+            
+                    
+                    2.4 确定线程数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../chapter2/2.5-chinese.html">
+            
+                <a href="../chapter2/2.5-chinese.html">
+            
+                    
+                    2.5 线程标识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../chapter2/2.6-chinese.html">
+            
+                <a href="../chapter2/2.6-chinese.html">
+            
+                    
+                    2.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../chapter3/3.0-chinese.html">
+            
+                <a href="../chapter3/3.0-chinese.html">
+            
+                    
+                    第3章 共享数据
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../chapter3/3.1-chinese.html">
+            
+                <a href="../chapter3/3.1-chinese.html">
+            
+                    
+                    3.1 共享数据的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../chapter3/3.2-chinese.html">
+            
+                <a href="../chapter3/3.2-chinese.html">
+            
+                    
+                    3.2 使用互斥量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../chapter3/3.3-chinese.html">
+            
+                <a href="../chapter3/3.3-chinese.html">
+            
+                    
+                    3.3 保护共享数据的方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../chapter3/3.4-chinese.html">
+            
+                <a href="../chapter3/3.4-chinese.html">
+            
+                    
+                    3.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../chapter4/4.0-chinese.html">
+            
+                <a href="../chapter4/4.0-chinese.html">
+            
+                    
+                    第4章 同步操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../chapter4/4.1-chinese.html">
+            
+                <a href="../chapter4/4.1-chinese.html">
+            
+                    
+                    4.1 等待事件或条件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../chapter4/4.2-chinese.html">
+            
+                <a href="../chapter4/4.2-chinese.html">
+            
+                    
+                    4.2 使用future
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../chapter4/4.3-chinese.html">
+            
+                <a href="../chapter4/4.3-chinese.html">
+            
+                    
+                    4.3 限时等待
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../chapter4/4.4-chinese.html">
+            
+                <a href="../chapter4/4.4-chinese.html">
+            
+                    
+                    4.4 简化代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../chapter4/4.5-chinese.html">
+            
+                <a href="../chapter4/4.5-chinese.html">
+            
+                    
+                    4.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../chapter5/5.0-chinese.html">
+            
+                <a href="../chapter5/5.0-chinese.html">
+            
+                    
+                    第5章 内存模型和原子操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../chapter5/5.1-chinese.html">
+            
+                <a href="../chapter5/5.1-chinese.html">
+            
+                    
+                    5.1 内存模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../chapter5/5.2-chinese.html">
+            
+                <a href="../chapter5/5.2-chinese.html">
+            
+                    
+                    5.2 原子操作和原子类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../chapter5/5.3-chinese.html">
+            
+                <a href="../chapter5/5.3-chinese.html">
+            
+                    
+                    5.3 同步操作和强制排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../chapter5/5.4-chinese.html">
+            
+                <a href="../chapter5/5.4-chinese.html">
+            
+                    
+                    5.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../chapter6/6.0-chinese.html">
+            
+                <a href="../chapter6/6.0-chinese.html">
+            
+                    
+                    第6章 设计基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../chapter6/6.1-chinese.html">
+            
+                <a href="../chapter6/6.1-chinese.html">
+            
+                    
+                    6.1 并发设计的意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../chapter6/6.2-chinese.html">
+            
+                <a href="../chapter6/6.2-chinese.html">
+            
+                    
+                    6.2 基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../chapter6/6.3-chinese.html">
+            
+                <a href="../chapter6/6.3-chinese.html">
+            
+                    
+                    6.3 设计更加复杂的数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../chapter6/6.4-chinese.html">
+            
+                <a href="../chapter6/6.4-chinese.html">
+            
+                    
+                    6.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../chapter7/7.0-chinese.html">
+            
+                <a href="../chapter7/7.0-chinese.html">
+            
+                    
+                    第7章 设计无锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../chapter7/7.1-chinese.html">
+            
+                <a href="../chapter7/7.1-chinese.html">
+            
+                    
+                    7.1 定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../chapter7/7.2-chinese.html">
+            
+                <a href="../chapter7/7.2-chinese.html">
+            
+                    
+                    7.2 无锁数据结构的例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../chapter7/7.3-chinese.html">
+            
+                <a href="../chapter7/7.3-chinese.html">
+            
+                    
+                    7.3 设计无锁数据结构的指导建议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../chapter7/7.4-chinese.html">
+            
+                <a href="../chapter7/7.4-chinese.html">
+            
+                    
+                    7.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../chapter8/8.0-chinese.html">
+            
+                <a href="../chapter8/8.0-chinese.html">
+            
+                    
+                    第8章 并发设计
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../chapter8/8.1-chinese.html">
+            
+                <a href="../chapter8/8.1-chinese.html">
+            
+                    
+                    8.1 线程间划分工作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../chapter8/8.2-chinese.html">
+            
+                <a href="../chapter8/8.2-chinese.html">
+            
+                    
+                    8.2 并发代码的性能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../chapter8/8.3-chinese.html">
+            
+                <a href="../chapter8/8.3-chinese.html">
+            
+                    
+                    8.3 为多线程性能设计数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="../chapter8/8.4-chinese.html">
+            
+                <a href="../chapter8/8.4-chinese.html">
+            
+                    
+                    8.4 设计并发代码的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.5" data-path="../chapter8/8.5-chinese.html">
+            
+                <a href="../chapter8/8.5-chinese.html">
+            
+                    
+                    8.5 在实践中设计并发代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.6" data-path="../chapter8/8.6-chinese.html">
+            
+                <a href="../chapter8/8.6-chinese.html">
+            
+                    
+                    8.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="9.0-chinese.html">
+            
+                <a href="9.0-chinese.html">
+            
+                    
+                    第9章 高级线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="9.1-chinese.html">
+            
+                <a href="9.1-chinese.html">
+            
+                    
+                    9.1 线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.16.2" data-path="9.2-chinese.html">
+            
+                <a href="9.2-chinese.html">
+            
+                    
+                    9.2 中断线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="9.3-chinese.html">
+            
+                <a href="9.3-chinese.html">
+            
+                    
+                    9.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../chapter10/10.0-chinese.html">
+            
+                <a href="../chapter10/10.0-chinese.html">
+            
+                    
+                    第10章 并行算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../chapter10/10.1-chinese.html">
+            
+                <a href="../chapter10/10.1-chinese.html">
+            
+                    
+                    10.1 并行化标准库算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../chapter10/10.2-chinese.html">
+            
+                <a href="../chapter10/10.2-chinese.html">
+            
+                    
+                    10.2 执行策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="../chapter10/10.3-chinese.html">
+            
+                <a href="../chapter10/10.3-chinese.html">
+            
+                    
+                    10.3 C++标准库中的并行算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="../chapter10/10.4-chinese.html">
+            
+                <a href="../chapter10/10.4-chinese.html">
+            
+                    
+                    10.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../chapter11/11.0-chinese.html">
+            
+                <a href="../chapter11/11.0-chinese.html">
+            
+                    
+                    第11章 测试和调试多线程应用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../chapter11/11.1-chinese.html">
+            
+                <a href="../chapter11/11.1-chinese.html">
+            
+                    
+                    11.1 与并发相关的Bug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.2" data-path="../chapter11/11.2-chinese.html">
+            
+                <a href="../chapter11/11.2-chinese.html">
+            
+                    
+                    11.2 定位并发Bug的技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.3" data-path="../chapter11/11.3-chinese.html">
+            
+                <a href="../chapter11/11.3-chinese.html">
+            
+                    
+                    11.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="../appendix_A/A.0-chinese.html">
+            
+                <a href="../appendix_A/A.0-chinese.html">
+            
+                    
+                    附录A C++11特性简明参考(部分)
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.19.1" data-path="../appendix_A/A.1-chinese.html">
+            
+                <a href="../appendix_A/A.1-chinese.html">
+            
+                    
+                    A.1 右值引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.2" data-path="../appendix_A/A.2-chinese.html">
+            
+                <a href="../appendix_A/A.2-chinese.html">
+            
+                    
+                    A.2 删除函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.3" data-path="../appendix_A/A.3-chinese.html">
+            
+                <a href="../appendix_A/A.3-chinese.html">
+            
+                    
+                    A.3 默认函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.4" data-path="../appendix_A/A.4-chinese.html">
+            
+                <a href="../appendix_A/A.4-chinese.html">
+            
+                    
+                    A.4 常量表达式函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.5" data-path="../appendix_A/A.5-chinese.html">
+            
+                <a href="../appendix_A/A.5-chinese.html">
+            
+                    
+                    A.5 Lambda函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.6" data-path="../appendix_A/A.6-chinese.html">
+            
+                <a href="../appendix_A/A.6-chinese.html">
+            
+                    
+                    A.6 变参模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.7" data-path="../appendix_A/A.7-chinese.html">
+            
+                <a href="../appendix_A/A.7-chinese.html">
+            
+                    
+                    A.7 自动推导变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.8" data-path="../appendix_A/A.8-chinese.html">
+            
+                <a href="../appendix_A/A.8-chinese.html">
+            
+                    
+                    A.8 线程本地变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.9" data-path="../appendix_A/A.9-chinese.html">
+            
+                <a href="../appendix_A/A.9-chinese.html">
+            
+                    
+                    A.9 模板类参数的推导
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.10" data-path="../appendix_A/A.10-chinese.html">
+            
+                <a href="../appendix_A/A.10-chinese.html">
+            
+                    
+                    A.10 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="../appendix_B/B.0-chinese.html">
+            
+                <a href="../appendix_B/B.0-chinese.html">
+            
+                    
+                    附录B 并发库简要对比
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="../appendix_C/C.0-chinese.html">
+            
+                <a href="../appendix_C/C.0-chinese.html">
+            
+                    
+                    附录C 消息传递框架与完整的ATM示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="../appendix_D/D.0-chinese.html">
+            
+                <a href="../appendix_D/D.0-chinese.html">
+            
+                    
+                    附录D C++线程类库参考
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.22.1" data-path="../appendix_D/D.1-chinese.html">
+            
+                <a href="../appendix_D/D.1-chinese.html">
+            
+                    
+                    D.1 chrono头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.2" data-path="../appendix_D/D.2-chinese.html">
+            
+                <a href="../appendix_D/D.2-chinese.html">
+            
+                    
+                    D.2 condition_variable头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.3" data-path="../appendix_D/D.3-chinese.html">
+            
+                <a href="../appendix_D/D.3-chinese.html">
+            
+                    
+                    D.3 atomic头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.4" data-path="../appendix_D/D.4-chinese.html">
+            
+                <a href="../appendix_D/D.4-chinese.html">
+            
+                    
+                    D.4 future头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.5" data-path="../appendix_D/D.5-chinese.html">
+            
+                <a href="../appendix_D/D.5-chinese.html">
+            
+                    
+                    D.5 mutex头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.6" data-path="../appendix_D/D.6-chinese.html">
+            
+                <a href="../appendix_D/D.6-chinese.html">
+            
+                    
+                    D.6 ratio头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.7" data-path="../appendix_D/D.7-chinese.html">
+            
+                <a href="../appendix_D/D.7-chinese.html">
+            
+                    
+                    D.7 thread头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >9.2 中断线程</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="92-&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;">9.2 &#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;</h1>
+<p>&#x5F88;&#x591A;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F7F;&#x7528;&#x4FE1;&#x53F7;&#x6765;&#x7EC8;&#x6B62;&#x957F;&#x65F6;&#x95F4;&#x8FD0;&#x884C;&#x7684;&#x7EBF;&#x7A0B;&#x662F;&#x5408;&#x7406;&#x7684;&#x3002;&#x8FD9;&#x79CD;&#x7EBF;&#x7A0B;&#x7684;&#x5B58;&#x5728;&#xFF0C;&#x53EF;&#x80FD;&#x662F;&#x56E0;&#x4E3A;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6240;&#x5728;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;&#x9500;&#x6BC1;&#xFF0C;&#x6216;&#x662F;&#x7528;&#x6237;&#x663E;&#x5F0F;&#x7684;&#x53D6;&#x6D88;&#x4E86;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x3002;&#x4E0D;&#x7BA1;&#x662F;&#x4EC0;&#x4E48;&#x539F;&#x56E0;&#xFF0C;&#x539F;&#x7406;&#x90FD;&#x4E00;&#x6837;&#xFF1A;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x4FE1;&#x53F7;&#x6765;&#x8BA9;&#x672A;&#x7ED3;&#x675F;&#x7EBF;&#x7A0B;&#x505C;&#x6B62;&#x8FD0;&#x884C;&#x3002;&#x8FD9;&#x9700;&#x8981;&#x4E00;&#x79CD;&#x5408;&#x9002;&#x7684;&#x65B9;&#x5F0F;&#x8BA9;&#x7EBF;&#x7A0B;&#x4E3B;&#x52A8;&#x7684;&#x505C;&#x4E0B;&#x6765;&#xFF0C;&#x800C;&#x975E;&#x621B;&#x7136;&#x800C;&#x6B62;&#x3002;</p>
+<p>&#x53EF;&#x80FD;&#x4F1A;&#x7ED9;&#x6BCF;&#x79CD;&#x60C5;&#x51B5;&#x5236;&#x5B9A;&#x4E00;&#x4E2A;&#x673A;&#x5236;&#xFF0C;&#x4F46;&#x8FD9;&#x6837;&#x7684;&#x610F;&#x4E49;&#x4E0D;&#x5927;&#x3002;&#x4E0D;&#x4EC5;&#x56E0;&#x4E3A;&#x7528;&#x7EDF;&#x4E00;&#x7684;&#x673A;&#x5236;&#x4F1A;&#x66F4;&#x5BB9;&#x6613;&#x5728;&#x4E4B;&#x540E;&#x7684;&#x573A;&#x666F;&#x4E2D;&#x5B9E;&#x73B0;&#xFF0C;&#x800C;&#x4E14;&#x5199;&#x51FA;&#x6765;&#x7684;&#x4E2D;&#x65AD;&#x4EE3;&#x7801;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#x5728;&#x54EA;&#x91CC;&#x4F7F;&#x7528;&#x3002;C++11&#x6807;&#x51C6;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x8FD9;&#x6837;&#x7684;&#x673A;&#x5236;(&#x8349;&#x6848;&#x4E0A;&#x6709;&#x79EF;&#x6781;&#x7684;&#x5EFA;&#x8BAE;&#xFF0C;&#x8BF4;&#x4E0D;&#x5B9A;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x4F1A;&#x5728;&#x4EE5;&#x540E;&#x7684;C++&#x6807;&#x51C6;&#x4E2D;&#x6DFB;&#x52A0;[1])&#xFF0C;&#x4E0D;&#x8FC7;&#x5B9E;&#x73B0;&#x8FD9;&#x6837;&#x7684;&#x673A;&#x5236;&#x4E5F;&#x5E76;&#x4E0D;&#x56F0;&#x96BE;&#x3002;</p>
+<p>&#x4E86;&#x89E3;&#x4E00;&#x4E0B;&#x5E94;&#x8BE5;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x8FD9;&#x79CD;&#x673A;&#x5236;&#x524D;&#xFF0C;&#x5148;&#x6765;&#x4E86;&#x89E3;&#x4E00;&#x4E0B;&#x542F;&#x52A8;&#x548C;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x7684;&#x63A5;&#x53E3;&#x3002;</p>
+<h2 id="921-&#x542F;&#x52A8;&#x548C;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;">9.2.1 &#x542F;&#x52A8;&#x548C;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;</h2>
+<p>&#x5148;&#x770B;&#x4E00;&#x4E0B;&#x5916;&#x90E8;&#x63A5;&#x53E3;&#xFF0C;&#x9700;&#x8981;&#x4ECE;&#x53EF;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x4E0A;&#x83B7;&#x53D6;&#x4E9B;&#x4EC0;&#x4E48;&#xFF1F;&#x6700;&#x8D77;&#x7801;&#x9700;&#x8981;&#x548C;<code>std::thread</code>&#x76F8;&#x540C;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x8FD8;&#x8981;&#x591A;&#x52A0;&#x4E00;&#x4E2A;interrupt()&#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">class</span> interruptible_thread
+{
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> FunctionType&gt;
+  interruptible_thread(FunctionType f);
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">join</span><span class="hljs-params">()</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">detach</span><span class="hljs-params">()</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">joinable</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">interrupt</span><span class="hljs-params">()</span></span>;
+};
+</code></pre>
+<p>&#x7C7B;&#x5185;&#x90E8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>std::thread</code>&#x6765;&#x7BA1;&#x7406;&#x7EBF;&#x7A0B;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x6765;&#x5904;&#x7406;&#x4E2D;&#x65AD;&#x3002;&#x73B0;&#x5728;&#xFF0C;&#x4ECE;&#x7EBF;&#x7A0B;&#x7684;&#x89D2;&#x5EA6;&#x80FD;&#x770B;&#x5230;&#x4EC0;&#x4E48;&#x5462;&#xFF1F;&#x201C;&#x80FD;&#x7528;&#x8FD9;&#x4E2A;&#x7C7B;&#x6765;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x201D;&#x2014;&#x2014;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x65AD;&#x70B9;(<em>interruption point</em>)&#x3002;&#x5728;&#x4E0D;&#x6DFB;&#x52A0;&#x591A;&#x4F59;&#x7684;&#x6570;&#x636E;&#x7684;&#x524D;&#x63D0;&#x4E0B;&#xFF0C;&#x4E3A;&#x4E86;&#x4F7F;&#x65AD;&#x70B9;&#x80FD;&#x591F;&#x6B63;&#x5E38;&#x4F7F;&#x7528;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;&#xFF1A;interruption_point()&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x4E2D;&#x65AD;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;thread_local&#x53D8;&#x91CF;&#xFF0C;&#x5E76;&#x5728;&#x7EBF;&#x7A0B;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x5BF9;&#x53D8;&#x91CF;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#xFF0C;&#x56E0;&#x6B64;&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;interruption_point()&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x53BB;&#x68C0;&#x67E5;&#x5F53;&#x524D;&#x8FD0;&#x884C;&#x7EBF;&#x7A0B;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;</p>
+<p>thread_local&#x6807;&#x5FD7;&#x662F;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x666E;&#x901A;&#x7684;<code>std::thread</code>&#x7BA1;&#x7406;&#x7EBF;&#x7A0B;&#x7684;&#x4E3B;&#x8981;&#x539F;&#x56E0;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x5206;&#x914D;&#x51FA;&#x4E00;&#x4E2A;&#x53EF;&#x8BBF;&#x95EE;&#x7684;interruptible_thread&#x5B9E;&#x4F8B;&#xFF0C;&#x5C31;&#x50CF;&#x65B0;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E00;&#x6837;&#x3002;&#x4F7F;&#x7528;&#x5DF2;&#x63D0;&#x4F9B;&#x51FD;&#x6570;&#x6765;&#x505A;&#x8FD9;&#x4EF6;&#x4E8B;&#x60C5;&#x524D;&#xFF0C;&#x9700;&#x8981;&#x5C06;interruptible_thread&#x5B9E;&#x4F8B;&#x4F20;&#x9012;&#x7ED9;<code>std::thread</code>&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x80FD;&#x591F;&#x6267;&#x884C;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x5C31;&#x50CF;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x6240;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x4EE3;&#x7801;9.9 interruptible_thread&#x7684;&#x57FA;&#x672C;&#x5B9E;&#x73B0;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">class</span> interrupt_flag
+{
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">()</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">is_set</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>;
+};
+<span class="hljs-keyword">thread_local</span> interrupt_flag this_thread_interrupt_flag;  <span class="hljs-comment">// 1</span>
+
+<span class="hljs-keyword">class</span> interruptible_thread
+{
+  <span class="hljs-built_in">std</span>::thread internal_thread;
+  interrupt_flag* flag;
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> FunctionType&gt;
+  interruptible_thread(FunctionType f)
+  {
+    <span class="hljs-built_in">std</span>::promise&lt;interrupt_flag*&gt; p;  <span class="hljs-comment">// 2</span>
+    internal_thread=<span class="hljs-built_in">std</span>::thread([f,&amp;p]{  <span class="hljs-comment">// 3</span>
+      p.set_value(&amp;this_thread_interrupt_flag);
+      f();  <span class="hljs-comment">// 4</span>
+    });
+    flag=p.get_future().get();  <span class="hljs-comment">// 5</span>
+  }
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">interrupt</span><span class="hljs-params">()</span>
+  </span>{
+    <span class="hljs-keyword">if</span>(flag)
+    {
+      flag-&gt;<span class="hljs-built_in">set</span>();  <span class="hljs-comment">// 6</span>
+    }
+  }
+};
+</code></pre>
+<p>&#x63D0;&#x4F9B;&#x51FD;&#x6570;f&#x662F;&#x5305;&#x88C5;&#x4E86;&#x4E00;&#x4E2A;Lambda&#x51FD;&#x6570;&#x2462;&#xFF0C;&#x7EBF;&#x7A0B;&#x5C06;&#x4F1A;&#x6301;&#x6709;f&#x526F;&#x672C;&#x548C;&#x672C;&#x5730;promise&#x53D8;&#x91CF;(p)&#x7684;&#x5F15;&#x7528;&#x2461;&#x3002;&#x65B0;&#x7EBF;&#x7A0B;&#x4E2D;&#xFF0C;Lambda&#x51FD;&#x6570;&#x8BBE;&#x7F6E;&#x627F;&#x8BFA;&#x503C;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x5230;this_thread_interrupt_flag(&#x5728;thread_local&#x2460;&#x4E2D;&#x58F0;&#x660E;)&#x7684;&#x5730;&#x5740;&#x4E2D;&#xFF0C;&#x4E3A;&#x7684;&#x662F;&#x8BA9;&#x7EBF;&#x7A0B;&#x80FD;&#x591F;&#x8C03;&#x7528;&#x63D0;&#x4F9B;&#x51FD;&#x6570;&#x7684;&#x526F;&#x672C;&#x2463;&#x3002;&#x8C03;&#x7528;&#x7EBF;&#x7A0B;&#x4F1A;&#x7B49;&#x5F85;&#x4E0E;&#x5176;future&#x76F8;&#x5173;&#x7684;promise&#x5904;&#x4E8E;&#x5C31;&#x7EEA;&#x6001;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x7ED3;&#x679C;&#x5B58;&#x5165;&#x5230;flag&#x6210;&#x5458;&#x53D8;&#x91CF;&#x4E2D;&#x2464;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x5373;&#x4F7F;Lambda&#x51FD;&#x6570;&#x5728;&#x65B0;&#x7EBF;&#x7A0B;&#x4E0A;&#x6267;&#x884C;&#xFF0C;&#x5BF9;&#x672C;&#x5730;&#x53D8;&#x91CF;p&#x8FDB;&#x884C;&#x60AC;&#x7A7A;&#x5F15;&#x7528;&#x90FD;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x5728;&#x65B0;&#x7EBF;&#x7A0B;&#x8FD4;&#x56DE;&#x4E4B;&#x524D;&#xFF0C;interruptible_thread&#x6784;&#x9020;&#x51FD;&#x6570;&#x4F1A;&#x7B49;&#x5F85;&#x53D8;&#x91CF;p&#xFF0C;&#x76F4;&#x5230;&#x53D8;&#x91CF;p&#x4E0D;&#x88AB;&#x5F15;&#x7528;&#x3002;&#x5B9E;&#x73B0;&#x6CA1;&#x6709;&#x8003;&#x8651;&#x6C47;&#x5165;&#x6216;&#x5206;&#x79BB;&#x7EBF;&#x7A0B;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;flag&#x53D8;&#x91CF;&#x5728;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x6216;&#x5206;&#x79BB;&#x524D;&#x58F0;&#x660E;&#xFF0C;&#x907F;&#x514D;&#x60AC;&#x7A7A;&#x3002;</p>
+<p>interrupt()&#x51FD;&#x6570;&#x76F8;&#x5BF9;&#x7B80;&#x5355;&#xFF1A;&#x7EBF;&#x7A0B;&#x53BB;&#x505A;&#x4E2D;&#x65AD;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x5408;&#x6CD5;&#x6307;&#x9488;&#x4F5C;&#x4E3A;&#x4E2D;&#x65AD;&#x6807;&#x5FD7;&#xFF0C;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x5BF9;&#x6807;&#x5FD7;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#x2465;&#x3002;</p>
+<h2 id="922-&#x68C0;&#x67E5;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x4E2D;&#x65AD;">9.2.2 &#x68C0;&#x67E5;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x4E2D;&#x65AD;</h2>
+<p>&#x73B0;&#x5728;&#x5C31;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x4E2D;&#x65AD;&#x6807;&#x5FD7;&#x4E86;&#xFF0C;&#x5F53;&#x4E0D;&#x68C0;&#x67E5;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x4E2D;&#x65AD;&#x65F6;&#xFF0C;&#x610F;&#x4E49;&#x5C31;&#x4E0D;&#x5927;&#x4E86;&#x3002;&#x5982;&#x679C;&#x6807;&#x5FD7;&#x5DF2;&#x8BBE;&#x7F6E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x629B;&#x51FA;thread_interrupted&#x5F02;&#x5E38;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">interruption_point</span><span class="hljs-params">()</span>
+</span>{
+  <span class="hljs-keyword">if</span>(this_thread_interrupt_flag.is_set())
+  {
+    <span class="hljs-keyword">throw</span> thread_interrupted();
+  }
+}
+</code></pre>
+<p>&#x4EE3;&#x7801;&#x4E2D;&#x53EF;&#x4EE5;&#x5728;&#x9002;&#x5F53;&#x7684;&#x5730;&#x65B9;&#x4F7F;&#x7528;&#x8BE5;&#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span>
+</span>{
+  <span class="hljs-keyword">while</span>(!done)
+  {
+    interruption_point();
+    process_next_item();
+  }
+}
+</code></pre>
+<p>&#x867D;&#x7136;&#x4E5F;&#x80FD;&#x5DE5;&#x4F5C;&#xFF0C;&#x4F46;&#x4E0D;&#x7406;&#x60F3;&#x3002;&#x6700;&#x597D;&#x662F;&#x5728;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x6216;&#x963B;&#x585E;&#x7684;&#x65F6;&#x5019;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x65F6;&#x7684;&#x7EBF;&#x7A0B;&#x4E0D;&#x80FD;&#x8FD0;&#x884C;&#xFF0C;&#x4E5F;&#x5C31;&#x4E0D;&#x80FD;&#x8C03;&#x7528;interruption_point()&#x51FD;&#x6570;&#xFF01;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x65F6;&#xFF0C;&#x4EC0;&#x4E48;&#x65B9;&#x5F0F;&#x624D;&#x80FD;&#x53BB;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x5462;&#xFF1F;</p>
+<h2 id="923-&#x4E2D;&#x65AD;&#x7B49;&#x5F85;&#x2014;&#x2014;&#x6761;&#x4EF6;&#x53D8;&#x91CF;">9.2.3 &#x4E2D;&#x65AD;&#x7B49;&#x5F85;&#x2014;&#x2014;&#x6761;&#x4EF6;&#x53D8;&#x91CF;</h2>
+<p>&#x4ED4;&#x7EC6;&#x9009;&#x62E9;&#x4E2D;&#x65AD;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;&#x663E;&#x5F0F;&#x8C03;&#x7528;interruption_point()&#x8FDB;&#x884C;&#x4E2D;&#x65AD;&#xFF0C;&#x4E0D;&#x8FC7;&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x7B49;&#x5F85;&#x65F6;&#xFF0C;&#x8FD9;&#x79CD;&#x529E;&#x6CD5;&#x5C31;&#x663E;&#x5F97;&#x82CD;&#x767D;&#x65E0;&#x529B;&#x4E86;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x7B49;&#x5F85;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7684;&#x901A;&#x77E5;&#x3002;&#x5C31;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x65B0;&#x51FD;&#x6570;&#x2014;&#x2014;interruptible_wait()&#x2014;&#x2014;&#x5C31;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x5404;&#x79CD;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x4E2D;&#x65AD;&#x7B49;&#x5F85;&#x3002;&#x4E4B;&#x524D;&#x63D0;&#x5230;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x7B49;&#x5F85;&#x4E00;&#x4E2A;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#xFF0C;&#x6240;&#x4EE5;&#x5C31;&#x4ECE;&#x5B83;&#x5F00;&#x59CB;&#xFF1A;&#x5982;&#x4F55;&#x505A;&#x624D;&#x80FD;&#x4E2D;&#x65AD;&#x4E00;&#x4E2A;&#x7B49;&#x5F85;&#x7684;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x5462;&#xFF1F;&#x6700;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5F53;&#x8BBE;&#x7F6E;&#x4E2D;&#x65AD;&#x6807;&#x5FD7;&#x65F6;&#x9700;&#x8981;&#x63D0;&#x9192;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#xFF0C;&#x5E76;&#x5728;&#x7B49;&#x5F85;&#x540E;&#x7ACB;&#x5373;&#x8BBE;&#x7F6E;&#x65AD;&#x70B9;&#x3002;&#x4E3A;&#x4E86;&#x8BA9;&#x5176;&#x5DE5;&#x4F5C;&#xFF0C;&#x9700;&#x8981;&#x63D0;&#x9192;&#x6240;&#x6709;&#x7B49;&#x5F85;&#x5BF9;&#x5E94;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x5C31;&#x80FD;&#x786E;&#x4FDD;&#x76F8;&#x5E94;&#x7684;&#x7EBF;&#x7A0B;&#x80FD;&#x591F;&#x5524;&#x9192;&#x3002;interrupt_flag&#x9700;&#x8981;&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#x6307;&#x5411;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#xFF0C;&#x6240;&#x4EE5;&#x7528;set()&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x63D0;&#x9192;&#x3002;&#x4E3A;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x5B9E;&#x73B0;&#x7684;interruptible_wait()&#x53EF;&#x80FD;&#x4F1A;&#x770B;&#x8D77;&#x6765;&#x4F1A;&#x50CF;&#x4E0B;&#x9762;&#x4EE3;&#x7801;&#x4E2D;&#x6240;&#x793A;&#x3002;</p>
+<p>&#x4EE3;&#x7801;9.10 &#x4E3A;<code>std::condition_variable</code>&#x5B9E;&#x73B0;&#x7684;interruptible_wait(&#x6709;&#x95EE;&#x9898;&#x7248;)</p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">interruptible_wait</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::condition_variable&amp; cv,
+<span class="hljs-built_in">std</span>::unique_lock&lt;<span class="hljs-built_in">std</span>::mutex&gt;&amp; lk)</span>
+</span>{
+  interruption_point();
+  this_thread_interrupt_flag.set_condition_variable(cv);  <span class="hljs-comment">// 1</span>
+  cv.wait(lk);  <span class="hljs-comment">// 2</span>
+  this_thread_interrupt_flag.clear_condition_variable();  <span class="hljs-comment">// 3</span>
+  interruption_point();
+}
+</code></pre>
+<p>&#x5047;&#x8BBE;&#x51FD;&#x6570;&#x80FD;&#x591F;&#x8BBE;&#x7F6E;&#x548C;&#x6E05;&#x9664;&#x76F8;&#x5173;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x4E0A;&#x7684;&#x4E2D;&#x65AD;&#x6807;&#x5FD7;&#xFF0C;&#x4EE3;&#x7801;&#x4F1A;&#x68C0;&#x67E5;&#x4E2D;&#x65AD;&#xFF0C;&#x901A;&#x8FC7;interrupt_flag&#x4E3A;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x5173;&#x8054;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x2460;&#xFF0C;&#x7B49;&#x5F85;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x2461;&#xFF0C;&#x6E05;&#x7406;&#x76F8;&#x5173;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x2462;&#xFF0C;&#x5E76;&#x4E14;&#x518D;&#x6B21;&#x68C0;&#x67E5;&#x4E2D;&#x65AD;&#x3002;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x5728;&#x7B49;&#x5F85;&#x671F;&#x95F4;&#x56E0;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x6240;&#x4E2D;&#x65AD;&#xFF0C;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x5C06;&#x5E7F;&#x64AD;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#xFF0C;&#x5E76;&#x5524;&#x9192;&#x7B49;&#x5F85;&#x8BE5;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7684;&#x7EBF;&#x7A0B;&#x68C0;&#x67E5;&#x4E2D;&#x65AD;&#x3002;&#x4E0D;&#x5E78;&#x7684;&#x662F;&#xFF0C;&#x4EE3;&#x7801;&#x6709;&#x4E24;&#x4E2A;&#x95EE;&#x9898;&#x3002;&#x7B2C;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x6BD4;&#x8F83;&#x660E;&#x663E;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x8981;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1A;<code>std::condition_variable::wait()</code>&#x53EF;&#x4EE5;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x4F1A;&#x76F4;&#x63A5;&#x9000;&#x51FA;&#xFF0C;&#x800C;&#x6CA1;&#x6709;&#x901A;&#x8FC7;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x5220;&#x9664;&#x76F8;&#x5173;&#x7684;&#x4E2D;&#x65AD;&#x6807;&#x5FD7;&#x3002;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x5F88;&#x5BB9;&#x6613;&#x4FEE;&#x590D;&#xFF0C;&#x5C31;&#x662F;&#x5728;&#x6790;&#x6784;&#x51FD;&#x6570;&#x4E2D;&#x6DFB;&#x52A0;&#x5220;&#x9664;&#x64CD;&#x4F5C;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x7B2C;&#x4E8C;&#x4E2A;&#x95EE;&#x9898;&#x662F;&#xFF0C;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x5B58;&#x5728;&#x6761;&#x4EF6;&#x7ADE;&#x4E89;&#x3002;&#x867D;&#x7136;&#xFF0C;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8C03;&#x7528;interruption_point()&#x4E2D;&#x65AD;&#xFF0C;&#x4E0D;&#x8FC7;&#x5728;&#x8C03;&#x7528;wait()&#x540E;&#xFF0C;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x548C;&#x76F8;&#x5173;&#x4E2D;&#x65AD;&#x6807;&#x5FD7;&#x5C31;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x5173;&#x7CFB;&#x4E86;&#x3002;&#x56E0;&#x4E3A;&#x7EBF;&#x7A0B;&#x4E0D;&#x662F;&#x7B49;&#x5F85;&#x72B6;&#x6001;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x80FD;&#x901A;&#x8FC7;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7684;&#x65B9;&#x5F0F;&#x5524;&#x9192;&#x3002;&#x5C31;&#x9700;&#x8981;&#x786E;&#x4FDD;&#x7EBF;&#x7A0B;&#x4E0D;&#x4F1A;&#x5728;&#x6700;&#x540E;&#x4E00;&#x6B21;&#x4E2D;&#x65AD;&#x68C0;&#x67E5;&#x548C;&#x8C03;&#x7528;wait()&#x95F4;&#x5524;&#x9192;&#x3002;&#x8FD9;&#x91CC;&#x4E0D;&#x5BF9;<code>std::condition_variable</code>&#x7684;&#x5185;&#x90E8;&#x7ED3;&#x6784;&#x8FDB;&#x884C;&#x7814;&#x7A76;&#xFF0C;&#x4F46;&#x53EF;&#x901A;&#x8FC7;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x6765;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;&#x4F7F;&#x7528;lk&#x4E0A;&#x7684;&#x4E92;&#x65A5;&#x91CF;&#x5BF9;&#x7EBF;&#x7A0B;&#x8FDB;&#x884C;&#x4FDD;&#x62A4;&#xFF0C;&#x8FD9;&#x5C31;&#x9700;&#x8981;&#x5C06;lk&#x4F20;&#x9012;&#x5230;set_condition_variable()&#x51FD;&#x6570;&#x4E2D;&#x53BB;&#x3002;&#x4E0D;&#x5E78;&#x7684;&#x662F;&#xFF0C;&#x8FD9;&#x5C06;&#x4EA7;&#x751F;&#x4E24;&#x4E2A;&#x65B0;&#x95EE;&#x9898;&#xFF1A;&#x9700;&#x8981;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x4E92;&#x65A5;&#x91CF;&#x7684;&#x5F15;&#x7528;&#x5230;&#x4E00;&#x4E2A;&#x4E0D;&#x77E5;&#x9053;&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;&#x7EBF;&#x7A0B;&#x4E2D;(&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x505A;&#x4E2D;&#x65AD;&#x64CD;&#x4F5C;)&#xFF0C;&#x4E3A;&#x8BE5;&#x7EBF;&#x7A0B;&#x4E0A;&#x9501;(&#x8C03;&#x7528;interrupt()&#x7684;&#x65F6;&#x5019;)&#x3002;&#x8FD9;&#x53EF;&#x80FD;&#x4F1A;&#x4EA7;&#x751F;&#x6B7B;&#x9501;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x80FD;&#x8BBF;&#x95EE;&#x5230;&#x5DF2;&#x7ECF;&#x9500;&#x6BC1;&#x7684;&#x4E92;&#x65A5;&#x91CF;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x4E0D;&#x53EF;&#x53D6;&#x3002;</p>
+<p>&#x5F53;&#x4E0D;&#x80FD;&#x5B8C;&#x5168;&#x786E;&#x5B9A;&#x80FD;&#x4E2D;&#x65AD;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7B49;&#x5F85;&#x2014;&#x2014;&#x6CA1;&#x6709;interruptible_wait()&#x60C5;&#x51B5;&#x4E0B;&#x4E5F;&#x53EF;&#x4EE5;&#x65F6;(&#x53EF;&#x80FD;&#x6709;&#x4E9B;&#x4E25;&#x683C;)&#xFF0C;&#x6709;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x9009;&#x62E9;&#x5462;&#xFF1F;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x5C31;&#x662F;&#x4F7F;&#x7528;&#x8D85;&#x65F6;&#x7B49;&#x5F85;&#xFF0C;&#x4F7F;&#x7528;wait_for()&#x5E76;&#x5E26;&#x6709;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x8D85;&#x65F6;&#x91CF;(&#x6BD4;&#x5982;&#xFF0C;1ms)&#x3002;&#x7EBF;&#x7A0B;&#x88AB;&#x4E2D;&#x65AD;&#x524D;&#xFF0C;&#x7B97;&#x662F;&#x7ED9;&#x4E86;&#x7EBF;&#x7A0B;&#x4E00;&#x4E2A;&#x7B49;&#x5F85;&#x7684;&#x4E0A;&#x9650;(&#x4EE5;&#x65F6;&#x949F;&#x523B;&#x5EA6;&#x4E3A;&#x57FA;&#x51C6;)&#x3002;&#x8D85;&#x65F6;&#x4E5F;&#x4E0D;&#x80FD;&#x5E2E;&#x52A9;&#x5230;&#x6211;&#x4EEC;&#xFF0C;&#x5982;&#x679C;&#x8FD9;&#x6837;&#x505A;&#x4E86;&#xFF0C;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#x5C06;&#x4F1A;&#x770B;&#x5230;&#x66F4;&#x591A;&#x56E0;&#x4E3A;&#x8D85;&#x65F6;&#x800C;&#x201C;&#x4F2A;&#x201D;&#x5524;&#x9192;&#x7684;&#x7EBF;&#x7A0B;&#x3002;&#x4E0E;interrupt_flag&#x76F8;&#x5173;&#x7684;&#x5B9E;&#x73B0;&#x7684;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x653E;&#x5728;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#x5C55;&#x793A;&#x3002;</p>
+<p>&#x4EE3;&#x7801;9.11 &#x4E3A;<code>std::condition_variable</code>&#x5728;interruptible_wait&#x4E2D;&#x4F7F;&#x7528;&#x8D85;&#x65F6;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">class</span> interrupt_flag
+{
+  <span class="hljs-built_in">std</span>::atomic&lt;<span class="hljs-keyword">bool</span>&gt; flag;
+  <span class="hljs-built_in">std</span>::condition_variable* thread_cond;
+  <span class="hljs-built_in">std</span>::mutex set_clear_mutex;
+
+<span class="hljs-keyword">public</span>:
+  interrupt_flag():
+    thread_cond(<span class="hljs-number">0</span>)
+  {}
+
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">()</span>
+  </span>{
+    flag.store(<span class="hljs-literal">true</span>,<span class="hljs-built_in">std</span>::memory_order_relaxed);
+    <span class="hljs-built_in">std</span>::lock_guard&lt;<span class="hljs-built_in">std</span>::mutex&gt; lk(set_clear_mutex);
+    <span class="hljs-keyword">if</span>(thread_cond)
+    {
+      thread_cond-&gt;notify_all();
+    }
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">is_set</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span>
+  </span>{
+    <span class="hljs-keyword">return</span> flag.load(<span class="hljs-built_in">std</span>::memory_order_relaxed);
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">set_condition_variable</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::condition_variable&amp; cv)</span>
+  </span>{
+    <span class="hljs-built_in">std</span>::lock_guard&lt;<span class="hljs-built_in">std</span>::mutex&gt; lk(set_clear_mutex);
+    thread_cond=&amp;cv;
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">clear_condition_variable</span><span class="hljs-params">()</span>
+  </span>{
+    <span class="hljs-built_in">std</span>::lock_guard&lt;<span class="hljs-built_in">std</span>::mutex&gt; lk(set_clear_mutex);
+    thread_cond=<span class="hljs-number">0</span>;
+  }
+
+  <span class="hljs-keyword">struct</span> clear_cv_on_destruct
+  {
+    ~clear_cv_on_destruct()
+    {
+      this_thread_interrupt_flag.clear_condition_variable();
+    }
+  };
+};
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">interruptible_wait</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::condition_variable&amp; cv,
+  <span class="hljs-built_in">std</span>::unique_lock&lt;<span class="hljs-built_in">std</span>::mutex&gt;&amp; lk)</span>
+</span>{
+  interruption_point();
+  this_thread_interrupt_flag.set_condition_variable(cv);
+  interrupt_flag::clear_cv_on_destruct guard;
+  interruption_point();
+  cv.wait_for(lk,<span class="hljs-built_in">std</span>::chrono::milliseconds(<span class="hljs-number">1</span>));
+  interruption_point();
+}
+</code></pre>
+<p>&#x5982;&#x679C;&#x6709;&#x8C13;&#x8BCD;(&#x76F8;&#x5173;&#x51FD;&#x6570;)&#x8FDB;&#x884C;&#x7B49;&#x5F85;&#xFF0C;1ms&#x7684;&#x8D85;&#x65F6;&#x5C06;&#x4F1A;&#x5728;&#x8C13;&#x8BCD;&#x5FAA;&#x73AF;&#x4E2D;&#x5B8C;&#x5168;&#x9690;&#x85CF;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Predicate&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">interruptible_wait</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::condition_variable&amp; cv,
+                        <span class="hljs-built_in">std</span>::unique_lock&lt;<span class="hljs-built_in">std</span>::mutex&gt;&amp; lk,
+                        Predicate pred)</span>
+</span>{
+  interruption_point();
+  this_thread_interrupt_flag.set_condition_variable(cv);
+  interrupt_flag::clear_cv_on_destruct guard;
+  <span class="hljs-keyword">while</span>(!this_thread_interrupt_flag.is_set() &amp;&amp; !pred())
+  {
+    cv.wait_for(lk,<span class="hljs-built_in">std</span>::chrono::milliseconds(<span class="hljs-number">1</span>));
+  }
+  interruption_point();
+}
+</code></pre>
+<p>&#x8FD9;&#x4F1A;&#x8BA9;&#x8C13;&#x8BCD;&#x68C0;&#x67E5;&#x7684;&#x6B21;&#x6570;&#x589E;&#x52A0;&#x8BB8;&#x591A;&#xFF0C;&#x4E0D;&#x8FC7;&#x5BF9;&#x4E8E;&#x7B80;&#x5355;&#x7684;wait()&#x5B9E;&#x73B0;&#x8FD8;&#x662F;&#x5F88;&#x597D;&#x7528;&#x7684;&#x3002;&#x8D85;&#x65F6;&#x53D8;&#x91CF;&#x5F88;&#x5BB9;&#x6613;&#x5B9E;&#x73B0;&#xFF1A;&#x901A;&#x8FC7;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;1ms&#x6216;&#x66F4;&#x77ED;&#x3002;&#x5BF9;&#x4E8E;<code>std::condition_variable</code>&#x7684;&#x7B49;&#x5F85;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5C0F;&#x5FC3;&#x5E94;&#x5BF9;&#x4E86;&#xFF1B;<code>std::condition_variable_any</code>&#x5462;&#xFF1F;&#x8FD8;&#x662F;&#x80FD;&#x505A;&#x7684;&#x66F4;&#x597D;&#x5417;&#xFF1F;</p>
+<h2 id="924-&#x4F7F;&#x7528;stdconditionvariableany&#x4E2D;&#x65AD;&#x7B49;&#x5F85;">9.2.4 &#x4F7F;&#x7528;<code>std::condition_variable_any</code>&#x4E2D;&#x65AD;&#x7B49;&#x5F85;</h2>
+<p><code>std::condition_variable_any</code>&#x4E0E;<code>std::condition_variable</code>&#x7684;&#x4E0D;&#x540C;&#x5728;&#x4E8E;&#xFF0C;<code>std::condition_variable_any</code>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EFB;&#x610F;&#x7C7B;&#x578B;&#x7684;&#x9501;&#xFF0C;&#x800C;&#x4E0D;&#x4EC5;&#x6709;<code>std::unique_lock&lt;std::mutex&gt;</code>&#x3002;&#x53EF;&#x4EE5;&#x8BA9;&#x4E8B;&#x60C5;&#x505A;&#x8D77;&#x6765;&#x66F4;&#x52A0;&#x7B80;&#x5355;&#xFF0C;&#x5E76;&#x4E14;<code>std::condition_variable_any</code>&#x53EF;&#x4EE5;&#x6BD4;<code>std::condition_variable</code>&#x505A;&#x7684;&#x66F4;&#x597D;&#x3002;&#x56E0;&#x4E3A;&#x80FD;&#x4E0E;&#x4EFB;&#x610F;&#x7C7B;&#x578B;&#x7684;&#x9501;&#x4E00;&#x8D77;&#x5DE5;&#x4F5C;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x8BBE;&#x8BA1;&#x81EA;&#x5DF1;&#x7684;&#x9501;&#xFF0C;&#x4E0A;&#x9501;/&#x89E3;&#x9501;interrupt_flag&#x7684;&#x5185;&#x90E8;&#x4E92;&#x65A5;&#x91CF;set_clear_mutex&#xFF0C;&#x5E76;&#x4E14;&#x9501;&#x4E5F;&#x652F;&#x6301;&#x7B49;&#x5F85;&#x8C03;&#x7528;&#xFF0C;&#x5C31;&#x50CF;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x4EE3;&#x7801;9.12 &#x4E3A;<code>std::condition_variable_any</code>&#x8BBE;&#x8BA1;&#x7684;interruptible_wait</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">class</span> interrupt_flag
+{
+  <span class="hljs-built_in">std</span>::atomic&lt;<span class="hljs-keyword">bool</span>&gt; flag;
+  <span class="hljs-built_in">std</span>::condition_variable* thread_cond;
+  <span class="hljs-built_in">std</span>::condition_variable_any* thread_cond_any;
+  <span class="hljs-built_in">std</span>::mutex set_clear_mutex;
+
+<span class="hljs-keyword">public</span>:
+  interrupt_flag(): 
+    thread_cond(<span class="hljs-number">0</span>),thread_cond_any(<span class="hljs-number">0</span>)
+  {}
+
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">()</span>
+  </span>{
+    flag.store(<span class="hljs-literal">true</span>,<span class="hljs-built_in">std</span>::memory_order_relaxed);
+    <span class="hljs-built_in">std</span>::lock_guard&lt;<span class="hljs-built_in">std</span>::mutex&gt; lk(set_clear_mutex);
+    <span class="hljs-keyword">if</span>(thread_cond)
+    {
+      thread_cond-&gt;notify_all();
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(thread_cond_any)
+    {
+      thread_cond_any-&gt;notify_all();
+    }
+  }
+
+  <span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Lockable&gt;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">wait</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::condition_variable_any&amp; cv,Lockable&amp; lk)</span>
+  </span>{
+    <span class="hljs-keyword">struct</span> custom_lock
+    {
+      interrupt_flag* self;
+      Lockable&amp; lk;
+
+      custom_lock(interrupt_flag* self_,
+                  <span class="hljs-built_in">std</span>::condition_variable_any&amp; cond,
+                  Lockable&amp; lk_):
+        self(self_),lk(lk_)
+      {
+        self-&gt;set_clear_mutex.lock();  <span class="hljs-comment">// 1</span>
+        self-&gt;thread_cond_any=&amp;cond;  <span class="hljs-comment">// 2</span>
+      }
+
+      <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">()</span>  <span class="hljs-comment">// 3</span>
+      </span>{
+        lk.unlock();
+        self-&gt;set_clear_mutex.unlock();
+      }
+
+      <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span>
+      </span>{
+        <span class="hljs-built_in">std</span>::lock(self-&gt;set_clear_mutex,lk);  <span class="hljs-comment">// 4</span>
+      }
+
+      ~custom_lock()
+      {
+        self-&gt;thread_cond_any=<span class="hljs-number">0</span>;  <span class="hljs-comment">// 5</span>
+        self-&gt;set_clear_mutex.unlock();
+      }
+    };
+    <span class="hljs-function">custom_lock <span class="hljs-title">cl</span><span class="hljs-params">(<span class="hljs-keyword">this</span>,cv,lk)</span></span>;
+    interruption_point();
+    cv.wait(cl);
+    interruption_point();
+  }
+  <span class="hljs-comment">// rest as before</span>
+};
+
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Lockable&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">interruptible_wait</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::condition_variable_any&amp; cv,
+                        Lockable&amp; lk)</span>
+</span>{
+  this_thread_interrupt_flag.wait(cv,lk);
+}
+</code></pre>
+<p>&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x9501;&#x7C7B;&#x578B;&#x5728;&#x6784;&#x9020;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x6240;&#x9501;&#x4F4F;&#x5185;&#x90E8;set_clear_mutex&#x2460;&#xFF0C;&#x5BF9;thread_cond_any&#x6307;&#x9488;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#xFF0C;&#x5E76;&#x5F15;&#x7528;<code>std::condition_variable_any</code>&#x4F20;&#x5165;&#x9501;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x2461;&#x3002;&#x9501;&#x7684;&#x5F15;&#x7528;&#x5C06;&#x4F1A;&#x5728;&#x4E4B;&#x540E;&#x8FDB;&#x884C;&#x5B58;&#x50A8;&#xFF0C;&#x5176;&#x53D8;&#x91CF;&#x5FC5;&#x987B;&#x9501;&#x4F4F;&#x3002;&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x5B89;&#x5FC3;&#x7684;&#x68C0;&#x67E5;&#x4E2D;&#x65AD;&#xFF0C;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#x7ADE;&#x4E89;&#x4E86;&#x3002;&#x5982;&#x679C;&#x4E2D;&#x65AD;&#x6807;&#x5FD7;&#x5DF2;&#x7ECF;&#x8BBE;&#x7F6E;&#xFF0C;&#x6807;&#x5FD7;&#x5E94;&#x8BE5;&#x662F;&#x5728;&#x9501;&#x4F4F;set_clear_mutex&#x65F6;&#x8BBE;&#x7F6E;&#x7684;&#x3002;&#x5F53;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x8C03;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x9501;&#x7684;unlock()&#xFF0C;&#x5C31;&#x4F1A;&#x5BF9;&#x53EF;&#x9501;&#x5BF9;&#x8C61;&#x548C;set_clear_mutex&#x8FDB;&#x884C;&#x89E3;&#x9501;&#x2462;&#xFF0C;&#x8FD9;&#x5C31;&#x5141;&#x8BB8;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x5C1D;&#x8BD5;&#x4E2D;&#x65AD;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;set_clear_mutex&#x9501;&#x3002;&#x4EE5;&#x53CA;&#x5728;&#x5185;&#x90E8;wait()&#x8C03;&#x7528;&#x4E4B;&#x540E;&#xFF0C;&#x68C0;&#x67E5;thread_cond_any&#x6307;&#x9488;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x5728;&#x66FF;&#x6362;<code>std::condition_variable</code>&#x540E;&#xFF0C;&#x6240;&#x62E5;&#x6709;&#x7684;&#x529F;&#x80FD;(&#x4E0D;&#x5305;&#x62EC;&#x7BA1;&#x7406;)&#x3002;&#x5F53;wait()&#x7ED3;&#x675F;&#x7B49;&#x5F85;(&#x56E0;&#x4E3A;&#x7B49;&#x5F85;&#xFF0C;&#x6216;&#x56E0;&#x4E3A;&#x4F2A;&#x5524;&#x9192;)&#xFF0C;&#x56E0;&#x4E3A;&#x7EBF;&#x7A0B;&#x4F1A;&#x8C03;&#x7528;lock()&#x51FD;&#x6570;&#xFF0C;&#x6240;&#x4EE5;&#x4F9D;&#x65E7;&#x8981;&#x6C42;&#x9501;&#x4F4F;&#x5185;&#x90E8;set_clear_mutex&#x2463;&#x3002;wait()&#x8C03;&#x7528;&#x65F6;&#xFF0C;custom_lock&#x7684;&#x6790;&#x6784;&#x51FD;&#x6570;&#x4E2D;&#x2464;&#x6E05;&#x7406;thread_cond_any&#x6307;&#x9488;(&#x540C;&#x6837;&#x4F1A;&#x89E3;&#x9501;set_clear_mutex)&#x4E4B;&#x524D;&#xFF0C;&#x53EF;&#x4EE5;&#x518D;&#x6B21;&#x5BF9;&#x4E2D;&#x65AD;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#x3002;</p>
+<h2 id="925-&#x4E2D;&#x65AD;&#x5176;&#x4ED6;&#x963B;&#x585E;&#x8C03;&#x7528;">9.2.5 &#x4E2D;&#x65AD;&#x5176;&#x4ED6;&#x963B;&#x585E;&#x8C03;&#x7528;</h2>
+<p>&#x8FD9;&#x6B21;&#x8F6E;&#x5230;&#x4E2D;&#x65AD;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7684;&#x7B49;&#x5F85;&#x4E86;&#xFF0C;&#x4E0D;&#x8FC7;&#x5176;&#x4ED6;&#x963B;&#x585E;&#x60C5;&#x51B5;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;&#x4E92;&#x65A5;&#x9501;&#xFF0C;&#x7B49;&#x5F85;future&#x7B49;&#x7B49;&#xFF0C;&#x8BE5;&#x600E;&#x4E48;&#x5904;&#x7406;&#x5462;&#xFF1F;&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>std::condition_variable</code>&#x7684;&#x8D85;&#x65F6;&#x9009;&#x9879;&#xFF0C;&#x56E0;&#x4E3A;&#x5B9E;&#x9645;&#x8FD0;&#x884C;&#x4E2D;&#x4E0D;&#x53EF;&#x80FD;&#x5F88;&#x5FEB;&#x7684;&#x5C06;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7684;&#x7B49;&#x5F85;&#x7EC8;&#x6B62;(&#x4E0D;&#x8BBF;&#x95EE;&#x5185;&#x90E8;&#x4E92;&#x65A5;&#x91CF;&#x6216;future&#x7684;&#x8BDD;)&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#x77E5;&#x9053;&#x5728;&#x7B49;&#x5F85;&#x4EC0;&#x4E48;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x8BA9;&#x5FAA;&#x73AF;&#x5728;interruptible_wait()&#x51FD;&#x6570;&#x4E2D;&#x8FD0;&#x884C;&#x3002;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;<code>std::future&lt;&gt;</code>&#x91CD;&#x8F7D;&#x4E86;interruptible_wait()&#x7684;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">interruptible_wait</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::future&lt;T&gt;&amp; uf)</span>
+</span>{
+  <span class="hljs-keyword">while</span>(!this_thread_interrupt_flag.is_set())
+  {
+    <span class="hljs-keyword">if</span>(uf.wait_for(lk,<span class="hljs-built_in">std</span>::chrono::milliseconds(<span class="hljs-number">1</span>))==
+       <span class="hljs-built_in">std</span>::future_status::ready)
+      <span class="hljs-keyword">break</span>;
+  }
+  interruption_point();
+}
+</code></pre>
+<p>&#x7B49;&#x5F85;&#x4F1A;&#x5728;&#x4E2D;&#x65AD;&#x6807;&#x5FD7;&#x8BBE;&#x7F6E;&#x597D;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6216;future&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#x65F6;&#x505C;&#x6B62;&#xFF0C;&#x4E0D;&#x8FC7;&#x5B9E;&#x73B0;&#x4E2D;&#x6BCF;&#x6B21;&#x7B49;&#x5F85;future&#x7684;&#x65F6;&#x95F4;&#x53EA;&#x6709;1ms&#x3002;&#x4E2D;&#x65AD;&#x8BF7;&#x6C42;&#x786E;&#x5B9A;&#x524D;&#xFF0C;&#x5E73;&#x5747;&#x7B49;&#x5F85;&#x7684;&#x65F6;&#x95F4;&#x4E3A;0.5ms(&#x8FD9;&#x91CC;&#x5047;&#x8BBE;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x9AD8;&#x7CBE;&#x5EA6;&#x7684;&#x65F6;&#x949F;)&#x3002;&#x901A;&#x5E38;wait_for&#x81F3;&#x5C11;&#x4F1A;&#x7B49;&#x5F85;&#x4E00;&#x4E2A;&#x65F6;&#x949F;&#x5468;&#x671F;&#xFF0C;&#x5982;&#x679C;&#x65F6;&#x949F;&#x5468;&#x671F;&#x4E3A;15ms&#xFF0C;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x7684;&#x65F6;&#x95F4;&#x5C06;&#x4F1A;&#x662F;15ms&#xFF0C;&#x800C;&#x4E0D;&#x662F;1ms&#x3002;&#x63A5;&#x53D7;&#x4E0E;&#x4E0D;&#x63A5;&#x53D7;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x5F97;&#x89C6;&#x60C5;&#x51B5;&#x800C;&#x5B9A;&#x3002;&#x5982;&#x679C;&#x65F6;&#x949F;&#x652F;&#x6301;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x524A;&#x51CF;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5C06;&#x4F1A;&#x5C06;&#x7EBF;&#x7A0B;&#x5524;&#x9192;&#x5F88;&#x591A;&#x6B21;&#x6765;&#x68C0;&#x67E5;&#x6807;&#x5FD7;&#xFF0C;&#x589E;&#x52A0;&#x7EBF;&#x7A0B;&#x5207;&#x6362;&#x7684;&#x5F00;&#x9500;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x4E86;&#x89E3;&#x5982;&#x4F55;&#x4F7F;&#x7528;interruption_point()&#x548C;interruptible_wait()&#x51FD;&#x6570;&#x68C0;&#x67E5;&#x4E2D;&#x65AD;&#x3002;&#x5F53;&#x4E2D;&#x65AD;&#x88AB;&#x68C0;&#x67E5;&#x51FA;&#x6765;&#x4E86;&#xFF0C;&#x8981;&#x5982;&#x4F55;&#x5904;&#x7406;&#x5B83;&#x5462;&#xFF1F;</p>
+<h2 id="926-&#x5904;&#x7406;&#x4E2D;&#x65AD;">9.2.6 &#x5904;&#x7406;&#x4E2D;&#x65AD;</h2>
+<p>&#x4ECE;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x7684;&#x89D2;&#x5EA6;&#x770B;&#xFF0C;&#x4E2D;&#x65AD;&#x5C31;&#x662F;thread_interrupted&#x5F02;&#x5E38;&#xFF0C;&#x56E0;&#x6B64;&#x80FD;&#x50CF;&#x5904;&#x7406;&#x5176;&#x4ED6;&#x5F02;&#x5E38;&#x90A3;&#x6837;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;&#x7279;&#x522B;&#x662F;&#x4F7F;&#x7528;&#x6807;&#x51C6;catch&#x5757;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x6355;&#x83B7;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">try</span>
+{
+  do_something();
+}
+<span class="hljs-keyword">catch</span>(thread_interrupted&amp;)
+{
+  handle_interruption();
+}
+</code></pre>
+<p>&#x6355;&#x83B7;&#x4E2D;&#x65AD;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x518D;&#x6B21;&#x8C03;&#x7528;interrupt()&#x65F6;&#xFF0C;&#x7EBF;&#x7A0B;&#x5C06;&#x4F1A;&#x518D;&#x6B21;&#x88AB;&#x4E2D;&#x65AD;&#xFF0C;&#x8FD9;&#x5C31;&#x88AB;&#x79F0;&#x4E3A;<em>&#x65AD;&#x70B9;</em>(interruption point)&#x3002;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x7684;&#x662F;&#x4E00;&#x7CFB;&#x5217;&#x72EC;&#x7ACB;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x5C31;&#x4F1A;&#x9700;&#x8981;&#x65AD;&#x70B9;&#x3002;&#x4E2D;&#x65AD;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x5C31;&#x610F;&#x5473;&#x7740;&#x4E22;&#x5F03;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x5E76;&#x4E14;&#x8BE5;&#x7EBF;&#x7A0B;&#x4F1A;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x5176;&#x4ED6;&#x4EFB;&#x52A1;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;thread_interrupted&#x662F;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x5728;&#x80FD;&#x591F;&#x88AB;&#x4E2D;&#x65AD;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x4E4B;&#x524D;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#x90FD;&#x662F;&#x9002;&#x7528;&#x7684;&#xFF0C;&#x4E3A;&#x4E86;&#x786E;&#x4FDD;&#x8D44;&#x6E90;&#x4E0D;&#x4F1A;&#x6CC4;&#x9732;&#xFF0C;&#x5E76;&#x5728;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E2D;&#x7559;&#x4E0B;&#x5BF9;&#x5E94;&#x7684;&#x9000;&#x51FA;&#x72B6;&#x6001;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x7EBF;&#x7A0B;&#x4E2D;&#x65AD;&#x662F;&#x53EF;&#x884C;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x53EA;&#x9700;&#x8981;&#x8BA9;&#x5F02;&#x5E38;&#x4F20;&#x64AD;&#x5373;&#x53EF;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x5F53;&#x5F02;&#x5E38;&#x4F20;&#x5165;<code>std::thread</code>&#x7684;&#x6790;&#x6784;&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x5C06;&#x4F1A;&#x8C03;&#x7528;<code>std::terminate()</code>&#xFF0C;&#x5E76;&#x4E14;&#x6574;&#x4E2A;&#x7A0B;&#x5E8F;&#x5C06;&#x4F1A;&#x7EC8;&#x6B62;&#x3002;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x9700;&#x8981;&#x5C06;interruptible_thread&#x53D8;&#x91CF;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x7684;&#x51FD;&#x6570;&#x4E2D;&#x653E;&#x7F6E;catch(thread_interrupted)&#x5904;&#x7406;&#x5757;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;catch&#x5757;&#x5305;&#x88C5;&#x8FDB;interrupt_flag&#x7684;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;&#x4E2D;&#x3002;&#x56E0;&#x4E3A;&#x5F02;&#x5E38;&#x5C06;&#x4F1A;&#x7EC8;&#x6B62;&#x72EC;&#x7ACB;&#x8FDB;&#x7A0B;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x80FD;&#x4FDD;&#x8BC1;&#x672A;&#x5904;&#x7406;&#x7684;&#x4E2D;&#x65AD;&#x662F;&#x5F02;&#x5E38;&#x5B89;&#x5168;&#x7684;&#x3002;interruptible_thread&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x5BF9;&#x7EBF;&#x7A0B;&#x7684;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x5B9E;&#x73B0;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-c++">internal_thread=<span class="hljs-built_in">std</span>::thread([f,&amp;p]{
+        p.set_value(&amp;this_thread_interrupt_flag);
+
+        <span class="hljs-keyword">try</span>
+        {
+          f();
+        }
+        <span class="hljs-keyword">catch</span>(thread_interrupted <span class="hljs-keyword">const</span>&amp;)
+        {}
+      });
+</code></pre>
+<p>&#x4E0B;&#x9762;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E2A;&#x66F4;&#x52A0;&#x590D;&#x6742;&#x7684;&#x4F8B;&#x5B50;&#x3002;</p>
+<h2 id="927-&#x9000;&#x51FA;&#x65F6;&#x4E2D;&#x65AD;&#x540E;&#x53F0;&#x4EFB;&#x52A1;">9.2.7 &#x9000;&#x51FA;&#x65F6;&#x4E2D;&#x65AD;&#x540E;&#x53F0;&#x4EFB;&#x52A1;</h2>
+<p>&#x8BD5;&#x60F3;&#x5728;&#x684C;&#x9762;&#x4E0A;&#x67E5;&#x627E;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x3002;&#x8FD9;&#x5C31;&#x9700;&#x8981;&#x4E0E;&#x7528;&#x6237;&#x4E92;&#x52A8;&#xFF0C;&#x5E94;&#x7528;&#x7684;&#x72B6;&#x6001;&#x9700;&#x8981;&#x80FD;&#x5728;&#x663E;&#x793A;&#x5668;&#x4E0A;&#x663E;&#x793A;&#xFF0C;&#x5C31;&#x80FD;&#x770B;&#x51FA;&#x5E94;&#x7528;&#x6709;&#x4EC0;&#x4E48;&#x6539;&#x53D8;&#x3002;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x5F71;&#x54CD;GUI&#x7684;&#x54CD;&#x5E94;&#x65F6;&#x95F4;&#xFF0C;&#x901A;&#x5E38;&#x4F1A;&#x5C06;&#x5904;&#x7406;&#x7EBF;&#x7A0B;&#x653E;&#x5728;&#x540E;&#x53F0;&#x8FD0;&#x884C;&#x3002;&#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#x9700;&#x8981;&#x4E00;&#x76F4;&#x6267;&#x884C;&#xFF0C;&#x76F4;&#x5230;&#x5E94;&#x7528;&#x9000;&#x51FA;&#x3002;&#x540E;&#x53F0;&#x7EBF;&#x7A0B;&#x4F1A;&#x4F5C;&#x4E3A;&#x5E94;&#x7528;&#x542F;&#x52A8;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x88AB;&#x542F;&#x52A8;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x5E94;&#x7528;&#x7EC8;&#x6B62;&#x7684;&#x65F6;&#x5019;&#x505C;&#x6B62;&#x8FD0;&#x884C;&#x3002;&#x901A;&#x5E38;&#x8FD9;&#x6837;&#x7684;&#x5E94;&#x7528;&#x53EA;&#x6709;&#x5728;&#x673A;&#x5668;&#x5173;&#x95ED;&#x65F6;&#x624D;&#x4F1A;&#x9000;&#x51FA;&#xFF0C;&#x56E0;&#x4E3A;&#x5E94;&#x7528;&#x9700;&#x8981;&#x66F4;&#x65B0;&#x5E94;&#x7528;&#x6700;&#x65B0;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5168;&#x65F6;&#x95F4;&#x8FD0;&#x884C;&#x3002;&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5F53;&#x5E94;&#x7528;&#x5173;&#x95ED;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x6709;&#x5E8F;&#x7684;&#x65B9;&#x5F0F;&#x5C06;&#x540E;&#x53F0;&#x7EBF;&#x7A0B;&#x5173;&#x95ED;&#xFF0C;&#x5176;&#x4E2D;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x5C31;&#x662F;&#x4E2D;&#x65AD;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x4EE3;&#x7801;&#x4E2D;&#x4E3A;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#x5B9E;&#x73B0;&#x4E86;&#x7B80;&#x5355;&#x7684;&#x7EBF;&#x7A0B;&#x7BA1;&#x7406;&#x90E8;&#x5206;&#x3002;</p>
+<p>&#x4EE3;&#x7801;9.13 &#x540E;&#x53F0;&#x76D1;&#x89C6;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</p>
+<pre><code class="lang-c++"><span class="hljs-built_in">std</span>::mutex config_mutex;
+<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;interruptible_thread&gt; background_threads;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">background_thread</span><span class="hljs-params">(<span class="hljs-keyword">int</span> disk_id)</span>
+</span>{
+  <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)
+  {
+    interruption_point();  <span class="hljs-comment">// 1</span>
+    fs_change fsc=get_fs_changes(disk_id);  <span class="hljs-comment">// 2</span>
+    <span class="hljs-keyword">if</span>(fsc.has_changes())
+    {
+      update_index(fsc);  <span class="hljs-comment">// 3</span>
+    }
+  }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">start_background_processing</span><span class="hljs-params">()</span>
+</span>{
+  background_threads.push_back(
+    interruptible_thread(background_thread,disk_1));
+  background_threads.push_back(
+    interruptible_thread(background_thread,disk_2));
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+  start_background_processing();  <span class="hljs-comment">// 4</span>
+  process_gui_until_exit();  <span class="hljs-comment">// 5</span>
+  <span class="hljs-built_in">std</span>::unique_lock&lt;<span class="hljs-built_in">std</span>::mutex&gt; lk(config_mutex);
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> i=<span class="hljs-number">0</span>;i&lt;background_threads.size();++i)
+  {
+    background_threads[i].interrupt();  <span class="hljs-comment">// 6</span>
+  }
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> i=<span class="hljs-number">0</span>;i&lt;background_threads.size();++i)
+  {
+    background_threads[i].join(); <span class="hljs-comment">// 7</span>
+  }
+}
+</code></pre>
+<p>&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x540E;&#x53F0;&#x7EBF;&#x7A0B;&#x5C31;&#x5DF2;&#x7ECF;&#x542F;&#x52A8;&#x2463;&#x3002;&#x4E4B;&#x540E;&#xFF0C;&#x5BF9;&#x5E94;&#x7EBF;&#x7A0B;&#x5C06;&#x4F1A;&#x5904;&#x7406;GUI&#x2464;&#x3002;&#x7528;&#x6237;&#x8981;&#x6C42;&#x8FDB;&#x7A0B;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#x5C06;&#x4F1A;&#x88AB;&#x4E2D;&#x65AD;&#x2465;&#xFF0C;&#x5E76;&#x4E14;&#x4E3B;&#x7EBF;&#x7A0B;&#x4F1A;&#x7B49;&#x5F85;&#x6BCF;&#x4E00;&#x4E2A;&#x540E;&#x53F0;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;&#x540E;&#x624D;&#x9000;&#x51FA;&#x2466;&#x3002;&#x540E;&#x53F0;&#x7EBF;&#x7A0B;&#x8FD0;&#x884C;&#x5728;&#x4E00;&#x4E2A;&#x5FAA;&#x73AF;&#x4E2D;&#xFF0C;&#x5E76;&#x65F6;&#x523B;&#x68C0;&#x67E5;&#x78C1;&#x76D8;&#x7684;&#x53D8;&#x5316;&#x2461;&#xFF0C;&#x5BF9;&#x5176;&#x5E8F;&#x53F7;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#x2462;&#x3002;&#x8C03;&#x7528;interruption_point()&#x51FD;&#x6570;&#x2460;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x5FAA;&#x73AF;&#x4E2D;&#x5BF9;&#x4E2D;&#x65AD;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#x3002;</p>
+<p>&#x4E3A;&#x4EC0;&#x4E48;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x524D;&#xFF0C;&#x4F1A;&#x5BF9;&#x7EBF;&#x7A0B;&#x8FDB;&#x884C;&#x7B49;&#x5F85;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x4E2D;&#x65AD;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x8BA9;&#x5B83;&#x4EEC;&#x6267;&#x884C;&#x4E0B;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF1F;&#x7B54;&#x6848;&#x5C31;&#x662F;&#x201C;&#x5E76;&#x53D1;&#x201D;&#x3002;&#x7EBF;&#x7A0B;&#x4E2D;&#x65AD;&#x540E;&#xFF0C;&#x4E0D;&#x4F1A;&#x9A6C;&#x4E0A;&#x7ED3;&#x675F;&#xFF0C;&#x56E0;&#x4E3A;&#x9700;&#x8981;&#x5BF9;&#x4E0B;&#x4E00;&#x4E2A;&#x65AD;&#x70B9;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x9000;&#x51FA;&#x524D;&#x6267;&#x884C;&#x6790;&#x6784;&#x51FD;&#x6570;&#x548C;&#x5F02;&#x5E38;&#x5904;&#x7406;&#x90E8;&#x5206;&#x3002;&#x56E0;&#x4E3A;&#x9700;&#x8981;&#x6C47;&#x5165;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x6240;&#x4EE5;&#x5C31;&#x4F1A;&#x8BA9;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#xFF0C;&#x5373;&#x4F7F;&#x7EBF;&#x7A0B;&#x8FD8;&#x5728;&#x505A;&#x7740;&#x6709;&#x7528;&#x7684;&#x5DE5;&#x4F5C;&#x2014;&#x2014;&#x4E2D;&#x65AD;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x3002;&#x53EA;&#x6709;&#x5F53;&#x6CA1;&#x6709;&#x5DE5;&#x4F5C;&#x65F6;(&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x90FD;&#x88AB;&#x4E2D;&#x65AD;)&#x4E0D;&#x9700;&#x8981;&#x7B49;&#x5F85;&#xFF0C;&#x8FD9;&#x5C31;&#x5141;&#x8BB8;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x5E76;&#x884C;&#x7684;&#x5904;&#x7406;&#x81EA;&#x5DF1;&#x7684;&#x4E2D;&#x65AD;&#xFF0C;&#x5E76;&#x66F4;&#x5FEB;&#x7684;&#x5B8C;&#x6210;&#x4E2D;&#x65AD;&#x3002;</p>
+<p>&#x4E2D;&#x65AD;&#x673A;&#x5236;&#x5F88;&#x5BB9;&#x6613;&#x6269;&#x5C55;&#x5230;&#x66F4;&#x6DF1;&#x5C42;&#x6B21;&#x7684;&#x4E2D;&#x65AD;&#x8C03;&#x7528;&#xFF0C;&#x6216;&#x5728;&#x7279;&#x5B9A;&#x7684;&#x4EE3;&#x7801;&#x5757;&#x4E2D;&#x7981;&#x7528;&#x4E2D;&#x65AD;&#xFF0C;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x5C31;&#x5F53;&#x505A;&#x7559;&#x7ED9;&#x8BFB;&#x8005;&#x7684;&#x4F5C;&#x4E1A;&#x5427;&#x3002;</p>
+<hr>
+<p>[1] P0660: A Cooperatively Interruptible Joining Thread, Rev 3, Nicolai Josuttis, Herb Sutter, Anthony Williams <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0660r3.pdf" target="_blank">http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0660r3.pdf</a>.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="9.1-chinese.html" class="navigation navigation-prev " aria-label="Previous page: 9.1 线程池">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="9.3-chinese.html" class="navigation navigation-next " aria-label="Next page: 9.3 本章总结">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"9.2 中断线程","level":"1.16.2","depth":2,"next":{"title":"9.3 本章总结","level":"1.16.3","depth":2,"path":"content/chapter9/9.3-chinese.md","ref":"content/chapter9/9.3-chinese.md","articles":[]},"previous":{"title":"9.1 线程池","level":"1.16.1","depth":2,"path":"content/chapter9/9.1-chinese.md","ref":"content/chapter9/9.1-chinese.md","articles":[]},"dir":"ltr"},"config":{"plugins":["livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"plugins":["katex","ace"],"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"msyh","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"陈晓伟 chenxiaowei","pdf":{"pageNumbers":false,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":10,"left":10,"top":10,"bottom":20}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"C++并发编程实战（第2版）","language":"zh-hans","gitbook":"*","description":"《C++ Concurrency In Action - SECOND EDITION》英文版的中文翻译版。","direction":"ltr"},"file":{"path":"content/chapter9/9.2-chinese.md","mtime":"2022-11-19T02:54:31.325Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-11-19T07:50:48.148Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

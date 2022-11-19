@@ -1,0 +1,1868 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>D.2 condition_variable头文件 · C++并发编程实战（第2版）</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="陈晓伟 chenxiaowei">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="D.3-chinese.html" />
+    
+    
+    <link rel="prev" href="D.1-chinese.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Praise_for_the_first_edition.html">
+            
+                <a href="../Praise_for_the_first_edition.html">
+            
+                    
+                    第一版的赞许
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../preface-chinese.html">
+            
+                <a href="../preface-chinese.html">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../acknowledgments-chinese.html">
+            
+                <a href="../acknowledgments-chinese.html">
+            
+                    
+                    感谢
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../about_this_book-chinese.html">
+            
+                <a href="../about_this_book-chinese.html">
+            
+                    
+                    关于本书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../about_the_author-chinese.html">
+            
+                <a href="../about_the_author-chinese.html">
+            
+                    
+                    关于作者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../about_cover_illustration-chinese.html">
+            
+                <a href="../about_cover_illustration-chinese.html">
+            
+                    
+                    关于封面
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../chapter1/1.0-chinese.html">
+            
+                <a href="../chapter1/1.0-chinese.html">
+            
+                    
+                    第1章 你好，并发世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../chapter1/1.1-chinese.html">
+            
+                <a href="../chapter1/1.1-chinese.html">
+            
+                    
+                    1.1 何谓并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../chapter1/1.2-chinese.html">
+            
+                <a href="../chapter1/1.2-chinese.html">
+            
+                    
+                    1.2 为什么使用并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../chapter1/1.3-chinese.html">
+            
+                <a href="../chapter1/1.3-chinese.html">
+            
+                    
+                    1.3 并发和多线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../chapter1/1.4-chinese.html">
+            
+                <a href="../chapter1/1.4-chinese.html">
+            
+                    
+                    1.4 开始入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../chapter1/1.5-chinese.html">
+            
+                <a href="../chapter1/1.5-chinese.html">
+            
+                    
+                    1.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../chapter2/2.0-chinese.html">
+            
+                <a href="../chapter2/2.0-chinese.html">
+            
+                    
+                    第2章 线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../chapter2/2.1-chinese.html">
+            
+                <a href="../chapter2/2.1-chinese.html">
+            
+                    
+                    2.1 线程的基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../chapter2/2.2-chinese.html">
+            
+                <a href="../chapter2/2.2-chinese.html">
+            
+                    
+                    2.2 传递参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../chapter2/2.3-chinese.html">
+            
+                <a href="../chapter2/2.3-chinese.html">
+            
+                    
+                    2.3 转移所有权
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../chapter2/2.4-chinese.html">
+            
+                <a href="../chapter2/2.4-chinese.html">
+            
+                    
+                    2.4 确定线程数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../chapter2/2.5-chinese.html">
+            
+                <a href="../chapter2/2.5-chinese.html">
+            
+                    
+                    2.5 线程标识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../chapter2/2.6-chinese.html">
+            
+                <a href="../chapter2/2.6-chinese.html">
+            
+                    
+                    2.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../chapter3/3.0-chinese.html">
+            
+                <a href="../chapter3/3.0-chinese.html">
+            
+                    
+                    第3章 共享数据
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../chapter3/3.1-chinese.html">
+            
+                <a href="../chapter3/3.1-chinese.html">
+            
+                    
+                    3.1 共享数据的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../chapter3/3.2-chinese.html">
+            
+                <a href="../chapter3/3.2-chinese.html">
+            
+                    
+                    3.2 使用互斥量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../chapter3/3.3-chinese.html">
+            
+                <a href="../chapter3/3.3-chinese.html">
+            
+                    
+                    3.3 保护共享数据的方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../chapter3/3.4-chinese.html">
+            
+                <a href="../chapter3/3.4-chinese.html">
+            
+                    
+                    3.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../chapter4/4.0-chinese.html">
+            
+                <a href="../chapter4/4.0-chinese.html">
+            
+                    
+                    第4章 同步操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../chapter4/4.1-chinese.html">
+            
+                <a href="../chapter4/4.1-chinese.html">
+            
+                    
+                    4.1 等待事件或条件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../chapter4/4.2-chinese.html">
+            
+                <a href="../chapter4/4.2-chinese.html">
+            
+                    
+                    4.2 使用future
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../chapter4/4.3-chinese.html">
+            
+                <a href="../chapter4/4.3-chinese.html">
+            
+                    
+                    4.3 限时等待
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../chapter4/4.4-chinese.html">
+            
+                <a href="../chapter4/4.4-chinese.html">
+            
+                    
+                    4.4 简化代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../chapter4/4.5-chinese.html">
+            
+                <a href="../chapter4/4.5-chinese.html">
+            
+                    
+                    4.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../chapter5/5.0-chinese.html">
+            
+                <a href="../chapter5/5.0-chinese.html">
+            
+                    
+                    第5章 内存模型和原子操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../chapter5/5.1-chinese.html">
+            
+                <a href="../chapter5/5.1-chinese.html">
+            
+                    
+                    5.1 内存模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../chapter5/5.2-chinese.html">
+            
+                <a href="../chapter5/5.2-chinese.html">
+            
+                    
+                    5.2 原子操作和原子类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../chapter5/5.3-chinese.html">
+            
+                <a href="../chapter5/5.3-chinese.html">
+            
+                    
+                    5.3 同步操作和强制排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../chapter5/5.4-chinese.html">
+            
+                <a href="../chapter5/5.4-chinese.html">
+            
+                    
+                    5.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../chapter6/6.0-chinese.html">
+            
+                <a href="../chapter6/6.0-chinese.html">
+            
+                    
+                    第6章 设计基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../chapter6/6.1-chinese.html">
+            
+                <a href="../chapter6/6.1-chinese.html">
+            
+                    
+                    6.1 并发设计的意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../chapter6/6.2-chinese.html">
+            
+                <a href="../chapter6/6.2-chinese.html">
+            
+                    
+                    6.2 基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../chapter6/6.3-chinese.html">
+            
+                <a href="../chapter6/6.3-chinese.html">
+            
+                    
+                    6.3 设计更加复杂的数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../chapter6/6.4-chinese.html">
+            
+                <a href="../chapter6/6.4-chinese.html">
+            
+                    
+                    6.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../chapter7/7.0-chinese.html">
+            
+                <a href="../chapter7/7.0-chinese.html">
+            
+                    
+                    第7章 设计无锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../chapter7/7.1-chinese.html">
+            
+                <a href="../chapter7/7.1-chinese.html">
+            
+                    
+                    7.1 定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../chapter7/7.2-chinese.html">
+            
+                <a href="../chapter7/7.2-chinese.html">
+            
+                    
+                    7.2 无锁数据结构的例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../chapter7/7.3-chinese.html">
+            
+                <a href="../chapter7/7.3-chinese.html">
+            
+                    
+                    7.3 设计无锁数据结构的指导建议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../chapter7/7.4-chinese.html">
+            
+                <a href="../chapter7/7.4-chinese.html">
+            
+                    
+                    7.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../chapter8/8.0-chinese.html">
+            
+                <a href="../chapter8/8.0-chinese.html">
+            
+                    
+                    第8章 并发设计
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../chapter8/8.1-chinese.html">
+            
+                <a href="../chapter8/8.1-chinese.html">
+            
+                    
+                    8.1 线程间划分工作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../chapter8/8.2-chinese.html">
+            
+                <a href="../chapter8/8.2-chinese.html">
+            
+                    
+                    8.2 并发代码的性能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../chapter8/8.3-chinese.html">
+            
+                <a href="../chapter8/8.3-chinese.html">
+            
+                    
+                    8.3 为多线程性能设计数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="../chapter8/8.4-chinese.html">
+            
+                <a href="../chapter8/8.4-chinese.html">
+            
+                    
+                    8.4 设计并发代码的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.5" data-path="../chapter8/8.5-chinese.html">
+            
+                <a href="../chapter8/8.5-chinese.html">
+            
+                    
+                    8.5 在实践中设计并发代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.6" data-path="../chapter8/8.6-chinese.html">
+            
+                <a href="../chapter8/8.6-chinese.html">
+            
+                    
+                    8.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../chapter9/9.0-chinese.html">
+            
+                <a href="../chapter9/9.0-chinese.html">
+            
+                    
+                    第9章 高级线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../chapter9/9.1-chinese.html">
+            
+                <a href="../chapter9/9.1-chinese.html">
+            
+                    
+                    9.1 线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../chapter9/9.2-chinese.html">
+            
+                <a href="../chapter9/9.2-chinese.html">
+            
+                    
+                    9.2 中断线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../chapter9/9.3-chinese.html">
+            
+                <a href="../chapter9/9.3-chinese.html">
+            
+                    
+                    9.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../chapter10/10.0-chinese.html">
+            
+                <a href="../chapter10/10.0-chinese.html">
+            
+                    
+                    第10章 并行算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../chapter10/10.1-chinese.html">
+            
+                <a href="../chapter10/10.1-chinese.html">
+            
+                    
+                    10.1 并行化标准库算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../chapter10/10.2-chinese.html">
+            
+                <a href="../chapter10/10.2-chinese.html">
+            
+                    
+                    10.2 执行策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="../chapter10/10.3-chinese.html">
+            
+                <a href="../chapter10/10.3-chinese.html">
+            
+                    
+                    10.3 C++标准库中的并行算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="../chapter10/10.4-chinese.html">
+            
+                <a href="../chapter10/10.4-chinese.html">
+            
+                    
+                    10.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../chapter11/11.0-chinese.html">
+            
+                <a href="../chapter11/11.0-chinese.html">
+            
+                    
+                    第11章 测试和调试多线程应用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../chapter11/11.1-chinese.html">
+            
+                <a href="../chapter11/11.1-chinese.html">
+            
+                    
+                    11.1 与并发相关的Bug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.2" data-path="../chapter11/11.2-chinese.html">
+            
+                <a href="../chapter11/11.2-chinese.html">
+            
+                    
+                    11.2 定位并发Bug的技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.3" data-path="../chapter11/11.3-chinese.html">
+            
+                <a href="../chapter11/11.3-chinese.html">
+            
+                    
+                    11.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="../appendix_A/A.0-chinese.html">
+            
+                <a href="../appendix_A/A.0-chinese.html">
+            
+                    
+                    附录A C++11特性简明参考(部分)
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.19.1" data-path="../appendix_A/A.1-chinese.html">
+            
+                <a href="../appendix_A/A.1-chinese.html">
+            
+                    
+                    A.1 右值引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.2" data-path="../appendix_A/A.2-chinese.html">
+            
+                <a href="../appendix_A/A.2-chinese.html">
+            
+                    
+                    A.2 删除函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.3" data-path="../appendix_A/A.3-chinese.html">
+            
+                <a href="../appendix_A/A.3-chinese.html">
+            
+                    
+                    A.3 默认函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.4" data-path="../appendix_A/A.4-chinese.html">
+            
+                <a href="../appendix_A/A.4-chinese.html">
+            
+                    
+                    A.4 常量表达式函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.5" data-path="../appendix_A/A.5-chinese.html">
+            
+                <a href="../appendix_A/A.5-chinese.html">
+            
+                    
+                    A.5 Lambda函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.6" data-path="../appendix_A/A.6-chinese.html">
+            
+                <a href="../appendix_A/A.6-chinese.html">
+            
+                    
+                    A.6 变参模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.7" data-path="../appendix_A/A.7-chinese.html">
+            
+                <a href="../appendix_A/A.7-chinese.html">
+            
+                    
+                    A.7 自动推导变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.8" data-path="../appendix_A/A.8-chinese.html">
+            
+                <a href="../appendix_A/A.8-chinese.html">
+            
+                    
+                    A.8 线程本地变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.9" data-path="../appendix_A/A.9-chinese.html">
+            
+                <a href="../appendix_A/A.9-chinese.html">
+            
+                    
+                    A.9 模板类参数的推导
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.10" data-path="../appendix_A/A.10-chinese.html">
+            
+                <a href="../appendix_A/A.10-chinese.html">
+            
+                    
+                    A.10 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="../appendix_B/B.0-chinese.html">
+            
+                <a href="../appendix_B/B.0-chinese.html">
+            
+                    
+                    附录B 并发库简要对比
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="../appendix_C/C.0-chinese.html">
+            
+                <a href="../appendix_C/C.0-chinese.html">
+            
+                    
+                    附录C 消息传递框架与完整的ATM示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="D.0-chinese.html">
+            
+                <a href="D.0-chinese.html">
+            
+                    
+                    附录D C++线程类库参考
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.22.1" data-path="D.1-chinese.html">
+            
+                <a href="D.1-chinese.html">
+            
+                    
+                    D.1 chrono头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.22.2" data-path="D.2-chinese.html">
+            
+                <a href="D.2-chinese.html">
+            
+                    
+                    D.2 condition_variable头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.3" data-path="D.3-chinese.html">
+            
+                <a href="D.3-chinese.html">
+            
+                    
+                    D.3 atomic头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.4" data-path="D.4-chinese.html">
+            
+                <a href="D.4-chinese.html">
+            
+                    
+                    D.4 future头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.5" data-path="D.5-chinese.html">
+            
+                <a href="D.5-chinese.html">
+            
+                    
+                    D.5 mutex头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.6" data-path="D.6-chinese.html">
+            
+                <a href="D.6-chinese.html">
+            
+                    
+                    D.6 ratio头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.7" data-path="D.7-chinese.html">
+            
+                <a href="D.7-chinese.html">
+            
+                    
+                    D.7 thread头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >D.2 condition_variable头文件</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="d2-conditionvariable&#x5934;&#x6587;&#x4EF6;">D.2 &lt;condition_variable&gt;&#x5934;&#x6587;&#x4EF6;</h1>
+<p>&lt;condition_variable&gt;&#x5934;&#x6587;&#x4EF6;&#x63D0;&#x4F9B;&#x4E86;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7684;&#x5B9A;&#x4E49;&#x3002;&#x5176;&#x4F5C;&#x4E3A;&#x57FA;&#x672C;&#x540C;&#x6B65;&#x673A;&#x5236;&#xFF0C;&#x5141;&#x8BB8;&#x88AB;&#x963B;&#x585E;&#x7684;&#x7EBF;&#x7A0B;&#x5728;&#x67D0;&#x4E9B;&#x6761;&#x4EF6;&#x8FBE;&#x6210;&#x6216;&#x8D85;&#x65F6;&#x65F6;&#xFF0C;&#x89E3;&#x9664;&#x963B;&#x585E;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x3002;</p>
+<h3 id="&#x5934;&#x6587;&#x4EF6;&#x5185;&#x5BB9;">&#x5934;&#x6587;&#x4EF6;&#x5185;&#x5BB9;</h3>
+<pre><code>namespace std
+{
+  enum class cv_status { timeout, no_timeout };
+
+  class condition_variable;
+  class condition_variable_any;
+}
+</code></pre><h2 id="d21-stdconditionvariable&#x7C7B;">D.2.1 std::condition_variable&#x7C7B;</h2>
+<p><code>std::condition_variable</code>&#x5141;&#x8BB8;&#x963B;&#x585E;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x76F4;&#x5230;&#x6761;&#x4EF6;&#x8FBE;&#x6210;&#x3002;</p>
+<p><code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E0D;&#x652F;&#x6301;CopyAssignable(&#x62F7;&#x8D1D;&#x8D4B;&#x503C;), CopyConstructible(&#x62F7;&#x8D1D;&#x6784;&#x9020;), MoveAssignable(&#x79FB;&#x52A8;&#x8D4B;&#x503C;)&#x548C; MoveConstructible(&#x79FB;&#x52A8;&#x6784;&#x9020;)&#x3002;</p>
+<h3 id="&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<pre><code>class condition_variable
+{
+public:
+  condition_variable();
+  ~condition_variable();
+
+  condition_variable(condition_variable const&amp; ) = delete;
+  condition_variable&amp; operator=(condition_variable const&amp; ) = delete;
+
+  void notify_one() noexcept;
+  void notify_all() noexcept;
+
+  void wait(std::unique_lock&lt;std::mutex&gt;&amp; lock);
+
+  template &lt;typename Predicate&gt;
+  void wait(std::unique_lock&lt;std::mutex&gt;&amp; lock,Predicate pred);
+
+  template &lt;typename Clock, typename Duration&gt;
+  cv_status wait_until(
+       std::unique_lock&lt;std::mutex&gt;&amp; lock,
+       const std::chrono::time_point&lt;Clock, Duration&gt;&amp; absolute_time);
+
+  template &lt;typename Clock, typename Duration, typename Predicate&gt;
+  bool wait_until(
+       std::unique_lock&lt;std::mutex&gt;&amp; lock,
+       const std::chrono::time_point&lt;Clock, Duration&gt;&amp; absolute_time,
+       Predicate pred);
+
+  template &lt;typename Rep, typename Period&gt;
+  cv_status wait_for(
+       std::unique_lock&lt;std::mutex&gt;&amp; lock,
+       const std::chrono::duration&lt;Rep, Period&gt;&amp; relative_time);
+
+  template &lt;typename Rep, typename Period, typename Predicate&gt;
+  bool wait_for(
+       std::unique_lock&lt;std::mutex&gt;&amp; lock,
+       const std::chrono::duration&lt;Rep, Period&gt;&amp; relative_time,
+       Predicate pred);
+};
+
+void notify_all_at_thread_exit(condition_variable&amp;,unique_lock&lt;mutex&gt;);
+</code></pre><h3 id="stdconditionvariable-&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;">std::condition_variable &#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::condition_variable</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>condition_variable();
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;&#x7684;<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x65E0;&#x6CD5;&#x591F;&#x65E9;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C06;&#x4F1A;&#x629B;&#x51FA;&#x4E00;&#x4E2A;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;</p>
+<h3 id="stdconditionvariable-&#x6790;&#x6784;&#x51FD;&#x6570;">std::condition_variable &#x6790;&#x6784;&#x51FD;&#x6570;</h3>
+<p>&#x9500;&#x6BC1;&#x4E00;&#x4E2A;<code>std::condition_variable</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>~condition_variable();
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x4E4B;&#x524D;&#x6CA1;&#x6709;&#x4F7F;&#x7528;*this&#x603B;&#x7684;wait(),wait_for()&#x6216;wait_until()&#x963B;&#x585E;&#x8FC7;&#x7EBF;&#x7A0B;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x9500;&#x6BC1;*this&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdconditionvariablenotifyone-&#x6210;&#x5458;&#x51FD;&#x6570;">std::condition_variable::notify_one &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5524;&#x9192;&#x4E00;&#x4E2A;&#x7B49;&#x5F85;&#x5F53;&#x524D;<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void notify_one() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5524;&#x9192;&#x4E00;&#x4E2A;&#x7B49;&#x5F85;*this&#x7684;&#x7EBF;&#x7A0B;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7EBF;&#x7A0B;&#x5728;&#x7B49;&#x5F85;&#xFF0C;&#x90A3;&#x4E48;&#x8C03;&#x7528;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6548;&#x679C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#xFF0C;&#x5C31;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariablenotifyall-&#x6210;&#x5458;&#x51FD;&#x6570;">std::condition_variable::notify_all &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5524;&#x9192;&#x6240;&#x6709;&#x7B49;&#x5F85;&#x5F53;&#x524D;<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void notify_all() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5524;&#x9192;&#x6240;&#x6709;&#x7B49;&#x5F85;*this&#x7684;&#x7EBF;&#x7A0B;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7EBF;&#x7A0B;&#x5728;&#x7B49;&#x5F85;&#xFF0C;&#x90A3;&#x4E48;&#x8C03;&#x7528;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6548;&#x679C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#xFF0C;&#x5C31;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariablewait-&#x6210;&#x5458;&#x51FD;&#x6570;">std::condition_variable::wait &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x901A;&#x8FC7;<code>std::condition_variable</code>&#x7684;notify_one()&#x3001;notify_all()&#x6216;&#x4F2A;&#x5524;&#x9192;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x3002;</p>
+<p><strong>&#x7B49;&#x5F85;</strong></p>
+<pre><code>void wait(std::unique_lock&lt;std::mutex&gt;&amp; lock);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lock.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x81EA;&#x52A8;&#x89E3;&#x9501;lock&#x5BF9;&#x8C61;&#xFF0C;&#x5BF9;&#x4E8E;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#xFF0C;&#x5F53;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x65F6;&#x88AB;&#x5524;&#x9192;&#xFF0C;&#x4EA6;&#x6216;&#x8BE5;&#x7EBF;&#x7A0B;&#x5904;&#x4E8E;&#x4F2A;&#x5524;&#x9192;&#x72B6;&#x6001;&#x3002;&#x5728;wait()&#x8FD4;&#x56DE;&#x524D;&#xFF0C;lock&#x5BF9;&#x8C61;&#x5C06;&#x4F1A;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C06;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;&#x5F53;lock&#x5BF9;&#x8C61;&#x5728;&#x8C03;&#x7528;wait()&#x9636;&#x6BB5;&#x88AB;&#x89E3;&#x9501;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;wait()&#x9000;&#x51FA;&#x7684;&#x65F6;&#x5019;lock&#x4F1A;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#xFF0C;&#x5373;&#x4F7F;&#x51FD;&#x6570;&#x662F;&#x901A;&#x8FC7;&#x5F02;&#x5E38;&#x7684;&#x65B9;&#x5F0F;&#x9000;&#x51FA;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x540E;&#xFF0C;&#x5728;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x65F6;&#xFF0C;&#x8FD8;&#x5904;&#x4EE5;&#x82CF;&#x9192;&#x72B6;&#x6001;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5EFA;&#x8BAE;&#x5BF9;wait()&#x8FDB;&#x884C;&#x91CD;&#x8F7D;&#xFF0C;&#x5728;&#x53EF;&#x80FD;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x5EFA;&#x8BAE;wait()&#x4F7F;&#x7528;&#x5FAA;&#x73AF;&#x68C0;&#x67E5;&#x4E0E;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x76F8;&#x5173;&#x7684;&#x8C13;&#x8BCD;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariablewait-&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;">std::condition_variable::wait &#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;</h3>
+<p>&#x7B49;&#x5F85;<code>std::condition_variable</code>&#x4E0A;&#x7684;notify_one()&#x6216;notify_all()&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x6216;&#x8C13;&#x8BCD;&#x4E3A;true&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x6765;&#x5524;&#x9192;&#x7EBF;&#x7A0B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Predicate&gt;
+void wait(std::unique_lock&lt;std::mutex&gt;&amp; lock,Predicate pred);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+pred()&#x8C13;&#x8BCD;&#x5FC5;&#x987B;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x53EF;&#x4EE5;&#x548C;bool&#x4E92;&#x76F8;&#x8F6C;&#x5316;&#x3002;&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lock.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x6B63;&#x5982;</p>
+<pre><code>while(!pred())
+{
+  wait(lock);
+}
+</code></pre><p><strong>&#x629B;&#x51FA;</strong>
+pred&#x4E2D;&#x53EF;&#x4EE5;&#x629B;&#x51FA;&#x4EFB;&#x610F;&#x5F02;&#x5E38;&#xFF0C;&#x6216;&#x8005;&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x5230;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x6F5C;&#x5728;&#x7684;&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#x4E0D;&#x4F1A;&#x6307;&#x5B9A;pred&#x8C03;&#x7528;&#x7684;&#x6B21;&#x6570;&#x3002;&#x901A;&#x8FC7;lock&#x8FDB;&#x884C;&#x4E0A;&#x9501;&#xFF0C;pred&#x7ECF;&#x5E38;&#x4F1A;&#x88AB;&#x4E92;&#x65A5;&#x91CF;&#x5F15;&#x7528;&#x6240;&#x8C03;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x51FD;&#x6570;&#x5FC5;&#x987B;&#x8FD4;&#x56DE;(&#x53EA;&#x80FD;&#x8FD4;&#x56DE;)&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5728;<code>(bool)pred()</code>&#x8BC4;&#x4F30;&#x540E;&#xFF0C;&#x8FD4;&#x56DE;true&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariablewaitfor-&#x6210;&#x5458;&#x51FD;&#x6570;">std::condition_variable::wait_for &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p><code>std::condition_variable</code>&#x5728;&#x8C03;&#x7528;notify_one()&#x3001;&#x8C03;&#x7528;notify_all()&#x3001;&#x8D85;&#x65F6;&#x6216;&#x7EBF;&#x7A0B;&#x4F2A;&#x5524;&#x9192;&#x65F6;&#xFF0C;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Rep,typename Period&gt;
+cv_status wait_for(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    std::chrono::duration&lt;Rep,Period&gt; const&amp; relative_time);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lock.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5F53;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x6216;&#x8D85;&#x51FA;&#x4E86;relative_time&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x4EA6;&#x6216;&#x662F;&#x7EBF;&#x7A0B;&#x88AB;&#x4F2A;&#x5524;&#x9192;&#xFF0C;&#x5219;&#x5C06;lock&#x5BF9;&#x8C61;&#x81EA;&#x52A8;&#x89E3;&#x9501;&#xFF0C;&#x5E76;&#x5C06;&#x963B;&#x585E;&#x7EBF;&#x7A0B;&#x5524;&#x9192;&#x3002;&#x5F53;wait_for()&#x8C03;&#x7528;&#x8FD4;&#x56DE;&#x524D;&#xFF0C;lock&#x5BF9;&#x8C61;&#x4F1A;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x7EBF;&#x7A0B;&#x88AB;notify_one()&#x3001;notify_all()&#x6216;&#x4F2A;&#x5524;&#x9192;&#x5524;&#x9192;&#x65F6;&#xFF0C;&#x4F1A;&#x8FD4;&#x56DE;<code>std::cv_status::no_timeout</code>&#xFF1B;&#x53CD;&#x4E4B;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;<code>std::cv_status::timeout</code>&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;&#x5F53;lock&#x5BF9;&#x8C61;&#x5728;&#x8C03;&#x7528;wait_for()&#x51FD;&#x6570;&#x524D;&#x89E3;&#x9501;&#xFF0C;&#x90A3;&#x4E48;lock&#x5BF9;&#x8C61;&#x4F1A;&#x5728;wait_for()&#x9000;&#x51FA;&#x524D;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#xFF0C;&#x5373;&#x4F7F;&#x51FD;&#x6570;&#x662F;&#x4EE5;&#x5F02;&#x5E38;&#x7684;&#x65B9;&#x5F0F;&#x9000;&#x51FA;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5728;&#x8C03;&#x7528;wait_for()&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5373;&#x4F7F;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x548C;notify_all()&#x51FD;&#x6570;&#xFF0C;&#x4E5F;&#x5904;&#x4E8E;&#x82CF;&#x9192;&#x72B6;&#x6001;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8FD9;&#x91CC;&#x5EFA;&#x8BAE;&#x91CD;&#x8F7D;wait_for()&#x51FD;&#x6570;&#xFF0C;&#x91CD;&#x8F7D;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8C13;&#x8BCD;&#x3002;&#x8981;&#x4E0D;&#xFF0C;&#x5219;&#x5EFA;&#x8BAE;wait_for()&#x4F7F;&#x7528;&#x5FAA;&#x73AF;&#x7684;&#x65B9;&#x5F0F;&#x5BF9;&#x4E0E;&#x8C13;&#x8BCD;&#x76F8;&#x5173;&#x7684;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#x3002;&#x5728;&#x8FD9;&#x6837;&#x505A;&#x7684;&#x65F6;&#x5019;&#x8FD8;&#x9700;&#x8981;&#x5C0F;&#x5FC3;&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x8D85;&#x65F6;&#x90E8;&#x5206;&#x4F9D;&#x65E7;&#x6709;&#x6548;&#xFF1B;wait_until()&#x53EF;&#x80FD;&#x9002;&#x5408;&#x66F4;&#x591A;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x8FD9;&#x6837;&#x7684;&#x8BDD;&#xFF0C;&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x7684;&#x65F6;&#x95F4;&#x5C31;&#x8981;&#x6BD4;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x957F;&#x4E86;&#x3002;&#x5728;&#x6709;&#x8FD9;&#x6837;&#x53EF;&#x80FD;&#x6027;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x6D41;&#x901D;&#x7684;&#x65F6;&#x95F4;&#x662F;&#x7531;&#x7A33;&#x5B9A;&#x65F6;&#x949F;&#x51B3;&#x5B9A;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariablewaitfor-&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;">std::condition_variable::wait_for &#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;</h3>
+<p><code>std::condition_variable</code>&#x5728;&#x8C03;&#x7528;notify_one()&#x3001;&#x8C03;&#x7528;notify_all()&#x3001;&#x8D85;&#x65F6;&#x6216;&#x7EBF;&#x7A0B;&#x4F2A;&#x5524;&#x9192;&#x65F6;&#xFF0C;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Rep,typename Period,typename Predicate&gt;
+bool wait_for(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    std::chrono::duration&lt;Rep,Period&gt; const&amp; relative_time,
+    Predicate pred);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+pred()&#x8C13;&#x8BCD;&#x5FC5;&#x987B;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x53EF;&#x4EE5;&#x548C;bool&#x4E92;&#x76F8;&#x8F6C;&#x5316;&#x3002;&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lock.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x7B49;&#x4EF7;&#x4E8E;</p>
+<pre><code>internal_clock::time_point end=internal_clock::now()+relative_time;
+while(!pred())
+{
+  std::chrono::duration&lt;Rep,Period&gt; remaining_time=
+      end-internal_clock::now();
+  if(wait_for(lock,remaining_time)==std::cv_status::timeout)
+      return pred();
+}
+return true;
+</code></pre><p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;pred()&#x4E3A;true&#xFF0C;&#x5219;&#x8FD4;&#x56DE;true&#xFF1B;&#x5F53;&#x8D85;&#x8FC7;relative_time&#x5E76;&#x4E14;pred()&#x8FD4;&#x56DE;false&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>NOTE</strong>:&#x6F5C;&#x5728;&#x7684;&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#x4E0D;&#x4F1A;&#x6307;&#x5B9A;pred&#x8C03;&#x7528;&#x7684;&#x6B21;&#x6570;&#x3002;&#x901A;&#x8FC7;lock&#x8FDB;&#x884C;&#x4E0A;&#x9501;&#xFF0C;pred&#x7ECF;&#x5E38;&#x4F1A;&#x88AB;&#x4E92;&#x65A5;&#x91CF;&#x5F15;&#x7528;&#x6240;&#x8C03;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x51FD;&#x6570;&#x5FC5;&#x987B;&#x8FD4;&#x56DE;(&#x53EA;&#x80FD;&#x8FD4;&#x56DE;)&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5728;<code>(bool)pred()</code>&#x8BC4;&#x4F30;&#x540E;&#x8FD4;&#x56DE;true&#xFF0C;&#x6216;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;relative_time&#x5185;&#x5B8C;&#x6210;&#x3002;&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x7684;&#x65F6;&#x95F4;&#x5C31;&#x8981;&#x6BD4;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x957F;&#x4E86;&#x3002;&#x5728;&#x6709;&#x8FD9;&#x6837;&#x53EF;&#x80FD;&#x6027;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x6D41;&#x901D;&#x7684;&#x65F6;&#x95F4;&#x662F;&#x7531;&#x7A33;&#x5B9A;&#x65F6;&#x949F;&#x51B3;&#x5B9A;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x65F6;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x6216;&#x8005;&#x7531;pred&#x629B;&#x51FA;&#x4EFB;&#x610F;&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariablewaituntil-&#x6210;&#x5458;&#x51FD;&#x6570;">std::condition_variable::wait_until &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p><code>std::condition_variable</code>&#x5728;&#x8C03;&#x7528;notify_one()&#x3001;&#x8C03;&#x7528;notify_all()&#x3001;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x5185;&#x8FBE;&#x6210;&#x6761;&#x4EF6;&#x6216;&#x7EBF;&#x7A0B;&#x4F2A;&#x5524;&#x9192;&#x65F6;&#xFF0C;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Clock,typename Duration&gt;
+cv_status wait_until(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    std::chrono::time_point&lt;Clock,Duration&gt; const&amp; absolute_time);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lock.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5F53;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x51FD;&#x6570;&#xFF0C;&#x6216;Clock::now()&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;absolute_time&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x4EA6;&#x6216;&#x7EBF;&#x7A0B;&#x4F2A;&#x5524;&#x9192;&#xFF0C;lock&#x90FD;&#x5C06;&#x81EA;&#x52A8;&#x89E3;&#x9501;&#xFF0C;&#x5E76;&#x4E14;&#x5524;&#x9192;&#x963B;&#x585E;&#x7684;&#x7EBF;&#x7A0B;&#x3002;&#x5728;wait_until()&#x8FD4;&#x56DE;&#x4E4B;&#x524D;lock&#x5BF9;&#x8C61;&#x4F1A;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x7EBF;&#x7A0B;&#x88AB;notify_one()&#x3001;notify_all()&#x6216;&#x4F2A;&#x5524;&#x9192;&#x5524;&#x9192;&#x65F6;&#xFF0C;&#x4F1A;&#x8FD4;&#x56DE;<code>std::cv_status::no_timeout</code>&#xFF1B;&#x53CD;&#x4E4B;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;<code>std::cv_status::timeout</code>&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;&#x5F53;lock&#x5BF9;&#x8C61;&#x5728;&#x8C03;&#x7528;wait_for()&#x51FD;&#x6570;&#x524D;&#x89E3;&#x9501;&#xFF0C;&#x90A3;&#x4E48;lock&#x5BF9;&#x8C61;&#x4F1A;&#x5728;wait_for()&#x9000;&#x51FA;&#x524D;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#xFF0C;&#x5373;&#x4F7F;&#x51FD;&#x6570;&#x662F;&#x4EE5;&#x5F02;&#x5E38;&#x7684;&#x65B9;&#x5F0F;&#x9000;&#x51FA;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x540E;&#xFF0C;&#x5728;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x65F6;&#xFF0C;&#x8FD8;&#x5904;&#x4EE5;&#x82CF;&#x9192;&#x72B6;&#x6001;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8FD9;&#x91CC;&#x5EFA;&#x8BAE;&#x91CD;&#x8F7D;wait_until()&#x51FD;&#x6570;&#xFF0C;&#x91CD;&#x8F7D;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8C13;&#x8BCD;&#x3002;&#x8981;&#x4E0D;&#xFF0C;&#x5219;&#x5EFA;&#x8BAE;wait_until()&#x4F7F;&#x7528;&#x5FAA;&#x73AF;&#x7684;&#x65B9;&#x5F0F;&#x5BF9;&#x4E0E;&#x8C13;&#x8BCD;&#x76F8;&#x5173;&#x7684;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#x3002;&#x8FD9;&#x91CC;&#x4E0D;&#x4FDD;&#x8BC1;&#x7EBF;&#x7A0B;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#x591A;&#x957F;&#x65F6;&#x95F4;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x51FD;&#x6570;&#x8FD4;&#x56DE;false&#x540E;(Clock::now()&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;absolute_time)&#xFF0C;&#x7EBF;&#x7A0B;&#x624D;&#x80FD;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariablewaituntil-&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;">std::condition_variable::wait_until &#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;</h3>
+<p><code>std::condition_variable</code>&#x5728;&#x8C03;&#x7528;notify_one()&#x3001;&#x8C03;&#x7528;notify_all()&#x3001;&#x8C13;&#x8BCD;&#x8FD4;&#x56DE;true&#x6216;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x5185;&#x8FBE;&#x5230;&#x6761;&#x4EF6;&#xFF0C;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Clock,typename Duration,typename Predicate&gt;
+bool wait_until(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    std::chrono::time_point&lt;Clock,Duration&gt; const&amp; absolute_time,
+    Predicate pred);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+pred()&#x5FC5;&#x987B;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x5176;&#x8FD4;&#x56DE;&#x503C;&#x80FD;&#x8F6C;&#x6362;&#x4E3A;bool&#x503C;&#x3002;&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lock.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x7B49;&#x4EF7;&#x4E8E;</p>
+<pre><code>while(!pred())
+{
+  if(wait_until(lock,absolute_time)==std::cv_status::timeout)
+    return pred();
+}
+return true;
+</code></pre><p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;&#x8C03;&#x7528;pred()&#x8FD4;&#x56DE;true&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;true&#xFF1B;&#x5F53;Clock::now()&#x7684;&#x65F6;&#x95F4;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;absolute_time&#xFF0C;&#x5E76;&#x4E14;pred()&#x8FD4;&#x56DE;false&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>NOTE</strong>:&#x6F5C;&#x5728;&#x7684;&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#x4E0D;&#x4F1A;&#x6307;&#x5B9A;pred&#x8C03;&#x7528;&#x7684;&#x6B21;&#x6570;&#x3002;&#x901A;&#x8FC7;lock&#x8FDB;&#x884C;&#x4E0A;&#x9501;&#xFF0C;pred&#x7ECF;&#x5E38;&#x4F1A;&#x88AB;&#x4E92;&#x65A5;&#x91CF;&#x5F15;&#x7528;&#x6240;&#x8C03;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x51FD;&#x6570;&#x5FC5;&#x987B;&#x8FD4;&#x56DE;(&#x53EA;&#x80FD;&#x8FD4;&#x56DE;)&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5728;<code>(bool)pred()</code>&#x8BC4;&#x4F30;&#x540E;&#x8FD4;&#x56DE;true&#xFF0C;&#x6216;Clock::now()&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x95F4;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;absolute_time&#x3002;&#x8FD9;&#x91CC;&#x4E0D;&#x4FDD;&#x8BC1;&#x8C03;&#x7528;&#x7EBF;&#x7A0B;&#x5C06;&#x88AB;&#x963B;&#x585E;&#x7684;&#x65F6;&#x957F;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x51FD;&#x6570;&#x8FD4;&#x56DE;false&#x540E;(Clock::now()&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7B49;&#x4E8E;&#x6216;&#x5927;&#x4E8E;absolute_time&#x7684;&#x503C;)&#xFF0C;&#x7EBF;&#x7A0B;&#x63A5;&#x89E6;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x65F6;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x6216;&#x8005;&#x7531;pred&#x629B;&#x51FA;&#x4EFB;&#x610F;&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdnotifyallatthreadexit-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::notify_all_at_thread_exit &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5F53;&#x5F53;&#x524D;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x7684;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x7B49;&#x5F85;<code>std::condition_variable</code>&#x7684;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x5C06;&#x4F1A;&#x88AB;&#x5524;&#x9192;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void notify_all_at_thread_exit(
+  condition_variable&amp; cv,unique_lock&lt;mutex&gt; lk);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lk.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;lk.mutex()&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x7684;&#x503C;&#x8981;&#x4E0E;&#x5E76;&#x53D1;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#x76F8;&#x5173;&#x7684;&#x4EFB;&#x610F;cv&#x4E2D;&#x9501;&#x5BF9;&#x8C61;&#x63D0;&#x4F9B;&#x7684;wait(),wait_for()&#x6216;wait_until()&#x76F8;&#x540C;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;lk&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x5230;&#x5185;&#x90E8;&#x5B58;&#x50A8;&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x5F53;&#x6709;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x5B89;&#x6392;&#x88AB;&#x63D0;&#x9192;&#x7684;cv&#x7C7B;&#x3002;&#x8FD9;&#x91CC;&#x7684;&#x63D0;&#x9192;&#x7B49;&#x4EF7;&#x4E8E;</p>
+<pre><code>lk.unlock();
+cv.notify_all();
+</code></pre><p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x65F6;&#xFF0C;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x5728;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x524D;&#xFF0C;&#x638C;&#x63E1;&#x7740;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x8981;&#x907F;&#x514D;&#x6B7B;&#x9501;&#x53D1;&#x751F;&#x3002;&#x8FD9;&#x91CC;&#x5EFA;&#x8BAE;&#x8C03;&#x7528;&#x8BE5;&#x51FD;&#x6570;&#x7684;&#x7EBF;&#x7A0B;&#x5E94;&#x8BE5;&#x5C3D;&#x5FEB;&#x9000;&#x51FA;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x8BE5;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x4E00;&#x4E9B;&#x963B;&#x585E;&#x7684;&#x64CD;&#x4F5C;&#x3002;&#x7528;&#x6237;&#x5FC5;&#x987B;&#x4FDD;&#x8BC1;&#x7B49;&#x5730;&#x7EBF;&#x7A0B;&#x4E0D;&#x4F1A;&#x9519;&#x8BEF;&#x7684;&#x5C06;&#x5524;&#x9192;&#x7EBF;&#x7A0B;&#x5F53;&#x505A;&#x5DF2;&#x9000;&#x51FA;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x4F2A;&#x5524;&#x9192;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#x4E0A;&#x7684;&#x8C13;&#x8BCD;&#x6D4B;&#x8BD5;&#x6765;&#x5B9E;&#x73B0;&#x8FD9;&#x4E00;&#x529F;&#x80FD;&#xFF0C;&#x5728;&#x4E92;&#x65A5;&#x91CF;&#x4FDD;&#x62A4;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x53EA;&#x6709;&#x8C13;&#x8BCD;&#x8FD4;&#x56DE;true&#x65F6;&#x7EBF;&#x7A0B;&#x624D;&#x80FD;&#x88AB;&#x5524;&#x9192;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x8C03;&#x7528;notify_all_at_thread_exit(std::condition_variable_any&#x7C7B;&#x4E2D;&#x51FD;&#x6570;)&#x524D;&#x662F;&#x4E0D;&#x4F1A;&#x91CA;&#x653E;&#x9501;&#x3002;</p>
+<h2 id="d22-stdconditionvariableany&#x7C7B;">D.2.2 std::condition_variable_any&#x7C7B;</h2>
+<p><code>std::condition_variable_any</code>&#x7C7B;&#x5141;&#x8BB8;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x67D0;&#x4E00;&#x6761;&#x4EF6;&#x4E3A;true&#x7684;&#x65F6;&#x5019;&#x7EE7;&#x7EED;&#x8FD0;&#x884C;&#x3002;&#x4E0D;&#x8FC7;<code>std::condition_variable</code>&#x53EA;&#x80FD;&#x548C;<code>std::unique_lock&lt;std::mutex&gt;</code>&#x4E00;&#x8D77;&#x4F7F;&#x7528;&#xFF0C;<code>std::condition_variable_any</code>&#x53EF;&#x4EE5;&#x548C;&#x4EFB;&#x610F;&#x53EF;&#x4E0A;&#x9501;(Lockable)&#x7C7B;&#x578B;&#x4E00;&#x8D77;&#x4F7F;&#x7528;&#x3002;</p>
+<p><code>std::condition_variable_any</code>&#x5B9E;&#x4F8B;&#x4E0D;&#x80FD;&#x8FDB;&#x884C;&#x62F7;&#x8D1D;&#x8D4B;&#x503C;(CopyAssignable)&#x3001;&#x62F7;&#x8D1D;&#x6784;&#x9020;(CopyConstructible)&#x3001;&#x79FB;&#x52A8;&#x8D4B;&#x503C;(MoveAssignable)&#x6216;&#x79FB;&#x52A8;&#x6784;&#x9020;(MoveConstructible)&#x3002;</p>
+<h3 id="&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<pre><code>class condition_variable_any
+{
+public:
+  condition_variable_any();
+  ~condition_variable_any();
+
+  condition_variable_any(
+      condition_variable_any const&amp; ) = delete;
+  condition_variable_any&amp; operator=(
+      condition_variable_any const&amp; ) = delete;
+
+  void notify_one() noexcept;
+  void notify_all() noexcept;
+
+  template&lt;typename Lockable&gt;
+  void wait(Lockable&amp; lock);
+
+  template &lt;typename Lockable, typename Predicate&gt;
+  void wait(Lockable&amp; lock, Predicate pred);
+
+  template &lt;typename Lockable, typename Clock,typename Duration&gt;
+  std::cv_status wait_until(
+      Lockable&amp; lock,
+      const std::chrono::time_point&lt;Clock, Duration&gt;&amp; absolute_time);
+
+  template &lt;
+      typename Lockable, typename Clock,
+      typename Duration, typename Predicate&gt;
+  bool wait_until(
+      Lockable&amp; lock,
+      const std::chrono::time_point&lt;Clock, Duration&gt;&amp; absolute_time,
+      Predicate pred);
+
+  template &lt;typename Lockable, typename Rep, typename Period&gt;
+  std::cv_status wait_for(
+      Lockable&amp; lock,
+      const std::chrono::duration&lt;Rep, Period&gt;&amp; relative_time);
+
+  template &lt;
+      typename Lockable, typename Rep,
+      typename Period, typename Predicate&gt;
+  bool wait_for(
+      Lockable&amp; lock,
+      const std::chrono::duration&lt;Rep, Period&gt;&amp; relative_time,
+      Predicate pred);
+};
+</code></pre><h3 id="stdconditionvariableany-&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;">std::condition_variable_any &#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::condition_variable_any</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>condition_variable_any();
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;&#x7684;<code>std::condition_variable_any</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x6784;&#x9020;&#x6210;&#x529F;&#xFF0C;&#x5C06;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;</p>
+<h3 id="stdconditionvariableany-&#x6790;&#x6784;&#x51FD;&#x6570;">std::condition_variable_any &#x6790;&#x6784;&#x51FD;&#x6570;</h3>
+<p>&#x9500;&#x6BC1;<code>std::condition_variable_any</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>~condition_variable_any();
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x4E4B;&#x524D;&#x6CA1;&#x6709;&#x4F7F;&#x7528;*this&#x603B;&#x7684;wait(),wait_for()&#x6216;wait_until()&#x963B;&#x585E;&#x8FC7;&#x7EBF;&#x7A0B;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x9500;&#x6BC1;*this&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdconditionvariableanynotifyone-&#x6210;&#x5458;&#x51FD;&#x6570;">std::condition_variable_any::notify_one &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p><code>std::condition_variable_any</code>&#x5524;&#x9192;&#x4E00;&#x4E2A;&#x7B49;&#x5F85;&#x8BE5;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void notify_all() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5524;&#x9192;&#x4E00;&#x4E2A;&#x7B49;&#x5F85;*this&#x7684;&#x7EBF;&#x7A0B;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7EBF;&#x7A0B;&#x5728;&#x7B49;&#x5F85;&#xFF0C;&#x90A3;&#x4E48;&#x8C03;&#x7528;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6548;&#x679C;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#xFF0C;&#x5C31;&#x4F1A;&#x629B;&#x51FA;std::system_error&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariableanynotifyall-&#x6210;&#x5458;&#x51FD;&#x6570;">std::condition_variable_any::notify_all &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5524;&#x9192;&#x6240;&#x6709;&#x7B49;&#x5F85;&#x5F53;&#x524D;<code>std::condition_variable_any</code>&#x5B9E;&#x4F8B;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void notify_all() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5524;&#x9192;&#x6240;&#x6709;&#x7B49;&#x5F85;*this&#x7684;&#x7EBF;&#x7A0B;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7EBF;&#x7A0B;&#x5728;&#x7B49;&#x5F85;&#xFF0C;&#x90A3;&#x4E48;&#x8C03;&#x7528;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6548;&#x679C;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#xFF0C;&#x5C31;&#x4F1A;&#x629B;&#x51FA;std::system_error&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariableanywait-&#x6210;&#x5458;&#x51FD;&#x6570;">std::condition_variable_any::wait &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x901A;&#x8FC7;<code>std::condition_variable_any</code>&#x7684;notify_one()&#x3001;notify_all()&#x6216;&#x4F2A;&#x5524;&#x9192;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Lockable&gt;
+void wait(Lockable&amp; lock);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+Lockable&#x7C7B;&#x578B;&#x9700;&#x8981;&#x80FD;&#x591F;&#x4E0A;&#x9501;&#xFF0C;lock&#x5BF9;&#x8C61;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x9501;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x81EA;&#x52A8;&#x89E3;&#x9501;lock&#x5BF9;&#x8C61;&#xFF0C;&#x5BF9;&#x4E8E;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#xFF0C;&#x5F53;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x65F6;&#x88AB;&#x5524;&#x9192;&#xFF0C;&#x4EA6;&#x6216;&#x8BE5;&#x7EBF;&#x7A0B;&#x5904;&#x4E8E;&#x4F2A;&#x5524;&#x9192;&#x72B6;&#x6001;&#x3002;&#x5728;wait()&#x8FD4;&#x56DE;&#x524D;&#xFF0C;lock&#x5BF9;&#x8C61;&#x5C06;&#x4F1A;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C06;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;&#x5F53;lock&#x5BF9;&#x8C61;&#x5728;&#x8C03;&#x7528;wait()&#x9636;&#x6BB5;&#x88AB;&#x89E3;&#x9501;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;wait()&#x9000;&#x51FA;&#x7684;&#x65F6;&#x5019;lock&#x4F1A;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#xFF0C;&#x5373;&#x4F7F;&#x51FD;&#x6570;&#x662F;&#x901A;&#x8FC7;&#x5F02;&#x5E38;&#x7684;&#x65B9;&#x5F0F;&#x9000;&#x51FA;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x540E;&#xFF0C;&#x5728;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x65F6;&#xFF0C;&#x8FD8;&#x5904;&#x4EE5;&#x82CF;&#x9192;&#x72B6;&#x6001;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5EFA;&#x8BAE;&#x5BF9;wait()&#x8FDB;&#x884C;&#x91CD;&#x8F7D;&#xFF0C;&#x5728;&#x53EF;&#x80FD;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x5EFA;&#x8BAE;wait()&#x4F7F;&#x7528;&#x5FAA;&#x73AF;&#x68C0;&#x67E5;&#x4E0E;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x76F8;&#x5173;&#x7684;&#x8C13;&#x8BCD;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+std::condition_variable_any&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariableanywait-&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;">std::condition_variable_any::wait &#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;</h3>
+<p>&#x7B49;&#x5F85;<code>std::condition_variable_any</code>&#x4E0A;&#x7684;notify_one()&#x6216;notify_all()&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x6216;&#x8C13;&#x8BCD;&#x4E3A;true&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x6765;&#x5524;&#x9192;&#x7EBF;&#x7A0B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Lockable,typename Predicate&gt;
+void wait(Lockable&amp; lock,Predicate pred);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+pred()&#x8C13;&#x8BCD;&#x5FC5;&#x987B;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x53EF;&#x4EE5;&#x548C;bool&#x4E92;&#x76F8;&#x8F6C;&#x5316;&#x3002;&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lock.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x6B63;&#x5982;</p>
+<pre><code>while(!pred())
+{
+wait(lock);
+}
+</code></pre><p><strong>&#x629B;&#x51FA;</strong>
+pred&#x4E2D;&#x53EF;&#x4EE5;&#x629B;&#x51FA;&#x4EFB;&#x610F;&#x5F02;&#x5E38;&#xFF0C;&#x6216;&#x8005;&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x5230;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x6F5C;&#x5728;&#x7684;&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#x4E0D;&#x4F1A;&#x6307;&#x5B9A;pred&#x8C03;&#x7528;&#x7684;&#x6B21;&#x6570;&#x3002;&#x901A;&#x8FC7;lock&#x8FDB;&#x884C;&#x4E0A;&#x9501;&#xFF0C;pred&#x7ECF;&#x5E38;&#x4F1A;&#x88AB;&#x4E92;&#x65A5;&#x91CF;&#x5F15;&#x7528;&#x6240;&#x8C03;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x51FD;&#x6570;&#x5FC5;&#x987B;&#x8FD4;&#x56DE;(&#x53EA;&#x80FD;&#x8FD4;&#x56DE;)&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5728;<code>(bool)pred()</code>&#x8BC4;&#x4F30;&#x540E;&#xFF0C;&#x8FD4;&#x56DE;true&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable_any</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariableanywaitfor-&#x6210;&#x5458;&#x51FD;&#x6570;">std::condition_variable_any::wait_for &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p><code>std::condition_variable_any</code>&#x5728;&#x8C03;&#x7528;notify_one()&#x3001;&#x8C03;&#x7528;notify_all()&#x3001;&#x8D85;&#x65F6;&#x6216;&#x7EBF;&#x7A0B;&#x4F2A;&#x5524;&#x9192;&#x65F6;&#xFF0C;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Lockable,typename Rep,typename Period&gt;
+std::cv_status wait_for(
+    Lockable&amp; lock,
+    std::chrono::duration&lt;Rep,Period&gt; const&amp; relative_time);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lock.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5F53;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x6216;&#x8D85;&#x51FA;&#x4E86;relative_time&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x4EA6;&#x6216;&#x662F;&#x7EBF;&#x7A0B;&#x88AB;&#x4F2A;&#x5524;&#x9192;&#xFF0C;&#x5219;&#x5C06;lock&#x5BF9;&#x8C61;&#x81EA;&#x52A8;&#x89E3;&#x9501;&#xFF0C;&#x5E76;&#x5C06;&#x963B;&#x585E;&#x7EBF;&#x7A0B;&#x5524;&#x9192;&#x3002;&#x5F53;wait_for()&#x8C03;&#x7528;&#x8FD4;&#x56DE;&#x524D;&#xFF0C;lock&#x5BF9;&#x8C61;&#x4F1A;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x7EBF;&#x7A0B;&#x88AB;notify_one()&#x3001;notify_all()&#x6216;&#x4F2A;&#x5524;&#x9192;&#x5524;&#x9192;&#x65F6;&#xFF0C;&#x4F1A;&#x8FD4;&#x56DE;<code>std::cv_status::no_timeout</code>&#xFF1B;&#x53CD;&#x4E4B;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;std::cv_status::timeout&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;&#x5F53;lock&#x5BF9;&#x8C61;&#x5728;&#x8C03;&#x7528;wait_for()&#x51FD;&#x6570;&#x524D;&#x89E3;&#x9501;&#xFF0C;&#x90A3;&#x4E48;lock&#x5BF9;&#x8C61;&#x4F1A;&#x5728;wait_for()&#x9000;&#x51FA;&#x524D;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#xFF0C;&#x5373;&#x4F7F;&#x51FD;&#x6570;&#x662F;&#x4EE5;&#x5F02;&#x5E38;&#x7684;&#x65B9;&#x5F0F;&#x9000;&#x51FA;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5728;&#x8C03;&#x7528;wait_for()&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5373;&#x4F7F;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x548C;notify_all()&#x51FD;&#x6570;&#xFF0C;&#x4E5F;&#x5904;&#x4E8E;&#x82CF;&#x9192;&#x72B6;&#x6001;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8FD9;&#x91CC;&#x5EFA;&#x8BAE;&#x91CD;&#x8F7D;wait_for()&#x51FD;&#x6570;&#xFF0C;&#x91CD;&#x8F7D;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8C13;&#x8BCD;&#x3002;&#x8981;&#x4E0D;&#xFF0C;&#x5219;&#x5EFA;&#x8BAE;wait_for()&#x4F7F;&#x7528;&#x5FAA;&#x73AF;&#x7684;&#x65B9;&#x5F0F;&#x5BF9;&#x4E0E;&#x8C13;&#x8BCD;&#x76F8;&#x5173;&#x7684;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#x3002;&#x5728;&#x8FD9;&#x6837;&#x505A;&#x7684;&#x65F6;&#x5019;&#x8FD8;&#x9700;&#x8981;&#x5C0F;&#x5FC3;&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x8D85;&#x65F6;&#x90E8;&#x5206;&#x4F9D;&#x65E7;&#x6709;&#x6548;&#xFF1B;wait_until()&#x53EF;&#x80FD;&#x9002;&#x5408;&#x66F4;&#x591A;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x8FD9;&#x6837;&#x7684;&#x8BDD;&#xFF0C;&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x7684;&#x65F6;&#x95F4;&#x5C31;&#x8981;&#x6BD4;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x957F;&#x4E86;&#x3002;&#x5728;&#x6709;&#x8FD9;&#x6837;&#x53EF;&#x80FD;&#x6027;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x6D41;&#x901D;&#x7684;&#x65F6;&#x95F4;&#x662F;&#x7531;&#x7A33;&#x5B9A;&#x65F6;&#x949F;&#x51B3;&#x5B9A;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable_any</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariableanywaitfor-&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;">std::condition_variable_any::wait_for &#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;</h3>
+<p><code>std::condition_variable_any</code>&#x5728;&#x8C03;&#x7528;notify_one()&#x3001;&#x8C03;&#x7528;notify_all()&#x3001;&#x8D85;&#x65F6;&#x6216;&#x7EBF;&#x7A0B;&#x4F2A;&#x5524;&#x9192;&#x65F6;&#xFF0C;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Lockable,typename Rep,
+    typename Period, typename Predicate&gt;
+bool wait_for(
+    Lockable&amp; lock,
+    std::chrono::duration&lt;Rep,Period&gt; const&amp; relative_time,
+    Predicate pred);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+pred()&#x8C13;&#x8BCD;&#x5FC5;&#x987B;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x53EF;&#x4EE5;&#x548C;bool&#x4E92;&#x76F8;&#x8F6C;&#x5316;&#x3002;&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lock.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x6B63;&#x5982;</p>
+<pre><code>internal_clock::time_point end=internal_clock::now()+relative_time;
+while(!pred())
+{
+  std::chrono::duration&lt;Rep,Period&gt; remaining_time=
+      end-internal_clock::now();
+  if(wait_for(lock,remaining_time)==std::cv_status::timeout)
+      return pred();
+}
+return true;
+</code></pre><p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;pred()&#x4E3A;true&#xFF0C;&#x5219;&#x8FD4;&#x56DE;true&#xFF1B;&#x5F53;&#x8D85;&#x8FC7;relative_time&#x5E76;&#x4E14;pred()&#x8FD4;&#x56DE;false&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>NOTE</strong>:
+&#x6F5C;&#x5728;&#x7684;&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#x4E0D;&#x4F1A;&#x6307;&#x5B9A;pred&#x8C03;&#x7528;&#x7684;&#x6B21;&#x6570;&#x3002;&#x901A;&#x8FC7;lock&#x8FDB;&#x884C;&#x4E0A;&#x9501;&#xFF0C;pred&#x7ECF;&#x5E38;&#x4F1A;&#x88AB;&#x4E92;&#x65A5;&#x91CF;&#x5F15;&#x7528;&#x6240;&#x8C03;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x51FD;&#x6570;&#x5FC5;&#x987B;&#x8FD4;&#x56DE;(&#x53EA;&#x80FD;&#x8FD4;&#x56DE;)&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5728;(bool)pred()&#x8BC4;&#x4F30;&#x540E;&#x8FD4;&#x56DE;true&#xFF0C;&#x6216;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;relative_time&#x5185;&#x5B8C;&#x6210;&#x3002;&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x7684;&#x65F6;&#x95F4;&#x5C31;&#x8981;&#x6BD4;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x957F;&#x4E86;&#x3002;&#x5728;&#x6709;&#x8FD9;&#x6837;&#x53EF;&#x80FD;&#x6027;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x6D41;&#x901D;&#x7684;&#x65F6;&#x95F4;&#x662F;&#x7531;&#x7A33;&#x5B9A;&#x65F6;&#x949F;&#x51B3;&#x5B9A;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x65F6;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x6216;&#x8005;&#x7531;pred&#x629B;&#x51FA;&#x4EFB;&#x610F;&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable_any</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariableanywaituntil-&#x6210;&#x5458;&#x51FD;&#x6570;">std::condition_variable_any::wait_until &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p><code>std::condition_variable_any</code>&#x5728;&#x8C03;&#x7528;notify_one()&#x3001;&#x8C03;&#x7528;notify_all()&#x3001;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x5185;&#x8FBE;&#x6210;&#x6761;&#x4EF6;&#x6216;&#x7EBF;&#x7A0B;&#x4F2A;&#x5524;&#x9192;&#x65F6;&#xFF0C;&#x7ED3;&#x675F;&#x7B49;&#x5F85;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Lockable,typename Clock,typename Duration&gt;
+std::cv_status wait_until(
+    Lockable&amp; lock,
+    std::chrono::time_point&lt;Clock,Duration&gt; const&amp; absolute_time);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+Lockable&#x7C7B;&#x578B;&#x9700;&#x8981;&#x80FD;&#x591F;&#x4E0A;&#x9501;&#xFF0C;lock&#x5BF9;&#x8C61;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x9501;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5F53;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x51FD;&#x6570;&#xFF0C;&#x6216;Clock::now()&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;absolute_time&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x4EA6;&#x6216;&#x7EBF;&#x7A0B;&#x4F2A;&#x5524;&#x9192;&#xFF0C;lock&#x90FD;&#x5C06;&#x81EA;&#x52A8;&#x89E3;&#x9501;&#xFF0C;&#x5E76;&#x4E14;&#x5524;&#x9192;&#x963B;&#x585E;&#x7684;&#x7EBF;&#x7A0B;&#x3002;&#x5728;wait_until()&#x8FD4;&#x56DE;&#x4E4B;&#x524D;lock&#x5BF9;&#x8C61;&#x4F1A;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x7EBF;&#x7A0B;&#x88AB;notify_one()&#x3001;notify_all()&#x6216;&#x4F2A;&#x5524;&#x9192;&#x5524;&#x9192;&#x65F6;&#xFF0C;&#x4F1A;&#x8FD4;&#x56DE;std::cv_status::no_timeout&#xFF1B;&#x53CD;&#x4E4B;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;<code>std::cv_status::timeout</code>&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;&#x5F53;lock&#x5BF9;&#x8C61;&#x5728;&#x8C03;&#x7528;wait_for()&#x51FD;&#x6570;&#x524D;&#x89E3;&#x9501;&#xFF0C;&#x90A3;&#x4E48;lock&#x5BF9;&#x8C61;&#x4F1A;&#x5728;wait_for()&#x9000;&#x51FA;&#x524D;&#x518D;&#x6B21;&#x4E0A;&#x9501;&#xFF0C;&#x5373;&#x4F7F;&#x51FD;&#x6570;&#x662F;&#x4EE5;&#x5F02;&#x5E38;&#x7684;&#x65B9;&#x5F0F;&#x9000;&#x51FA;&#x3002;</p>
+<p><strong>NOTE</strong>:&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x540E;&#xFF0C;&#x5728;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x65F6;&#xFF0C;&#x8FD8;&#x5904;&#x4EE5;&#x82CF;&#x9192;&#x72B6;&#x6001;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8FD9;&#x91CC;&#x5EFA;&#x8BAE;&#x91CD;&#x8F7D;wait_until()&#x51FD;&#x6570;&#xFF0C;&#x91CD;&#x8F7D;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8C13;&#x8BCD;&#x3002;&#x8981;&#x4E0D;&#xFF0C;&#x5219;&#x5EFA;&#x8BAE;wait_until()&#x4F7F;&#x7528;&#x5FAA;&#x73AF;&#x7684;&#x65B9;&#x5F0F;&#x5BF9;&#x4E0E;&#x8C13;&#x8BCD;&#x76F8;&#x5173;&#x7684;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#x3002;&#x8FD9;&#x91CC;&#x4E0D;&#x4FDD;&#x8BC1;&#x7EBF;&#x7A0B;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#x591A;&#x957F;&#x65F6;&#x95F4;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x51FD;&#x6570;&#x8FD4;&#x56DE;false&#x540E;(Clock::now()&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;absolute_time)&#xFF0C;&#x7EBF;&#x7A0B;&#x624D;&#x80FD;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable_any</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<h3 id="stdconditionvariableanywaitunti-&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;">std::condition_variable_any::wait_unti &#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8C13;&#x8BCD;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CD;&#x8F7D;</h3>
+<p><code>std::condition_variable_any</code>&#x5728;&#x8C03;&#x7528;notify_one()&#x3001;&#x8C03;&#x7528;notify_all()&#x3001;&#x8C13;&#x8BCD;&#x8FD4;&#x56DE;true&#x6216;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x5185;&#x8FBE;&#x5230;&#x6761;&#x4EF6;&#xFF0C;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Lockable,typename Clock,
+    typename Duration, typename Predicate&gt;
+bool wait_until(
+    Lockable&amp; lock,
+    std::chrono::time_point&lt;Clock,Duration&gt; const&amp; absolute_time,
+    Predicate pred);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+pred()&#x5FC5;&#x987B;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x5176;&#x8FD4;&#x56DE;&#x503C;&#x80FD;&#x8F6C;&#x6362;&#x4E3A;bool&#x503C;&#x3002;&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;wait()&#x5373;&#x53EF;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x6240;&#x6709;&#x6743;,lock.owns_lock()&#x5FC5;&#x987B;&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x7B49;&#x4EF7;&#x4E8E;</p>
+<pre><code>while(!pred())
+{
+  if(wait_until(lock,absolute_time)==std::cv_status::timeout)
+    return pred();
+}
+return true;
+</code></pre><p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;&#x8C03;&#x7528;pred()&#x8FD4;&#x56DE;true&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;true&#xFF1B;&#x5F53;Clock::now()&#x7684;&#x65F6;&#x95F4;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;absolute_time&#xFF0C;&#x5E76;&#x4E14;pred()&#x8FD4;&#x56DE;false&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>NOTE</strong>&#xFF1A;&#x6F5C;&#x5728;&#x7684;&#x4F2A;&#x5524;&#x9192;&#x610F;&#x5473;&#x7740;&#x4E0D;&#x4F1A;&#x6307;&#x5B9A;pred&#x8C03;&#x7528;&#x7684;&#x6B21;&#x6570;&#x3002;&#x901A;&#x8FC7;lock&#x8FDB;&#x884C;&#x4E0A;&#x9501;&#xFF0C;pred&#x7ECF;&#x5E38;&#x4F1A;&#x88AB;&#x4E92;&#x65A5;&#x91CF;&#x5F15;&#x7528;&#x6240;&#x8C03;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x51FD;&#x6570;&#x5FC5;&#x987B;&#x8FD4;&#x56DE;(&#x53EA;&#x80FD;&#x8FD4;&#x56DE;)&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5728;(bool)pred()&#x8BC4;&#x4F30;&#x540E;&#x8FD4;&#x56DE;true&#xFF0C;&#x6216;Clock::now()&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x95F4;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;absolute_time&#x3002;&#x8FD9;&#x91CC;&#x4E0D;&#x4FDD;&#x8BC1;&#x8C03;&#x7528;&#x7EBF;&#x7A0B;&#x5C06;&#x88AB;&#x963B;&#x585E;&#x7684;&#x65F6;&#x957F;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x51FD;&#x6570;&#x8FD4;&#x56DE;false&#x540E;(Clock::now()&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7B49;&#x4E8E;&#x6216;&#x5927;&#x4E8E;absolute_time&#x7684;&#x503C;)&#xFF0C;&#x7EBF;&#x7A0B;&#x63A5;&#x89E6;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x6210;&#x65F6;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x6216;&#x8005;&#x7531;pred&#x629B;&#x51FA;&#x4EFB;&#x610F;&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::condition_variable_any</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;notify_one(),notify_all(),wait(),wait_for()&#x548C;wait_until()&#x90FD;&#x662F;&#x5E8F;&#x5217;&#x5316;&#x51FD;&#x6570;(&#x4E32;&#x884C;&#x8C03;&#x7528;)&#x3002;&#x8C03;&#x7528;notify_one()&#x6216;notify_all()&#x53EA;&#x80FD;&#x5524;&#x9192;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="D.1-chinese.html" class="navigation navigation-prev " aria-label="Previous page: D.1 chrono头文件">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="D.3-chinese.html" class="navigation navigation-next " aria-label="Next page: D.3 atomic头文件">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"D.2 condition_variable头文件","level":"1.22.2","depth":2,"next":{"title":"D.3 atomic头文件","level":"1.22.3","depth":2,"path":"content/appendix_D/D.3-chinese.md","ref":"content/appendix_D/D.3-chinese.md","articles":[]},"previous":{"title":"D.1 chrono头文件","level":"1.22.1","depth":2,"path":"content/appendix_D/D.1-chinese.md","ref":"content/appendix_D/D.1-chinese.md","articles":[]},"dir":"ltr"},"config":{"plugins":["livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"plugins":["katex","ace"],"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"msyh","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"陈晓伟 chenxiaowei","pdf":{"pageNumbers":false,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":10,"left":10,"top":10,"bottom":20}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"C++并发编程实战（第2版）","language":"zh-hans","gitbook":"*","description":"《C++ Concurrency In Action - SECOND EDITION》英文版的中文翻译版。","direction":"ltr"},"file":{"path":"content/appendix_D/D.2-chinese.md","mtime":"2022-11-19T02:54:31.286Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-11-19T07:50:48.148Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,1926 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>8.5 在实践中设计并发代码 · C++并发编程实战（第2版）</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="陈晓伟 chenxiaowei">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="8.6-chinese.html" />
+    
+    
+    <link rel="prev" href="8.4-chinese.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Praise_for_the_first_edition.html">
+            
+                <a href="../Praise_for_the_first_edition.html">
+            
+                    
+                    第一版的赞许
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../preface-chinese.html">
+            
+                <a href="../preface-chinese.html">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../acknowledgments-chinese.html">
+            
+                <a href="../acknowledgments-chinese.html">
+            
+                    
+                    感谢
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../about_this_book-chinese.html">
+            
+                <a href="../about_this_book-chinese.html">
+            
+                    
+                    关于本书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../about_the_author-chinese.html">
+            
+                <a href="../about_the_author-chinese.html">
+            
+                    
+                    关于作者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../about_cover_illustration-chinese.html">
+            
+                <a href="../about_cover_illustration-chinese.html">
+            
+                    
+                    关于封面
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../chapter1/1.0-chinese.html">
+            
+                <a href="../chapter1/1.0-chinese.html">
+            
+                    
+                    第1章 你好，并发世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../chapter1/1.1-chinese.html">
+            
+                <a href="../chapter1/1.1-chinese.html">
+            
+                    
+                    1.1 何谓并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../chapter1/1.2-chinese.html">
+            
+                <a href="../chapter1/1.2-chinese.html">
+            
+                    
+                    1.2 为什么使用并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../chapter1/1.3-chinese.html">
+            
+                <a href="../chapter1/1.3-chinese.html">
+            
+                    
+                    1.3 并发和多线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../chapter1/1.4-chinese.html">
+            
+                <a href="../chapter1/1.4-chinese.html">
+            
+                    
+                    1.4 开始入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../chapter1/1.5-chinese.html">
+            
+                <a href="../chapter1/1.5-chinese.html">
+            
+                    
+                    1.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../chapter2/2.0-chinese.html">
+            
+                <a href="../chapter2/2.0-chinese.html">
+            
+                    
+                    第2章 线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../chapter2/2.1-chinese.html">
+            
+                <a href="../chapter2/2.1-chinese.html">
+            
+                    
+                    2.1 线程的基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../chapter2/2.2-chinese.html">
+            
+                <a href="../chapter2/2.2-chinese.html">
+            
+                    
+                    2.2 传递参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../chapter2/2.3-chinese.html">
+            
+                <a href="../chapter2/2.3-chinese.html">
+            
+                    
+                    2.3 转移所有权
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../chapter2/2.4-chinese.html">
+            
+                <a href="../chapter2/2.4-chinese.html">
+            
+                    
+                    2.4 确定线程数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../chapter2/2.5-chinese.html">
+            
+                <a href="../chapter2/2.5-chinese.html">
+            
+                    
+                    2.5 线程标识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../chapter2/2.6-chinese.html">
+            
+                <a href="../chapter2/2.6-chinese.html">
+            
+                    
+                    2.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../chapter3/3.0-chinese.html">
+            
+                <a href="../chapter3/3.0-chinese.html">
+            
+                    
+                    第3章 共享数据
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../chapter3/3.1-chinese.html">
+            
+                <a href="../chapter3/3.1-chinese.html">
+            
+                    
+                    3.1 共享数据的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../chapter3/3.2-chinese.html">
+            
+                <a href="../chapter3/3.2-chinese.html">
+            
+                    
+                    3.2 使用互斥量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../chapter3/3.3-chinese.html">
+            
+                <a href="../chapter3/3.3-chinese.html">
+            
+                    
+                    3.3 保护共享数据的方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../chapter3/3.4-chinese.html">
+            
+                <a href="../chapter3/3.4-chinese.html">
+            
+                    
+                    3.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../chapter4/4.0-chinese.html">
+            
+                <a href="../chapter4/4.0-chinese.html">
+            
+                    
+                    第4章 同步操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../chapter4/4.1-chinese.html">
+            
+                <a href="../chapter4/4.1-chinese.html">
+            
+                    
+                    4.1 等待事件或条件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../chapter4/4.2-chinese.html">
+            
+                <a href="../chapter4/4.2-chinese.html">
+            
+                    
+                    4.2 使用future
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../chapter4/4.3-chinese.html">
+            
+                <a href="../chapter4/4.3-chinese.html">
+            
+                    
+                    4.3 限时等待
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../chapter4/4.4-chinese.html">
+            
+                <a href="../chapter4/4.4-chinese.html">
+            
+                    
+                    4.4 简化代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../chapter4/4.5-chinese.html">
+            
+                <a href="../chapter4/4.5-chinese.html">
+            
+                    
+                    4.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../chapter5/5.0-chinese.html">
+            
+                <a href="../chapter5/5.0-chinese.html">
+            
+                    
+                    第5章 内存模型和原子操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../chapter5/5.1-chinese.html">
+            
+                <a href="../chapter5/5.1-chinese.html">
+            
+                    
+                    5.1 内存模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../chapter5/5.2-chinese.html">
+            
+                <a href="../chapter5/5.2-chinese.html">
+            
+                    
+                    5.2 原子操作和原子类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../chapter5/5.3-chinese.html">
+            
+                <a href="../chapter5/5.3-chinese.html">
+            
+                    
+                    5.3 同步操作和强制排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../chapter5/5.4-chinese.html">
+            
+                <a href="../chapter5/5.4-chinese.html">
+            
+                    
+                    5.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../chapter6/6.0-chinese.html">
+            
+                <a href="../chapter6/6.0-chinese.html">
+            
+                    
+                    第6章 设计基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../chapter6/6.1-chinese.html">
+            
+                <a href="../chapter6/6.1-chinese.html">
+            
+                    
+                    6.1 并发设计的意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../chapter6/6.2-chinese.html">
+            
+                <a href="../chapter6/6.2-chinese.html">
+            
+                    
+                    6.2 基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../chapter6/6.3-chinese.html">
+            
+                <a href="../chapter6/6.3-chinese.html">
+            
+                    
+                    6.3 设计更加复杂的数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../chapter6/6.4-chinese.html">
+            
+                <a href="../chapter6/6.4-chinese.html">
+            
+                    
+                    6.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../chapter7/7.0-chinese.html">
+            
+                <a href="../chapter7/7.0-chinese.html">
+            
+                    
+                    第7章 设计无锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../chapter7/7.1-chinese.html">
+            
+                <a href="../chapter7/7.1-chinese.html">
+            
+                    
+                    7.1 定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../chapter7/7.2-chinese.html">
+            
+                <a href="../chapter7/7.2-chinese.html">
+            
+                    
+                    7.2 无锁数据结构的例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../chapter7/7.3-chinese.html">
+            
+                <a href="../chapter7/7.3-chinese.html">
+            
+                    
+                    7.3 设计无锁数据结构的指导建议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../chapter7/7.4-chinese.html">
+            
+                <a href="../chapter7/7.4-chinese.html">
+            
+                    
+                    7.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="8.0-chinese.html">
+            
+                <a href="8.0-chinese.html">
+            
+                    
+                    第8章 并发设计
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="8.1-chinese.html">
+            
+                <a href="8.1-chinese.html">
+            
+                    
+                    8.1 线程间划分工作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="8.2-chinese.html">
+            
+                <a href="8.2-chinese.html">
+            
+                    
+                    8.2 并发代码的性能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="8.3-chinese.html">
+            
+                <a href="8.3-chinese.html">
+            
+                    
+                    8.3 为多线程性能设计数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="8.4-chinese.html">
+            
+                <a href="8.4-chinese.html">
+            
+                    
+                    8.4 设计并发代码的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.15.5" data-path="8.5-chinese.html">
+            
+                <a href="8.5-chinese.html">
+            
+                    
+                    8.5 在实践中设计并发代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.6" data-path="8.6-chinese.html">
+            
+                <a href="8.6-chinese.html">
+            
+                    
+                    8.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../chapter9/9.0-chinese.html">
+            
+                <a href="../chapter9/9.0-chinese.html">
+            
+                    
+                    第9章 高级线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../chapter9/9.1-chinese.html">
+            
+                <a href="../chapter9/9.1-chinese.html">
+            
+                    
+                    9.1 线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../chapter9/9.2-chinese.html">
+            
+                <a href="../chapter9/9.2-chinese.html">
+            
+                    
+                    9.2 中断线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../chapter9/9.3-chinese.html">
+            
+                <a href="../chapter9/9.3-chinese.html">
+            
+                    
+                    9.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../chapter10/10.0-chinese.html">
+            
+                <a href="../chapter10/10.0-chinese.html">
+            
+                    
+                    第10章 并行算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../chapter10/10.1-chinese.html">
+            
+                <a href="../chapter10/10.1-chinese.html">
+            
+                    
+                    10.1 并行化标准库算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../chapter10/10.2-chinese.html">
+            
+                <a href="../chapter10/10.2-chinese.html">
+            
+                    
+                    10.2 执行策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="../chapter10/10.3-chinese.html">
+            
+                <a href="../chapter10/10.3-chinese.html">
+            
+                    
+                    10.3 C++标准库中的并行算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="../chapter10/10.4-chinese.html">
+            
+                <a href="../chapter10/10.4-chinese.html">
+            
+                    
+                    10.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../chapter11/11.0-chinese.html">
+            
+                <a href="../chapter11/11.0-chinese.html">
+            
+                    
+                    第11章 测试和调试多线程应用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../chapter11/11.1-chinese.html">
+            
+                <a href="../chapter11/11.1-chinese.html">
+            
+                    
+                    11.1 与并发相关的Bug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.2" data-path="../chapter11/11.2-chinese.html">
+            
+                <a href="../chapter11/11.2-chinese.html">
+            
+                    
+                    11.2 定位并发Bug的技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.3" data-path="../chapter11/11.3-chinese.html">
+            
+                <a href="../chapter11/11.3-chinese.html">
+            
+                    
+                    11.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="../appendix_A/A.0-chinese.html">
+            
+                <a href="../appendix_A/A.0-chinese.html">
+            
+                    
+                    附录A C++11特性简明参考(部分)
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.19.1" data-path="../appendix_A/A.1-chinese.html">
+            
+                <a href="../appendix_A/A.1-chinese.html">
+            
+                    
+                    A.1 右值引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.2" data-path="../appendix_A/A.2-chinese.html">
+            
+                <a href="../appendix_A/A.2-chinese.html">
+            
+                    
+                    A.2 删除函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.3" data-path="../appendix_A/A.3-chinese.html">
+            
+                <a href="../appendix_A/A.3-chinese.html">
+            
+                    
+                    A.3 默认函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.4" data-path="../appendix_A/A.4-chinese.html">
+            
+                <a href="../appendix_A/A.4-chinese.html">
+            
+                    
+                    A.4 常量表达式函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.5" data-path="../appendix_A/A.5-chinese.html">
+            
+                <a href="../appendix_A/A.5-chinese.html">
+            
+                    
+                    A.5 Lambda函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.6" data-path="../appendix_A/A.6-chinese.html">
+            
+                <a href="../appendix_A/A.6-chinese.html">
+            
+                    
+                    A.6 变参模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.7" data-path="../appendix_A/A.7-chinese.html">
+            
+                <a href="../appendix_A/A.7-chinese.html">
+            
+                    
+                    A.7 自动推导变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.8" data-path="../appendix_A/A.8-chinese.html">
+            
+                <a href="../appendix_A/A.8-chinese.html">
+            
+                    
+                    A.8 线程本地变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.9" data-path="../appendix_A/A.9-chinese.html">
+            
+                <a href="../appendix_A/A.9-chinese.html">
+            
+                    
+                    A.9 模板类参数的推导
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.10" data-path="../appendix_A/A.10-chinese.html">
+            
+                <a href="../appendix_A/A.10-chinese.html">
+            
+                    
+                    A.10 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="../appendix_B/B.0-chinese.html">
+            
+                <a href="../appendix_B/B.0-chinese.html">
+            
+                    
+                    附录B 并发库简要对比
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="../appendix_C/C.0-chinese.html">
+            
+                <a href="../appendix_C/C.0-chinese.html">
+            
+                    
+                    附录C 消息传递框架与完整的ATM示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="../appendix_D/D.0-chinese.html">
+            
+                <a href="../appendix_D/D.0-chinese.html">
+            
+                    
+                    附录D C++线程类库参考
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.22.1" data-path="../appendix_D/D.1-chinese.html">
+            
+                <a href="../appendix_D/D.1-chinese.html">
+            
+                    
+                    D.1 chrono头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.2" data-path="../appendix_D/D.2-chinese.html">
+            
+                <a href="../appendix_D/D.2-chinese.html">
+            
+                    
+                    D.2 condition_variable头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.3" data-path="../appendix_D/D.3-chinese.html">
+            
+                <a href="../appendix_D/D.3-chinese.html">
+            
+                    
+                    D.3 atomic头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.4" data-path="../appendix_D/D.4-chinese.html">
+            
+                <a href="../appendix_D/D.4-chinese.html">
+            
+                    
+                    D.4 future头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.5" data-path="../appendix_D/D.5-chinese.html">
+            
+                <a href="../appendix_D/D.5-chinese.html">
+            
+                    
+                    D.5 mutex头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.6" data-path="../appendix_D/D.6-chinese.html">
+            
+                <a href="../appendix_D/D.6-chinese.html">
+            
+                    
+                    D.6 ratio头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.7" data-path="../appendix_D/D.7-chinese.html">
+            
+                <a href="../appendix_D/D.7-chinese.html">
+            
+                    
+                    D.7 thread头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >8.5 在实践中设计并发代码</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="85-&#x5728;&#x5B9E;&#x8DF5;&#x4E2D;&#x8BBE;&#x8BA1;&#x5E76;&#x53D1;&#x4EE3;&#x7801;">8.5 &#x5728;&#x5B9E;&#x8DF5;&#x4E2D;&#x8BBE;&#x8BA1;&#x5E76;&#x53D1;&#x4EE3;&#x7801;</h1>
+<p>&#x4E3A;&#x7279;&#x6B8A;&#x7684;&#x4EFB;&#x52A1;&#x8BBE;&#x8BA1;&#x5E76;&#x53D1;&#x4EE3;&#x7801;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x6839;&#x636E;&#x4EFB;&#x52A1;&#x6765;&#x8003;&#x8651;&#x4E4B;&#x524D;&#x63D0;&#x5230;&#x7684;&#x95EE;&#x9898;&#x3002;&#x4E3A;&#x4E86;&#x5C55;&#x793A;&#x4EE5;&#x4E0A;&#x7684;&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#x5982;&#x4F55;&#x5E94;&#x7528;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x770B;&#x4E00;&#x4E0B;&#x5728;C++&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x4E09;&#x4E2A;&#x6807;&#x51C6;&#x51FD;&#x6570;&#x7684;&#x5E76;&#x884C;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x4E3B;&#x8981;&#x6F14;&#x793A;&#x8FD9;&#x4E9B;&#x6280;&#x672F;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x4E0D;&#x8FC7;&#x53EF;&#x80FD;&#x8FD9;&#x4E9B;&#x6280;&#x672F;&#x5E76;&#x4E0D;&#x662F;&#x6700;&#x524D;&#x6CBF;&#x7684;&#x3002;&#x66F4;&#x591A;&#x4F18;&#x79C0;&#x7684;&#x5B9E;&#x73B0;&#x53EF;&#x4EE5;&#x66F4;&#x597D;&#x7684;&#x5229;&#x7528;&#x786C;&#x4EF6;&#x5E76;&#x53D1;&#xFF0C;&#x8FD9;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x5230;&#x4E0E;&#x5E76;&#x884C;&#x7B97;&#x6CD5;&#x76F8;&#x5173;&#x7684;&#x5B66;&#x672F;&#x6587;&#x732E;&#xFF0C;&#x6216;&#x8005;&#x662F;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x4E13;&#x5BB6;&#x5E93;&#x4E2D;(&#x6BD4;&#x5982;&#xFF1A;Inter&#x7684;TBB[4])&#x624D;&#x80FD;&#x770B;&#x5230;&#x3002;</p>
+<p>&#x5E76;&#x884C;&#x7248;&#x7684;<code>std::for_each</code>&#x6700;&#x80FD;&#x4F53;&#x73B0;&#x5E76;&#x884C;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5C31;&#x8BA9;&#x6211;&#x4EEC;&#x4ECE;&#x5B83;&#x5F00;&#x59CB;&#x5427;&#xFF01;</p>
+<h2 id="851-&#x5E76;&#x884C;&#x7248;stdforeach">8.5.1 &#x5E76;&#x884C;&#x7248;<code>std::for_each</code></h2>
+<p><code>std::for_each</code>&#x7684;&#x539F;&#x7406;&#x5F88;&#x7B80;&#x5355;&#xFF1A;&#x5176;&#x5BF9;&#x67D0;&#x4E2A;&#x8303;&#x56F4;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x4F9D;&#x6B21;&#x4F7F;&#x7528;&#x7528;&#x6237;&#x63D0;&#x4F9B;&#x7684;&#x51FD;&#x6570;&#x3002;&#x5E76;&#x884C;&#x548C;&#x4E32;&#x884C;&#x7684;&#x6700;&#x5927;&#x533A;&#x522B;&#x5C31;&#x662F;&#x51FD;&#x6570;&#x7684;&#x8C03;&#x7528;&#x987A;&#x5E8F;&#x3002;<code>std::for_each</code>&#x662F;&#x5BF9;&#x8303;&#x56F4;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x8C03;&#x7528;&#x7528;&#x6237;&#x51FD;&#x6570;&#xFF0C;&#x63A5;&#x7740;&#x662F;&#x7B2C;&#x4E8C;&#x4E2A;&#xFF0C;&#x4EE5;&#x6B64;&#x7C7B;&#x63A8;&#x3002;&#x5728;&#x5E76;&#x884C;&#x5B9E;&#x73B0;&#x4E2D;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x5904;&#x7406;&#x987A;&#x5E8F;&#x5C31;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x4E86;&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x5E76;&#x884C;&#x7248;&#x672C;&#xFF0C;&#x9700;&#x8981;&#x5BF9;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x6240;&#x5904;&#x7406;&#x7684;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x5212;&#x5206;&#x3002;&#x4E8B;&#x5148;&#x77E5;&#x9053;&#x5143;&#x7D20;&#x6570;&#x91CF;&#xFF0C;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x5728;&#x5904;&#x7406;&#x524D;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x5212;&#x5206;(&#x8BE6;&#x89C1;8.1.1&#x8282;)&#x3002;&#x5047;&#x8BBE;&#x53EA;&#x6709;&#x5E76;&#x884C;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>std::thread::hardware_concurrency()</code>&#x6765;&#x51B3;&#x5B9A;&#x7EBF;&#x7A0B;&#x7684;&#x6570;&#x91CF;&#x3002;&#x540C;&#x6837;&#xFF0C;&#x8FD9;&#x4E9B;&#x5143;&#x7D20;&#x90FD;&#x80FD;&#x72EC;&#x7ACB;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FDE;&#x7EED;&#x7684;&#x6570;&#x636E;&#x5757;&#x6765;&#x907F;&#x514D;&#x4F2A;&#x5171;&#x4EAB;(&#x8BE6;&#x89C1;8.2.3&#x8282;)&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x7684;&#x7B97;&#x6CD5;&#x7C7B;&#x4F3C;&#x4E8E;&#x5E76;&#x884C;&#x7248;&#x7684;<code>std::accumulate</code>(&#x8BE6;&#x89C1;8.4.1&#x8282;)&#xFF0C;&#x4E0D;&#x8FC7;&#x6BD4;&#x8D77;&#x8BA1;&#x7B97;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x52A0;&#x548C;&#xFF0C;&#x8FD9;&#x91CC;&#x5BF9;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x4EC5;&#x4EC5;&#x4F7F;&#x7528;&#x4E86;&#x6307;&#x5B9A;&#x529F;&#x80FD;&#x7684;&#x51FD;&#x6570;&#x3002;&#x56E0;&#x4E3A;&#x4E0D;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF0C;&#x8981;&#x5C06;&#x5F02;&#x5E38;&#x4F20;&#x9012;&#x7ED9;&#x8C03;&#x7528;&#x8005;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x4F7F;&#x7528;<code>std::packaged_task</code>&#x548C;<code>std::future</code>&#x5BF9;&#x7EBF;&#x7A0B;&#x4E2D;&#x7684;&#x5F02;&#x5E38;&#x8FDB;&#x884C;&#x8F6C;&#x79FB;&#x3002;</p>
+<p>&#x4EE3;&#x7801;8.7 &#x5E76;&#x884C;&#x7248;<code>std::for_each</code></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Iterator,<span class="hljs-keyword">typename</span> Func&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">parallel_for_each</span><span class="hljs-params">(Iterator first,Iterator last,Func f)</span>
+</span>{
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> length=<span class="hljs-built_in">std</span>::distance(first,last);
+
+  <span class="hljs-keyword">if</span>(!length)
+    <span class="hljs-keyword">return</span>;
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> min_per_thread=<span class="hljs-number">25</span>;
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> max_threads=
+    (length+min_per_thread<span class="hljs-number">-1</span>)/min_per_thread;
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> hardware_threads=
+    <span class="hljs-built_in">std</span>::thread::hardware_concurrency();
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> num_threads=
+    <span class="hljs-built_in">std</span>::min(hardware_threads!=<span class="hljs-number">0</span>?hardware_threads:<span class="hljs-number">2</span>,max_threads);
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> block_size=length/num_threads;
+
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::future&lt;<span class="hljs-keyword">void</span>&gt; &gt; futures(num_threads<span class="hljs-number">-1</span>);  <span class="hljs-comment">// 1</span>
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::thread&gt; threads(num_threads<span class="hljs-number">-1</span>);
+  <span class="hljs-function">join_threads <span class="hljs-title">joiner</span><span class="hljs-params">(threads)</span></span>;
+
+  Iterator block_start=first;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> i=<span class="hljs-number">0</span>;i&lt;(num_threads<span class="hljs-number">-1</span>);++i)
+  {
+    Iterator block_end=block_start;
+    <span class="hljs-built_in">std</span>::advance(block_end,block_size);
+    <span class="hljs-built_in">std</span>::packaged_task&lt;<span class="hljs-keyword">void</span>(<span class="hljs-keyword">void</span>)&gt; task(  <span class="hljs-comment">// 2</span>
+      [=]()
+      {
+        <span class="hljs-built_in">std</span>::for_each(block_start,block_end,f);
+      });
+    futures[i]=task.get_future();
+    threads[i]=<span class="hljs-built_in">std</span>::thread(<span class="hljs-built_in">std</span>::move(task));  <span class="hljs-comment">// 3</span>
+    block_start=block_end;
+  }
+  <span class="hljs-built_in">std</span>::for_each(block_start,last,f);
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> i=<span class="hljs-number">0</span>;i&lt;(num_threads<span class="hljs-number">-1</span>);++i)
+  {
+    futures[i].get();  <span class="hljs-comment">// 4</span>
+  }
+}
+</code></pre>
+<p>&#x4EE3;&#x7801;&#x7ED3;&#x6784;&#x4E0E;&#x4EE3;&#x7801;8.4&#x5DEE;&#x4E0D;&#x591A;&#xFF0C;&#x4E0D;&#x540C;&#x5728;&#x4E8E;future&#x5411;&#x91CF;&#x5BF9;<code>std::future&lt;void&gt;</code>&#x7C7B;&#x578B;&#x2460;&#x53D8;&#x91CF;&#x8FDB;&#x884C;&#x5B58;&#x50A8;&#xFF0C;&#x56E0;&#x4E3A;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x4E0D;&#x4F1A;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x5E76;&#x4E14;Lambda&#x51FD;&#x6570;&#x4F1A;&#x5BF9;block_start&#x5230;block_end&#x4E0A;&#x7684;&#x4EFB;&#x52A1;&#x2461;&#x6267;&#x884C;f&#x51FD;&#x6570;(&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x4F20;&#x5165;&#x7EBF;&#x7A0B;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x2462;)&#x3002;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x4E0D;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x503C;&#x65F6;&#xFF0C;&#x8C03;&#x7528;futures[i].get()&#x2463;&#x53EA;&#x4E3A;&#x4E86;&#x68C0;&#x7D22;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x7684;&#x5F02;&#x5E38;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x60F3;&#x628A;&#x5F02;&#x5E38;&#x4F20;&#x9012;&#x51FA;&#x53BB;&#xFF0C;&#x53EF;&#x4EE5;&#x7701;&#x7565;&#x8FD9;&#x4E00;&#x6B65;&#x3002;</p>
+<p>&#x5B9E;&#x73B0;&#x5E76;&#x884C;<code>std::accumulate</code>&#x65F6;&#xFF0C;&#x4F7F;&#x7528;<code>std::async</code>&#x4F1A;&#x7B80;&#x5316;&#x4EE3;&#x7801;&#x3002;&#x540C;&#x6837;&#xFF0C;parallel_for_each&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>std::async</code>&#x3002;</p>
+<p>&#x4EE3;&#x7801;8.8 &#x4F7F;&#x7528;<code>std::async</code>&#x5B9E;&#x73B0;<code>std::for_each</code></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Iterator,<span class="hljs-keyword">typename</span> Func&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">parallel_for_each</span><span class="hljs-params">(Iterator first,Iterator last,Func f)</span>
+</span>{
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> length=<span class="hljs-built_in">std</span>::distance(first,last);
+
+  <span class="hljs-keyword">if</span>(!length)
+    <span class="hljs-keyword">return</span>;
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> min_per_thread=<span class="hljs-number">25</span>;
+
+  <span class="hljs-keyword">if</span>(length&lt;(<span class="hljs-number">2</span>*min_per_thread))
+  {
+    <span class="hljs-built_in">std</span>::for_each(first,last,f);  <span class="hljs-comment">// 1</span>
+  }
+  <span class="hljs-keyword">else</span>
+  {
+    Iterator <span class="hljs-keyword">const</span> mid_point=first+length/<span class="hljs-number">2</span>;
+    <span class="hljs-built_in">std</span>::future&lt;<span class="hljs-keyword">void</span>&gt; first_half=  <span class="hljs-comment">// 2</span>
+      <span class="hljs-built_in">std</span>::async(&amp;parallel_for_each&lt;Iterator,Func&gt;,
+                 first,mid_point,f);
+    parallel_for_each(mid_point,last,f);  <span class="hljs-comment">// 3</span>
+    first_half.get();  <span class="hljs-comment">// 4</span>
+  }
+}
+</code></pre>
+<p>&#x548C;&#x57FA;&#x4E8E;<code>std::async</code>&#x7684;parallel_accumulate(&#x4EE3;&#x7801;8.5)&#x4E00;&#x6837;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x77E5;&#x9053;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x591A;&#x5C11;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x8FED;&#x4EE3;&#x5212;&#x5206;&#x3002;&#x50CF;&#x4E4B;&#x524D;&#x4E00;&#x6837;&#xFF0C;&#x5C06;&#x6BCF;&#x4E00;&#x7EA7;&#x7684;&#x6570;&#x636E;&#x5206;&#x6210;&#x4E24;&#x90E8;&#x5206;&#xFF0C;&#x5F02;&#x6B65;&#x6267;&#x884C;&#x53E6;&#x5916;&#x4E00;&#x90E8;&#x5206;&#x2461;&#xFF0C;&#x5269;&#x4E0B;&#x7684;&#x90E8;&#x5206;&#x5C31;&#x4E0D;&#x80FD;&#x518D;&#x8FDB;&#x884C;&#x5212;&#x5206;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x76F4;&#x63A5;&#x8FD0;&#x884C;&#x8FD9;&#x4E00;&#x90E8;&#x5206;&#x2462;&#xFF1B;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5BF9;<code>std::for_each</code>&#x2460;&#x8FDB;&#x884C;&#x4F7F;&#x7528;&#x4E86;&#x3002;&#x518D;&#x6B21;&#x4F7F;&#x7528;<code>std::async</code>&#x548C;<code>std::future</code>&#x7684;get()&#x2463;&#x5BF9;&#x5F02;&#x5E38;&#x8FDB;&#x884C;&#x4F20;&#x64AD;&#x3002;</p>
+<p>&#x56DE;&#x5230;&#x7B97;&#x6CD5;&#xFF0C;&#x51FD;&#x6570;&#x9700;&#x8981;&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x6267;&#x884C;&#x540C;&#x6837;&#x7684;&#x64CD;&#x4F5C;(&#x8FD9;&#x6837;&#x7684;&#x64CD;&#x4F5C;&#x6709;&#x5F88;&#x591A;&#x79CD;&#xFF0C;&#x521D;&#x5B66;&#x8005;&#x53EF;&#x80FD;&#x4F1A;&#x60F3;&#x5230;<code>std::count</code>&#x548C;<code>std::replace</code>)&#xFF0C;&#x4E00;&#x4E2A;&#x7A0D;&#x5FAE;&#x590D;&#x6742;&#x4E00;&#x4E9B;&#x7684;&#x4F8B;&#x5B50;&#x5C31;&#x662F;&#x4F7F;&#x7528;<code>std::find</code>&#x3002;</p>
+<h2 id="852-&#x5E76;&#x884C;&#x7248;stdfind">8.5.2 &#x5E76;&#x884C;&#x7248;<code>std::find</code></h2>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x662F;<code>std::find</code>&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x9700;&#x8981;&#x5BF9;&#x6570;&#x636E;&#x5143;&#x7D20;&#x505A;&#x5904;&#x7406;&#xFF0C;&#x6240;&#x4EE5;&#x5F53;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x5C31;&#x6EE1;&#x8DB3;&#x67E5;&#x627E;&#x6807;&#x51C6;&#x65F6;&#xFF0C;&#x5C31;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x5BF9;&#x5269;&#x4F59;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x641C;&#x7D22;&#x4E86;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x7B97;&#x6CD5;&#x5C5E;&#x6027;&#x5BF9;&#x4E8E;&#x6027;&#x80FD;&#x5177;&#x6709;&#x5F88;&#x5927;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9;&#x5E76;&#x884C;&#x5B9E;&#x73B0;&#x6709;&#x7740;&#x76F4;&#x63A5;&#x7684;&#x5F71;&#x54CD;&#x3002;&#x8FD9;&#x4E2A;&#x7B97;&#x6CD5;&#x662F;&#x4E2A;&#x5F88;&#x7279;&#x522B;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x6570;&#x636E;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#x90FD;&#x4F1A;&#x5BF9;&#x4EE3;&#x7801;&#x7684;&#x8BBE;&#x8BA1;&#x4EA7;&#x751F;&#x5F71;&#x54CD;(&#x8BE6;&#x89C1;8.3.2&#x8282;)&#x3002;&#x8BE5;&#x7C7B;&#x4E2D;&#x7684;&#x53E6;&#x4E00;&#x4E9B;&#x7B97;&#x6CD5;&#x5305;&#x62EC;<code>std::equal</code>&#x548C;<code>std::any_of</code>&#x3002;</p>
+<p>&#x5F53;&#x4F60;&#x548C;&#x59BB;&#x5B50;&#x6216;&#x642D;&#x6863;&#xFF0C;&#x5728;&#x4E00;&#x4E2A;&#x7EAA;&#x5FF5;&#x76D2;&#x4E2D;&#x627E;&#x5BFB;&#x4E00;&#x5F20;&#x8001;&#x7167;&#x7247;&#xFF0C;&#x5F53;&#x627E;&#x5230;&#x8FD9;&#x5F20;&#x7167;&#x7247;&#x65F6;&#xFF0C;&#x5C31;&#x4E0D;&#x4F1A;&#x518D;&#x770B;&#x53E6;&#x5916;&#x7684;&#x7167;&#x7247;&#x4E86;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x8BA9;&#x5176;&#x4ED6;&#x4EBA;&#x77E5;&#x9053;&#x4F60;&#x5DF2;&#x7ECF;&#x627E;&#x5230;&#x7167;&#x7247;&#x4E86;(&#x6BD4;&#x5982;&#xFF0C;&#x5927;&#x558A;&#x4E00;&#x58F0;&#x201C;&#x627E;&#x5230;&#x4E86;&#xFF01;&#x201D;)&#xFF0C;&#x8FD9;&#x6837;&#x5176;&#x4ED6;&#x4EBA;&#x5C31;&#x4F1A;&#x505C;&#x6B62;&#x641C;&#x7D22;&#x4E86;&#x3002;&#x5F88;&#x591A;&#x7B97;&#x6CD5;&#x7684;&#x7279;&#x6027;&#x5C31;&#x662F;&#x8981;&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x6240;&#x4EE5;&#x6CA1;&#x6709;&#x529E;&#x6CD5;&#x50CF;<code>std::find</code>&#x4E00;&#x6837;&#xFF0C;&#x4E00;&#x65E6;&#x627E;&#x5230;&#x5408;&#x9002;&#x6570;&#x636E;&#x5C31;&#x505C;&#x6B62;&#x6267;&#x884C;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x9700;&#x8981;&#x8BBE;&#x8BA1;&#x4EE3;&#x7801;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x4F7F;&#x7528;&#x2014;&#x2014;&#x5F53;&#x5F97;&#x5230;&#x60F3;&#x8981;&#x7684;&#x7B54;&#x6848;&#x65F6;&#xFF0C;&#x5C31;&#x4E2D;&#x65AD;&#x5176;&#x4ED6;&#x4EFB;&#x52A1;&#x7684;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4E0D;&#x4E2D;&#x65AD;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#xFF0C;&#x4E32;&#x884C;&#x7248;&#x672C;&#x7684;&#x6027;&#x80FD;&#x53EF;&#x80FD;&#x4F1A;&#x8D85;&#x8D8A;&#x5E76;&#x884C;&#x7248;&#xFF0C;&#x56E0;&#x4E3A;&#x4E32;&#x884C;&#x7B97;&#x6CD5;&#x53EF;&#x4EE5;&#x5728;&#x627E;&#x5230;&#x5339;&#x914D;&#x5143;&#x7D20;&#x7684;&#x65F6;&#x5019;&#x505C;&#x6B62;&#x641C;&#x7D22;&#x3002;&#x5982;&#x679C;&#x7CFB;&#x7EDF;&#x80FD;&#x652F;&#x6301;&#x56DB;&#x4E2A;&#x5E76;&#x53D1;&#x7EBF;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x5C31;&#x53EF;&#x4EE5;&#x5BF9;&#x603B;&#x6570;&#x636E;&#x91CF;&#x7684;1/4&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x5B9E;&#x73B0;&#x53EA;&#x9700;&#x8981;&#x5355;&#x6838;&#x5B8C;&#x6210;&#x7684;1/4&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5C31;&#x80FD;&#x5B8C;&#x6210;&#x5BF9;&#x6240;&#x6709;&#x5143;&#x7D20;&#x7684;&#x67E5;&#x627E;&#x3002;&#x5982;&#x679C;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#x5728;&#x7B2C;&#x4E00;&#x4E2A;1/4&#x5757;&#x4E2D;&#xFF0C;&#x4E32;&#x884C;&#x7B97;&#x6CD5;&#x5C06;&#x4F1A;&#x8FD4;&#x56DE;&#x7B2C;&#x4E00;&#x4E2A;&#x3002;</p>
+<p>&#x4E2D;&#x65AD;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x7684;&#x4E00;&#x4E2A;&#x529E;&#x6CD5;&#x5C31;&#x662F;&#x4F7F;&#x7528;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x4F5C;&#x4E3A;&#x6807;&#x8BC6;&#xFF0C;&#x5904;&#x7406;&#x8FC7;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x540E;&#x5C31;&#x5BF9;&#x8FD9;&#x4E2A;&#x6807;&#x8BC6;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#x3002;&#x5982;&#x679C;&#x6807;&#x8BC6;&#x8BBE;&#x7F6E;&#x4E86;&#xFF0C;&#x5C31;&#x610F;&#x5473;&#x6709;&#x7EBF;&#x7A0B;&#x627E;&#x5230;&#x4E86;&#x5339;&#x914D;&#x5143;&#x7D20;&#xFF0C;&#x7B97;&#x6CD5;&#x5C31;&#x53EF;&#x4EE5;&#x505C;&#x6B62;&#x5E76;&#x8FD4;&#x56DE;&#x3002;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x6765;&#x4E2D;&#x65AD;&#x7EBF;&#x7A0B;&#x5C31;&#x53EF;&#x4EE5;&#x5C06;&#x6CA1;&#x6709;&#x5904;&#x7406;&#x7684;&#x6570;&#x636E;&#x4FDD;&#x6301;&#x539F;&#x6837;&#xFF0C;&#x5E76;&#x5728;&#x66F4;&#x591A;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6BD4;&#x4E32;&#x884C;&#x8FD0;&#x884C;&#x6027;&#x80FD;&#x4E0A;&#x80FD;&#x63D0;&#x5347;&#x5F88;&#x591A;&#x3002;&#x7F3A;&#x70B9;&#x5C31;&#x662F;&#xFF0C;&#x52A0;&#x8F7D;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x6162;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x4F1A;&#x963B;&#x788D;&#x7EBF;&#x7A0B;&#x7684;&#x8FD0;&#x884C;&#x3002;</p>
+<p>&#x5982;&#x4F55;&#x83B7;&#x53D6;&#x8FD4;&#x56DE;&#x503C;&#x548C;&#x5F02;&#x5E38;&#x5462;&#xFF1F;&#x6709;&#x4E24;&#x4E2A;&#x9009;&#x62E9;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;future&#x6570;&#x7EC4;&#xFF0C;&#x4F7F;&#x7528;<code>std::packaged_task</code>&#x6765;&#x8F6C;&#x79FB;&#x503C;&#x548C;&#x5F02;&#x5E38;&#xFF0C;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E0A;&#x5BF9;&#x8FD4;&#x56DE;&#x503C;&#x548C;&#x5F02;&#x5E38;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x6216;&#x8005;&#x4F7F;&#x7528;<code>std::promise</code>&#x5BF9;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x4E0A;&#x7684;&#x6700;&#x7EC8;&#x7ED3;&#x679C;&#x76F4;&#x63A5;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#xFF0C;&#x8FD9;&#x5B8C;&#x5168;&#x4F9D;&#x8D56;&#x4E8E;&#x600E;&#x4E48;&#x6837;&#x5904;&#x7406;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x4E0A;&#x7684;&#x5F02;&#x5E38;&#x3002;&#x5982;&#x679C;&#x60F3;&#x505C;&#x6B62;&#x7B2C;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;(&#x5373;&#x4F7F;&#x8FD8;&#x6CA1;&#x6709;&#x5BF9;&#x6240;&#x6709;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x5904;&#x7406;)&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>std::promise</code>&#x5BF9;&#x5F02;&#x5E38;&#x548C;&#x6700;&#x7EC8;&#x503C;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x8BA9;&#x5176;&#x4ED6;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x7EE7;&#x7EED;&#x67E5;&#x627E;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>std::packaged_task</code>&#x6765;&#x5B58;&#x50A8;&#x5F02;&#x5E38;&#xFF0C;&#x5F53;&#x7EBF;&#x7A0B;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x5339;&#x914D;&#x5143;&#x7D20;&#x65F6;&#x5F02;&#x5E38;&#x5C06;&#x518D;&#x6B21;&#x629B;&#x51FA;&#x3002;</p>
+<p>&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6211;&#x4F1A;&#x9009;&#x62E9;<code>std::promise</code>&#xFF0C;&#x56E0;&#x4E3A;&#x5176;&#x884C;&#x4E3A;&#x548C;<code>std::find</code>&#x66F4;&#x4E3A;&#x63A5;&#x8FD1;&#x3002;&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x4E00;&#x4E0B;&#x641C;&#x7D22;&#x7684;&#x5143;&#x7D20;&#x662F;&#x4E0D;&#x662F;&#x5728;&#x63D0;&#x4F9B;&#x7684;&#x641C;&#x7D22;&#x8303;&#x56F4;&#x5185;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5728;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;&#x524D;&#xFF0C;&#x83B7;&#x53D6;future&#x4E0A;&#x7684;&#x7ED3;&#x679C;&#x3002;&#x5982;&#x679C;&#x6240;&#x8981;&#x67E5;&#x627E;&#x7684;&#x503C;&#x4E0D;&#x5728;&#x8303;&#x56F4;&#x5185;&#xFF0C;&#x5C31;&#x4F1A;&#x6301;&#x7EED;&#x7684;&#x7B49;&#x5F85;&#x4E0B;&#x53BB;&#x3002;</p>
+<p>&#x4EE3;&#x7801;8.9 &#x5E76;&#x884C;find&#x7B97;&#x6CD5;&#x5B9E;&#x73B0;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Iterator,<span class="hljs-keyword">typename</span> MatchType&gt;
+<span class="hljs-function">Iterator <span class="hljs-title">parallel_find</span><span class="hljs-params">(Iterator first,Iterator last,MatchType match)</span>
+</span>{
+  <span class="hljs-keyword">struct</span> find_element  <span class="hljs-comment">// 1</span>
+  {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(Iterator begin,Iterator end,
+                    MatchType match,
+                    <span class="hljs-built_in">std</span>::promise&lt;Iterator&gt;* result,
+                    <span class="hljs-built_in">std</span>::atomic&lt;<span class="hljs-keyword">bool</span>&gt;* done_flag)</span>
+    </span>{
+      <span class="hljs-keyword">try</span>
+      {
+        <span class="hljs-keyword">for</span>(;(begin!=end) &amp;&amp; !done_flag-&gt;load();++begin)  <span class="hljs-comment">// 2</span>
+        {
+          <span class="hljs-keyword">if</span>(*begin==match)
+          {
+            result-&gt;set_value(begin);  <span class="hljs-comment">// 3</span>
+            done_flag-&gt;store(<span class="hljs-literal">true</span>);  <span class="hljs-comment">// 4</span>
+            <span class="hljs-keyword">return</span>;
+          }
+        }
+      }
+      <span class="hljs-keyword">catch</span>(...)  <span class="hljs-comment">// 5</span>
+      {
+        <span class="hljs-keyword">try</span>
+        {
+          result-&gt;set_exception(<span class="hljs-built_in">std</span>::current_exception());  <span class="hljs-comment">// 6</span>
+          done_flag-&gt;store(<span class="hljs-literal">true</span>);
+        }
+        <span class="hljs-keyword">catch</span>(...)  <span class="hljs-comment">// 7</span>
+        {}
+      }
+    }
+  };
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> length=<span class="hljs-built_in">std</span>::distance(first,last);
+
+  <span class="hljs-keyword">if</span>(!length)
+    <span class="hljs-keyword">return</span> last;
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> min_per_thread=<span class="hljs-number">25</span>;
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> max_threads=
+    (length+min_per_thread<span class="hljs-number">-1</span>)/min_per_thread;
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> hardware_threads=
+    <span class="hljs-built_in">std</span>::thread::hardware_concurrency();
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> num_threads=
+    <span class="hljs-built_in">std</span>::min(hardware_threads!=<span class="hljs-number">0</span>?hardware_threads:<span class="hljs-number">2</span>,max_threads);
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> block_size=length/num_threads;
+
+  <span class="hljs-built_in">std</span>::promise&lt;Iterator&gt; result;  <span class="hljs-comment">// 8</span>
+  <span class="hljs-built_in">std</span>::atomic&lt;<span class="hljs-keyword">bool</span>&gt; done_flag(<span class="hljs-literal">false</span>);  <span class="hljs-comment">// 9</span>
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::thread&gt; threads(num_threads<span class="hljs-number">-1</span>);
+  {  <span class="hljs-comment">// 10</span>
+    <span class="hljs-function">join_threads <span class="hljs-title">joiner</span><span class="hljs-params">(threads)</span></span>;
+
+    Iterator block_start=first;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> i=<span class="hljs-number">0</span>;i&lt;(num_threads<span class="hljs-number">-1</span>);++i)
+    {
+      Iterator block_end=block_start;
+      <span class="hljs-built_in">std</span>::advance(block_end,block_size);
+      threads[i]=<span class="hljs-built_in">std</span>::thread(find_element(),  <span class="hljs-comment">// 11</span>
+                             block_start,block_end,match,
+                             &amp;result,&amp;done_flag);
+      block_start=block_end;
+    }
+    find_element()(block_start,last,match,&amp;result,&amp;done_flag);  <span class="hljs-comment">// 12</span>
+  }
+  <span class="hljs-keyword">if</span>(!done_flag.load())  <span class="hljs-comment">//13</span>
+  {
+    <span class="hljs-keyword">return</span> last;
+  }
+  <span class="hljs-keyword">return</span> result.get_future().get();  <span class="hljs-comment">// 14</span>
+}
+</code></pre>
+<p>&#x4EE3;&#x7801;8.9&#x4E2D;&#x7684;&#x51FD;&#x6570;&#x4F53;&#x4E0E;&#x4E4B;&#x524D;&#x7684;&#x4F8B;&#x5B50;&#x76F8;&#x4F3C;&#x3002;&#x8FD9;&#x6B21;&#xFF0C;&#x7531;find_element&#x7C7B;&#x2460;&#x7684;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x64CD;&#x4F5C;&#x5B9E;&#x73B0;&#xFF0C;&#x5FAA;&#x73AF;&#x901A;&#x8FC7;&#x5728;&#x7ED9;&#x5B9A;&#x6570;&#x636E;&#x5757;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x68C0;&#x67E5;&#x6BCF;&#x4E00;&#x6B65;&#x7684;&#x6807;&#x8BC6;&#x2461;&#x3002;&#x5982;&#x679C;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#x88AB;&#x627E;&#x5230;&#xFF0C;&#x5C31;&#x5C06;&#x6700;&#x7EC8;&#x7684;&#x7ED3;&#x679C;&#x8BBE;&#x7F6E;&#x5230;promise&#x2462;&#x5F53;&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x8FD4;&#x56DE;&#x524D;&#x5BF9;done_flag&#x2463;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6709;&#x5F02;&#x5E38;&#x629B;&#x51FA;&#xFF0C;&#x901A;&#x7528;&#x5904;&#x7406;&#x4EE3;&#x7801;&#x2464;&#x5C31;&#x4F1A;&#x5C06;&#x5176;&#x6355;&#x83B7;&#xFF0C;&#x5E76;&#x4E14;&#x5728;promise&#x2465;&#x5C1D;&#x8BD5;&#x5B58;&#x50A8;&#x524D;&#x5BF9;done_flag&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x5BF9;&#x5E94;promise&#x5DF2;&#x8BBE;&#x7F6E;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x2466;&#x53D1;&#x751F;&#x7684;&#x4EFB;&#x4F55;&#x5F02;&#x5E38;&#x90FD;&#x53EF;&#x4EE5;&#x6355;&#x83B7;&#x5E76;&#x4E22;&#x5F03;&#x3002;</p>
+<p>&#x5F53;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;find_element&#x67E5;&#x8BE2;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x6216;&#x8005;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x770B;&#x5230;done_flag&#x5DF2;&#x8BBE;&#x7F6E;&#xFF0C;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4F1A;&#x7EC8;&#x6B62;&#x3002;&#x5982;&#x679C;&#x591A;&#x7EBF;&#x7A0B;&#x540C;&#x65F6;&#x627E;&#x5230;&#x5339;&#x914D;&#x503C;&#x6216;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;&#x5C06;&#x4F1A;&#x4EA7;&#x751F;&#x7ADE;&#x4E89;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x8FD9;&#x662F;&#x826F;&#x6027;&#x7684;&#x6761;&#x4EF6;&#x7ADE;&#x4E89;&#xFF0C;&#x6210;&#x529F;&#x7684;&#x7ADE;&#x4E89;&#x8005;&#x4F1A;&#x4F5C;&#x4E3A;&#x201C;&#x7B2C;&#x4E00;&#x4E2A;&#x201D;&#x8FD4;&#x56DE;&#x7EBF;&#x7A0B;&#x3002;</p>
+<p>&#x56DE;&#x5230;parallel_find&#x51FD;&#x6570;&#x672C;&#x8EAB;&#xFF0C;&#x5176;&#x62E5;&#x6709;&#x7528;&#x6765;&#x505C;&#x6B62;&#x641C;&#x7D22;&#x7684;promise&#x2467;&#x548C;&#x6807;&#x8BC6;&#x2468;&#x3002;&#x968F;&#x7740;&#x5BF9;&#x5143;&#x7D20;&#x7684;&#x67E5;&#x627E;&#x246A;&#xFF0C;promise&#x548C;&#x6807;&#x8BC6;&#x4F1A;&#x4F20;&#x9012;&#x5230;&#x65B0;&#x7EBF;&#x7A0B;&#x4E2D;&#x3002;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E5F;&#x4F7F;&#x7528;find_element&#x5BF9;&#x5269;&#x4E0B;&#x7684;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x67E5;&#x627E;&#x246B;&#x3002;&#x50CF;&#x4E4B;&#x524D;&#x63D0;&#x5230;&#x7684;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x5168;&#x90E8;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;&#x524D;&#xFF0C;&#x5BF9;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#xFF0C;&#x56E0;&#x4E3A;&#x7ED3;&#x679C;&#x53EF;&#x80FD;&#x662F;&#x4EFB;&#x610F;&#x4F4D;&#x7F6E;&#x4E0A;&#x7684;&#x5339;&#x914D;&#x5143;&#x7D20;&#x3002;&#x5C06;&#x201C;&#x542F;&#x52A8;-&#x6C47;&#x5165;&#x201D;&#x4EE3;&#x7801;&#x653E;&#x5728;&#x4E00;&#x4E2A;&#x5757;&#x4E2D;&#x2469;&#xFF0C;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x90FD;&#x4F1A;&#x5728;&#x627E;&#x5230;&#x5339;&#x914D;&#x5143;&#x7D20;&#x65F6;&#x246C;&#x8FDB;&#x884C;&#x6C47;&#x5165;&#x3002;&#x5982;&#x679C;&#x627E;&#x5230;&#x5339;&#x914D;&#x5143;&#x7D20;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x8C03;&#x7528;<code>std::future&lt;Iterator&gt;</code>(&#x6765;&#x81EA;promise&#x246D;)&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;get()&#x6765;&#x83B7;&#x53D6;&#x8FD4;&#x56DE;&#x503C;&#x6216;&#x5F02;&#x5E38;&#x3002;</p>
+<p>&#x4E0D;&#x8FC7;&#xFF0C;&#x5047;&#x8BBE;&#x4F7F;&#x7528;&#x786C;&#x4EF6;&#x4E0A;&#x6240;&#x6709;&#x53EF;&#x7528;&#x7684;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x6216;&#x4F7F;&#x7528;&#x5176;&#x4ED6;&#x673A;&#x5236;&#x5BF9;&#x7EBF;&#x7A0B;&#x4E0A;&#x7684;&#x4EFB;&#x52A1;&#x8FDB;&#x884C;&#x63D0;&#x524D;&#x5212;&#x5206;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>std::async</code>&#xFF0C;&#x4EE5;&#x53CA;&#x9012;&#x5F52;&#x6570;&#x636E;&#x5212;&#x5206;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x7B80;&#x5316;&#x5B9E;&#x73B0;(&#x540C;&#x65F6;&#x4F7F;&#x7528;C++&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x63D0;&#x4F9B;&#x7684;&#x81EA;&#x52A8;&#x7F29;&#x653E;&#x5DE5;&#x5177;)&#x3002;&#x4F7F;&#x7528;<code>std::async</code>&#x7684;parallel_find&#x5B9E;&#x73B0;&#x5982;&#x4E0B;&#x6240;&#x793A;&#x3002;</p>
+<p>&#x4EE3;&#x7801;8.10 &#x4F7F;&#x7528;<code>std::async</code>&#x5B9E;&#x73B0;&#x7684;&#x5E76;&#x884C;find&#x7B97;&#x6CD5;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Iterator,<span class="hljs-keyword">typename</span> MatchType&gt;  <span class="hljs-comment">// 1</span>
+<span class="hljs-function">Iterator <span class="hljs-title">parallel_find_impl</span><span class="hljs-params">(Iterator first,Iterator last,MatchType match,
+                            <span class="hljs-built_in">std</span>::atomic&lt;<span class="hljs-keyword">bool</span>&gt;&amp; done)</span>
+</span>{
+  <span class="hljs-keyword">try</span>
+  {
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> length=<span class="hljs-built_in">std</span>::distance(first,last);
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> min_per_thread=<span class="hljs-number">25</span>;  <span class="hljs-comment">// 2</span>
+    <span class="hljs-keyword">if</span>(length&lt;(<span class="hljs-number">2</span>*min_per_thread))  <span class="hljs-comment">// 3</span>
+    {
+      <span class="hljs-keyword">for</span>(;(first!=last) &amp;&amp; !done.load();++first)  <span class="hljs-comment">// 4</span>
+      {
+        <span class="hljs-keyword">if</span>(*first==match)
+        {
+          done=<span class="hljs-literal">true</span>;  <span class="hljs-comment">// 5</span>
+          <span class="hljs-keyword">return</span> first;
+        }
+      }
+      <span class="hljs-keyword">return</span> last;  <span class="hljs-comment">// 6</span>
+    }
+    <span class="hljs-keyword">else</span>
+    { 
+      Iterator <span class="hljs-keyword">const</span> mid_point=first+(length/<span class="hljs-number">2</span>);  <span class="hljs-comment">// 7</span>
+      <span class="hljs-built_in">std</span>::future&lt;Iterator&gt; async_result=
+        <span class="hljs-built_in">std</span>::async(&amp;parallel_find_impl&lt;Iterator,MatchType&gt;,  <span class="hljs-comment">// 8</span>
+                   mid_point,last,match,<span class="hljs-built_in">std</span>::ref(done));
+      Iterator <span class="hljs-keyword">const</span> direct_result=
+        parallel_find_impl(first,mid_point,match,done);  <span class="hljs-comment">// 9</span>
+      <span class="hljs-keyword">return</span> (direct_result==mid_point)?
+        async_result.get():direct_result;  <span class="hljs-comment">// 10</span>
+    }
+  }
+  <span class="hljs-keyword">catch</span>(...)
+  {
+    done=<span class="hljs-literal">true</span>;  <span class="hljs-comment">// 11</span>
+    <span class="hljs-keyword">throw</span>;
+  }
+}
+
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Iterator,<span class="hljs-keyword">typename</span> MatchType&gt;
+<span class="hljs-function">Iterator <span class="hljs-title">parallel_find</span><span class="hljs-params">(Iterator first,Iterator last,MatchType match)</span>
+</span>{
+  <span class="hljs-built_in">std</span>::atomic&lt;<span class="hljs-keyword">bool</span>&gt; done(<span class="hljs-literal">false</span>);
+  <span class="hljs-keyword">return</span> parallel_find_impl(first,last,match,done);  <span class="hljs-comment">// 12</span>
+}
+</code></pre>
+<p>&#x5982;&#x679C;&#x60F3;&#x8981;&#x5728;&#x627E;&#x5230;&#x5339;&#x914D;&#x9879;&#x65F6;&#x7ED3;&#x675F;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5728;&#x7EBF;&#x7A0B;&#x95F4;&#x8BBE;&#x7F6E;&#x6807;&#x8BC6;&#xFF0C;&#x6765;&#x8868;&#x660E;&#x5339;&#x914D;&#x9879;&#x5DF2;&#x627E;&#x5230;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x9700;&#x8981;&#x5C06;&#x8FD9;&#x4E2A;&#x6807;&#x8BC6;&#x9012;&#x5F52;&#x4F20;&#x9012;&#x3002;&#x901A;&#x8FC7;&#x51FD;&#x6570;&#x2460;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x53C2;&#x6570;done&#x6807;&#x8BC6;&#x7684;&#x5F15;&#x7528;&#xFF0C;&#x7528;&#x6765;&#x8868;&#x793A;&#x901A;&#x8FC7;&#x4E3B;&#x5165;&#x53E3;&#x70B9;&#x4F20;&#x5165;&#x246B;&#x3002;</p>
+<p>&#x6838;&#x5FC3;&#x5B9E;&#x73B0;&#x548C;&#x4E4B;&#x524D;&#x7684;&#x4EE3;&#x7801;&#x4E00;&#x6837;&#x3002;&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x4F1A;&#x8BA9;&#x5355;&#x4E2A;&#x7EBF;&#x7A0B;&#x5904;&#x7406;&#x6700;&#x5C11;&#x7684;&#x6570;&#x636E;&#x9879;&#x2461;&#x3002;&#x5982;&#x679C;&#x6570;&#x636E;&#x5757;&#x5927;&#x5C0F;&#x4E0D;&#x8DB3;&#x4EE5;&#x5206;&#x6210;&#x4E24;&#x534A;&#xFF0C;&#x5C31;&#x8981;&#x8BA9;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x5B8C;&#x6210;&#x6240;&#x6709;&#x7684;&#x5DE5;&#x4F5C;&#x2462;&#x3002;&#x5B9E;&#x9645;&#x7B97;&#x6CD5;&#x5728;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x5FAA;&#x73AF;&#x4E2D;&#xFF0C;&#x76F4;&#x5230;&#x5728;&#x5FAA;&#x73AF;&#x5230;&#x6307;&#x5B9A;&#x8303;&#x56F4;&#x4E2D;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#xFF0C;&#x6216;&#x627E;&#x5230;&#x5339;&#x914D;&#x9879;&#xFF0C;&#x5E76;&#x5BF9;&#x6807;&#x8BC6;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#x2463;&#x3002;&#x5982;&#x679C;&#x627E;&#x5230;&#x5339;&#x914D;&#x9879;&#xFF0C;&#x6807;&#x8BC6;done&#x5C31;&#x4F1A;&#x5728;&#x8FD4;&#x56DE;&#x524D;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#x2464;&#x3002;&#x65E0;&#x8BBA;&#x662F;&#x56E0;&#x4E3A;&#x5DF2;&#x7ECF;&#x67E5;&#x627E;&#x5230;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#xFF0C;&#x8FD8;&#x662F;&#x56E0;&#x4E3A;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x5BF9;done&#x8FDB;&#x884C;&#x4E86;&#x8BBE;&#x7F6E;&#xFF0C;&#x67E5;&#x627E;&#x90FD;&#x4F1A;&#x505C;&#x6B62;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x627E;&#x5230;&#xFF0C;&#x4F1A;&#x5C06;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x8FD4;&#x56DE;&#x2465;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x7ED9;&#x5B9A;&#x8303;&#x56F4;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x5212;&#x5206;&#xFF0C;&#x9996;&#x5148;&#x8981;&#x5728;<code>st::async</code>&#x5728;&#x5BF9;&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x67E5;&#x627E;&#x2467;&#x524D;&#xFF0C;&#x8981;&#x627E;&#x6570;&#x636E;&#x4E2D;&#x70B9;&#x2466;&#xFF0C;&#x800C;&#x4E14;&#x9700;&#x8981;&#x4F7F;&#x7528;<code>std::ref</code>&#x5C06;done&#x4EE5;&#x5F15;&#x7528;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x9012;&#x3002;&#x540C;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5BF9;&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#x76F4;&#x63A5;&#x8FDB;&#x884C;&#x9012;&#x5F52;&#x67E5;&#x627E;&#x3002;&#x4E24;&#x90E8;&#x5206;&#x90FD;&#x4E3A;&#x5F02;&#x6B65;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x539F;&#x59CB;&#x8303;&#x56F4;&#x8FC7;&#x5927;&#x65F6;&#xFF0C;&#x76F4;&#x63A5;&#x9012;&#x5F52;&#x67E5;&#x627E;&#x7684;&#x90E8;&#x5206;&#x53EF;&#x80FD;&#x4F1A;&#x518D;&#x7EC6;&#x5316;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x67E5;&#x627E;&#x8FD4;&#x56DE;&#x7684;&#x662F;mid_point&#xFF0C;&#x8FD9;&#x5C31;&#x610F;&#x5473;&#x7740;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x5339;&#x914D;&#x9879;&#xFF0C;&#x6240;&#x4EE5;&#x5C31;&#x8981;&#x4ECE;&#x5F02;&#x6B65;&#x67E5;&#x627E;&#x4E2D;&#x83B7;&#x53D6;&#x7ED3;&#x679C;&#x3002;&#x5982;&#x679C;&#x5728;&#x53E6;&#x4E00;&#x534A;&#x4E2D;&#x6CA1;&#x6709;&#x5339;&#x914D;&#x9879;&#x7684;&#x8BDD;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x5C31;&#x4E00;&#x5B9A;&#x662F;last&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x7684;&#x8FD4;&#x56DE;&#x5C31;&#x4EE3;&#x8868;&#x4E86;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#x2469;&#x3002;&#x5982;&#x679C;&#x201C;&#x5F02;&#x6B65;&#x201D;&#x8C03;&#x7528;&#x5EF6;&#x8FDF;(&#x975E;&#x771F;&#x6B63;&#x7684;&#x5F02;&#x6B65;)&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x8FD9;&#x91CC;&#x4F1A;&#x8FD0;&#x884C;get()&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x5BF9;&#x4E0B;&#x534A;&#x90E8;&#x5206;&#x7684;&#x5143;&#x7D20;&#x641C;&#x7D22;&#x6210;&#x529F;&#xFF0C;&#x5C31;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#x5BF9;&#x4E0A;&#x534A;&#x90E8;&#x5206;&#x5143;&#x7D20;&#x7684;&#x641C;&#x7D22;&#x4E86;&#x3002;&#x5982;&#x679C;&#x5F02;&#x6B65;&#x67E5;&#x627E;&#x771F;&#x5B9E;&#x7684;&#x8FD0;&#x884C;&#x5728;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4E0A;&#xFF0C;&#x90A3;&#x4E48;async_result&#x7684;&#x6790;&#x6784;&#x51FD;&#x6570;&#x5C06;&#x4F1A;&#x7B49;&#x5F85;&#x8BE5;&#x7EBF;&#x7A0B;&#x5B8C;&#x6210;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x4E0D;&#x4F1A;&#x6709;&#x7EBF;&#x7A0B;&#x6CC4;&#x9732;&#x3002;</p>
+<p><code>std::async</code>&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x63D0;&#x4F9B;&#x201C;&#x5F02;&#x5E38;-&#x5B89;&#x5168;&#x201D;&#x548C;&#x201C;&#x5F02;&#x5E38;-&#x4F20;&#x64AD;&#x201D;&#x7279;&#x6027;&#x3002;&#x5982;&#x679C;&#x76F4;&#x63A5;&#x9012;&#x5F52;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;future&#x7684;&#x6790;&#x6784;&#x51FD;&#x6570;&#x5C31;&#x80FD;&#x8BA9;&#x5F02;&#x6B65;&#x6267;&#x884C;&#x7684;&#x7EBF;&#x7A0B;&#x63D0;&#x524D;&#x7ED3;&#x675F;&#x3002;&#x5982;&#x679C;&#x5F02;&#x6B65;&#x8C03;&#x7528;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;&#x8FD9;&#x4E2A;&#x5F02;&#x5E38;&#x5C06;&#x4F1A;&#x901A;&#x8FC7;&#x5BF9;get()&#x6210;&#x5458;&#x51FD;&#x6570;&#x7684;&#x8C03;&#x7528;&#x8FDB;&#x884C;&#x4F20;&#x64AD;&#x2469;&#x3002;&#x4F7F;&#x7528;<em>try/catch</em>&#x5757;&#x53EA;&#x80FD;&#x6355;&#x6349;&#x5728;done&#x65F6;&#x53D1;&#x751F;&#x7684;&#x5F02;&#x5E38;&#xFF0C;&#x5E76;&#x4E14;&#x6709;&#x5F02;&#x5E38;&#x629B;&#x51FA;&#x246A;&#x65F6;&#xFF0C;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x90FD;&#x80FD;&#x5F88;&#x5FEB;&#x7684;&#x7EC8;&#x6B62;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x4E0D;&#x4F7F;&#x7528;<em>try/catch</em>&#x7684;&#x5B9E;&#x73B0;&#x4F9D;&#x65E7;&#x6CA1;&#x95EE;&#x9898;&#xFF0C;&#x5C31;&#x662F;&#x8981;&#x7B49;&#x5F85;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x7684;&#x5DE5;&#x4F5C;&#x5B8C;&#x6210;&#x3002;</p>
+<p>&#x5B9E;&#x73B0;&#x4E2D;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x5C31;&#x662F;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;<code>std::find</code>&#x80FD;&#x4E32;&#x884C;&#x5904;&#x7406;&#x6240;&#x6709;&#x6570;&#x636E;&#x3002;&#x5176;&#x4ED6;&#x5E76;&#x884C;&#x7B97;&#x6CD5;&#x53EF;&#x4EE5;&#x501F;&#x9274;&#x8FD9;&#x4E2A;&#x7279;&#x6027;&#xFF0C;&#x56E0;&#x4E3A;&#x8BA9;&#x4E00;&#x4E2A;&#x7B97;&#x6CD5;&#x5E76;&#x884C;&#x8D77;&#x6765;&#x8FD9;&#x662F;&#x5FC5;&#x987B;&#x7684;&#x7279;&#x6027;&#x3002;&#x5982;&#x679C;&#x6709;&#x987A;&#x5E8F;&#x95EE;&#x9898;&#xFF0C;&#x5143;&#x7D20;&#x5C31;&#x4E0D;&#x80FD;&#x5E76;&#x53D1;&#x4E86;&#x3002;&#x5982;&#x679C;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x72EC;&#x7ACB;&#xFF0C;&#x867D;&#x7136;&#x5BF9;&#x4E8E;parallel_for_each&#x4E0D;&#x662F;&#x5F88;&#x91CD;&#x8981;&#xFF0C;&#x4E0D;&#x8FC7;&#x5BF9;&#x4E8E;parallel_find&#xFF0C;&#x5373;&#x4F7F;&#x5728;&#x5F00;&#x59CB;&#x90E8;&#x5206;&#x5DF2;&#x7ECF;&#x627E;&#x5230;&#x4E86;&#x5339;&#x914D;&#x5143;&#x7D20;&#xFF0C;&#x4E5F;&#x6709;&#x53EF;&#x80FD;&#x8FD4;&#x56DE;&#x8303;&#x56F4;&#x4E2D;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x3002;</p>
+<p>OK&#xFF0C;&#x73B0;&#x5728;&#x5DF2;&#x7ECF;&#x4F7F;&#x7528;&#x4E86;&#x5E76;&#x884C;&#x5316;&#x7684;<code>std::find</code>&#x3002;&#x5982;&#x5728;&#x672C;&#x8282;&#x5F00;&#x59CB;&#x8BF4;&#x7684;&#x90A3;&#x6837;&#xFF0C;&#x5176;&#x4ED6;&#x76F8;&#x4F3C;&#x7B97;&#x6CD5;&#x4E0D;&#x9700;&#x8981;&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x5E76;&#x4E14;&#x540C;&#x6837;&#x7684;&#x6280;&#x672F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5230;&#x8FD9;&#x4E9B;&#x7C7B;&#x4F3C;&#x7684;&#x7B97;&#x6CD5;&#x4E0A;&#x53BB;&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x5B8C;&#x6210;&#x5E76;&#x884C;&#x201C;&#x4E09;&#x91CD;&#x594F;&#x201D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x6362;&#x4E00;&#x4E2A;&#x89D2;&#x5EA6;&#x6765;&#x770B;&#x4E00;&#x4E0B;<code>std::partial_sum</code>&#x3002;&#x5BF9;&#x4E8E;&#x8FD9;&#x4E2A;&#x7B97;&#x6CD5;&#xFF0C;&#x6CA1;&#x6709;&#x592A;&#x591A;&#x7684;&#x6587;&#x732E;&#x53EF;&#x53C2;&#x8003;&#xFF0C;&#x4E0D;&#x8FC7;&#x8BA9;&#x8FD9;&#x4E2A;&#x7B97;&#x6CD5;&#x5E76;&#x884C;&#x8D77;&#x6765;&#x662F;&#x4E00;&#x4EF6;&#x5F88;&#x6709;&#x8DA3;&#x7684;&#x4E8B;&#x3002;</p>
+<h2 id="853-&#x5E76;&#x884C;&#x7248;stdpartialsum">8.5.3 &#x5E76;&#x884C;&#x7248;<code>std::partial_sum</code></h2>
+<p><code>std::partial_sum</code>&#x4F1A;&#x8BA1;&#x7B97;&#x7ED9;&#x5B9A;&#x8303;&#x56F4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5E76;&#x7528;&#x8BA1;&#x7B97;&#x540E;&#x7684;&#x7ED3;&#x679C;&#x5C06;&#x539F;&#x59CB;&#x5E8F;&#x5217;&#x4E2D;&#x7684;&#x503C;&#x66FF;&#x6362;&#x6389;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;&#x5E8F;&#x5217;[1&#xFF0C;2&#xFF0C;3&#xFF0C;4&#xFF0C;5]&#xFF0C;&#x6267;&#x884C;&#x8BE5;&#x7B97;&#x6CD5;&#x540E;&#x4F1A;&#x6210;&#x4E3A;&#xFF1A;[1&#xFF0C;3(1+2)&#xFF0C;6(1+2+3)&#xFF0C;10(1+2+3+4)&#xFF0C;15(1+2+3+4+5)]&#x3002;&#x8BA9;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x7B97;&#x6CD5;&#x5E76;&#x884C;&#x8D77;&#x6765;&#x4F1A;&#x5F88;&#x6709;&#x8DA3;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x91CC;&#x4E0D;&#x80FD;&#x8BB2;&#x4EFB;&#x52A1;&#x5206;&#x5757;&#xFF0C;&#x5BF9;&#x6BCF;&#x4E00;&#x5757;&#x8FDB;&#x884C;&#x72EC;&#x7ACB;&#x7684;&#x8BA1;&#x7B97;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x539F;&#x59CB;&#x5E8F;&#x5217;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x9700;&#x8981;&#x52A0;&#x5230;&#x540E;&#x9762;&#x7684;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x4E2D;&#x53BB;&#x3002;</p>
+<p>&#x786E;&#x5B9A;&#x67D0;&#x4E2A;&#x8303;&#x56F4;&#x90E8;&#x5206;&#x548C;&#x7684;&#x4E00;&#x79CD;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5C31;&#x662F;&#x5728;&#x72EC;&#x7ACB;&#x5757;&#x4E2D;&#x8BA1;&#x7B97;&#x90E8;&#x5206;&#x548C;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x7B2C;&#x4E00;&#x5757;&#x4E2D;&#x6700;&#x540E;&#x7684;&#x5143;&#x7D20;&#x7684;&#x503C;&#xFF0C;&#x4E0E;&#x4E0B;&#x4E00;&#x5757;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x76F8;&#x52A0;&#xFF0C;&#x4F9D;&#x6B21;&#x7C7B;&#x63A8;&#x3002;&#x5982;&#x679C;&#x6709;&#x4E2A;&#x5E8F;&#x5217;[1&#xFF0C;2&#xFF0C;3&#xFF0C;4&#xFF0C;5&#xFF0C;6&#xFF0C;7&#xFF0C;8&#xFF0C;9]&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x5176;&#x5206;&#x4E3A;&#x4E09;&#x5757;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x7B2C;&#x4E00;&#x6B21;&#x8BA1;&#x7B97;&#x540E;&#x5C31;&#x80FD;&#x5F97;&#x5230;[{1&#xFF0C;3&#xFF0C;6}&#xFF0C;{4&#xFF0C;9&#xFF0C;15}&#xFF0C;{7&#xFF0C;15&#xFF0C;24}]&#x3002;&#x7136;&#x540E;&#x5C06;6(&#x7B2C;&#x4E00;&#x5757;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;)&#x52A0;&#x5230;&#x7B2C;&#x4E8C;&#x4E2A;&#x5757;&#x4E2D;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x5F97;&#x5230;[{1&#xFF0C;3&#xFF0C;6}&#xFF0C;{10&#xFF0C;15&#xFF0C;21}&#xFF0C;{7&#xFF0C;15&#xFF0C;24}]&#x3002;&#x7136;&#x540E;&#x518D;&#x5C06;&#x7B2C;&#x4E8C;&#x5757;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;21&#x52A0;&#x5230;&#x7B2C;&#x4E09;&#x5757;&#x4E2D;&#x53BB;&#xFF0C;&#x5C31;&#x5F97;&#x5230;[{1&#xFF0C;3&#xFF0C;6}&#xFF0C;{10&#xFF0C;15&#xFF0C;21}&#xFF0C;{28&#xFF0C;36&#xFF0C;55}]&#x3002;</p>
+<p>&#x5C06;&#x539F;&#x59CB;&#x6570;&#x636E;&#x5206;&#x5272;&#x6210;&#x5757;&#xFF0C;&#x52A0;&#x4E0A;&#x4E4B;&#x524D;&#x5757;&#x7684;&#x90E8;&#x5206;&#x548C;&#x5C31;&#x80FD;&#x591F;&#x5E76;&#x884C;&#x4E86;&#x3002;&#x5982;&#x679C;&#x6BCF;&#x4E2A;&#x5757;&#x4E2D;&#x7684;&#x672B;&#x5C3E;&#x5143;&#x7D20;&#x90FD;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x88AB;&#x66F4;&#x65B0;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x5757;&#x4E2D;&#x5176;&#x4ED6;&#x7684;&#x5143;&#x7D20;&#x5C31;&#x80FD;&#x88AB;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x6240;&#x66F4;&#x65B0;&#xFF0C;&#x540C;&#x65F6;&#x53E6;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5BF9;&#x4E0B;&#x4E00;&#x5757;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#xFF0C;&#x7B49;&#x7B49;&#x3002;&#x5F53;&#x5904;&#x7406;&#x7684;&#x5143;&#x7D20;&#x6BD4;&#x5904;&#x7406;&#x6838;&#x5FC3;&#x7684;&#x4E2A;&#x6570;&#x591A;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x6837;&#x5B8C;&#x6210;&#x5DE5;&#x4F5C;&#x6CA1;&#x95EE;&#x9898;&#xFF0C;&#x56E0;&#x4E3A;&#x6BCF;&#x4E00;&#x4E2A;&#x6838;&#x82AF;&#x5728;&#x6BCF;&#x4E00;&#x4E2A;&#x9636;&#x6BB5;&#x90FD;&#x6709;&#x5408;&#x9002;&#x7684;&#x6570;&#x636E;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6709;&#x5F88;&#x591A;&#x7684;&#x5904;&#x7406;&#x5668;(&#x6BD4;&#x5904;&#x7406;&#x7684;&#x5143;&#x7D20;&#x4E2A;&#x6570;&#x591A;)&#xFF0C;&#x4E4B;&#x524D;&#x7684;&#x65B9;&#x5F0F;&#x5C31;&#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x5DE5;&#x4F5C;&#x4E86;&#x3002;&#x5982;&#x679C;&#x8FD8;&#x662F;&#x5C06;&#x5DE5;&#x4F5C;&#x5212;&#x5206;&#x7ED9;&#x6BCF;&#x4E2A;&#x5904;&#x7406;&#x5668;&#xFF0C;&#x7B2C;&#x4E00;&#x6B65;&#x5C31;&#x6CA1;&#x5FC5;&#x8981;&#x53BB;&#x505A;&#x4E86;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F20;&#x9012;&#x7ED3;&#x679C;&#x5C31;&#x610F;&#x5473;&#x7740;&#x8BA9;&#x5904;&#x7406;&#x5668;&#x8FDB;&#x884C;&#x7B49;&#x5F85;&#xFF0C;&#x8FD9;&#x65F6;&#x9700;&#x8981;&#x7ED9;&#x8FD9;&#x4E9B;&#x5904;&#x4E8E;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x5904;&#x7406;&#x5668;&#x4E00;&#x4E9B;&#x5DE5;&#x4F5C;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x5B8C;&#x5168;&#x4E0D;&#x540C;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x5904;&#x7406;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;&#x6BD4;&#x8D77;&#x5C06;&#x6570;&#x636E;&#x5757;&#x4E2D;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x7ED3;&#x679C;&#x5411;&#x540E;&#x9762;&#x7684;&#x5143;&#x7D20;&#x5757;&#x4F20;&#x9012;&#xFF0C;&#x53EF;&#x4EE5;&#x5BF9;&#x90E8;&#x5206;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x4F20;&#x64AD;&#xFF1A;&#x7B2C;&#x4E00;&#x6B21;&#x4E0E;&#x76F8;&#x90BB;&#x7684;&#x5143;&#x7D20;(&#x8DDD;&#x79BB;&#x4E3A;1)&#x76F8;&#x52A0;&#x548C;(&#x548C;&#x4E4B;&#x524D;&#x4E00;&#x6837;)&#xFF0C;&#x4E4B;&#x540E;&#x548C;&#x8DDD;&#x79BB;&#x4E3A;2&#x7684;&#x5143;&#x7D20;&#x76F8;&#x52A0;&#xFF0C;&#x540E;&#x6765;&#x548C;&#x8DDD;&#x79BB;&#x4E3A;4&#x7684;&#x5143;&#x7D20;&#x76F8;&#x52A0;&#xFF0C;&#x4EE5;&#x6B64;&#x7C7B;&#x63A8;&#x3002;&#x6BD4;&#x5982;&#xFF1A;&#x521D;&#x59CB;&#x5E8F;&#x5217;&#x4E3A;[1&#xFF0C;2&#xFF0C;3&#xFF0C;4&#xFF0C;5&#xFF0C;6&#xFF0C;7&#xFF0C;8&#xFF0C;9]&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x540E;&#x4E3A;[1&#xFF0C;3&#xFF0C;5&#xFF0C;7&#xFF0C;9&#xFF0C;11&#xFF0C;13&#xFF0C;15&#xFF0C;17]&#xFF0C;&#x7B2C;&#x4E8C;&#x6B21;&#x540E;&#x4E3A;[1&#xFF0C;3&#xFF0C;6&#xFF0C;10&#xFF0C;14&#xFF0C;18, 22&#xFF0C;26&#xFF0C;30]&#xFF0C;&#x4E0B;&#x4E00;&#x6B21;&#x5C31;&#x8981;&#x9694;4&#x4E2A;&#x5143;&#x7D20;&#x4E86;&#x3002;&#x7B2C;&#x4E09;&#x6B21;&#x540E;[1, 3, 6, 10, 15, 21, 28, 36, 44]&#xFF0C;&#x4E0B;&#x4E00;&#x6B21;&#x5C31;&#x8981;&#x9694;8&#x4E2A;&#x5143;&#x7D20;&#x4E86;&#x3002;&#x7B2C;&#x56DB;&#x6B21;&#x540E;[1, 3, 6, 10, 15, 21, 28, 36, 45]&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x6700;&#x7EC8;&#x7684;&#x7ED3;&#x679C;&#x3002;&#x6BD4;&#x8D77;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x591A;&#x4E86;&#x5F88;&#x591A;&#x6B65;&#x9AA4;&#xFF0C;&#x4E0D;&#x8FC7;&#x5728;&#x53EF;&#x5E76;&#x53D1;&#x5E73;&#x53F0;&#x4E0B;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x63D0;&#x9AD8;&#x4E86;&#x5E76;&#x884C;&#x7684;&#x53EF;&#x884C;&#x6027;&#xFF0C;&#x6BCF;&#x4E2A;&#x5904;&#x7406;&#x5668;&#x53EF;&#x5728;&#x6BCF;&#x4E00;&#x6B65;&#x4E2D;&#x5904;&#x7406;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x3002;</p>
+<p>&#x603B;&#x4F53;&#x6765;&#x8BF4;&#xFF0C;&#x5F53;&#x6709;N&#x4E2A;&#x64CD;&#x4F5C;&#x65F6;(&#x6BCF;&#x6B65;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x5904;&#x7406;&#x5668;)&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x6CD5;&#x9700;&#x8981;log(N)[&#x5E95;&#x4E3A;2]&#x6B65;&#x3002;&#x5728;&#x672C;&#x8282;&#x4E2D;&#xFF0C;N&#x5C31;&#x76F8;&#x5F53;&#x4E8E;&#x6570;&#x636E;&#x94FE;&#x8868;&#x7684;&#x957F;&#x5EA6;&#x3002;&#x6BD4;&#x8D77;&#x7B2C;&#x4E00;&#x79CD;&#xFF0C;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x5BF9;&#x5206;&#x914D;&#x5757;&#x505A;N/k&#x4E2A;&#x64CD;&#x4F5C;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x505A;N/k&#x6B21;&#x7ED3;&#x679C;&#x4F20;&#x9012;(&#x8FD9;&#x91CC;&#x7684;k&#x662F;&#x7EBF;&#x7A0B;&#x7684;&#x6570;&#x91CF;)&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A;O(N)&#xFF0C;&#x4E0D;&#x8FC7;&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x6CD5;&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A;Q(Nlog(N))&#x3002;&#x5F53;&#x6570;&#x636E;&#x91CF;&#x548C;&#x5904;&#x7406;&#x5668;&#x6570;&#x91CF;&#x76F8;&#x8FD1;&#x65F6;&#xFF0C;&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x6CD5;&#x9700;&#x8981;&#x6BCF;&#x4E2A;&#x5904;&#x7406;&#x5668;&#x4E0A;log(N)&#x4E2A;&#x64CD;&#x4F5C;&#xFF0C;&#x56E0;&#x4E3A;&#x9700;&#x8981;&#x5BF9;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x4F20;&#x9012;&#xFF0C;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x4E2D;&#x6BCF;&#x4E2A;&#x5904;&#x7406;&#x5668;&#x4E0A;&#x6267;&#x884C;&#x7684;&#x64CD;&#x4F5C;&#x6570;&#x4F1A;&#x968F;&#x7740;k&#x7684;&#x589E;&#x52A0;&#x800C;&#x589E;&#x591A;&#x3002;&#x5BF9;&#x4E8E;&#x5904;&#x7406;&#x5355;&#x5143;&#x8F83;&#x5C11;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x4F1A;&#x6BD4;&#x8F83;&#x5408;&#x9002;&#x3002;&#x5BF9;&#x4E8E;&#x5927;&#x89C4;&#x6A21;&#x5E76;&#x884C;&#x7CFB;&#x7EDF;&#xFF0C;&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x6CD5;&#x6BD4;&#x8F83;&#x5408;&#x9002;&#x3002;</p>
+<p>&#x4E0D;&#x7BA1;&#x600E;&#x4E48;&#x6837;&#xFF0C;&#x5148;&#x5C06;&#x6548;&#x7387;&#x95EE;&#x9898;&#x653E;&#x4E00;&#x8FB9;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E9B;&#x4EE3;&#x7801;&#x3002;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x5C31;&#x662F;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x4EE3;&#x7801;8.11 &#x4F7F;&#x7528;&#x5212;&#x5206;&#x7684;&#x65B9;&#x5F0F;&#x8FDB;&#x884C;&#x5E76;&#x884C;&#x6C42;&#x548C;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Iterator&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">parallel_partial_sum</span><span class="hljs-params">(Iterator first,Iterator last)</span>
+</span>{
+  <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">typename</span> Iterator::value_type value_type;
+
+  <span class="hljs-keyword">struct</span> process_chunk  <span class="hljs-comment">// 1</span>
+  {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(Iterator begin,Iterator last,
+                    <span class="hljs-built_in">std</span>::future&lt;value_type&gt;* previous_end_value,
+                    <span class="hljs-built_in">std</span>::promise&lt;value_type&gt;* end_value)</span>
+    </span>{
+      <span class="hljs-keyword">try</span>
+      {
+        Iterator end=last;
+        ++end;
+        <span class="hljs-built_in">std</span>::partial_sum(begin,end,begin);  <span class="hljs-comment">// 2</span>
+        <span class="hljs-keyword">if</span>(previous_end_value)  <span class="hljs-comment">// 3</span>
+        {
+          value_type&amp; addend=previous_end_value-&gt;get();  <span class="hljs-comment">// 4</span>
+          *last+=addend;  <span class="hljs-comment">// 5</span>
+          <span class="hljs-keyword">if</span>(end_value)
+          {
+            end_value-&gt;set_value(*last);  <span class="hljs-comment">// 6</span>
+          }
+          <span class="hljs-built_in">std</span>::for_each(begin,last,[addend](value_type&amp; item)  <span class="hljs-comment">// 7</span>
+                        {
+                          item+=addend;
+                        });
+         }
+         <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(end_value)
+         {
+           end_value-&gt;set_value(*last);  <span class="hljs-comment">// 8</span>
+         }
+       }
+       <span class="hljs-keyword">catch</span>(...)  <span class="hljs-comment">// 9</span>
+       {
+         <span class="hljs-keyword">if</span>(end_value)
+         {
+           end_value-&gt;set_exception(<span class="hljs-built_in">std</span>::current_exception());  <span class="hljs-comment">// 10</span>
+         }
+         <span class="hljs-keyword">else</span>
+         {
+           <span class="hljs-keyword">throw</span>;  <span class="hljs-comment">// 11</span>
+         }
+       }
+     }
+   };
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> length=<span class="hljs-built_in">std</span>::distance(first,last);
+
+  <span class="hljs-keyword">if</span>(!length)
+    <span class="hljs-keyword">return</span> last;
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> min_per_thread=<span class="hljs-number">25</span>;  <span class="hljs-comment">// 12</span>
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> max_threads=
+    (length+min_per_thread<span class="hljs-number">-1</span>)/min_per_thread;
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> hardware_threads=
+    <span class="hljs-built_in">std</span>::thread::hardware_concurrency();
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> num_threads=
+    <span class="hljs-built_in">std</span>::min(hardware_threads!=<span class="hljs-number">0</span>?hardware_threads:<span class="hljs-number">2</span>,max_threads);
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> block_size=length/num_threads;
+
+  <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">typename</span> Iterator::value_type value_type;
+
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::thread&gt; threads(num_threads<span class="hljs-number">-1</span>);  <span class="hljs-comment">// 13</span>
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::promise&lt;value_type&gt; &gt;
+    end_values(num_threads<span class="hljs-number">-1</span>);  <span class="hljs-comment">// 14</span>
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::future&lt;value_type&gt; &gt;
+    previous_end_values;  <span class="hljs-comment">// 15</span>
+  previous_end_values.reserve(num_threads<span class="hljs-number">-1</span>);  <span class="hljs-comment">// 16</span>
+  <span class="hljs-function">join_threads <span class="hljs-title">joiner</span><span class="hljs-params">(threads)</span></span>;
+
+  Iterator block_start=first;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> i=<span class="hljs-number">0</span>;i&lt;(num_threads<span class="hljs-number">-1</span>);++i)
+  {
+    Iterator block_last=block_start;
+    <span class="hljs-built_in">std</span>::advance(block_last,block_size<span class="hljs-number">-1</span>);  <span class="hljs-comment">// 17</span>
+    threads[i]=<span class="hljs-built_in">std</span>::thread(process_chunk(),  <span class="hljs-comment">// 18</span>
+                           block_start,block_last,
+                           (i!=<span class="hljs-number">0</span>)?&amp;previous_end_values[i<span class="hljs-number">-1</span>]:<span class="hljs-number">0</span>,
+                           &amp;end_values[i]);
+    block_start=block_last;
+    ++block_start;  <span class="hljs-comment">// 19</span>
+    previous_end_values.push_back(end_values[i].get_future());  <span class="hljs-comment">// 20</span>
+  }
+  Iterator final_element=block_start;
+  <span class="hljs-built_in">std</span>::advance(final_element,<span class="hljs-built_in">std</span>::distance(block_start,last)<span class="hljs-number">-1</span>);  <span class="hljs-comment">// 21</span>
+  process_chunk()(block_start,final_element,  <span class="hljs-comment">// 22</span>
+                  (num_threads&gt;<span class="hljs-number">1</span>)?&amp;previous_end_values.back():<span class="hljs-number">0</span>,
+                  <span class="hljs-number">0</span>);
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x5B9E;&#x73B0;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#x548C;&#x4E4B;&#x524D;&#x4E00;&#x6837;&#xFF0C;&#x5C06;&#x95EE;&#x9898;&#x8FDB;&#x884C;&#x5206;&#x5757;&#x89E3;&#x51B3;&#xFF0C;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x5904;&#x7406;&#x6700;&#x5C0F;&#x7684;&#x6570;&#x636E;&#x5757;&#x246B;&#x3002;&#x5176;&#x4E2D;&#xFF0C;&#x6709;&#x4E00;&#x7EC4;&#x7EBF;&#x7A0B;&#x246C;&#x548C;&#x4E00;&#x7EC4;promise&#x246D;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x6BCF;&#x5757;&#x4E2D;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5B9E;&#x73B0;&#x4E2D;&#x8FD8;&#x6709;&#x4E00;&#x7EC4;future&#x246E;&#xFF0C;&#x7528;&#x6765;&#x5BF9;&#x524D;&#x4E00;&#x5757;&#x4E2D;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#x8FDB;&#x884C;&#x68C0;&#x7D22;&#x3002;&#x53EF;&#x4EE5;&#x4E3A;future&#x246F;&#x8FDB;&#x884C;&#x5B58;&#x50A8;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x751F;&#x6210;&#x65B0;&#x7EBF;&#x7A0B;&#x65F6;&#x518D;&#x5206;&#x914D;&#x3002;</p>
+<p>&#x4E3B;&#x5FAA;&#x73AF;&#x548C;&#x4E4B;&#x524D;&#x4E00;&#x6837;&#xFF0C;&#x4E0D;&#x8FC7;&#x8FD9;&#x6B21;&#x662F;&#x8BA9;&#x8FED;&#x4EE3;&#x5668;&#x6307;&#x5411;&#x4E86;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x5757;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4F5C;&#x4E3A;&#x666E;&#x901A;&#x503C;&#x4F20;&#x9012;&#x5230;&#x6700;&#x540E;&#x2470;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x65B9;&#x4FBF;&#x5411;&#x5176;&#x4ED6;&#x5757;&#x4F20;&#x9012;&#x5F53;&#x524D;&#x5757;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x4E86;&#x3002;&#x5B9E;&#x9645;&#x5904;&#x7406;&#x662F;&#x5728;process_chunk&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x4E2D;&#x5B8C;&#x6210;&#xFF0C;&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#x770B;&#x4E0A;&#x53BB;&#x4E0D;&#x662F;&#x5F88;&#x957F;&#x3002;&#x5F53;&#x524D;&#x5757;&#x7684;&#x5F00;&#x59CB;&#x548C;&#x7ED3;&#x675F;&#x8FED;&#x4EE3;&#x5668;&#x548C;&#x524D;&#x5757;&#x4E2D;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#x7684;future&#x4E00;&#x8D77;&#xFF0C;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x8FDB;&#x884C;&#x4F20;&#x9012;&#xFF0C;&#x5E76;&#x4E14;promise&#x7528;&#x6765;&#x4FDD;&#x7559;&#x5F53;&#x524D;&#x8303;&#x56F4;&#x5185;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#x7684;&#x539F;&#x59CB;&#x503C;&#x2471;&#x3002;</p>
+<p>&#x751F;&#x6210;&#x65B0;&#x7EBF;&#x7A0B;&#x540E;&#xFF0C;&#x5C31;&#x5BF9;&#x5F00;&#x59CB;&#x5757;ID&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#xFF0C;&#x522B;&#x5FD8;&#x4E86;&#x4F20;&#x9012;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x2472;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5F53;&#x524D;&#x5757;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x5B58;&#x50A8;&#x5230;future&#xFF0C;&#x4E0A;&#x9762;&#x7684;&#x6570;&#x636E;&#x5C06;&#x5728;&#x5FAA;&#x73AF;&#x4E2D;&#x518D;&#x6B21;&#x4F7F;&#x7528;&#x5230;&#x2473;&#x3002;</p>
+<p>&#x5904;&#x7406;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5757;&#x524D;&#xFF0C;&#x9700;&#x8981;&#x83B7;&#x53D6;&#x4E4B;&#x524D;&#x6570;&#x636E;&#x5757;&#x4E2D;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x8FED;&#x4EE3;&#x5668;(21)&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x5165;process_chunk(22)&#x4E2D;&#x4E86;&#x3002;<code>std::partial_sum</code>&#x4E0D;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5757;&#x88AB;&#x5904;&#x7406;&#x540E;&#xFF0C;&#x5C31;&#x4E0D;&#x7528;&#x518D;&#x505A;&#x4EFB;&#x4F55;&#x4E8B;&#x60C5;&#x4E86;&#x3002;&#x5F53;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x7684;&#x64CD;&#x4F5C;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x6C42;&#x90E8;&#x5206;&#x548C;&#x7684;&#x64CD;&#x4F5C;&#x4E5F;&#x5C31;&#x7B97;&#x5B8C;&#x6210;&#x4E86;&#x3002;</p>
+<p>&#x6765;&#x770B;&#x4E00;&#x4E0B;process_chunk&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x2460;&#x3002;&#x5BF9;&#x4E8E;&#x6574;&#x5757;&#x7684;&#x5904;&#x7406;&#x59CB;&#x4E8E;&#x5BF9;<code>std::partial_sum</code>&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x5305;&#x62EC;&#x5BF9;&#x4E8E;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#x7684;&#x5904;&#x7406;&#x2461;&#xFF0C;&#x9700;&#x8981;&#x4E86;&#x89E3;&#x5F53;&#x524D;&#x5757;&#x662F;&#x5426;&#x662F;&#x7B2C;&#x4E00;&#x5757;&#x2462;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x662F;&#x7B2C;&#x4E00;&#x5757;&#xFF0C;&#x5C31;&#x4F1A;&#x6709;previous_end_value&#x503C;&#x4ECE;&#x524D;&#x9762;&#x7684;&#x5757;&#x4F20;&#x8FC7;&#x6765;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x8FD9;&#x4E2A;&#x503C;&#x7684;&#x4EA7;&#x751F;&#x2463;&#x3002;&#x4E3A;&#x4E86;&#x5C06;&#x7B97;&#x6CD5;&#x7684;&#x5E76;&#x884C;&#x6700;&#x5927;&#x5316;&#xFF0C;&#x9700;&#x8981;&#x5BF9;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#x2464;&#xFF0C;&#x8FD9;&#x5C31;&#x80FD;&#x5C06;&#x503C;&#x4F20;&#x9012;&#x7ED9;&#x4E0B;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5757;(&#x5982;&#x679C;&#x6709;&#x4E0B;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5757;&#x7684;&#x8BDD;)&#x2465;&#x3002;&#x5F53;&#x5B8C;&#x6210;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>std::for_each</code>&#x548C;&#x7B80;&#x5355;&#x7684;Lambda&#x51FD;&#x6570;&#x2466;&#x5BF9;&#x5269;&#x4F59;&#x7684;&#x6570;&#x636E;&#x9879;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#x3002;</p>
+<p>&#x5982;&#x679C;previous_end_value&#x503C;&#x4E3A;&#x7A7A;&#xFF0C;&#x5F53;&#x524D;&#x6570;&#x636E;&#x5757;&#x5C31;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5757;&#xFF0C;&#x6240;&#x4EE5;&#x53EA;&#x9700;&#x8981;&#x4E3A;&#x4E0B;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5757;&#x66F4;&#x65B0;end_value&#x2467;&#x3002;</p>
+<p>&#x6700;&#x540E;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x64CD;&#x4F5C;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x6355;&#x83B7;&#x2468;&#xFF0C;&#x5E76;&#x4E14;&#x5B58;&#x5165;promise&#x2469;&#xFF0C;&#x5728;&#x4E0B;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5757;&#x5C1D;&#x8BD5;&#x83B7;&#x53D6;&#x524D;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5757;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#x2463;&#x65F6;&#xFF0C;&#x5F02;&#x5E38;&#x4F1A;&#x518D;&#x6B21;&#x629B;&#x51FA;&#x3002;&#x5904;&#x7406;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5757;&#x65F6;&#xFF0C;&#x5F02;&#x5E38;&#x4F1A;&#x91CD;&#x65B0;&#x629B;&#x51FA;&#x246A;&#xFF0C;&#x56E0;&#x4E3A;&#x629B;&#x51FA;&#x52A8;&#x4F5C;&#x4F1A;&#x5728;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E0A;&#x8FDB;&#x884C;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;&#x7EBF;&#x7A0B;&#x95F4;&#x9700;&#x8981;&#x540C;&#x6B65;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x5BB9;&#x6613;&#x4F7F;&#x7528;<code>std::async</code>&#x91CD;&#x5199;&#x4E86;&#x3002;&#x4EFB;&#x52A1;&#x7B49;&#x5F85;&#x4F1A;&#x8BA9;&#x7EBF;&#x7A0B;&#x4E2D;&#x9014;&#x53BB;&#x6267;&#x884C;&#x5176;&#x4ED6;&#x4EFB;&#x52A1;&#xFF0C;&#x6240;&#x4EE5;&#x6240;&#x6709;&#x7684;&#x4EFB;&#x52A1;&#x5FC5;&#x987B;&#x540C;&#x65F6;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x57FA;&#x4E8E;&#x5757;&#x7684;&#x65B9;&#x6CD5;&#x5C31;&#x4ECB;&#x7ECD;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x7B2C;&#x4E8C;&#x79CD;&#x8BA1;&#x7B97;&#x65B9;&#x5F0F;&#x3002;</p>
+<p><strong>&#x5B9E;&#x73B0;&#x4EE5;2&#x7684;&#x5E42;&#x7EA7;&#x6570;&#x4E3A;&#x8DDD;&#x79BB;&#x7684;&#x7B97;&#x6CD5;</strong></p>
+<p>&#x7B2C;&#x4E8C;&#x79CD;&#x7B97;&#x6CD5;&#x901A;&#x8FC7;&#x589E;&#x52A0;&#x8DDD;&#x79BB;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x8BA9;&#x66F4;&#x591A;&#x7684;&#x5904;&#x7406;&#x5668;&#x5145;&#x5206;&#x53D1;&#x6325;&#x4F5C;&#x7528;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6CA1;&#x6709;&#x540C;&#x6B65;&#x7684;&#x5FC5;&#x8981;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x6240;&#x6709;&#x4E2D;&#x95F4;&#x7ED3;&#x679C;&#x90FD;&#x76F4;&#x63A5;&#x4F20;&#x9012;&#x5230;&#x4E0B;&#x4E00;&#x4E2A;&#x5904;&#x7406;&#x5668;&#x4E0A;&#x53BB;&#x4E86;&#x3002;&#x5B9E;&#x9645;&#x4E2D;&#x6211;&#x4EEC;&#x5F88;&#x5C11;&#x89C1;&#x5230;&#x5355;&#x4E2A;&#x5904;&#x7406;&#x5668;&#x5904;&#x7406;&#x5BF9;&#x4E00;&#x5B9A;&#x6570;&#x91CF;&#x7684;&#x5143;&#x7D20;&#x6267;&#x884C;&#x540C;&#x4E00;&#x6761;&#x6307;&#x4EE4;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x79F0;&#x4E3A;<em>&#x5355;&#x6307;&#x4EE4;-&#x591A;&#x6570;&#x636E;&#x6D41;</em>(SIMD)&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x4EE3;&#x7801;&#x5FC5;&#x987B;&#x80FD;&#x5904;&#x7406;&#x901A;&#x7528;&#x60C5;&#x51B5;&#xFF0C;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x5BF9;&#x7EBF;&#x7A0B;&#x8FDB;&#x884C;&#x663E;&#x5F0F;&#x540C;&#x6B65;&#x3002;</p>
+<p>&#x5B8C;&#x6210;&#x8FD9;&#x79CD;&#x529F;&#x80FD;&#x7684;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x662F;&#x4F7F;&#x7528;<em>&#x6805;&#x680F;</em>(barrier)&#xFF1A;&#x53EA;&#x6709;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x90FD;&#x5230;&#x8FBE;&#x6805;&#x680F;&#x5904;&#xFF0C;&#x624D;&#x80FD;&#x8FDB;&#x884C;&#x4E4B;&#x540E;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5148;&#x5230;&#x8FBE;&#x7684;&#x7EBF;&#x7A0B;&#x5FC5;&#x987B;&#x7B49;&#x5F85;&#x672A;&#x5230;&#x8FBE;&#x7684;&#x7EBF;&#x7A0B;&#x3002;C++11&#x6807;&#x51C6;&#x5E93;&#x6CA1;&#x6709;&#x76F4;&#x63A5;&#x63D0;&#x4F9B;&#x8FD9;&#x6837;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x81EA;&#x884C;&#x8BBE;&#x8BA1;&#x3002;</p>
+<p>&#x8BD5;&#x60F3;&#x6E38;&#x4E50;&#x573A;&#x4E2D;&#x7684;&#x8FC7;&#x5C71;&#x8F66;&#x3002;&#x5982;&#x679C;&#x6709;&#x9002;&#x91CF;&#x7684;&#x6E38;&#x5BA2;&#x5728;&#x7B49;&#x5F85;&#xFF0C;&#x8FC7;&#x5C71;&#x8F66;&#x7BA1;&#x7406;&#x5458;&#x5C31;&#x8981;&#x4FDD;&#x8BC1;&#xFF0C;&#x5728;&#x8FC7;&#x5C71;&#x8F66;&#x542F;&#x52A8;&#x524D;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#x90FD;&#x5F97;&#x5750;&#x4E00;&#x4E2A;&#x6E38;&#x5BA2;&#x3002;&#x6805;&#x680F;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#x4E5F;&#x4E00;&#x6837;&#xFF1A;&#x5DF2;&#x77E5;&#x4E86;&#x201C;&#x5EA7;&#x4F4D;&#x201D;&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x7EBF;&#x7A0B;&#x5C31;&#x662F;&#x8981;&#x7B49;&#x5F85;&#x6240;&#x6709;&#x201C;&#x5EA7;&#x4F4D;&#x201D;&#x90FD;&#x5750;&#x6EE1;&#x3002;&#x5F53;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#x591F;&#x6570;&#xFF0C;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x8FD0;&#x884C;&#x3002;&#x8FD9;&#x65F6;&#xFF0C;&#x6805;&#x680F;&#x4F1A;&#x91CD;&#x7F6E;&#xFF0C;&#x5E76;&#x4E14;&#x4F1A;&#x8BA9;&#x4E0B;&#x4E00;&#x62E8;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x3002;&#x901A;&#x5E38;&#x4F1A;&#x5728;&#x5FAA;&#x73AF;&#x4E2D;&#x8FD9;&#x6837;&#x505A;&#xFF0C;&#x5F53;&#x540C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x518D;&#x6B21;&#x5230;&#x8FBE;&#x6805;&#x680F;&#x5904;&#xFF0C;&#x5B83;&#x4F1A;&#x518D;&#x6B21;&#x7B49;&#x5F85;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x662F;&#x4E3A;&#x4E86;&#x8BA9;&#x7EBF;&#x7A0B;&#x540C;&#x6B65;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x4F1A;&#x6709;&#x7EBF;&#x7A0B;&#x5728;&#x5176;&#x4ED6;&#x672A;&#x5B8C;&#x6210;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x53BB;&#x5B8C;&#x6210;&#x4E0B;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x3002;&#x5982;&#x679C;&#x6709;&#x7EBF;&#x7A0B;&#x63D0;&#x524D;&#x6267;&#x884C;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x7B97;&#x6CD5;&#x5C31;&#x662F;&#x4E00;&#x573A;&#x707E;&#x96BE;&#xFF0C;&#x56E0;&#x4E3A;&#x63D0;&#x524D;&#x51FA;&#x53D1;&#x7684;&#x7EBF;&#x7A0B;&#x53EF;&#x80FD;&#x4F1A;&#x4FEE;&#x6539;&#x8981;&#x88AB;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4F7F;&#x7528;&#x5230;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x540E;&#x9762;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;&#x5230;&#x7684;&#x6570;&#x636E;&#x5C31;&#x4E0D;&#x6B63;&#x786E;&#x4E86;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5C31;&#x7B80;&#x5355;&#x7684;&#x5B9E;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x6805;&#x680F;&#x3002;</p>
+<p>&#x4EE3;&#x7801;8.12 &#x7B80;&#x5355;&#x7684;&#x6805;&#x680F;&#x7C7B;</p>
+<pre><code class="lang-c++">class barrier
+{
+  unsigned const count;
+  std::atomic&lt;unsigned&gt; spaces;
+  std::atomic&lt;unsigned&gt; generation;
+public:
+  explicit barrier(unsigned count_):  // 1
+    count(count_),spaces(count),generation(0)
+  {}
+
+  void wait()
+  {
+    unsigned const my_generation=generation;  // 2
+    if(!--spaces)  // 3
+    {
+      spaces=count;  // 4
+      ++generation;  // 5
+    }
+    else
+    {
+      while(generation==my_generation)  // 6
+        std::this_thread::yield();  // 7
+    }
+  }
+};
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x7528;&#x4E00;&#x5B9A;&#x6570;&#x91CF;&#x7684;&#x201C;&#x5EA7;&#x4F4D;&#x201D;&#x6784;&#x9020;&#x4E86;barrier&#x2460;&#xFF0C;&#x8FD9;&#x4E2A;&#x6570;&#x91CF;&#x5C06;&#x4F1A;&#x5B58;&#x50A8;count&#x53D8;&#x91CF;&#x4E2D;&#x3002;&#x8D77;&#x521D;&#xFF0C;&#x6805;&#x680F;&#x4E2D;&#x7684;spaces&#x4E0E;count&#x6570;&#x91CF;&#x76F8;&#x5F53;&#x3002;&#x5F53;&#x6709;&#x7EBF;&#x7A0B;&#x90FD;&#x5728;&#x7B49;&#x5F85;&#x65F6;&#xFF0C;spaces&#x7684;&#x6570;&#x91CF;&#x5C31;&#x4F1A;&#x51CF;&#x5C11;&#x2462;&#x3002;&#x5F53;spaces&#x7684;&#x6570;&#x91CF;&#x51CF;&#x5230;0&#x65F6;&#xFF0C;spaces&#x7684;&#x503C;&#x5C06;&#x4F1A;&#x91CD;&#x7F6E;&#x4E3A;count&#x2463;&#xFF0C;&#x5E76;&#x4E14;generation&#x53D8;&#x91CF;&#x4F1A;&#x589E;&#x52A0;&#xFF0C;&#x5411;&#x7EBF;&#x7A0B;&#x53D1;&#x51FA;&#x4FE1;&#x53F7;&#xFF0C;&#x8BA9;&#x8FD9;&#x4E9B;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#x80FD;&#x591F;&#x7EE7;&#x7EED;&#x8FD0;&#x884C;&#x2464;&#x3002;&#x5982;&#x679C;spaces&#x6CA1;&#x6709;&#x5230;&#x8FBE;0&#xFF0C;&#x5219;&#x7EBF;&#x7A0B;&#x4F1A;&#x7EE7;&#x7EED;&#x7B49;&#x5F85;&#x3002;&#x8FD9;&#x4E2A;&#x5B9E;&#x73B0;&#x4F7F;&#x7528;&#x4E86;&#x7B80;&#x5355;&#x7684;&#x81EA;&#x65CB;&#x9501;&#x2465;&#xFF0C;&#x5BF9;generation&#x7684;&#x68C0;&#x67E5;&#x4F1A;&#x5728;wait()&#x5F00;&#x59CB;&#x65F6;&#x8FDB;&#x884C;&#x2461;&#x3002;&#x56E0;&#x4E3A;generation&#x53EA;&#x4F1A;&#x5728;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x90FD;&#x5230;&#x8FBE;&#x6805;&#x680F;&#x7684;&#x65F6;&#x5019;&#x66F4;&#x65B0;&#x2464;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x7B49;&#x5F85;&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;yield()&#x2466;&#x5C31;&#x4E0D;&#x4F1A;&#x8BA9;CPU&#x5904;&#x4E8E;&#x5FD9;&#x7B49;&#x5F85;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x5B9E;&#x73B0;&#x6BD4;&#x8F83;&#x201C;&#x7B80;&#x5355;&#x201D;&#xFF1A;&#x4F7F;&#x7528;&#x81EA;&#x65CB;&#x7B49;&#x5F85;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x8BA9;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x5F88;&#x957F;&#x65F6;&#x95F4;&#x5C31;&#x4E0D;&#x4F1A;&#x5F88;&#x7406;&#x60F3;&#xFF0C;&#x5E76;&#x4E14;&#x5982;&#x679C;&#x8D85;&#x8FC7;count&#x6570;&#x91CF;&#x7684;&#x7EBF;&#x7A0B;&#x5BF9;wait()&#x8FDB;&#x884C;&#x8C03;&#x7528;&#xFF0C;&#x8FD9;&#x4E2A;&#x5B9E;&#x73B0;&#x5C31;&#x6CA1;&#x6709;&#x529E;&#x6CD5;&#x5DE5;&#x4F5C;&#x4E86;&#x3002;&#x5982;&#x679C;&#x60F3;&#x8981;&#x5F88;&#x597D;&#x7684;&#x5904;&#x7406;&#x8FD9;&#x6837;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x66F4;&#x52A0;&#x5065;&#x58EE;(&#x66F4;&#x52A0;&#x590D;&#x6742;)&#x7684;&#x5B9E;&#x73B0;&#x3002;&#x6211;&#x4F9D;&#x65E7;&#x575A;&#x6301;&#x5BF9;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x64CD;&#x4F5C;&#x987A;&#x5E8F;&#x7684;&#x4E00;&#x81F4;&#x6027;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4F1A;&#x8BA9;&#x4E8B;&#x60C5;&#x66F4;&#x52A0;&#x7B80;&#x5355;&#xFF0C;&#x6709;&#x65F6;&#x8FD8;&#x662F;&#x9700;&#x8981;&#x653E;&#x677E;&#x8FD9;&#x6837;&#x7684;&#x7EA6;&#x675F;&#x3002;&#x5168;&#x5C40;&#x540C;&#x6B65;&#x5BF9;&#x4E8E;&#x5927;&#x89C4;&#x6A21;&#x5E76;&#x884C;&#x67B6;&#x6784;&#x6765;&#x8BF4;&#x6D88;&#x8017;&#x5DE8;&#x5927;&#xFF0C;&#x56E0;&#x4E3A;&#x76F8;&#x5173;&#x5904;&#x7406;&#x5668;&#x4F1A;&#x7A7F;&#x68AD;&#x4E8E;&#x5B58;&#x50A8;&#x6805;&#x680F;&#x72B6;&#x6001;&#x7684;&#x7F13;&#x5B58;&#x884C;&#x4E2D;(&#x53EF;&#x89C1;8.2.2&#x4E2D;&#x5BF9;&#x4E52;&#x4E53;&#x7F13;&#x5B58;&#x7684;&#x8BA8;&#x8BBA;)&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x683C;&#x5916;&#x5C0F;&#x5FC3;&#xFF0C;&#x6765;&#x786E;&#x4FDD;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x6700;&#x4F73;&#x540C;&#x6B65;&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x679C;&#x652F;&#x6301;&#x5E76;&#x53D1;&#x6280;&#x672F;&#x89C4;&#x8303;&#x6269;&#x5C55;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>std::experimental::barrier</code>(&#x5982;&#x7B2C;4&#x7AE0;&#x6240;&#x8FF0;)&#x3002;</p>
+<p>&#x4E0D;&#x8BBA;&#x600E;&#x4E48;&#x6837;&#xFF0C;&#x90FD;&#x9700;&#x8981;&#x6709;&#x56FA;&#x5B9A;&#x6570;&#x91CF;&#x7684;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x540C;&#x6B65;&#x5FAA;&#x73AF;&#xFF0C;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x7EBF;&#x7A0B;&#x6570;&#x91CF;&#x90FD;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#x3002;&#x4EE3;&#x7801;&#x8D77;&#x59CB;&#x90E8;&#x5206;&#x7684;&#x51E0;&#x4E2A;&#x6570;&#x636E;&#x9879;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x51E0;&#x6B65;&#x5C31;&#x80FD;&#x5F97;&#x5230;&#x5176;&#x6700;&#x7EC8;&#x503C;&#x3002;&#x8FD9;&#x5C31;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x8BA9;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x5FAA;&#x73AF;&#x5904;&#x7406;&#x8303;&#x56F4;&#x5185;&#x7684;&#x6240;&#x6709;&#x5143;&#x7D20;&#xFF0C;&#x8FD8;&#x662F;&#x8BA9;&#x6805;&#x680F;&#x6765;&#x540C;&#x6B65;&#x7EBF;&#x7A0B;&#xFF0C;&#x90FD;&#x4F1A;&#x9012;&#x51CF;count&#x7684;&#x503C;&#x3002;&#x6211;&#x4F1A;&#x9009;&#x62E9;&#x540E;&#x8005;(&#x6805;&#x680F;)&#xFF0C;&#x80FD;&#x907F;&#x514D;&#x7EBF;&#x7A0B;&#x505A;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x5E76;&#x4E14;&#x4EC5;&#x4EC5;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x6700;&#x7EC8;&#x6B65;&#x9AA4;&#x5B8C;&#x6210;&#x3002;</p>
+<p>&#x8981;&#x5C06;count&#x6539;&#x4E3A;&#x4E00;&#x4E2A;&#x539F;&#x5B50;&#x53D8;&#x91CF;&#xFF0C;&#x8FD9;&#x6837;&#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x989D;&#x5916;&#x7684;&#x540C;&#x6B65;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-built_in">std</span>::atomic&lt;<span class="hljs-keyword">unsigned</span>&gt; count;
+</code></pre>
+<p>&#x521D;&#x59CB;&#x5316;&#x4FDD;&#x6301;&#x4E0D;&#x53D8;&#xFF0C;&#x4E0D;&#x8FC7;&#x5F53;spaces&#x7684;&#x503C;&#x88AB;&#x91CD;&#x7F6E;&#x540E;&#xFF0C;&#x9700;&#x8981;&#x663E;&#x5F0F;&#x7684;&#x5BF9;count&#x8FDB;&#x884C;load()&#x64CD;&#x4F5C;&#xFF1A;</p>
+<pre><code class="lang-c++">spaces=count.load();
+</code></pre>
+<p>&#x8FD9;&#x5C31;&#x662F;&#x8981;&#x5BF9;wait()&#x51FD;&#x6570;&#x7684;&#x6539;&#x52A8;&#x3002;&#x73B0;&#x5728;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x6765;&#x9012;&#x51CF;count&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x547D;&#x540D;&#x4E3A;done_waiting()&#xFF0C;&#x5F53;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5B8C;&#x6210;&#x5176;&#x5DE5;&#x4F5C;&#x5E76;&#x5728;&#x7B49;&#x5F85;&#x65F6;&#x624D;&#x80FD;&#x8C03;&#x7528;&#x5B83;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">done_waiting</span><span class="hljs-params">()</span>
+</span>{
+  --count;  <span class="hljs-comment">// 1</span>
+  <span class="hljs-keyword">if</span>(!--spaces)  <span class="hljs-comment">// 2</span>
+  {
+    spaces=count.load();  <span class="hljs-comment">// 3</span>
+    ++generation;
+  }
+}
+</code></pre>
+<p>&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x9996;&#x5148;&#x8981;&#x51CF;&#x5C11;count&#x2460;&#xFF0C;&#x6240;&#x4EE5;spaces&#x4E0B;&#x4E00;&#x6B21;&#x5C06;&#x4F1A;&#x7F6E;&#x4E3A;&#x4E00;&#x4E2A;&#x8F83;&#x5C0F;&#x7684;&#x6570;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x9700;&#x8981;&#x9012;&#x51CF;spaces&#x7684;&#x503C;&#x2461;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x505A;&#x8FD9;&#x4E9B;&#x64CD;&#x4F5C;&#xFF0C;&#x6709;&#x4E9B;&#x7EBF;&#x7A0B;&#x5C06;&#x4F1A;&#x6301;&#x7EED;&#x7B49;&#x5F85;&#xFF0C;&#x56E0;&#x4E3A;spaces&#x88AB;&#x65E7;&#x7684;count&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x4ECE;&#x800C;&#x5927;&#x4E8E;&#x671F;&#x671B;&#x503C;&#x3002;&#x4E00;&#x7EC4;&#x5F53;&#x4E2D;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x9700;&#x8981;&#x5BF9;&#x8BA1;&#x6570;&#x5668;&#x8FDB;&#x884C;&#x91CD;&#x7F6E;&#xFF0C;&#x5E76;&#x4E14;&#x9012;&#x589E;generation&#x7684;&#x503C;&#x2462;&#xFF0C;&#x5C31;&#x50CF;&#x5728;wait()&#x91CC;&#x9762;&#x505A;&#x7684;&#x90A3;&#x6837;&#x3002;&#x6700;&#x91CD;&#x8981;&#x7684;&#x533A;&#x522B;&#xFF1A;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E0D;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x3002;&#x5F53;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;&#xFF0C;&#x6574;&#x4E2A;&#x7B49;&#x5F85;&#x4E5F;&#x5C31;&#x968F;&#x4E4B;&#x7ED3;&#x675F;&#xFF01;</p>
+<p>&#x73B0;&#x5728;&#x5C31;&#x51C6;&#x5907;&#x5F00;&#x59CB;&#x5199;&#x90E8;&#x5206;&#x548C;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x5B9E;&#x73B0;&#x5427;&#x3002;&#x6BCF;&#x4E00;&#x6B65;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x90FD;&#x5728;&#x6805;&#x680F;&#x5904;&#x8C03;&#x7528;wait()&#xFF0C;&#x4ECE;&#x800C;&#x4FDD;&#x8BC1;&#x7EBF;&#x7A0B;&#x6240;&#x5904;&#x6B65;&#x9AA4;&#x7684;&#x4E00;&#x81F4;&#x6027;&#xFF0C;&#x5E76;&#x4E14;&#x5F53;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x90FD;&#x7ED3;&#x675F;&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x4F1A;&#x8C03;&#x7528;done_waiting()&#x6765;&#x51CF;&#x5C11;count&#x7684;&#x503C;&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E24;&#x4E2A;&#x7F13;&#x5B58;&#x5BF9;&#x539F;&#x59CB;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x4FDD;&#x5B58;&#xFF0C;&#x6805;&#x680F;&#x4E5F;&#x53EF;&#x4EE5;&#x63D0;&#x4F9B;&#x6240;&#x9700;&#x8981;&#x7684;&#x540C;&#x6B65;&#x3002;&#x6BCF;&#x4E00;&#x6B65;&#x4E2D;&#x7EBF;&#x7A0B;&#x90FD;&#x4F1A;&#x4ECE;&#x539F;&#x59CB;&#x6570;&#x636E;&#x6216;&#x7F13;&#x5B58;&#x4E2D;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x65B0;&#x503C;&#x5199;&#x5165;&#x5BF9;&#x5E94;&#x4F4D;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x5148;&#x4ECE;&#x539F;&#x59CB;&#x6570;&#x636E;&#x5904;&#x83B7;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x4E0B;&#x4E00;&#x6B65;&#x5C31;&#x4ECE;&#x7F13;&#x5B58;&#x4E0A;&#x83B7;&#x53D6;&#x6570;&#x636E;(&#x6216;&#x76F8;&#x53CD;)&#x3002;&#x8FD9;&#x5C31;&#x80FD;&#x4FDD;&#x8BC1;&#x8BFB;&#x4E0E;&#x5199;&#x90FD;&#x662F;&#x7531;&#x72EC;&#x7ACB;&#x7EBF;&#x7A0B;&#x5B8C;&#x6210;&#xFF0C;&#x5E76;&#x4E0D;&#x5B58;&#x5728;&#x6761;&#x4EF6;&#x7ADE;&#x4E89;&#x3002;&#x5F53;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x5FAA;&#x73AF;&#xFF0C;&#x5C31;&#x80FD;&#x4FDD;&#x8BC1;&#x6B63;&#x786E;&#x7684;&#x503C;&#x5199;&#x5165;&#x5230;&#x539F;&#x59CB;&#x6570;&#x636E;&#x5F53;&#x4E2D;&#x3002;</p>
+<p>&#x4EE3;&#x7801;8.13 &#x901A;&#x8FC7;&#x4E24;&#x4E24;&#x66F4;&#x65B0;&#x7684;&#x65B9;&#x5F0F;&#x5B9E;&#x73B0;partial_sum</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">struct</span> barrier
+{
+  <span class="hljs-built_in">std</span>::atomic&lt;<span class="hljs-keyword">unsigned</span>&gt; count;
+  <span class="hljs-built_in">std</span>::atomic&lt;<span class="hljs-keyword">unsigned</span>&gt; spaces;
+  <span class="hljs-built_in">std</span>::atomic&lt;<span class="hljs-keyword">unsigned</span>&gt; generation;
+
+  barrier(<span class="hljs-keyword">unsigned</span> count_):
+    count(count_),spaces(count_),generation(<span class="hljs-number">0</span>)
+  {}
+
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">wait</span><span class="hljs-params">()</span>
+  </span>{
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">const</span> gen=generation.load();
+    <span class="hljs-keyword">if</span>(!--spaces)
+    {
+      spaces=count.load();
+      ++generation;
+    }
+    <span class="hljs-keyword">else</span>
+    {
+      <span class="hljs-keyword">while</span>(generation.load()==gen)
+      {
+        <span class="hljs-built_in">std</span>::this_thread::yield();
+      }
+    }
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">done_waiting</span><span class="hljs-params">()</span>
+  </span>{
+    --count;
+    <span class="hljs-keyword">if</span>(!--spaces)
+    {
+      spaces=count.load();
+      ++generation;
+    }
+  }
+};
+
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Iterator&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">parallel_partial_sum</span><span class="hljs-params">(Iterator first,Iterator last)</span>
+</span>{
+  <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">typename</span> Iterator::value_type value_type;
+
+  <span class="hljs-keyword">struct</span> process_element  <span class="hljs-comment">// 1</span>
+  {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(Iterator first,Iterator last,
+                    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;value_type&gt;&amp; buffer,
+                    <span class="hljs-keyword">unsigned</span> i,barrier&amp; b)</span>
+    </span>{
+      value_type&amp; ith_element=*(first+i);
+      <span class="hljs-keyword">bool</span> update_source=<span class="hljs-literal">false</span>;
+
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> step=<span class="hljs-number">0</span>,stride=<span class="hljs-number">1</span>;stride&lt;=i;++step,stride*=<span class="hljs-number">2</span>)
+      {
+        value_type <span class="hljs-keyword">const</span>&amp; source=(step%<span class="hljs-number">2</span>)?  <span class="hljs-comment">// 2</span>
+          buffer[i]:ith_element;
+
+        value_type&amp; dest=(step%<span class="hljs-number">2</span>)?
+          ith_element:buffer[i];
+
+        value_type <span class="hljs-keyword">const</span>&amp; addend=(step%<span class="hljs-number">2</span>)?  <span class="hljs-comment">// 3</span>
+          buffer[i-stride]:*(first+i-stride);
+
+        dest=source+addend;  <span class="hljs-comment">// 4</span>
+        update_source=!(step%<span class="hljs-number">2</span>);
+        b.wait();  <span class="hljs-comment">// 5</span>
+      }
+      <span class="hljs-keyword">if</span>(update_source)  <span class="hljs-comment">// 6</span>
+      {
+        ith_element=buffer[i];
+      }
+      b.done_waiting();  <span class="hljs-comment">// 7</span>
+    }
+  };
+
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">const</span> length=<span class="hljs-built_in">std</span>::distance(first,last);
+
+  <span class="hljs-keyword">if</span>(length&lt;=<span class="hljs-number">1</span>)
+    <span class="hljs-keyword">return</span>;
+
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;value_type&gt; buffer(length);
+  <span class="hljs-function">barrier <span class="hljs-title">b</span><span class="hljs-params">(length)</span></span>;
+
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::thread&gt; threads(length<span class="hljs-number">-1</span>);  <span class="hljs-comment">// 8</span>
+  <span class="hljs-function">join_threads <span class="hljs-title">joiner</span><span class="hljs-params">(threads)</span></span>;
+
+  Iterator block_start=first;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> i=<span class="hljs-number">0</span>;i&lt;(length<span class="hljs-number">-1</span>);++i)
+  {
+    threads[i]=<span class="hljs-built_in">std</span>::thread(process_element(),first,last,  <span class="hljs-comment">// 9</span>
+                           <span class="hljs-built_in">std</span>::ref(buffer),i,<span class="hljs-built_in">std</span>::ref(b));
+  }
+  process_element()(first,last,buffer,length<span class="hljs-number">-1</span>,b);  <span class="hljs-comment">// 10</span>
+}
+</code></pre>
+<p>&#x4EE3;&#x7801;&#x7684;&#x6574;&#x4F53;&#x7ED3;&#x6784;&#x5E94;&#x8BE5;&#x4E0D;&#x7528;&#x8BF4;&#x4E86;&#x3002;process_element&#x7C7B;&#x6709;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x64CD;&#x4F5C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x505A;&#x5177;&#x4F53;&#x7684;&#x5DE5;&#x4F5C;&#x2460;&#xFF0C;&#x5C31;&#x662F;&#x8FD0;&#x884C;&#x4E00;&#x7EC4;&#x7EBF;&#x7A0B;&#x2468;&#xFF0C;&#x5E76;&#x5C06;&#x7EBF;&#x7A0B;&#x5B58;&#x50A8;&#x5230;vector&#x4E2D;&#x2467;&#xFF0C;&#x540C;&#x6837;&#x8FD8;&#x9700;&#x8981;&#x5728;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E2D;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x8C03;&#x7528;&#x2469;&#x3002;&#x8FD9;&#x91CC;&#x4E0E;&#x4E4B;&#x524D;&#x6700;&#x5927;&#x7684;&#x533A;&#x522B;&#x5C31;&#x662F;&#xFF0C;&#x7EBF;&#x7A0B;&#x7684;&#x6570;&#x91CF;&#x662F;&#x6839;&#x636E;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x91CF;&#x6765;&#x5B9A;&#x7684;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6839;&#x636E;<code>std::thread::hardware_concurrency</code>&#x3002;&#x5982;&#x4E4B;&#x524D;&#x6240;&#x8BF4;&#xFF0C;&#x9664;&#x975E;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x5927;&#x89C4;&#x6A21;&#x5E76;&#x884C;&#x7684;&#x673A;&#x5668;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E0A;&#x9762;&#x7684;&#x7EBF;&#x7A0B;&#x90FD;&#x5341;&#x5206;&#x5EC9;&#x4EF7;(&#x867D;&#x7136;&#x8FD9;&#x6837;&#x7684;&#x65B9;&#x5F0F;&#x5E76;&#x4E0D;&#x662F;&#x5F88;&#x597D;)&#xFF0C;&#x8FD8;&#x80FD;&#x4E3A;&#x6211;&#x4EEC;&#x5C55;&#x793A;&#x4E86;&#x5176;&#x6574;&#x4F53;&#x7ED3;&#x6784;&#x3002;&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x5728;&#x6709;&#x8F83;&#x5C11;&#x7EBF;&#x7A0B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EA;&#x80FD;&#x5904;&#x7406;&#x6E90;&#x6570;&#x636E;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x4E0D;&#x7BA1;&#x600E;&#x6837;&#xFF0C;&#x4E3B;&#x8981;&#x7684;&#x5DE5;&#x4F5C;&#x90FD;&#x662F;&#x8C03;&#x7528;process_element&#x7684;&#x51FD;&#x6570;&#x64CD;&#x4F5C;&#x7B26;&#x6765;&#x5B8C;&#x6210;&#x7684;&#x3002;&#x6BCF;&#x4E00;&#x6B65;&#xFF0C;&#x90FD;&#x4F1A;&#x4ECE;&#x539F;&#x59CB;&#x6570;&#x636E;&#x6216;&#x7F13;&#x5B58;&#x4E2D;&#x83B7;&#x53D6;&#x7B2C;i&#x4E2A;&#x5143;&#x7D20;&#x2461;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x83B7;&#x53D6;&#x5230;&#x7684;&#x5143;&#x7D20;&#x52A0;&#x5230;&#x6307;&#x5B9A;stride&#x7684;&#x5143;&#x7D20;&#x4E2D;&#x53BB;&#x2462;&#xFF0C;&#x5982;&#x679C;&#x4ECE;&#x539F;&#x59CB;&#x6570;&#x636E;&#x5F00;&#x59CB;&#x8BFB;&#x53D6;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x52A0;&#x548C;&#x540E;&#x7684;&#x6570;&#x9700;&#x8981;&#x5B58;&#x50A8;&#x5728;&#x7F13;&#x5B58;&#x4E2D;&#x2463;&#xFF0C;&#x5728;&#x5F00;&#x59CB;&#x4E0B;&#x4E00;&#x6B65;&#x524D;&#x4F1A;&#x5728;&#x6805;&#x680F;&#x5904;&#x7B49;&#x5F85;&#x2464;&#x3002;&#x5F53;stride&#x8D85;&#x51FA;&#x4E86;&#x7ED9;&#x5B9A;&#x6570;&#x636E;&#x7684;&#x8303;&#x56F4;&#xFF0C;&#x6700;&#x7EC8;&#x7ED3;&#x679C;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7F13;&#x5B58;&#x4E2D;&#x65F6;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x66F4;&#x65B0;&#x539F;&#x59CB;&#x6570;&#x636E;&#x4E2D;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x540C;&#x6837;&#x8FD9;&#x4E5F;&#x610F;&#x5473;&#x7740;&#x672C;&#x6B21;&#x52A0;&#x548C;&#x7ED3;&#x675F;&#x3002;&#x6700;&#x540E;&#xFF0C;&#x518D;&#x8C03;&#x7528;&#x6805;&#x680F;&#x4E2D;&#x7684;done_waiting()&#x51FD;&#x6570;&#x2466;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5E76;&#x4E0D;&#x662F;&#x5F02;&#x5E38;&#x5B89;&#x5168;&#x7684;&#x3002;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x7EBF;&#x7A0B;&#x5728;process_element&#x6267;&#x884C;&#x65F6;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x5C31;&#x4F1A;&#x7EC8;&#x6B62;&#x6574;&#x4E2A;&#x5E94;&#x7528;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;<code>std::promise</code>&#x6765;&#x5B58;&#x50A8;&#x5F02;&#x5E38;&#xFF0C;&#x5C31;&#x50CF;&#x5728;&#x4EE3;&#x7801;8.9&#x4E2D;parallel_find&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x6216;&#x4EC5;&#x4F7F;&#x7528;&#x4E92;&#x65A5;&#x91CF;&#x4FDD;&#x62A4;&#x7684;<code>std::exception_ptr</code>&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x603B;&#x7ED3;&#x4E0B;&#x8FD9;&#x4E09;&#x4E2A;&#x4F8B;&#x5B50;&#x3002;&#x5E0C;&#x671B;&#x5176;&#x80FD;&#x8BA9;&#x6211;&#x4EEC;&#x4E86;&#x89E3;8.1&#x3001;8.2&#x3001;8.3&#x548C;8.4&#x8282;&#x4E2D;&#x63D0;&#x5230;&#x7684;&#x8BBE;&#x8BA1;&#x8003;&#x91CF;&#xFF0C;&#x5E76;&#x4E14;&#x8BC1;&#x660E;&#x4E86;&#x8FD9;&#x4E9B;&#x6280;&#x672F;&#x5728;&#x771F;&#x5B9E;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#x9700;&#x8981;&#x627F;&#x62C5;&#x54EA;&#x4E9B;&#x8D23;&#x4EFB;&#x3002;</p>
+<hr>
+<p>[4] <a href="http://threadingbuildingblocks.org/" target="_blank">http://threadingbuildingblocks.org/</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="8.4-chinese.html" class="navigation navigation-prev " aria-label="Previous page: 8.4 设计并发代码的注意事项">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="8.6-chinese.html" class="navigation navigation-next " aria-label="Next page: 8.6 本章总结">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"8.5 在实践中设计并发代码","level":"1.15.5","depth":2,"next":{"title":"8.6 本章总结","level":"1.15.6","depth":2,"path":"content/chapter8/8.6-chinese.md","ref":"content/chapter8/8.6-chinese.md","articles":[]},"previous":{"title":"8.4 设计并发代码的注意事项","level":"1.15.4","depth":2,"path":"content/chapter8/8.4-chinese.md","ref":"content/chapter8/8.4-chinese.md","articles":[]},"dir":"ltr"},"config":{"plugins":["livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"plugins":["katex","ace"],"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"msyh","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"陈晓伟 chenxiaowei","pdf":{"pageNumbers":false,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":10,"left":10,"top":10,"bottom":20}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"C++并发编程实战（第2版）","language":"zh-hans","gitbook":"*","description":"《C++ Concurrency In Action - SECOND EDITION》英文版的中文翻译版。","direction":"ltr"},"file":{"path":"content/chapter8/8.5-chinese.md","mtime":"2022-11-19T02:54:31.323Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-11-19T07:50:48.148Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

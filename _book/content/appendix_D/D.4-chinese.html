@@ -1,0 +1,2114 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>D.4 future头文件 · C++并发编程实战（第2版）</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="陈晓伟 chenxiaowei">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="D.5-chinese.html" />
+    
+    
+    <link rel="prev" href="D.3-chinese.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Praise_for_the_first_edition.html">
+            
+                <a href="../Praise_for_the_first_edition.html">
+            
+                    
+                    第一版的赞许
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../preface-chinese.html">
+            
+                <a href="../preface-chinese.html">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../acknowledgments-chinese.html">
+            
+                <a href="../acknowledgments-chinese.html">
+            
+                    
+                    感谢
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../about_this_book-chinese.html">
+            
+                <a href="../about_this_book-chinese.html">
+            
+                    
+                    关于本书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../about_the_author-chinese.html">
+            
+                <a href="../about_the_author-chinese.html">
+            
+                    
+                    关于作者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../about_cover_illustration-chinese.html">
+            
+                <a href="../about_cover_illustration-chinese.html">
+            
+                    
+                    关于封面
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../chapter1/1.0-chinese.html">
+            
+                <a href="../chapter1/1.0-chinese.html">
+            
+                    
+                    第1章 你好，并发世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../chapter1/1.1-chinese.html">
+            
+                <a href="../chapter1/1.1-chinese.html">
+            
+                    
+                    1.1 何谓并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../chapter1/1.2-chinese.html">
+            
+                <a href="../chapter1/1.2-chinese.html">
+            
+                    
+                    1.2 为什么使用并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../chapter1/1.3-chinese.html">
+            
+                <a href="../chapter1/1.3-chinese.html">
+            
+                    
+                    1.3 并发和多线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../chapter1/1.4-chinese.html">
+            
+                <a href="../chapter1/1.4-chinese.html">
+            
+                    
+                    1.4 开始入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../chapter1/1.5-chinese.html">
+            
+                <a href="../chapter1/1.5-chinese.html">
+            
+                    
+                    1.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../chapter2/2.0-chinese.html">
+            
+                <a href="../chapter2/2.0-chinese.html">
+            
+                    
+                    第2章 线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../chapter2/2.1-chinese.html">
+            
+                <a href="../chapter2/2.1-chinese.html">
+            
+                    
+                    2.1 线程的基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../chapter2/2.2-chinese.html">
+            
+                <a href="../chapter2/2.2-chinese.html">
+            
+                    
+                    2.2 传递参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../chapter2/2.3-chinese.html">
+            
+                <a href="../chapter2/2.3-chinese.html">
+            
+                    
+                    2.3 转移所有权
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../chapter2/2.4-chinese.html">
+            
+                <a href="../chapter2/2.4-chinese.html">
+            
+                    
+                    2.4 确定线程数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../chapter2/2.5-chinese.html">
+            
+                <a href="../chapter2/2.5-chinese.html">
+            
+                    
+                    2.5 线程标识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../chapter2/2.6-chinese.html">
+            
+                <a href="../chapter2/2.6-chinese.html">
+            
+                    
+                    2.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../chapter3/3.0-chinese.html">
+            
+                <a href="../chapter3/3.0-chinese.html">
+            
+                    
+                    第3章 共享数据
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../chapter3/3.1-chinese.html">
+            
+                <a href="../chapter3/3.1-chinese.html">
+            
+                    
+                    3.1 共享数据的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../chapter3/3.2-chinese.html">
+            
+                <a href="../chapter3/3.2-chinese.html">
+            
+                    
+                    3.2 使用互斥量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../chapter3/3.3-chinese.html">
+            
+                <a href="../chapter3/3.3-chinese.html">
+            
+                    
+                    3.3 保护共享数据的方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../chapter3/3.4-chinese.html">
+            
+                <a href="../chapter3/3.4-chinese.html">
+            
+                    
+                    3.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../chapter4/4.0-chinese.html">
+            
+                <a href="../chapter4/4.0-chinese.html">
+            
+                    
+                    第4章 同步操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../chapter4/4.1-chinese.html">
+            
+                <a href="../chapter4/4.1-chinese.html">
+            
+                    
+                    4.1 等待事件或条件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../chapter4/4.2-chinese.html">
+            
+                <a href="../chapter4/4.2-chinese.html">
+            
+                    
+                    4.2 使用future
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../chapter4/4.3-chinese.html">
+            
+                <a href="../chapter4/4.3-chinese.html">
+            
+                    
+                    4.3 限时等待
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../chapter4/4.4-chinese.html">
+            
+                <a href="../chapter4/4.4-chinese.html">
+            
+                    
+                    4.4 简化代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../chapter4/4.5-chinese.html">
+            
+                <a href="../chapter4/4.5-chinese.html">
+            
+                    
+                    4.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../chapter5/5.0-chinese.html">
+            
+                <a href="../chapter5/5.0-chinese.html">
+            
+                    
+                    第5章 内存模型和原子操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../chapter5/5.1-chinese.html">
+            
+                <a href="../chapter5/5.1-chinese.html">
+            
+                    
+                    5.1 内存模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../chapter5/5.2-chinese.html">
+            
+                <a href="../chapter5/5.2-chinese.html">
+            
+                    
+                    5.2 原子操作和原子类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../chapter5/5.3-chinese.html">
+            
+                <a href="../chapter5/5.3-chinese.html">
+            
+                    
+                    5.3 同步操作和强制排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../chapter5/5.4-chinese.html">
+            
+                <a href="../chapter5/5.4-chinese.html">
+            
+                    
+                    5.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../chapter6/6.0-chinese.html">
+            
+                <a href="../chapter6/6.0-chinese.html">
+            
+                    
+                    第6章 设计基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../chapter6/6.1-chinese.html">
+            
+                <a href="../chapter6/6.1-chinese.html">
+            
+                    
+                    6.1 并发设计的意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../chapter6/6.2-chinese.html">
+            
+                <a href="../chapter6/6.2-chinese.html">
+            
+                    
+                    6.2 基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../chapter6/6.3-chinese.html">
+            
+                <a href="../chapter6/6.3-chinese.html">
+            
+                    
+                    6.3 设计更加复杂的数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../chapter6/6.4-chinese.html">
+            
+                <a href="../chapter6/6.4-chinese.html">
+            
+                    
+                    6.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../chapter7/7.0-chinese.html">
+            
+                <a href="../chapter7/7.0-chinese.html">
+            
+                    
+                    第7章 设计无锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../chapter7/7.1-chinese.html">
+            
+                <a href="../chapter7/7.1-chinese.html">
+            
+                    
+                    7.1 定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../chapter7/7.2-chinese.html">
+            
+                <a href="../chapter7/7.2-chinese.html">
+            
+                    
+                    7.2 无锁数据结构的例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../chapter7/7.3-chinese.html">
+            
+                <a href="../chapter7/7.3-chinese.html">
+            
+                    
+                    7.3 设计无锁数据结构的指导建议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../chapter7/7.4-chinese.html">
+            
+                <a href="../chapter7/7.4-chinese.html">
+            
+                    
+                    7.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../chapter8/8.0-chinese.html">
+            
+                <a href="../chapter8/8.0-chinese.html">
+            
+                    
+                    第8章 并发设计
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../chapter8/8.1-chinese.html">
+            
+                <a href="../chapter8/8.1-chinese.html">
+            
+                    
+                    8.1 线程间划分工作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../chapter8/8.2-chinese.html">
+            
+                <a href="../chapter8/8.2-chinese.html">
+            
+                    
+                    8.2 并发代码的性能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../chapter8/8.3-chinese.html">
+            
+                <a href="../chapter8/8.3-chinese.html">
+            
+                    
+                    8.3 为多线程性能设计数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="../chapter8/8.4-chinese.html">
+            
+                <a href="../chapter8/8.4-chinese.html">
+            
+                    
+                    8.4 设计并发代码的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.5" data-path="../chapter8/8.5-chinese.html">
+            
+                <a href="../chapter8/8.5-chinese.html">
+            
+                    
+                    8.5 在实践中设计并发代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.6" data-path="../chapter8/8.6-chinese.html">
+            
+                <a href="../chapter8/8.6-chinese.html">
+            
+                    
+                    8.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../chapter9/9.0-chinese.html">
+            
+                <a href="../chapter9/9.0-chinese.html">
+            
+                    
+                    第9章 高级线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../chapter9/9.1-chinese.html">
+            
+                <a href="../chapter9/9.1-chinese.html">
+            
+                    
+                    9.1 线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../chapter9/9.2-chinese.html">
+            
+                <a href="../chapter9/9.2-chinese.html">
+            
+                    
+                    9.2 中断线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../chapter9/9.3-chinese.html">
+            
+                <a href="../chapter9/9.3-chinese.html">
+            
+                    
+                    9.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../chapter10/10.0-chinese.html">
+            
+                <a href="../chapter10/10.0-chinese.html">
+            
+                    
+                    第10章 并行算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../chapter10/10.1-chinese.html">
+            
+                <a href="../chapter10/10.1-chinese.html">
+            
+                    
+                    10.1 并行化标准库算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../chapter10/10.2-chinese.html">
+            
+                <a href="../chapter10/10.2-chinese.html">
+            
+                    
+                    10.2 执行策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="../chapter10/10.3-chinese.html">
+            
+                <a href="../chapter10/10.3-chinese.html">
+            
+                    
+                    10.3 C++标准库中的并行算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="../chapter10/10.4-chinese.html">
+            
+                <a href="../chapter10/10.4-chinese.html">
+            
+                    
+                    10.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../chapter11/11.0-chinese.html">
+            
+                <a href="../chapter11/11.0-chinese.html">
+            
+                    
+                    第11章 测试和调试多线程应用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../chapter11/11.1-chinese.html">
+            
+                <a href="../chapter11/11.1-chinese.html">
+            
+                    
+                    11.1 与并发相关的Bug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.2" data-path="../chapter11/11.2-chinese.html">
+            
+                <a href="../chapter11/11.2-chinese.html">
+            
+                    
+                    11.2 定位并发Bug的技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.3" data-path="../chapter11/11.3-chinese.html">
+            
+                <a href="../chapter11/11.3-chinese.html">
+            
+                    
+                    11.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="../appendix_A/A.0-chinese.html">
+            
+                <a href="../appendix_A/A.0-chinese.html">
+            
+                    
+                    附录A C++11特性简明参考(部分)
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.19.1" data-path="../appendix_A/A.1-chinese.html">
+            
+                <a href="../appendix_A/A.1-chinese.html">
+            
+                    
+                    A.1 右值引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.2" data-path="../appendix_A/A.2-chinese.html">
+            
+                <a href="../appendix_A/A.2-chinese.html">
+            
+                    
+                    A.2 删除函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.3" data-path="../appendix_A/A.3-chinese.html">
+            
+                <a href="../appendix_A/A.3-chinese.html">
+            
+                    
+                    A.3 默认函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.4" data-path="../appendix_A/A.4-chinese.html">
+            
+                <a href="../appendix_A/A.4-chinese.html">
+            
+                    
+                    A.4 常量表达式函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.5" data-path="../appendix_A/A.5-chinese.html">
+            
+                <a href="../appendix_A/A.5-chinese.html">
+            
+                    
+                    A.5 Lambda函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.6" data-path="../appendix_A/A.6-chinese.html">
+            
+                <a href="../appendix_A/A.6-chinese.html">
+            
+                    
+                    A.6 变参模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.7" data-path="../appendix_A/A.7-chinese.html">
+            
+                <a href="../appendix_A/A.7-chinese.html">
+            
+                    
+                    A.7 自动推导变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.8" data-path="../appendix_A/A.8-chinese.html">
+            
+                <a href="../appendix_A/A.8-chinese.html">
+            
+                    
+                    A.8 线程本地变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.9" data-path="../appendix_A/A.9-chinese.html">
+            
+                <a href="../appendix_A/A.9-chinese.html">
+            
+                    
+                    A.9 模板类参数的推导
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.10" data-path="../appendix_A/A.10-chinese.html">
+            
+                <a href="../appendix_A/A.10-chinese.html">
+            
+                    
+                    A.10 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="../appendix_B/B.0-chinese.html">
+            
+                <a href="../appendix_B/B.0-chinese.html">
+            
+                    
+                    附录B 并发库简要对比
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="../appendix_C/C.0-chinese.html">
+            
+                <a href="../appendix_C/C.0-chinese.html">
+            
+                    
+                    附录C 消息传递框架与完整的ATM示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="D.0-chinese.html">
+            
+                <a href="D.0-chinese.html">
+            
+                    
+                    附录D C++线程类库参考
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.22.1" data-path="D.1-chinese.html">
+            
+                <a href="D.1-chinese.html">
+            
+                    
+                    D.1 chrono头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.2" data-path="D.2-chinese.html">
+            
+                <a href="D.2-chinese.html">
+            
+                    
+                    D.2 condition_variable头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.3" data-path="D.3-chinese.html">
+            
+                <a href="D.3-chinese.html">
+            
+                    
+                    D.3 atomic头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.22.4" data-path="D.4-chinese.html">
+            
+                <a href="D.4-chinese.html">
+            
+                    
+                    D.4 future头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.5" data-path="D.5-chinese.html">
+            
+                <a href="D.5-chinese.html">
+            
+                    
+                    D.5 mutex头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.6" data-path="D.6-chinese.html">
+            
+                <a href="D.6-chinese.html">
+            
+                    
+                    D.6 ratio头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.7" data-path="D.7-chinese.html">
+            
+                <a href="D.7-chinese.html">
+            
+                    
+                    D.7 thread头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >D.4 future头文件</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="d4-future&#x5934;&#x6587;&#x4EF6;">D.4 &lt;future&gt;&#x5934;&#x6587;&#x4EF6;</h1>
+<p><code>&lt;future&gt;</code>&#x5934;&#x6587;&#x4EF6;&#x63D0;&#x4F9B;&#x5904;&#x7406;&#x5F02;&#x6B65;&#x7ED3;&#x679C;(&#x5728;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4E0A;&#x6267;&#x884C;&#x989D;&#x7ED3;&#x679C;)&#x7684;&#x5DE5;&#x5177;&#x3002;</p>
+<p><strong>&#x5934;&#x6587;&#x4EF6;&#x5185;&#x5BB9;</strong></p>
+<pre><code>namespace std
+{
+  enum class future_status {
+      ready, timeout, deferred };
+
+  enum class future_errc
+  {
+    broken_promise,
+    future_already_retrieved,
+    promise_already_satisfied,
+    no_state
+  };
+
+  class future_error;
+
+  const error_category&amp; future_category();
+
+  error_code make_error_code(future_errc e);
+  error_condition make_error_condition(future_errc e);
+
+  template&lt;typename ResultType&gt;
+  class future;
+
+  template&lt;typename ResultType&gt;
+  class shared_future;
+
+  template&lt;typename ResultType&gt;
+  class promise;
+
+  template&lt;typename FunctionSignature&gt;
+  class packaged_task; // no definition provided
+
+  template&lt;typename ResultType,typename ... Args&gt;
+  class packaged_task&lt;ResultType (Args...)&gt;;
+
+  enum class launch {
+    async, deferred
+  };
+
+  template&lt;typename FunctionType,typename ... Args&gt;
+  future&lt;result_of&lt;FunctionType(Args...)&gt;::type&gt;
+  async(FunctionType&amp;&amp; func,Args&amp;&amp; ... args);
+
+  template&lt;typename FunctionType,typename ... Args&gt;
+  future&lt;result_of&lt;FunctionType(Args...)&gt;::type&gt;
+  async(std::launch policy,FunctionType&amp;&amp; func,Args&amp;&amp; ... args);
+}
+</code></pre><h2 id="d41-stdfuture&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.4.1 std::future&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::future</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x662F;&#x4E3A;&#x4E86;&#x7B49;&#x5F85;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4E0A;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;&#x5176;&#x548C;<code>std::promise</code>&#xFF0C;<code>std::packaged_task</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#xFF0C;&#x8FD8;&#x6709;<code>std::async</code>&#x51FD;&#x6570;&#x6A21;&#x677F;&#xFF0C;&#x90FD;&#x662F;&#x4E3A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x7684;&#x5DE5;&#x5177;&#x3002;&#x53EA;&#x6709;<code>std::future</code>&#x5B9E;&#x4F8B;&#x53EF;&#x4EE5;&#x5728;&#x4EFB;&#x610F;&#x65F6;&#x95F4;&#x5F15;&#x7528;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><code>std::future</code>&#x5B9E;&#x4F8B;&#x662F;MoveConstructible(&#x79FB;&#x52A8;&#x6784;&#x9020;)&#x548C;MoveAssignable(&#x79FB;&#x52A8;&#x8D4B;&#x503C;)&#xFF0C;&#x4E0D;&#x8FC7;&#x4E0D;&#x80FD;CopyConstructible(&#x62F7;&#x8D1D;&#x6784;&#x9020;)&#x548C;CopyAssignable(&#x62F7;&#x8D1D;&#x8D4B;&#x503C;)&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename ResultType&gt;
+class future
+{
+public:
+  future() noexcept;
+  future(future&amp;&amp;) noexcept;
+  future&amp; operator=(future&amp;&amp;) noexcept;
+  ~future();
+
+  future(future const&amp;) = delete;
+  future&amp; operator=(future const&amp;) = delete;
+
+  shared_future&lt;ResultType&gt; share();
+
+  bool valid() const noexcept;
+
+  see description get();
+
+  void wait();
+
+  template&lt;typename Rep,typename Period&gt;
+  future_status wait_for(
+      std::chrono::duration&lt;Rep,Period&gt; const&amp; relative_time);
+
+  template&lt;typename Clock,typename Duration&gt;
+  future_status wait_until(
+      std::chrono::time_point&lt;Clock,Duration&gt; const&amp; absolute_time);
+};
+</code></pre><h3 id="stdfuture-&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;">std::future &#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x4E0D;&#x4F7F;&#x7528;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::future</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>future() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;&#x7684;<code>std::future</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+valid()&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdfuture-&#x79FB;&#x52A8;&#x6784;&#x9020;&#x51FD;&#x6570;">std::future &#x79FB;&#x52A8;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x4F7F;&#x7528;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::future</code>&#x5BF9;&#x8C61;&#xFF0C;&#x5C06;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x7ED9;&#x65B0;<code>std::future</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>future(future&amp;&amp; other) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x4F7F;&#x7528;&#x5DF2;&#x6709;&#x5BF9;&#x8C61;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;&#x7684;<code>std::future</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5DF2;&#x6709;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x5C06;&#x4E8E;&#x65B0;&#x7684;&#x5BF9;&#x8C61;&#x76F8;&#x5173;&#x8054;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x89E3;&#x9664;&#x5DF2;&#x6709;&#x5BF9;&#x8C61;&#x548C;&#x5F02;&#x6B65;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x3002;<code>this-&gt;valid()</code>&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x4E0E;&#x4E4B;&#x524D;&#x5DF2;&#x6709;&#x5BF9;&#x8C61;<code>other.valid()</code>&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x76F8;&#x540C;&#x3002;&#x5728;&#x8C03;&#x7528;&#x8BE5;&#x6784;&#x9020;&#x51FD;&#x6570;&#x540E;&#xFF0C;<code>other.valid()</code>&#x5C06;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdfuture-&#x79FB;&#x52A8;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;">std::future &#x79FB;&#x52A8;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</h3>
+<p>&#x5C06;&#x5DF2;&#x6709;<code>std::future</code>&#x5BF9;&#x8C61;&#x4E2D;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#xFF0C;&#x8F6C;&#x79FB;&#x5230;&#x53E6;&#x4E00;&#x5BF9;&#x8C61;&#x5F53;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>future(future&amp;&amp; other) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5728;&#x4E24;&#x4E2A;<code>std::future</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x8F6C;&#x79FB;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x72B6;&#x6001;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5F53;&#x6267;&#x884C;&#x5B8C;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;<code>*this.other</code>&#x5C31;&#x4E0E;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x6CA1;&#x6709;&#x5173;&#x7CFB;&#x4E86;&#x3002;&#x5F02;&#x6B65;&#x72B6;&#x6001;(&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;)&#x5728;&#x91CA;&#x653E;&#x540E;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x6700;&#x540E;&#x4E00;&#x6B21;&#x5F15;&#x7528;&#x540E;&#xFF0C;&#x9500;&#x6BC1;&#x8BE5;&#x72B6;&#x6001;&#x3002;<code>this-&gt;valid()</code>&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x4E0E;&#x4E4B;&#x524D;&#x5DF2;&#x6709;&#x5BF9;&#x8C61;<code>other.valid()</code>&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x76F8;&#x540C;&#x3002;&#x5728;&#x8C03;&#x7528;&#x8BE5;&#x6784;&#x9020;&#x51FD;&#x6570;&#x540E;&#xFF0C;<code>other.valid()</code>&#x5C06;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdfuture-&#x6790;&#x6784;&#x51FD;&#x6570;">std::future &#x6790;&#x6784;&#x51FD;&#x6570;</h3>
+<p>&#x9500;&#x6BC1;&#x4E00;&#x4E2A;<code>std::future</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>~future();
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x9500;&#x6BC1;<code>*this</code>&#x3002;&#x5982;&#x679C;&#x8FD9;&#x662F;&#x6700;&#x540E;&#x4E00;&#x6B21;&#x5F15;&#x7528;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x4E4B;&#x540E;&#x5C31;&#x4F1A;&#x5C06;&#x8BE5;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x9500;&#x6BC1;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdfutureshare-&#x6210;&#x5458;&#x51FD;&#x6570;">std::future::share &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;<code>*this</code>&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x5230;&#x65B0;&#x7684;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>shared_future&lt;ResultType&gt; share();
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5982;&#x540C; shared_future<resulttype>(std::move(*this))&#x3002;</resulttype></p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5F53;&#x8C03;&#x7528;share()&#x6210;&#x5458;&#x51FD;&#x6570;&#xFF0C;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5C06;&#x4E0E;&#x65B0;&#x6784;&#x9020;&#x7684;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x76F8;&#x5173;&#x3002;<code>this-&gt;valid()</code>&#x5C06;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdfuturevalid-&#x6210;&#x5458;&#x51FD;&#x6570;">std::future::valid &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x68C0;&#x67E5;<code>std::future</code>&#x5B9E;&#x4F8B;&#x662F;&#x5426;&#x4E0E;&#x4E00;&#x4E2A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x76F8;&#x5173;&#x8054;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>bool valid() const noexcept;
+</code></pre><p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;&#x4E0E;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x76F8;&#x5173;&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;true&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdfuturewait-&#x6210;&#x5458;&#x51FD;&#x6570;">std::future::wait &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5982;&#x679C;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x72B6;&#x6001;&#x5305;&#x542B;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;&#xFF0C;&#x5C06;&#x8C03;&#x7528;&#x8BE5;&#x51FD;&#x6570;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x4F1A;&#x7B49;&#x5F85;<code>std::future</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void wait();
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+<code>this-&gt;valid()</code>&#x5C06;&#x4F1A;&#x8FD4;&#x56DE;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5F53;&#x76F8;&#x5173;&#x72B6;&#x6001;&#x5305;&#x542B;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;&#xFF0C;&#x8C03;&#x7528;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x4FDD;&#x5B58;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x6216;&#x5C06;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#x4FDD;&#x5B58;&#x6210;&#x4E3A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x4F1A;&#x963B;&#x585E;&#x5230;<code>*this</code>&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdfuturewaitfor-&#x6210;&#x5458;&#x51FD;&#x6570;">std::future::wait_for &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x7B49;&#x5F85;<code>std::future</code>&#x5B9E;&#x4F8B;&#x4E0A;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x6216;&#x8D85;&#x8FC7;&#x67D0;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Rep,typename Period&gt;
+future_status wait_for(
+    std::chrono::duration&lt;Rep,Period&gt; const&amp; relative_time);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+<code>this-&gt;valid()</code>&#x5C06;&#x4F1A;&#x8FD4;&#x56DE;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5982;&#x679C;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>std::async</code>&#x8C03;&#x7528;&#x7684;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;(&#x8FD8;&#x672A;&#x6267;&#x884C;)&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4E0D;&#x963B;&#x585E;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x3002;&#x5426;&#x5219;&#x5C06;&#x963B;&#x585E;&#x5B9E;&#x4F8B;&#xFF0C;&#x76F4;&#x5230;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x6216;&#x8D85;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684;relative_time&#x65F6;&#x957F;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>std::async</code>&#x8C03;&#x7528;&#x7684;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;(&#x8FD8;&#x672A;&#x6267;&#x884C;)&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::deferred</code>&#xFF1B;&#x5F53;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::ready</code>&#xFF1B;&#x5F53;&#x7ED9;&#x5B9A;&#x65F6;&#x95F4;&#x8D85;&#x8FC7;relative_time&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::timeout</code>&#x3002;</p>
+<p><strong>NOTE</strong>:&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x7684;&#x65F6;&#x95F4;&#x53EF;&#x80FD;&#x8D85;&#x591A;&#x7ED9;&#x5B9A;&#x7684;&#x65F6;&#x957F;&#x3002;&#x65F6;&#x957F;&#x5C3D;&#x53EF;&#x80FD;&#x7531;&#x4E00;&#x4E2A;&#x7A33;&#x5B9A;&#x7684;&#x65F6;&#x949F;&#x51B3;&#x5B9A;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdfuturewaituntil-&#x6210;&#x5458;&#x51FD;&#x6570;">std::future::wait_until &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x7B49;&#x5F85;<code>std::future</code>&#x5B9E;&#x4F8B;&#x4E0A;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x6216;&#x8D85;&#x8FC7;&#x67D0;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Clock,typename Duration&gt;
+future_status wait_until(
+  std::chrono::time_point&lt;Clock,Duration&gt; const&amp; absolute_time);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+this-&gt;valid()&#x5C06;&#x8FD4;&#x56DE;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5982;&#x679C;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>std::async</code>&#x8C03;&#x7528;&#x7684;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;(&#x8FD8;&#x672A;&#x6267;&#x884C;)&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4E0D;&#x963B;&#x585E;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x3002;&#x5426;&#x5219;&#x5C06;&#x963B;&#x585E;&#x5B9E;&#x4F8B;&#xFF0C;&#x76F4;&#x5230;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x6216;<code>Clock::now()</code>&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x95F4;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;absolute_time&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>std::async</code>&#x8C03;&#x7528;&#x7684;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;(&#x8FD8;&#x672A;&#x6267;&#x884C;)&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::deferred</code>&#xFF1B;&#x5F53;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::ready</code>&#xFF1B;<code>Clock::now()</code>&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x95F4;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;absolute_time&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::timeout</code>&#x3002;</p>
+<p><strong>NOTE</strong>:&#x8FD9;&#x91CC;&#x4E0D;&#x4FDD;&#x8BC1;&#x8C03;&#x7528;&#x7EBF;&#x7A0B;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#x591A;&#x4E45;&#xFF0C;&#x53EA;&#x6709;&#x51FD;&#x6570;&#x8FD4;&#x56DE;<code>std::future_status::timeout</code>&#xFF0C;&#x7136;&#x540E;<code>Clock::now()</code>&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x95F4;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;absolute_time&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7EBF;&#x7A0B;&#x624D;&#x4F1A;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdfutureget-&#x6210;&#x5458;&#x51FD;&#x6570;">std::future::get &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5F53;&#x76F8;&#x5173;&#x72B6;&#x6001;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>std::async</code>&#x8C03;&#x7528;&#x7684;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;&#xFF0C;&#x8C03;&#x7528;&#x8BE5;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x7B49;&#x5F85;&#x4E0E;<code>std::future</code>&#x5B9E;&#x4F8B;&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x4E4B;&#x540E;&#x8FD4;&#x56DE;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x6216;&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void future&lt;void&gt;::get();
+R&amp; future&lt;R&amp;&gt;::get();
+R future&lt;R&gt;::get();
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+this-&gt;valid()&#x5C06;&#x8FD4;&#x56DE;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5982;&#x679C;*this&#x76F8;&#x5173;&#x72B6;&#x6001;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5EF6;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5E76;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF0C;&#x6216;&#x5C06;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#x8FDB;&#x884C;&#x4F20;&#x64AD;&#x3002;</p>
+<p>&#x5426;&#x5219;&#xFF0C;&#x7EBF;&#x7A0B;&#x5C31;&#x8981;&#x88AB;&#x963B;&#x585E;&#xFF0C;&#x76F4;&#x5230;&#x4E0E;*this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5C31;&#x7EEA;&#x3002;&#x5F53;&#x7ED3;&#x679C;&#x5B58;&#x50A8;&#x4E86;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x5C31;&#x4F1A;&#x5C06;&#x5B58;&#x50A8;&#x5F02;&#x5E38;&#x629B;&#x51FA;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x5C06;&#x4F1A;&#x8FD4;&#x56DE;&#x5B58;&#x50A8;&#x503C;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;&#x76F8;&#x5173;&#x72B6;&#x6001;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5EF6;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x5EF6;&#x671F;&#x51FD;&#x6570;&#x7684;&#x7ED3;&#x679C;&#x5C06;&#x88AB;&#x8FD4;&#x56DE;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x5F53;ResultType&#x4E3A;void&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x6309;&#x7167;&#x5E38;&#x89C4;&#x8C03;&#x7528;&#x8FD4;&#x56DE;&#x3002;&#x5982;&#x679C;ResultType&#x662F;R&amp;(R&#x7C7B;&#x578B;&#x7684;&#x5F15;&#x7528;)&#xFF0C;&#x5B58;&#x50A8;&#x7684;&#x5F15;&#x7528;&#x503C;&#x5C06;&#x4F1A;&#x88AB;&#x8FD4;&#x56DE;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x5C06;&#x4F1A;&#x8FD4;&#x56DE;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F02;&#x5E38;&#x7531;&#x5EF6;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x6216;&#x5B58;&#x50A8;&#x5728;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x7684;&#x5F02;&#x5E38;(&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;)&#x629B;&#x51FA;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong></p>
+<pre><code>this-&gt;valid()==false
+</code></pre><h2 id="d42-stdsharedfuture&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.4.2 std::shared_future&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::shared_future</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x662F;&#x4E3A;&#x4E86;&#x7B49;&#x5F85;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4E0A;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;&#x5176;&#x548C;<code>std::promise</code>&#xFF0C;<code>std::packaged_task</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#xFF0C;&#x8FD8;&#x6709;<code>std::async</code>&#x51FD;&#x6570;&#x6A21;&#x677F;&#xFF0C;&#x90FD;&#x662F;&#x4E3A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x7684;&#x5DE5;&#x5177;&#x3002;&#x591A;&#x4E2A;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x540C;&#x4E00;&#x4E2A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x662F;CopyConstructible(&#x62F7;&#x8D1D;&#x6784;&#x9020;)&#x548C;CopyAssignable(&#x62F7;&#x8D1D;&#x8D4B;&#x503C;)&#x3002;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x540C;ResultType&#x7684;<code>std::future</code>&#x7C7B;&#x578B;&#x5BF9;&#x8C61;&#xFF0C;&#x79FB;&#x52A8;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::shared_future</code>&#x7C7B;&#x578B;&#x5BF9;&#x8C61;&#x3002;</p>
+<p>&#x8BBF;&#x95EE;&#x7ED9;&#x5B9A;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x662F;&#x975E;&#x540C;&#x6B65;&#x7684;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5F53;&#x6709;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#x540C;&#x4E00;&#x4E2A;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#xFF0C;&#x4E14;&#x65E0;&#x4EFB;&#x4F55;&#x5916;&#x56F4;&#x540C;&#x6B65;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x8BBF;&#x95EE;&#x662F;&#x4E0D;&#x5B89;&#x5168;&#x7684;&#x3002;&#x4E0D;&#x8FC7;&#x8BBF;&#x95EE;&#x5173;&#x8054;&#x72B6;&#x6001;&#x65F6;&#x662F;&#x540C;&#x6B65;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#x591A;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#xFF0C;&#x4E14;&#x6CA1;&#x6709;&#x5916;&#x56F4;&#x540C;&#x6B65;&#x64CD;&#x4F5C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x662F;&#x5B89;&#x5168;&#x7684;&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template&lt;typename ResultType&gt;
+class shared_future
+{
+public:
+  shared_future() noexcept;
+  shared_future(future&lt;ResultType&gt;&amp;&amp;) noexcept;
+
+  shared_future(shared_future&amp;&amp;) noexcept;
+  shared_future(shared_future const&amp;);
+  shared_future&amp; operator=(shared_future const&amp;);
+  shared_future&amp; operator=(shared_future&amp;&amp;) noexcept;
+  ~shared_future();
+
+  bool valid() const noexcept;
+
+  see description get() const;
+
+  void wait() const;
+
+  template&lt;typename Rep,typename Period&gt;
+  future_status wait_for(
+     std::chrono::duration&lt;Rep,Period&gt; const&amp; relative_time) const;
+
+  template&lt;typename Clock,typename Duration&gt;
+  future_status wait_until(
+     std::chrono::time_point&lt;Clock,Duration&gt; const&amp; absolute_time)
+    const;
+};
+</code></pre><h3 id="stdsharedfuture-&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;">std::shared_future &#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x4E0D;&#x4F7F;&#x7528;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::shared_future</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>shared_future() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;&#x7684;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5F53;&#x65B0;&#x5B9E;&#x4F8B;&#x6784;&#x5EFA;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x8C03;&#x7528;valid()&#x5C06;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdsharedfuture-&#x79FB;&#x52A8;&#x6784;&#x9020;&#x51FD;&#x6570;">std::shared_future &#x79FB;&#x52A8;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x4EE5;&#x4E00;&#x4E2A;&#x5DF2;&#x521B;&#x5EFA;<code>std::shared_future</code>&#x5BF9;&#x8C61;&#x4E3A;&#x51C6;&#xFF0C;&#x6784;&#x9020;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x5C06;&#x4F7F;&#x7528;<code>std::shared_future</code>&#x5BF9;&#x8C61;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x5230;&#x65B0;&#x7684;&#x5B9E;&#x4F8B;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>shared_future(shared_future&amp;&amp; other) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5C06;other&#x5BF9;&#x8C61;&#x4E2D;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x5230;&#x65B0;&#x5BF9;&#x8C61;&#x4E2D;&#xFF0C;&#x8FD9;&#x6837;other&#x5BF9;&#x8C61;&#x5C31;&#x6CA1;&#x6709;&#x4E0E;&#x4E4B;&#x76F8;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E86;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdsharedfuture-&#x79FB;&#x52A8;&#x5BF9;&#x5E94;stdfuture&#x5BF9;&#x8C61;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;">std::shared_future &#x79FB;&#x52A8;&#x5BF9;&#x5E94;std::future&#x5BF9;&#x8C61;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x4EE5;&#x4E00;&#x4E2A;&#x5DF2;&#x521B;&#x5EFA;<code>std::future</code>&#x5BF9;&#x8C61;&#x4E3A;&#x51C6;&#xFF0C;&#x6784;&#x9020;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x5C06;&#x4F7F;&#x7528;<code>std::shared_future</code>&#x5BF9;&#x8C61;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x5230;&#x65B0;&#x7684;&#x5B9E;&#x4F8B;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>shared_future(std::future&lt;ResultType&gt;&amp;&amp; other) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::shared_future</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5C06;other&#x5BF9;&#x8C61;&#x4E2D;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x5230;&#x65B0;&#x5BF9;&#x8C61;&#x4E2D;&#xFF0C;&#x8FD9;&#x6837;other&#x5BF9;&#x8C61;&#x5C31;&#x6CA1;&#x6709;&#x4E0E;&#x4E4B;&#x76F8;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E86;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdsharedfuture-&#x62F7;&#x8D1D;&#x6784;&#x9020;&#x51FD;&#x6570;">std::shared_future &#x62F7;&#x8D1D;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x4EE5;&#x4E00;&#x4E2A;&#x5DF2;&#x521B;&#x5EFA;<code>std::future</code>&#x5BF9;&#x8C61;&#x4E3A;&#x51C6;&#xFF0C;&#x6784;&#x9020;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x5C06;&#x4F7F;&#x7528;<code>std::shared_future</code>&#x5BF9;&#x8C61;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;(&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;)&#x62F7;&#x8D1D;&#x5230;&#x65B0;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x5F53;&#x4E2D;&#xFF0C;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#x5171;&#x4EAB;&#x8BE5;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>shared_future(shared_future const&amp; other);
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::shared_future</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5C06;other&#x5BF9;&#x8C61;&#x4E2D;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x62F7;&#x8D1D;&#x5230;&#x65B0;&#x5BF9;&#x8C61;&#x4E2D;&#xFF0C;&#x4E0E;other&#x5171;&#x4EAB;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdsharedfuture-&#x6790;&#x6784;&#x51FD;&#x6570;">std::shared_future &#x6790;&#x6784;&#x51FD;&#x6570;</h3>
+<p>&#x9500;&#x6BC1;&#x4E00;&#x4E2A;<code>std::shared_future</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>~shared_future();
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;<code>*this</code>&#x9500;&#x6BC1;&#x3002;&#x5982;&#x679C;<code>*this</code>&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E0E;<code>std::promise</code>&#x6216;<code>std::packaged_task</code>&#x4E0D;&#x518D;&#x6709;&#x5173;&#x8054;&#xFF0C;&#x90A3;&#x4E48;&#x8BE5;&#x51FD;&#x6570;&#x5C06;&#x4F1A;&#x5207;&#x65AD;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x4E0E;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x8054;&#x7CFB;&#xFF0C;&#x5E76;&#x9500;&#x6BC1;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdsharedfuturevalid-&#x6210;&#x5458;&#x51FD;&#x6570;">std::shared_future::valid &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x68C0;&#x67E5;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x662F;&#x5426;&#x4E0E;&#x4E00;&#x4E2A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x76F8;&#x5173;&#x8054;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>bool valid() const noexcept;
+</code></pre><p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;&#x4E0E;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x76F8;&#x5173;&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;true&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdsharedfuturewait-&#x6210;&#x5458;&#x51FD;&#x6570;">std::shared_future::wait &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5F53;*this&#x5173;&#x8054;&#x72B6;&#x6001;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5EF6;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x7B49;&#x5F85;&#x76F4;&#x5230;&#x4E0E;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5C31;&#x7EEA;&#x4E3A;&#x6B62;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void wait() const;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+this-&gt;valid()&#x5C06;&#x8FD4;&#x56DE;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5F53;&#x6709;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x4E0A;&#x7684;get()&#x548C;wait()&#x65F6;&#xFF0C;&#x5B9E;&#x4F8B;&#x4F1A;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x5171;&#x4EAB;&#x540C;&#x4E00;&#x5173;&#x8054;&#x72B6;&#x6001;&#x3002;&#x5982;&#x679C;&#x5173;&#x8054;&#x72B6;&#x6001;&#x5305;&#x62EC;&#x4E00;&#x4E2A;&#x5EF6;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x7B2C;&#x4E00;&#x4E2A;&#x8C03;&#x7528;get()&#x6216;wait()&#x65F6;&#x5C31;&#x4F1A;&#x8C03;&#x7528;&#x5EF6;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x4E14;&#x5B58;&#x50A8;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x6216;&#x5C06;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x4EE5;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x65B9;&#x5F0F;&#x4FDD;&#x5B58;&#x4E0B;&#x6765;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdsharedfuturewaitfor-&#x6210;&#x5458;&#x51FD;&#x6570;">std::shared_future::wait_for &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x7B49;&#x5F85;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x4E0A;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x6216;&#x8D85;&#x8FC7;&#x67D0;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Rep,typename Period&gt;
+future_status wait_for(
+    std::chrono::duration&lt;Rep,Period&gt; const&amp; relative_time) const;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+<code>this-&gt;valid()</code>&#x5C06;&#x4F1A;&#x8FD4;&#x56DE;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5982;&#x679C;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>std::async</code>&#x8C03;&#x7528;&#x7684;&#x5EF6;&#x671F;&#x51FD;&#x6570;(&#x8FD8;&#x672A;&#x6267;&#x884C;)&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4E0D;&#x963B;&#x585E;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x3002;&#x5426;&#x5219;&#x5C06;&#x963B;&#x585E;&#x5B9E;&#x4F8B;&#xFF0C;&#x76F4;&#x5230;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x6216;&#x8D85;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684;relative_time&#x65F6;&#x957F;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>std::async</code>&#x8C03;&#x7528;&#x7684;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;(&#x8FD8;&#x672A;&#x6267;&#x884C;)&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::deferred</code>&#xFF1B;&#x5F53;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::ready</code>&#xFF1B;&#x5F53;&#x7ED9;&#x5B9A;&#x65F6;&#x95F4;&#x8D85;&#x8FC7;relative_time&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::timeout</code>&#x3002;</p>
+<p><strong>NOTE</strong>:&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x7684;&#x65F6;&#x95F4;&#x53EF;&#x80FD;&#x8D85;&#x591A;&#x7ED9;&#x5B9A;&#x7684;&#x65F6;&#x957F;&#x3002;&#x65F6;&#x957F;&#x5C3D;&#x53EF;&#x80FD;&#x7531;&#x4E00;&#x4E2A;&#x7A33;&#x5B9A;&#x7684;&#x65F6;&#x949F;&#x51B3;&#x5B9A;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdsharedfuturewaituntil-&#x6210;&#x5458;&#x51FD;&#x6570;">std::shared_future::wait_until &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x7B49;&#x5F85;<code>std::future</code>&#x5B9E;&#x4F8B;&#x4E0A;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x6216;&#x8D85;&#x8FC7;&#x67D0;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Clock,typename Duration&gt;
+future_status wait_until(
+  std::chrono::time_point&lt;Clock,Duration&gt; const&amp; absolute_time) const;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+this-&gt;valid()&#x5C06;&#x8FD4;&#x56DE;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5982;&#x679C;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>std::async</code>&#x8C03;&#x7528;&#x7684;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;(&#x8FD8;&#x672A;&#x6267;&#x884C;)&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4E0D;&#x963B;&#x585E;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x3002;&#x5426;&#x5219;&#x5C06;&#x963B;&#x585E;&#x5B9E;&#x4F8B;&#xFF0C;&#x76F4;&#x5230;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x6216;<code>Clock::now()</code>&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x95F4;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;absolute_time&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>std::async</code>&#x8C03;&#x7528;&#x7684;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;(&#x8FD8;&#x672A;&#x6267;&#x884C;)&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::deferred</code>&#xFF1B;&#x5F53;&#x4E0E;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::ready</code>&#xFF1B;<code>Clock::now()</code>&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x95F4;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;absolute_time&#xFF0C;&#x8FD4;&#x56DE;<code>std::future_status::timeout</code>&#x3002;</p>
+<p><strong>NOTE</strong>:&#x8FD9;&#x91CC;&#x4E0D;&#x4FDD;&#x8BC1;&#x8C03;&#x7528;&#x7EBF;&#x7A0B;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#x591A;&#x4E45;&#xFF0C;&#x53EA;&#x6709;&#x51FD;&#x6570;&#x8FD4;&#x56DE;<code>std::future_status::timeout</code>&#xFF0C;&#x7136;&#x540E;<code>Clock::now()</code>&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x95F4;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;absolute_time&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7EBF;&#x7A0B;&#x624D;&#x4F1A;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdsharedfutureget-&#x6210;&#x5458;&#x51FD;&#x6570;">std::shared_future::get &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5F53;&#x76F8;&#x5173;&#x72B6;&#x6001;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>std::async</code>&#x8C03;&#x7528;&#x7684;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;&#xFF0C;&#x8C03;&#x7528;&#x8BE5;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x7B49;&#x5F85;&#x4E0E;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x4E4B;&#x540E;&#x8FD4;&#x56DE;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x6216;&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void shared_future&lt;void&gt;::get() const;
+R&amp; shared_future&lt;R&amp;&gt;::get() const;
+R const&amp; shared_future&lt;R&gt;::get() const;
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+this-&gt;valid()&#x5C06;&#x8FD4;&#x56DE;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5F53;&#x6709;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x4E0A;&#x7684;get()&#x548C;wait()&#x65F6;&#xFF0C;&#x5B9E;&#x4F8B;&#x4F1A;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x5171;&#x4EAB;&#x540C;&#x4E00;&#x5173;&#x8054;&#x72B6;&#x6001;&#x3002;&#x5982;&#x679C;&#x5173;&#x8054;&#x72B6;&#x6001;&#x5305;&#x62EC;&#x4E00;&#x4E2A;&#x5EF6;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x7B2C;&#x4E00;&#x4E2A;&#x8C03;&#x7528;get()&#x6216;wait()&#x65F6;&#x5C31;&#x4F1A;&#x8C03;&#x7528;&#x5EF6;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x4E14;&#x5B58;&#x50A8;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x6216;&#x5C06;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x4EE5;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x65B9;&#x5F0F;&#x4FDD;&#x5B58;&#x4E0B;&#x6765;&#x3002;</p>
+<p>&#x963B;&#x585E;&#x4F1A;&#x77E5;&#x9053;*this&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5C31;&#x7EEA;&#x540E;&#x89E3;&#x9664;&#x3002;&#x5F53;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5B58;&#x50A8;&#x4E86;&#x4E00;&#x4E2A;&#x4E00;&#x884C;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x629B;&#x51FA;&#x8FD9;&#x4E2A;&#x5F02;&#x5E38;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x8FD4;&#x56DE;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;ResultType&#x4E3A;void&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x6309;&#x7167;&#x5E38;&#x89C4;&#x8C03;&#x7528;&#x8FD4;&#x56DE;&#x3002;&#x5982;&#x679C;ResultType&#x662F;R&amp;(R&#x7C7B;&#x578B;&#x7684;&#x5F15;&#x7528;)&#xFF0C;&#x5B58;&#x50A8;&#x7684;&#x5F15;&#x7528;&#x503C;&#x5C06;&#x4F1A;&#x88AB;&#x8FD4;&#x56DE;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x8FD4;&#x56DE;&#x5B58;&#x50A8;&#x503C;&#x7684;const&#x5F15;&#x7528;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x629B;&#x51FA;&#x5B58;&#x50A8;&#x7684;&#x5F02;&#x5E38;(&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;)&#x3002;</p>
+<h2 id="d43-stdpackagedtask&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.4.3 std::packaged_task&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::packaged_task</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x53EF;&#x6253;&#x5305;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6216;&#x5176;&#x4ED6;&#x53EF;&#x8C03;&#x7528;&#x5BF9;&#x8C61;&#xFF0C;&#x6240;&#x4EE5;&#x5F53;&#x51FD;&#x6570;&#x901A;&#x8FC7;<code>std::packaged_task</code>&#x5B9E;&#x4F8B;&#x88AB;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x7ED3;&#x679C;&#x5C06;&#x4F1A;&#x4F5C;&#x4E3A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;&#x8FD9;&#x4E2A;&#x7ED3;&#x679C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x68C0;&#x7D22;<code>std::future</code>&#x5B9E;&#x4F8B;&#x6765;&#x67E5;&#x627E;&#x3002;</p>
+<p><code>std::packaged_task</code>&#x5B9E;&#x4F8B;&#x662F;&#x53EF;&#x4EE5;MoveConstructible(&#x79FB;&#x52A8;&#x6784;&#x9020;)&#x548C;MoveAssignable(&#x79FB;&#x52A8;&#x8D4B;&#x503C;)&#xFF0C;&#x4E0D;&#x8FC7;&#x4E0D;&#x80FD;CopyConstructible(&#x62F7;&#x8D1D;&#x6784;&#x9020;)&#x548C;CopyAssignable(&#x62F7;&#x8D1D;&#x8D4B;&#x503C;)&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template&lt;typename FunctionType&gt;
+class packaged_task; // undefined
+
+template&lt;typename ResultType,typename... ArgTypes&gt;
+class packaged_task&lt;ResultType(ArgTypes...)&gt;
+{
+public:
+  packaged_task() noexcept;
+  packaged_task(packaged_task&amp;&amp;) noexcept;
+  ~packaged_task();
+
+  packaged_task&amp; operator=(packaged_task&amp;&amp;) noexcept;
+
+  packaged_task(packaged_task const&amp;) = delete;
+  packaged_task&amp; operator=(packaged_task const&amp;) = delete;
+
+  void swap(packaged_task&amp;) noexcept;
+
+  template&lt;typename Callable&gt;
+  explicit packaged_task(Callable&amp;&amp; func);
+
+  template&lt;typename Callable,typename Allocator&gt;
+  packaged_task(std::allocator_arg_t, const Allocator&amp;,Callable&amp;&amp;);
+
+  bool valid() const noexcept;
+  std::future&lt;ResultType&gt; get_future();
+  void operator()(ArgTypes...);
+  void make_ready_at_thread_exit(ArgTypes...);
+  void reset();
+};
+</code></pre><h3 id="stdpackagedtask-&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;">std::packaged_task &#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>packaged_task() noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x4E0D;&#x4F7F;&#x7528;&#x5173;&#x8054;&#x4EFB;&#x52A1;&#x6216;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x6765;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdpackagedtask-&#x901A;&#x8FC7;&#x53EF;&#x8C03;&#x7528;&#x5BF9;&#x8C61;&#x6784;&#x9020;">std::packaged_task &#x901A;&#x8FC7;&#x53EF;&#x8C03;&#x7528;&#x5BF9;&#x8C61;&#x6784;&#x9020;</h3>
+<p>&#x4F7F;&#x7528;&#x5173;&#x8054;&#x4EFB;&#x52A1;&#x548C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Callable&gt;
+packaged_task(Callable&amp;&amp; func);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x8868;&#x8FBE;&#x5F0F;<code>func(args...)</code>&#x5FC5;&#x987B;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x5728;<code>args...</code>&#x4E2D;&#x7684;args-i&#x53C2;&#x6570;&#xFF0C;&#x5FC5;&#x987B;&#x662F;<code>ArgTypes...</code>&#x4E2D;ArgTypes-i&#x7C7B;&#x578B;&#x7684;&#x4E00;&#x4E2A;&#x503C;&#x3002;&#x4E14;&#x8FD4;&#x56DE;&#x503C;&#x5FC5;&#x987B;&#x53EF;&#x8F6C;&#x6362;&#x4E3A;ResultType&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x4F7F;&#x7528;ResultType&#x7C7B;&#x578B;&#x7684;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#xFF0C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x662F;&#x672A;&#x5C31;&#x7EEA;&#x7684;&#xFF0C;&#x5E76;&#x4E14;Callable&#x7C7B;&#x578B;&#x76F8;&#x5173;&#x7684;&#x4EFB;&#x52A1;&#x662F;&#x5BF9;func&#x7684;&#x4E00;&#x4E2A;&#x62F7;&#x8D1D;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6784;&#x9020;&#x51FD;&#x6570;&#x65E0;&#x6CD5;&#x4E3A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5206;&#x914D;&#x51FA;&#x5185;&#x5B58;&#x65F6;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::bad_alloc</code>&#x7C7B;&#x578B;&#x7684;&#x5F02;&#x5E38;&#x3002;&#x5176;&#x4ED6;&#x5F02;&#x5E38;&#x4F1A;&#x5728;&#x4F7F;&#x7528;Callable&#x7C7B;&#x578B;&#x7684;&#x62F7;&#x8D1D;&#x6216;&#x79FB;&#x52A8;&#x6784;&#x9020;&#x8FC7;&#x7A0B;&#x4E2D;&#x629B;&#x51FA;&#x3002;</p>
+<h3 id="stdpackagedtask-&#x901A;&#x8FC7;&#x6709;&#x5206;&#x914D;&#x5668;&#x7684;&#x53EF;&#x8C03;&#x7528;&#x5BF9;&#x8C61;&#x6784;&#x9020;">std::packaged_task &#x901A;&#x8FC7;&#x6709;&#x5206;&#x914D;&#x5668;&#x7684;&#x53EF;&#x8C03;&#x7528;&#x5BF9;&#x8C61;&#x6784;&#x9020;</h3>
+<p>&#x4F7F;&#x7528;&#x5173;&#x8054;&#x4EFB;&#x52A1;&#x548C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#x3002;&#x4F7F;&#x7528;&#x4EE5;&#x63D0;&#x4F9B;&#x7684;&#x5206;&#x914D;&#x5668;&#x4E3A;&#x5173;&#x8054;&#x4EFB;&#x52A1;&#x548C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5206;&#x914D;&#x5185;&#x5B58;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Allocator,typename Callable&gt;
+packaged_task(
+    std::allocator_arg_t, Allocator const&amp; alloc,Callable&amp;&amp; func);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x8868;&#x8FBE;&#x5F0F;<code>func(args...)</code>&#x5FC5;&#x987B;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x5728;<code>args...</code>&#x4E2D;&#x7684;args-i&#x53C2;&#x6570;&#xFF0C;&#x5FC5;&#x987B;&#x662F;<code>ArgTypes...</code>&#x4E2D;ArgTypes-i&#x7C7B;&#x578B;&#x7684;&#x4E00;&#x4E2A;&#x503C;&#x3002;&#x4E14;&#x8FD4;&#x56DE;&#x503C;&#x5FC5;&#x987B;&#x53EF;&#x8F6C;&#x6362;&#x4E3A;ResultType&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x4F7F;&#x7528;ResultType&#x7C7B;&#x578B;&#x7684;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#xFF0C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x662F;&#x672A;&#x5C31;&#x7EEA;&#x7684;&#xFF0C;&#x5E76;&#x4E14;Callable&#x7C7B;&#x578B;&#x76F8;&#x5173;&#x7684;&#x4EFB;&#x52A1;&#x662F;&#x5BF9;func&#x7684;&#x4E00;&#x4E2A;&#x62F7;&#x8D1D;&#x3002;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x548C;&#x4EFB;&#x52A1;&#x7684;&#x5185;&#x5B58;&#x901A;&#x8FC7;&#x5185;&#x5B58;&#x5206;&#x914D;&#x5668;alloc&#x8FDB;&#x884C;&#x5206;&#x914D;&#xFF0C;&#x6216;&#x8FDB;&#x884C;&#x62F7;&#x8D1D;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6784;&#x9020;&#x51FD;&#x6570;&#x65E0;&#x6CD5;&#x4E3A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5206;&#x914D;&#x51FA;&#x5185;&#x5B58;&#x65F6;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::bad_alloc</code>&#x7C7B;&#x578B;&#x7684;&#x5F02;&#x5E38;&#x3002;&#x5176;&#x4ED6;&#x5F02;&#x5E38;&#x4F1A;&#x5728;&#x4F7F;&#x7528;Callable&#x7C7B;&#x578B;&#x7684;&#x62F7;&#x8D1D;&#x6216;&#x79FB;&#x52A8;&#x6784;&#x9020;&#x8FC7;&#x7A0B;&#x4E2D;&#x629B;&#x51FA;&#x3002;</p>
+<h3 id="stdpackagedtask-&#x79FB;&#x52A8;&#x6784;&#x9020;&#x51FD;&#x6570;">std::packaged_task &#x79FB;&#x52A8;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x901A;&#x8FC7;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#x6784;&#x5EFA;&#x53E6;&#x4E00;&#x4E2A;&#xFF0C;&#x5C06;&#x4E0E;&#x5DF2;&#x5B58;&#x5728;&#x7684;<code>std::packaged_task</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x548C;&#x4EFB;&#x52A1;&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x5230;&#x65B0;&#x6784;&#x5EFA;&#x7684;&#x5BF9;&#x8C61;&#x5F53;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>packaged_task(packaged_task&amp;&amp; other) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;<code>std::packaged_task</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x901A;&#x8FC7;other&#x6784;&#x5EFA;&#x65B0;&#x7684;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#x3002;&#x5728;&#x65B0;&#x5BF9;&#x8C61;&#x6784;&#x5EFA;&#x5B8C;&#x6210;&#x540E;&#xFF0C;other&#x4E0E;&#x5176;&#x4E4B;&#x524D;&#x76F8;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5C31;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x5173;&#x7CFB;&#x4E86;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdpackagedtask-&#x79FB;&#x52A8;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;">std::packaged_task &#x79FB;&#x52A8;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</h3>
+<p>&#x5C06;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x5230;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>packaged_task&amp; operator=(packaged_task&amp;&amp; other) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;other&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x548C;&#x4EFB;&#x52A1;&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x5230;<code>*this</code>&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x5207;&#x65AD;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x548C;&#x4EFB;&#x52A1;&#x4E0E;other&#x5BF9;&#x8C61;&#x7684;&#x5173;&#x8054;&#xFF0C;&#x5982;&#x540C;<code>std::packaged_task(other).swap(*this)</code>&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x4E0E;other&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E0E;&#x4EFB;&#x52A1;&#x79FB;&#x52A8;&#x8F6C;&#x79FB;&#xFF0C;&#x4F7F;*this.other&#x65E0;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<pre><code>*this
+</code></pre><p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdpackagedtaskswap-&#x6210;&#x5458;&#x51FD;&#x6570;">std::packaged_task::swap &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5C06;&#x4E24;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#x6240;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x8FDB;&#x884C;&#x4EA4;&#x6362;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void swap(packaged_task&amp; other) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;other&#x548C;*this&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E0E;&#x4EFB;&#x52A1;&#x8FDB;&#x884C;&#x4EA4;&#x6362;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5C06;&#x4E0E;other&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x548C;&#x4EFB;&#x52A1;&#xFF0C;&#x901A;&#x8FC7;&#x8C03;&#x7528;swap&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x4E0E;*this&#x76F8;&#x4EA4;&#x6362;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdpackagedtask-&#x6790;&#x6784;&#x51FD;&#x6570;">std::packaged_task &#x6790;&#x6784;&#x51FD;&#x6570;</h3>
+<p>&#x9500;&#x6BC1;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>~packaged_task();
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;<code>*this</code>&#x9500;&#x6BC1;&#x3002;&#x5982;&#x679C;<code>*this</code>&#x6709;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x5E76;&#x4E14;&#x7ED3;&#x679C;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x5DF2;&#x5B58;&#x50A8;&#x7684;&#x4EFB;&#x52A1;&#x6216;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x72B6;&#x6001;&#x5C06;&#x4F1A;&#x53D8;&#x4E3A;&#x5C31;&#x7EEA;&#xFF0C;&#x4F34;&#x968F;&#x5C31;&#x7EEA;&#x7684;&#x662F;&#x4E00;&#x4E2A;<code>std::future_error</code>&#x5F02;&#x5E38;&#x548C;&#x9519;&#x8BEF;&#x7801;<code>std::future_errc::broken_promise</code>&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdpackagedtaskgetfuture-&#x6210;&#x5458;&#x51FD;&#x6570;">std::packaged_task::get_future &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5728;*this&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#xFF0C;&#x68C0;&#x7D22;&#x4E00;&#x4E2A;<code>std::future</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>std::future&lt;ResultType&gt; get_future();
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+*this&#x5177;&#x6709;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x4E00;&#x4E2A;&#x4E0E;*this&#x5173;&#x8054;&#x5F02;&#x6784;&#x7ED3;&#x679C;&#x76F8;&#x5173;&#x7684;&#x4E00;&#x4E2A;<code>std::future</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5982;&#x679C;&#x4E00;&#x4E2A;<code>std::future</code>&#x5DF2;&#x7ECF;&#x901A;&#x8FC7;get_future()&#x83B7;&#x53D6;&#x4E86;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x5728;&#x629B;&#x51FA;<code>std::future_error</code>&#x5F02;&#x5E38;&#x65F6;&#xFF0C;&#x9519;&#x8BEF;&#x7801;&#x662F;<code>std::future_errc::future_already_retrieved</code></p>
+<h3 id="stdpackagedtaskreset-&#x6210;&#x5458;&#x51FD;&#x6570;">std::packaged_task::reset &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5C06;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5BF9;&#x5B9E;&#x4F8B;&#x4E0E;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x76F8;&#x5173;&#x8054;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void reset();
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+*this&#x5177;&#x6709;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5982;&#x540C;<code>*this=packaged_task(std::move(f))</code>&#xFF0C;f&#x662F;*this&#x4E2D;&#x5DF2;&#x5B58;&#x50A8;&#x7684;&#x5173;&#x8054;&#x4EFB;&#x52A1;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5982;&#x679C;&#x5185;&#x5B58;&#x4E0D;&#x8DB3;&#x4EE5;&#x5206;&#x914D;&#x7ED9;&#x65B0;&#x7684;&#x5F02;&#x6784;&#x7ED3;&#x679C;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x4F1A;&#x629B;&#x51FA;<code>std::bad_alloc</code>&#x7C7B;&#x5F02;&#x5E38;&#x3002;</p>
+<h3 id="stdpackagedtaskvalid-&#x6210;&#x5458;&#x51FD;&#x6570;">std::packaged_task::valid &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x68C0;&#x67E5;*this&#x4E2D;&#x662F;&#x90FD;&#x5177;&#x6709;&#x5173;&#x8054;&#x4EFB;&#x52A1;&#x548C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>bool valid() const noexcept;
+</code></pre><p><strong>&#x8FD4;&#x56DE;</strong>
+&#x5F53;*this&#x5177;&#x6709;&#x76F8;&#x5173;&#x4EFB;&#x52A1;&#x548C;&#x5F02;&#x6B65;&#x7ED3;&#x6784;&#xFF0C;&#x8FD4;&#x56DE;true&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdpackagedtaskoperator-&#x51FD;&#x6570;&#x8C03;&#x7528;&#x64CD;&#x4F5C;">std::packaged_task::operator() &#x51FD;&#x6570;&#x8C03;&#x7528;&#x64CD;&#x4F5C;</h3>
+<p>&#x8C03;&#x7528;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;&#x76F8;&#x5173;&#x4EFB;&#x52A1;&#xFF0C;&#x5E76;&#x4E14;&#x5B58;&#x50A8;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x6216;&#x5C06;&#x5F02;&#x5E38;&#x5B58;&#x50A8;&#x5230;&#x5F02;&#x5E38;&#x7ED3;&#x679C;&#x5F53;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void operator()(ArgTypes... args);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+*this&#x5177;&#x6709;&#x76F8;&#x5173;&#x4EFB;&#x52A1;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x50CF;<code>INVOKE(func,args...)</code>&#x90A3;&#x8981;&#x8C03;&#x7528;&#x76F8;&#x5173;&#x7684;&#x51FD;&#x6570;func&#x3002;&#x5982;&#x679C;&#x8FD4;&#x56DE;&#x5F81;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x4F1A;&#x5B58;&#x50A8;&#x5230;<em>this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x3002;&#x5F53;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x662F;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x5C06;&#x8FD9;&#x4E2A;&#x5F02;&#x5E38;&#x5B58;&#x50A8;&#x5230;</em>this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+*this&#x76F8;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x72B6;&#x6001;&#x4E3A;&#x5C31;&#x7EEA;&#xFF0C;&#x5E76;&#x4E14;&#x5B58;&#x50A8;&#x4E86;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x5F02;&#x5E38;&#x3002;&#x6240;&#x6709;&#x963B;&#x585E;&#x7EBF;&#x7A0B;&#xFF0C;&#x5728;&#x7B49;&#x5F85;&#x5230;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x65F6;&#x5019;&#x88AB;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5DF2;&#x7ECF;&#x5B58;&#x50A8;&#x4E86;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x629B;&#x51FA;&#x4E00;&#x4E2A;<code>std::future_error</code>&#x5F02;&#x5E38;&#xFF0C;&#x9519;&#x8BEF;&#x7801;&#x4E3A;<code>std::future_errc::promise_already_satisfied</code>&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::future&lt;ResultType&gt;::get()</code>&#x6216;<code>std::shared_future&lt;ResultType&gt;::get()</code>&#x7684;&#x6210;&#x529F;&#x8C03;&#x7528;&#xFF0C;&#x4EE3;&#x8868;&#x540C;&#x6B65;&#x64CD;&#x4F5C;&#x7684;&#x6210;&#x529F;&#xFF0C;&#x51FD;&#x6570;&#x5C06;&#x4F1A;&#x68C0;&#x7D22;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x7684;&#x503C;&#x6216;&#x5F02;&#x5E38;&#x3002;</p>
+<h3 id="stdpackagedtaskmakereadyatthreadexit-&#x6210;&#x5458;&#x51FD;&#x6570;">std::packaged_task::make_ready_at_thread_exit &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x8C03;&#x7528;&#x4E00;&#x4E2A;<code>std::packaged_task</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;&#x76F8;&#x5173;&#x4EFB;&#x52A1;&#xFF0C;&#x5E76;&#x4E14;&#x5B58;&#x50A8;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x6216;&#x5C06;&#x5F02;&#x5E38;&#x5B58;&#x50A8;&#x5230;&#x5F02;&#x5E38;&#x7ED3;&#x679C;&#x5F53;&#x4E2D;&#xFF0C;&#x76F4;&#x5230;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x5C06;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x72B6;&#x6001;&#x7F6E;&#x4E3A;&#x5C31;&#x7EEA;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void make_ready_at_thread_exit(ArgTypes... args);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+*this&#x5177;&#x6709;&#x76F8;&#x5173;&#x4EFB;&#x52A1;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x50CF;<code>INVOKE(func,args...)</code>&#x90A3;&#x8981;&#x8C03;&#x7528;&#x76F8;&#x5173;&#x7684;&#x51FD;&#x6570;func&#x3002;&#x5982;&#x679C;&#x8FD4;&#x56DE;&#x5F81;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x4F1A;&#x5B58;&#x50A8;&#x5230;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x3002;&#x5F53;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x662F;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x5C06;&#x8FD9;&#x4E2A;&#x5F02;&#x5E38;&#x5B58;&#x50A8;&#x5230;<code>*this</code>&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x3002;&#x5F53;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x8C03;&#x914D;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x72B6;&#x6001;&#x4E3A;&#x5C31;&#x7EEA;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+*this&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x5DF2;&#x7ECF;&#x5B58;&#x50A8;&#x4E86;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x4E0D;&#x8FC7;&#x5728;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x4E2A;&#x7ED3;&#x679C;&#x90FD;&#x662F;&#x975E;&#x5C31;&#x7EEA;&#x7684;&#x3002;&#x5F53;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x963B;&#x585E;&#x7B49;&#x5F85;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x7EBF;&#x7A0B;&#x5C06;&#x4F1A;&#x88AB;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5DF2;&#x7ECF;&#x5B58;&#x50A8;&#x4E86;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x629B;&#x51FA;&#x4E00;&#x4E2A;<code>std::future_error</code>&#x5F02;&#x5E38;&#xFF0C;&#x9519;&#x8BEF;&#x7801;&#x4E3A;<code>std::future_errc::promise_already_satisfied</code>&#x3002;&#x5F53;&#x65E0;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x629B;&#x51FA;<code>std::future_error</code>&#x5F02;&#x5E38;&#xFF0C;&#x9519;&#x8BEF;&#x7801;&#x4E3A;<code>std::future_errc::no_state</code>&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+<code>std::future&lt;ResultType&gt;::get()</code>&#x6216;<code>std::shared_future&lt;ResultType&gt;::get()</code>&#x5728;&#x7EBF;&#x7A0B;&#x4E0A;&#x7684;&#x6210;&#x529F;&#x8C03;&#x7528;&#xFF0C;&#x4EE3;&#x8868;&#x540C;&#x6B65;&#x64CD;&#x4F5C;&#x7684;&#x6210;&#x529F;&#xFF0C;&#x51FD;&#x6570;&#x5C06;&#x4F1A;&#x68C0;&#x7D22;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x7684;&#x503C;&#x6216;&#x5F02;&#x5E38;&#x3002;</p>
+<h2 id="d44-stdpromise&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.4.4 std::promise&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::promise</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x63D0;&#x4F9B;&#x8BBE;&#x7F6E;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x6837;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x5C31;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>std::future</code>&#x5B9E;&#x4F8B;&#x6765;&#x7D22;&#x5F15;&#x8BE5;&#x7ED3;&#x679C;&#x3002;</p>
+<p>ResultType&#x6A21;&#x677F;&#x53C2;&#x6570;&#xFF0C;&#x8BE5;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x5B58;&#x50A8;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><code>std::promise</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E0E;&#x67D0;&#x4E2A;<code>srd::future</code>&#x5B9E;&#x4F8B;&#x76F8;&#x5173;&#x8054;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8C03;&#x7528;get_future()&#x6210;&#x5458;&#x51FD;&#x6570;&#x6765;&#x83B7;&#x53D6;&#x8FD9;&#x4E2A;<code>srd::future</code>&#x5B9E;&#x4F8B;&#x3002;ResultType&#x7C7B;&#x578B;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;set_value()&#x6210;&#x5458;&#x51FD;&#x6570;&#x5BF9;&#x5B58;&#x50A8;&#x503C;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#xFF0C;&#x6216;&#x8005;&#x4F7F;&#x7528;set_exception()&#x5C06;&#x5BF9;&#x5E94;&#x5F02;&#x5E38;&#x8BBE;&#x7F6E;&#x8FDB;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x3002;</p>
+<p><code>std::promise</code>&#x5B9E;&#x4F8B;&#x662F;&#x53EF;&#x4EE5;MoveConstructible(&#x79FB;&#x52A8;&#x6784;&#x9020;)&#x548C;MoveAssignable(&#x79FB;&#x52A8;&#x8D4B;&#x503C;)&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x80FD;CopyConstructible(&#x62F7;&#x8D1D;&#x6784;&#x9020;)&#x548C;CopyAssignable(&#x62F7;&#x8D1D;&#x8D4B;&#x503C;)&#x3002;</p>
+<p><strong>&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</strong></p>
+<pre><code>template&lt;typename ResultType&gt;
+class promise
+{
+public:
+  promise();
+  promise(promise&amp;&amp;) noexcept;
+  ~promise();
+  promise&amp; operator=(promise&amp;&amp;) noexcept;
+
+  template&lt;typename Allocator&gt;
+  promise(std::allocator_arg_t, Allocator const&amp;);
+
+  promise(promise const&amp;) = delete;
+  promise&amp; operator=(promise const&amp;) = delete;
+
+  void swap(promise&amp; ) noexcept;
+
+  std::future&lt;ResultType&gt; get_future();
+
+  void set_value(see description);
+  void set_exception(std::exception_ptr p);
+};
+</code></pre><h3 id="stdpromise-&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;">std::promise &#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::promise</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>promise();
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x4F7F;&#x7528;ResultType&#x7C7B;&#x578B;&#x7684;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x6765;&#x6784;&#x9020;<code>std::promise</code>&#x5B9E;&#x4F8B;&#xFF0C;&#x4E0D;&#x8FC7;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5E76;&#x672A;&#x5C31;&#x7EEA;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x6CA1;&#x6709;&#x8DB3;&#x591F;&#x5185;&#x5B58;&#x4E3A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x5206;&#x914D;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x629B;&#x51FA;<code>std::bad_alloc</code>&#x578B;&#x5F02;&#x5E38;&#x3002;</p>
+<h3 id="stdpromise-&#x5E26;&#x5206;&#x914D;&#x5668;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;">std::promise &#x5E26;&#x5206;&#x914D;&#x5668;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::promise</code>&#x5BF9;&#x8C61;&#xFF0C;&#x4F7F;&#x7528;&#x63D0;&#x4F9B;&#x7684;&#x5206;&#x914D;&#x5668;&#x6765;&#x4E3A;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5206;&#x914D;&#x5185;&#x5B58;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>template&lt;typename Allocator&gt;
+promise(std::allocator_arg_t, Allocator const&amp; alloc);
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x4F7F;&#x7528;ResultType&#x7C7B;&#x578B;&#x7684;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x6765;&#x6784;&#x9020;<code>std::promise</code>&#x5B9E;&#x4F8B;&#xFF0C;&#x4E0D;&#x8FC7;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5E76;&#x672A;&#x5C31;&#x7EEA;&#x3002;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x5185;&#x5B58;&#x7531;alloc&#x5206;&#x914D;&#x5668;&#x6765;&#x5206;&#x914D;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x5206;&#x914D;&#x5668;&#x4E3A;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5206;&#x914D;&#x5185;&#x5B58;&#x65F6;&#xFF0C;&#x5982;&#x6709;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;&#x5C31;&#x4E3A;&#x8BE5;&#x51FD;&#x6570;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#x3002;</p>
+<h3 id="stdpromise-&#x79FB;&#x52A8;&#x6784;&#x9020;&#x51FD;&#x6570;">std::promise &#x79FB;&#x52A8;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x901A;&#x8FC7;&#x53E6;&#x4E00;&#x4E2A;&#x5DF2;&#x5B58;&#x5728;&#x5BF9;&#x8C61;&#xFF0C;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::promise</code>&#x5BF9;&#x8C61;&#x3002;&#x5C06;&#x5DF2;&#x5B58;&#x5728;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x8F6C;&#x79FB;&#x5230;&#x65B0;&#x521B;&#x5EFA;&#x7684;<code>std::promise</code>&#x5BF9;&#x8C61;&#x5F53;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>promise(promise&amp;&amp; other) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::promise</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5F53;&#x4F7F;&#x7528;other&#x6765;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x90A3;&#x4E48;other&#x4E2D;&#x76F8;&#x5173;&#x5F02;&#x6784;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x5C06;&#x8F6C;&#x79FB;&#x5230;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#x5BF9;&#x8C61;&#x4E0A;&#x3002;&#x4E4B;&#x540E;&#xFF0C;other&#x5C06;&#x65E0;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdpromise-&#x79FB;&#x52A8;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;">std::promise &#x79FB;&#x52A8;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x5728;&#x4E24;&#x4E2A;<code>std::promise</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x8F6C;&#x79FB;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x6240;&#x6709;&#x6743;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>promise&amp; operator=(promise&amp;&amp; other) noexcept;
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x5728;other&#x548C;<code>*this</code>&#x4E4B;&#x95F4;&#x8FDB;&#x884C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x6240;&#x6709;&#x6743;&#x7684;&#x8F6C;&#x79FB;&#x3002;&#x5F53;<code>*this</code>&#x5DF2;&#x7ECF;&#x6709;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x90A3;&#x4E48;&#x8BE5;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x72B6;&#x6001;&#x5C06;&#x4F1A;&#x4E3A;&#x5C31;&#x7EEA;&#x6001;&#xFF0C;&#x4E14;&#x4F34;&#x968F;&#x4E00;&#x4E2A;<code>std::future_error</code>&#x7C7B;&#x578B;&#x5F02;&#x5E38;&#xFF0C;&#x9519;&#x8BEF;&#x7801;&#x4E3A;<code>std::future_errc::broken_promise</code>&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5C06;other&#x4E2D;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x8F6C;&#x79FB;&#x5230;*this&#x5F53;&#x4E2D;&#x3002;other&#x4E2D;&#x5C06;&#x65E0;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<pre><code>*this
+</code></pre><p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdpromiseswap-&#x6210;&#x5458;&#x51FD;&#x6570;">std::promise::swap &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5C06;&#x4E24;&#x4E2A;<code>std::promise</code>&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x4EA4;&#x6362;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void swap(promise&amp; other);
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x4EA4;&#x6362;other&#x548C;*this&#x5F53;&#x4E2D;&#x7684;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5F53;swap&#x4F7F;&#x7528;other&#x65F6;&#xFF0C;other&#x4E2D;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5C31;&#x4F1A;&#x4E0E;*this&#x4E2D;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x76F8;&#x4EA4;&#x6362;&#x3002;&#x4E8C;&#x8005;&#x8FD4;&#x56DE;&#x6765;&#x4EA6;&#x7136;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdpromise-&#x6790;&#x6784;&#x51FD;&#x6570;">std::promise &#x6790;&#x6784;&#x51FD;&#x6570;</h3>
+<p>&#x9500;&#x6BC1;<code>std::promise</code>&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>~promise();
+</code></pre><p><strong>&#x6548;&#x679C;</strong>
+&#x9500;&#x6BC1;<code>*this</code>&#x3002;&#x5F53;<code>*this</code>&#x5177;&#x6709;&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x5E76;&#x4E14;&#x7ED3;&#x679C;&#x4E2D;&#x6CA1;&#x6709;&#x5B58;&#x50A8;&#x503C;&#x6216;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x7ED3;&#x679C;&#x5C06;&#x4F1A;&#x7F6E;&#x4E3A;&#x5C31;&#x7EEA;&#xFF0C;&#x4F34;&#x968F;&#x4E00;&#x4E2A;<code>std::future_error</code>&#x5F02;&#x5E38;&#xFF0C;&#x9519;&#x8BEF;&#x7801;&#x4E3A;<code>std::future_errc::broken_promise</code>&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x65E0;</p>
+<h3 id="stdpromisegetfuture-&#x6210;&#x5458;&#x51FD;&#x6570;">std::promise::get_future &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x901A;&#x8FC7;*this&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x68C0;&#x7D22;&#x51FA;&#x6240;&#x8981;&#x7684;<code>std::future</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>std::future&lt;ResultType&gt; get_future();
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+*this&#x5177;&#x6709;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+&#x4E0E;*this&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5173;&#x8054;&#x7684;<code>std::future</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;<code>std::future</code>&#x5DF2;&#x7ECF;&#x901A;&#x8FC7;get_future()&#x83B7;&#x53D6;&#x8FC7;&#x4E86;&#xFF0C;&#x5C06;&#x4F1A;&#x629B;&#x51FA;&#x4E00;&#x4E2A;<code>std::future_error</code>&#x7C7B;&#x578B;&#x5F02;&#x5E38;&#xFF0C;&#x4F34;&#x968F;&#x7684;&#x9519;&#x8BEF;&#x7801;&#x4E3A;<code>std::future_errc::future_already_retrieved</code>&#x3002;</p>
+<h3 id="stdpromisesetvalue-&#x6210;&#x5458;&#x51FD;&#x6570;">std::promise::set_value &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x503C;&#x5230;&#x4E0E;*this&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void promise&lt;void&gt;::set_value();
+void promise&lt;R&amp;&gt;::set_value(R&amp; r);
+void promise&lt;R&gt;::set_value(R const&amp; r);
+void promise&lt;R&gt;::set_value(R&amp;&amp; r);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+*this&#x5177;&#x6709;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5F53;ResultType&#x4E0D;&#x662F;void&#x578B;&#xFF0C;&#x5C31;&#x5B58;&#x50A8;r&#x5230;*this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5F53;&#x4E2D;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+*this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x72B6;&#x6001;&#x4E3A;&#x5C31;&#x7EEA;&#xFF0C;&#x4E14;&#x5C06;&#x503C;&#x5B58;&#x5165;&#x3002;&#x4EFB;&#x610F;&#x7B49;&#x5F85;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x963B;&#x585E;&#x7EBF;&#x7A0B;&#x5C06;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5DF2;&#x7ECF;&#x5B58;&#x6709;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x629B;&#x51FA;<code>std::future_error</code>&#x578B;&#x5F02;&#x5E38;&#xFF0C;&#x4F34;&#x968F;&#x9519;&#x8BEF;&#x7801;&#x4E3A;<code>std::future_errc::promise_already_satisfied</code>&#x3002;r&#x7684;&#x62F7;&#x8D1D;&#x6784;&#x9020;&#x6216;&#x79FB;&#x52A8;&#x6784;&#x9020;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#xFF0C;&#x5373;&#x4E3A;&#x672C;&#x51FD;&#x6570;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+&#x5E76;&#x53D1;&#x8C03;&#x7528;set_value()&#x548C;set_exception()&#x7684;&#x7EBF;&#x7A0B;&#x5C06;&#x88AB;&#x5E8F;&#x5217;&#x5316;&#x3002;&#x8981;&#x60F3;&#x6210;&#x529F;&#x7684;&#x8C03;&#x7528;set_exception()&#xFF0C;&#x9700;&#x8981;&#x5728;&#x4E4B;&#x524D;&#x8C03;&#x7528;<code>std::future&lt;Result-Type&gt;::get()</code>&#x6216;<code>std::shared_future&lt;ResultType&gt;::get()</code>&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x5C06;&#x4F1A;&#x67E5;&#x627E;&#x5DF2;&#x5B58;&#x50A8;&#x7684;&#x5F02;&#x5E38;&#x3002;</p>
+<h3 id="stdpromisesetvalueatthreadexit-&#x6210;&#x5458;&#x51FD;&#x6570;">std::promise::set_value_at_thread_exit &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x503C;&#x5230;&#x4E0E;*this&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#xFF0C;&#x5230;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x72B6;&#x6001;&#x4F1A;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;&#x5C31;&#x7EEA;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void promise&lt;void&gt;::set_value_at_thread_exit();
+void promise&lt;R&amp;&gt;::set_value_at_thread_exit(R&amp; r);
+void promise&lt;R&gt;::set_value_at_thread_exit(R const&amp; r);
+void promise&lt;R&gt;::set_value_at_thread_exit(R&amp;&amp; r);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+*this&#x5177;&#x6709;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5F53;ResultType&#x4E0D;&#x662F;void&#x578B;&#xFF0C;&#x5C31;&#x5B58;&#x50A8;r&#x5230;*this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5F53;&#x4E2D;&#x3002;&#x6807;&#x8BB0;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E3A;&#x201C;&#x5DF2;&#x5B58;&#x50A8;&#x503C;&#x201D;&#x3002;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x4F1A;&#x5B89;&#x6392;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x72B6;&#x6001;&#x4E3A;&#x5C31;&#x7EEA;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5C06;&#x503C;&#x5B58;&#x5165;*this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x4E14;&#x76F4;&#x5230;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x72B6;&#x6001;&#x88AB;&#x7F6E;&#x4E3A;&#x5C31;&#x7EEA;&#x3002;&#x4EFB;&#x4F55;&#x7B49;&#x5F85;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x963B;&#x585E;&#x7EBF;&#x7A0B;&#x5C06;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5DF2;&#x7ECF;&#x5B58;&#x6709;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x629B;&#x51FA;<code>std::future_error</code>&#x578B;&#x5F02;&#x5E38;&#xFF0C;&#x4F34;&#x968F;&#x9519;&#x8BEF;&#x7801;&#x4E3A;<code>std::future_errc::promise_already_satisfied</code>&#x3002;r&#x7684;&#x62F7;&#x8D1D;&#x6784;&#x9020;&#x6216;&#x79FB;&#x52A8;&#x6784;&#x9020;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#xFF0C;&#x5373;&#x4E3A;&#x672C;&#x51FD;&#x6570;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+&#x5E76;&#x53D1;&#x8C03;&#x7528;set_value(), set_value_at_thread_exit(), set_exception()&#x548C;set_exception_at_thread_exit()&#x7684;&#x7EBF;&#x7A0B;&#x5C06;&#x88AB;&#x5E8F;&#x5217;&#x5316;&#x3002;&#x8981;&#x60F3;&#x6210;&#x529F;&#x7684;&#x8C03;&#x7528;set_exception()&#xFF0C;&#x9700;&#x8981;&#x5728;&#x4E4B;&#x524D;&#x8C03;&#x7528;<code>std::future&lt;Result-Type&gt;::get()</code>&#x6216;<code>std::shared_future&lt;ResultType&gt;::get()</code>&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x5C06;&#x4F1A;&#x67E5;&#x627E;&#x5DF2;&#x5B58;&#x50A8;&#x7684;&#x5F02;&#x5E38;&#x3002;</p>
+<h3 id="stdpromisesetexception-&#x6210;&#x5458;&#x51FD;&#x6570;">std::promise::set_exception &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#x5230;&#x4E0E;*this&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void set_exception(std::exception_ptr e);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+*this&#x5177;&#x6709;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;(bool)e&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;e&#x5B58;&#x50A8;&#x5230;*this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5728;&#x5B58;&#x50A8;&#x5F02;&#x5E38;&#x540E;&#xFF0C;*this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x72B6;&#x6001;&#x5C06;&#x7F6E;&#x4E3A;&#x7EE7;&#x7EED;&#x3002;&#x4EFB;&#x4F55;&#x7B49;&#x5F85;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x963B;&#x585E;&#x7EBF;&#x7A0B;&#x5C06;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5DF2;&#x7ECF;&#x5B58;&#x6709;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x629B;&#x51FA;<code>std::future_error</code>&#x578B;&#x5F02;&#x5E38;&#xFF0C;&#x4F34;&#x968F;&#x9519;&#x8BEF;&#x7801;&#x4E3A;<code>std::future_errc::promise_already_satisfied</code>&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+&#x5E76;&#x53D1;&#x8C03;&#x7528;set_value()&#x548C;set_exception()&#x7684;&#x7EBF;&#x7A0B;&#x5C06;&#x88AB;&#x5E8F;&#x5217;&#x5316;&#x3002;&#x8981;&#x60F3;&#x6210;&#x529F;&#x7684;&#x8C03;&#x7528;set_exception()&#xFF0C;&#x9700;&#x8981;&#x5728;&#x4E4B;&#x524D;&#x8C03;&#x7528;<code>std::future&lt;Result-Type&gt;::get()</code>&#x6216;<code>std::shared_future&lt;ResultType&gt;::get()</code>&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x5C06;&#x4F1A;&#x67E5;&#x627E;&#x5DF2;&#x5B58;&#x50A8;&#x7684;&#x5F02;&#x5E38;&#x3002;</p>
+<h3 id="stdpromisesetexceptionatthreadexit-&#x6210;&#x5458;&#x51FD;&#x6570;">std::promise::set_exception_at_thread_exit &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#x5230;&#x4E0E;*this&#x5173;&#x8054;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#xFF0C;&#x77E5;&#x9053;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#xFF0C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x88AB;&#x7F6E;&#x4E3A;&#x5C31;&#x7EEA;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>void set_exception_at_thread_exit(std::exception_ptr e);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+*this&#x5177;&#x6709;&#x5173;&#x8054;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x3002;(bool)e&#x4E3A;true&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5C06;e&#x5B58;&#x50A8;&#x5230;*this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E2D;&#x3002;&#x6807;&#x8BB0;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x4E3A;&#x201C;&#x5DF2;&#x5B58;&#x50A8;&#x503C;&#x201D;&#x3002;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x4F1A;&#x5B89;&#x6392;&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x72B6;&#x6001;&#x4E3A;&#x5C31;&#x7EEA;&#x3002;</p>
+<p><strong>&#x540E;&#x7F6E;&#x6761;&#x4EF6;</strong>
+&#x5C06;&#x503C;&#x5B58;&#x5165;*this&#x76F8;&#x5173;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#xFF0C;&#x4E14;&#x76F4;&#x5230;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x72B6;&#x6001;&#x88AB;&#x7F6E;&#x4E3A;&#x5C31;&#x7EEA;&#x3002;&#x4EFB;&#x4F55;&#x7B49;&#x5F85;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x7684;&#x963B;&#x585E;&#x7EBF;&#x7A0B;&#x5C06;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x5DF2;&#x7ECF;&#x5B58;&#x6709;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x629B;&#x51FA;<code>std::future_error</code>&#x578B;&#x5F02;&#x5E38;&#xFF0C;&#x4F34;&#x968F;&#x9519;&#x8BEF;&#x7801;&#x4E3A;<code>std::future_errc::promise_already_satisfied</code>&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+&#x5E76;&#x53D1;&#x8C03;&#x7528;set_value(), set_value_at_thread_exit(), set_exception()&#x548C;set_exception_at_thread_exit()&#x7684;&#x7EBF;&#x7A0B;&#x5C06;&#x88AB;&#x5E8F;&#x5217;&#x5316;&#x3002;&#x8981;&#x60F3;&#x6210;&#x529F;&#x7684;&#x8C03;&#x7528;set_exception()&#xFF0C;&#x9700;&#x8981;&#x5728;&#x4E4B;&#x524D;&#x8C03;&#x7528;<code>std::future&lt;Result-Type&gt;::get()</code>&#x6216;<code>std::shared_future&lt;ResultType&gt;::get()</code>&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x5C06;&#x4F1A;&#x67E5;&#x627E;&#x5DF2;&#x5B58;&#x50A8;&#x7684;&#x5F02;&#x5E38;&#x3002;</p>
+<h2 id="d45-stdasync&#x51FD;&#x6570;&#x6A21;&#x677F;">D.4.5 std::async&#x51FD;&#x6570;&#x6A21;&#x677F;</h2>
+<p><code>std::async</code>&#x80FD;&#x591F;&#x7B80;&#x5355;&#x7684;&#x4F7F;&#x7528;&#x53EF;&#x7528;&#x7684;&#x786C;&#x4EF6;&#x5E76;&#x884C;&#x6765;&#x8FD0;&#x884C;&#x81EA;&#x8EAB;&#x5305;&#x542B;&#x7684;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x3002;&#x5F53;&#x8C03;&#x7528;<code>std::async</code>&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;&#x7684;<code>std::future</code>&#x5BF9;&#x8C61;&#x3002;&#x6839;&#x636E;&#x6295;&#x653E;&#x7B56;&#x7565;&#xFF0C;&#x4EFB;&#x52A1;&#x5728;&#x5176;&#x6240;&#x5728;&#x7EBF;&#x7A0B;&#x4E0A;&#x662F;&#x5F02;&#x6B65;&#x8FD0;&#x884C;&#x7684;&#xFF0C;&#x5F53;&#x6709;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;&#x4E86;&#x8FD9;&#x4E2A;future&#x5BF9;&#x8C61;&#x7684;wait()&#x548C;get()&#x6210;&#x5458;&#x51FD;&#x6570;&#xFF0C;&#x5219;&#x8BE5;&#x4EFB;&#x52A1;&#x4F1A;&#x540C;&#x6B65;&#x8FD0;&#x884C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code>enum class launch
+{
+  async,deferred
+};
+
+template&lt;typename Callable,typename ... Args&gt;
+future&lt;result_of&lt;Callable(Args...)&gt;::type&gt;
+async(Callable&amp;&amp; func,Args&amp;&amp; ... args);
+
+template&lt;typename Callable,typename ... Args&gt;
+future&lt;result_of&lt;Callable(Args...)&gt;::type&gt;
+async(launch policy,Callable&amp;&amp; func,Args&amp;&amp; ... args);
+</code></pre><p><strong>&#x5148;&#x51B3;&#x6761;&#x4EF6;</strong>
+&#x8868;&#x8FBE;&#x5F0F;<code>INVOKE(func,args)</code>&#x80FD;&#x90FD;&#x4E3A;func&#x63D0;&#x4F9B;&#x5408;&#x6CD5;&#x7684;&#x503C;&#x548C;args&#x3002;Callable&#x548C;Args&#x7684;&#x6240;&#x6709;&#x6210;&#x5458;&#x90FD;&#x53EF;MoveConstructible(&#x53EF;&#x79FB;&#x52A8;&#x6784;&#x9020;)&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong>
+&#x5728;&#x5185;&#x90E8;&#x5B58;&#x50A8;&#x4E2D;&#x62F7;&#x8D1D;&#x6784;&#x9020;<code>func</code>&#x548C;<code>arg...</code>(&#x5206;&#x522B;&#x4F7F;&#x7528;fff&#x548C;xyz...&#x8FDB;&#x884C;&#x8868;&#x793A;)&#x3002;</p>
+<p>&#x5F53;policy&#x662F;<code>std::launch::async</code>,&#x8FD0;&#x884C;<code>INVOKE(fff,xyz...)</code>&#x5728;&#x6240;&#x5728;&#x7EBF;&#x7A0B;&#x4E0A;&#x3002;&#x5F53;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;<code>std::future</code>&#x72B6;&#x6001;&#x5C06;&#x4F1A;&#x4E3A;&#x5C31;&#x7EEA;&#x6001;&#xFF0C;&#x5E76;&#x4E14;&#x4E4B;&#x540E;&#x4F1A;&#x8FD4;&#x56DE;&#x5BF9;&#x5E94;&#x7684;&#x503C;&#x6216;&#x5F02;&#x5E38;(&#x7531;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x629B;&#x51FA;)&#x3002;&#x6790;&#x6784;&#x51FD;&#x6570;&#x4F1A;&#x7B49;&#x5F85;&#x8FD4;&#x56DE;&#x7684;<code>std::future</code>&#x76F8;&#x5173;&#x5F02;&#x6B65;&#x72B6;&#x6001;&#x4E3A;&#x5C31;&#x7EEA;&#x65F6;&#xFF0C;&#x624D;&#x89E3;&#x9664;&#x963B;&#x585E;&#x3002;</p>
+<p>&#x5F53;policy&#x662F;<code>std::launch::deferred</code>&#xFF0C;fff&#x548C;xyx...&#x90FD;&#x4F1A;&#x4F5C;&#x4E3A;&#x5EF6;&#x671F;&#x51FD;&#x6570;&#x8C03;&#x7528;&#xFF0C;&#x5B58;&#x50A8;&#x5728;&#x8FD4;&#x56DE;&#x7684;<code>std::future</code>&#x3002;&#x9996;&#x6B21;&#x8C03;&#x7528;future&#x7684;wait()&#x6216;get()&#x6210;&#x5458;&#x51FD;&#x6570;&#xFF0C;&#x5C06;&#x4F1A;&#x5171;&#x4EAB;&#x76F8;&#x5173;&#x72B6;&#x6001;&#xFF0C;&#x4E4B;&#x540E;&#x6267;&#x884C;&#x7684;<code>INVOKE(fff,xyz...)</code>&#x4E0E;&#x8C03;&#x7528;wait()&#x6216;get()&#x51FD;&#x6570;&#x7684;&#x7EBF;&#x7A0B;&#x540C;&#x6B65;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x6267;&#x884C;<code>INVOKE(fff,xyz...)</code>&#x540E;&#xFF0C;&#x5728;&#x8C03;&#x7528;<code>std::future</code>&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;get()&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x6709;&#x503C;&#x8FD4;&#x56DE;&#x6216;&#x6709;&#x5F02;&#x5E38;&#x629B;&#x51FA;&#x3002;</p>
+<p>&#x5F53;policy&#x662F;<code>std::launch::async | std::launch::deferred</code>&#x6216;&#x662F;policy&#x53C2;&#x6570;&#x88AB;&#x7701;&#x7565;&#xFF0C;&#x5176;&#x884C;&#x4E3A;&#x5982;&#x540C;&#x5DF2;&#x6307;&#x5B9A;&#x7684;<code>std::launch::async</code>&#x6216;<code>std::launch::deferred</code>&#x3002;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x5C06;&#x4F1A;&#x901A;&#x8FC7;&#x9010;&#x6E10;&#x9012;&#x589E;&#x7684;&#x65B9;&#x5F0F;(call-by-call basis)&#x6700;&#x5927;&#x5316;&#x5229;&#x7528;&#x53EF;&#x7528;&#x7684;&#x786C;&#x4EF6;&#x5E76;&#x884C;&#xFF0C;&#x5E76;&#x907F;&#x514D;&#x8D85;&#x9650;&#x5206;&#x914D;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x5728;&#x6240;&#x6709;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>std::async</code>&#x8C03;&#x7528;&#x90FD;&#x4F1A;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+&#x5B8C;&#x6210;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x7684;&#x5148;&#x884C;&#x6761;&#x4EF6;&#x662F;&#xFF0C;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x8C03;&#x7528;<code>std::future</code>&#x548C;<code>std::shared_future</code>&#x5B9E;&#x4F8B;&#x7684;wait(),get(),wait_for()&#x6216;wait_until()&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x5BF9;&#x8C61;&#x4E0E;<code>std::async</code>&#x8FD4;&#x56DE;&#x7684;<code>std::future</code>&#x5BF9;&#x8C61;&#x5173;&#x8054;&#x7684;&#x72B6;&#x6001;&#x76F8;&#x540C;&#x624D;&#x7B97;&#x6210;&#x529F;&#x3002;&#x5C31;<code>std::launch::async</code>&#x8FD9;&#x4E2A;policy&#x6765;&#x8BF4;&#xFF0C;&#x5728;&#x5B8C;&#x6210;&#x7EBF;&#x7A0B;&#x4E0A;&#x7684;&#x51FD;&#x6570;&#x524D;&#xFF0C;&#x4E5F;&#x9700;&#x8981;&#x5148;&#x884C;&#x5BF9;&#x4E0A;&#x9762;&#x7684;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x540E;&#xFF0C;&#x6210;&#x529F;&#x7684;&#x8FD4;&#x56DE;&#x624D;&#x884C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x5185;&#x90E8;&#x5B58;&#x50A8;&#x65E0;&#x6CD5;&#x5206;&#x914D;&#x6240;&#x9700;&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x5C06;&#x629B;&#x51FA;<code>std::bad_alloc</code>&#x7C7B;&#x578B;&#x5F02;&#x5E38;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x5F53;&#x6548;&#x679C;&#x6CA1;&#x6709;&#x8FBE;&#x5230;&#xFF0C;&#x6216;&#x4EFB;&#x4F55;&#x5F02;&#x5E38;&#x5728;&#x6784;&#x9020;fff&#x548C;xyz...&#x53D1;&#x751F;&#x65F6;&#xFF0C;&#x629B;&#x51FA;<code>std::future_error</code>&#x5F02;&#x5E38;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="D.3-chinese.html" class="navigation navigation-prev " aria-label="Previous page: D.3 atomic头文件">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="D.5-chinese.html" class="navigation navigation-next " aria-label="Next page: D.5 mutex头文件">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"D.4 future头文件","level":"1.22.4","depth":2,"next":{"title":"D.5 mutex头文件","level":"1.22.5","depth":2,"path":"content/appendix_D/D.5-chinese.md","ref":"content/appendix_D/D.5-chinese.md","articles":[]},"previous":{"title":"D.3 atomic头文件","level":"1.22.3","depth":2,"path":"content/appendix_D/D.3-chinese.md","ref":"content/appendix_D/D.3-chinese.md","articles":[]},"dir":"ltr"},"config":{"plugins":["livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"plugins":["katex","ace"],"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"msyh","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"陈晓伟 chenxiaowei","pdf":{"pageNumbers":false,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":10,"left":10,"top":10,"bottom":20}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"C++并发编程实战（第2版）","language":"zh-hans","gitbook":"*","description":"《C++ Concurrency In Action - SECOND EDITION》英文版的中文翻译版。","direction":"ltr"},"file":{"path":"content/appendix_D/D.4-chinese.md","mtime":"2022-11-19T02:54:31.287Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-11-19T07:50:48.148Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

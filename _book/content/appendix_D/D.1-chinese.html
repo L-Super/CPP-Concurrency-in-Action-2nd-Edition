@@ -1,0 +1,2032 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>D.1 chrono头文件 · C++并发编程实战（第2版）</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="陈晓伟 chenxiaowei">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="D.2-chinese.html" />
+    
+    
+    <link rel="prev" href="D.0-chinese.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Praise_for_the_first_edition.html">
+            
+                <a href="../Praise_for_the_first_edition.html">
+            
+                    
+                    第一版的赞许
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../preface-chinese.html">
+            
+                <a href="../preface-chinese.html">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../acknowledgments-chinese.html">
+            
+                <a href="../acknowledgments-chinese.html">
+            
+                    
+                    感谢
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../about_this_book-chinese.html">
+            
+                <a href="../about_this_book-chinese.html">
+            
+                    
+                    关于本书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../about_the_author-chinese.html">
+            
+                <a href="../about_the_author-chinese.html">
+            
+                    
+                    关于作者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../about_cover_illustration-chinese.html">
+            
+                <a href="../about_cover_illustration-chinese.html">
+            
+                    
+                    关于封面
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../chapter1/1.0-chinese.html">
+            
+                <a href="../chapter1/1.0-chinese.html">
+            
+                    
+                    第1章 你好，并发世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../chapter1/1.1-chinese.html">
+            
+                <a href="../chapter1/1.1-chinese.html">
+            
+                    
+                    1.1 何谓并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../chapter1/1.2-chinese.html">
+            
+                <a href="../chapter1/1.2-chinese.html">
+            
+                    
+                    1.2 为什么使用并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../chapter1/1.3-chinese.html">
+            
+                <a href="../chapter1/1.3-chinese.html">
+            
+                    
+                    1.3 并发和多线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../chapter1/1.4-chinese.html">
+            
+                <a href="../chapter1/1.4-chinese.html">
+            
+                    
+                    1.4 开始入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../chapter1/1.5-chinese.html">
+            
+                <a href="../chapter1/1.5-chinese.html">
+            
+                    
+                    1.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../chapter2/2.0-chinese.html">
+            
+                <a href="../chapter2/2.0-chinese.html">
+            
+                    
+                    第2章 线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../chapter2/2.1-chinese.html">
+            
+                <a href="../chapter2/2.1-chinese.html">
+            
+                    
+                    2.1 线程的基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../chapter2/2.2-chinese.html">
+            
+                <a href="../chapter2/2.2-chinese.html">
+            
+                    
+                    2.2 传递参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../chapter2/2.3-chinese.html">
+            
+                <a href="../chapter2/2.3-chinese.html">
+            
+                    
+                    2.3 转移所有权
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../chapter2/2.4-chinese.html">
+            
+                <a href="../chapter2/2.4-chinese.html">
+            
+                    
+                    2.4 确定线程数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../chapter2/2.5-chinese.html">
+            
+                <a href="../chapter2/2.5-chinese.html">
+            
+                    
+                    2.5 线程标识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../chapter2/2.6-chinese.html">
+            
+                <a href="../chapter2/2.6-chinese.html">
+            
+                    
+                    2.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../chapter3/3.0-chinese.html">
+            
+                <a href="../chapter3/3.0-chinese.html">
+            
+                    
+                    第3章 共享数据
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../chapter3/3.1-chinese.html">
+            
+                <a href="../chapter3/3.1-chinese.html">
+            
+                    
+                    3.1 共享数据的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../chapter3/3.2-chinese.html">
+            
+                <a href="../chapter3/3.2-chinese.html">
+            
+                    
+                    3.2 使用互斥量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../chapter3/3.3-chinese.html">
+            
+                <a href="../chapter3/3.3-chinese.html">
+            
+                    
+                    3.3 保护共享数据的方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../chapter3/3.4-chinese.html">
+            
+                <a href="../chapter3/3.4-chinese.html">
+            
+                    
+                    3.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../chapter4/4.0-chinese.html">
+            
+                <a href="../chapter4/4.0-chinese.html">
+            
+                    
+                    第4章 同步操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../chapter4/4.1-chinese.html">
+            
+                <a href="../chapter4/4.1-chinese.html">
+            
+                    
+                    4.1 等待事件或条件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../chapter4/4.2-chinese.html">
+            
+                <a href="../chapter4/4.2-chinese.html">
+            
+                    
+                    4.2 使用future
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../chapter4/4.3-chinese.html">
+            
+                <a href="../chapter4/4.3-chinese.html">
+            
+                    
+                    4.3 限时等待
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../chapter4/4.4-chinese.html">
+            
+                <a href="../chapter4/4.4-chinese.html">
+            
+                    
+                    4.4 简化代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../chapter4/4.5-chinese.html">
+            
+                <a href="../chapter4/4.5-chinese.html">
+            
+                    
+                    4.5 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../chapter5/5.0-chinese.html">
+            
+                <a href="../chapter5/5.0-chinese.html">
+            
+                    
+                    第5章 内存模型和原子操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../chapter5/5.1-chinese.html">
+            
+                <a href="../chapter5/5.1-chinese.html">
+            
+                    
+                    5.1 内存模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../chapter5/5.2-chinese.html">
+            
+                <a href="../chapter5/5.2-chinese.html">
+            
+                    
+                    5.2 原子操作和原子类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../chapter5/5.3-chinese.html">
+            
+                <a href="../chapter5/5.3-chinese.html">
+            
+                    
+                    5.3 同步操作和强制排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../chapter5/5.4-chinese.html">
+            
+                <a href="../chapter5/5.4-chinese.html">
+            
+                    
+                    5.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../chapter6/6.0-chinese.html">
+            
+                <a href="../chapter6/6.0-chinese.html">
+            
+                    
+                    第6章 设计基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../chapter6/6.1-chinese.html">
+            
+                <a href="../chapter6/6.1-chinese.html">
+            
+                    
+                    6.1 并发设计的意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../chapter6/6.2-chinese.html">
+            
+                <a href="../chapter6/6.2-chinese.html">
+            
+                    
+                    6.2 基于锁的并发数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../chapter6/6.3-chinese.html">
+            
+                <a href="../chapter6/6.3-chinese.html">
+            
+                    
+                    6.3 设计更加复杂的数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../chapter6/6.4-chinese.html">
+            
+                <a href="../chapter6/6.4-chinese.html">
+            
+                    
+                    6.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../chapter7/7.0-chinese.html">
+            
+                <a href="../chapter7/7.0-chinese.html">
+            
+                    
+                    第7章 设计无锁的并发数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../chapter7/7.1-chinese.html">
+            
+                <a href="../chapter7/7.1-chinese.html">
+            
+                    
+                    7.1 定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../chapter7/7.2-chinese.html">
+            
+                <a href="../chapter7/7.2-chinese.html">
+            
+                    
+                    7.2 无锁数据结构的例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../chapter7/7.3-chinese.html">
+            
+                <a href="../chapter7/7.3-chinese.html">
+            
+                    
+                    7.3 设计无锁数据结构的指导建议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../chapter7/7.4-chinese.html">
+            
+                <a href="../chapter7/7.4-chinese.html">
+            
+                    
+                    7.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../chapter8/8.0-chinese.html">
+            
+                <a href="../chapter8/8.0-chinese.html">
+            
+                    
+                    第8章 并发设计
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../chapter8/8.1-chinese.html">
+            
+                <a href="../chapter8/8.1-chinese.html">
+            
+                    
+                    8.1 线程间划分工作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../chapter8/8.2-chinese.html">
+            
+                <a href="../chapter8/8.2-chinese.html">
+            
+                    
+                    8.2 并发代码的性能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../chapter8/8.3-chinese.html">
+            
+                <a href="../chapter8/8.3-chinese.html">
+            
+                    
+                    8.3 为多线程性能设计数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="../chapter8/8.4-chinese.html">
+            
+                <a href="../chapter8/8.4-chinese.html">
+            
+                    
+                    8.4 设计并发代码的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.5" data-path="../chapter8/8.5-chinese.html">
+            
+                <a href="../chapter8/8.5-chinese.html">
+            
+                    
+                    8.5 在实践中设计并发代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.6" data-path="../chapter8/8.6-chinese.html">
+            
+                <a href="../chapter8/8.6-chinese.html">
+            
+                    
+                    8.6 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../chapter9/9.0-chinese.html">
+            
+                <a href="../chapter9/9.0-chinese.html">
+            
+                    
+                    第9章 高级线程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../chapter9/9.1-chinese.html">
+            
+                <a href="../chapter9/9.1-chinese.html">
+            
+                    
+                    9.1 线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../chapter9/9.2-chinese.html">
+            
+                <a href="../chapter9/9.2-chinese.html">
+            
+                    
+                    9.2 中断线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../chapter9/9.3-chinese.html">
+            
+                <a href="../chapter9/9.3-chinese.html">
+            
+                    
+                    9.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../chapter10/10.0-chinese.html">
+            
+                <a href="../chapter10/10.0-chinese.html">
+            
+                    
+                    第10章 并行算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../chapter10/10.1-chinese.html">
+            
+                <a href="../chapter10/10.1-chinese.html">
+            
+                    
+                    10.1 并行化标准库算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../chapter10/10.2-chinese.html">
+            
+                <a href="../chapter10/10.2-chinese.html">
+            
+                    
+                    10.2 执行策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="../chapter10/10.3-chinese.html">
+            
+                <a href="../chapter10/10.3-chinese.html">
+            
+                    
+                    10.3 C++标准库中的并行算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="../chapter10/10.4-chinese.html">
+            
+                <a href="../chapter10/10.4-chinese.html">
+            
+                    
+                    10.4 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../chapter11/11.0-chinese.html">
+            
+                <a href="../chapter11/11.0-chinese.html">
+            
+                    
+                    第11章 测试和调试多线程应用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../chapter11/11.1-chinese.html">
+            
+                <a href="../chapter11/11.1-chinese.html">
+            
+                    
+                    11.1 与并发相关的Bug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.2" data-path="../chapter11/11.2-chinese.html">
+            
+                <a href="../chapter11/11.2-chinese.html">
+            
+                    
+                    11.2 定位并发Bug的技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.3" data-path="../chapter11/11.3-chinese.html">
+            
+                <a href="../chapter11/11.3-chinese.html">
+            
+                    
+                    11.3 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="../appendix_A/A.0-chinese.html">
+            
+                <a href="../appendix_A/A.0-chinese.html">
+            
+                    
+                    附录A C++11特性简明参考(部分)
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.19.1" data-path="../appendix_A/A.1-chinese.html">
+            
+                <a href="../appendix_A/A.1-chinese.html">
+            
+                    
+                    A.1 右值引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.2" data-path="../appendix_A/A.2-chinese.html">
+            
+                <a href="../appendix_A/A.2-chinese.html">
+            
+                    
+                    A.2 删除函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.3" data-path="../appendix_A/A.3-chinese.html">
+            
+                <a href="../appendix_A/A.3-chinese.html">
+            
+                    
+                    A.3 默认函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.4" data-path="../appendix_A/A.4-chinese.html">
+            
+                <a href="../appendix_A/A.4-chinese.html">
+            
+                    
+                    A.4 常量表达式函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.5" data-path="../appendix_A/A.5-chinese.html">
+            
+                <a href="../appendix_A/A.5-chinese.html">
+            
+                    
+                    A.5 Lambda函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.6" data-path="../appendix_A/A.6-chinese.html">
+            
+                <a href="../appendix_A/A.6-chinese.html">
+            
+                    
+                    A.6 变参模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.7" data-path="../appendix_A/A.7-chinese.html">
+            
+                <a href="../appendix_A/A.7-chinese.html">
+            
+                    
+                    A.7 自动推导变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.8" data-path="../appendix_A/A.8-chinese.html">
+            
+                <a href="../appendix_A/A.8-chinese.html">
+            
+                    
+                    A.8 线程本地变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.9" data-path="../appendix_A/A.9-chinese.html">
+            
+                <a href="../appendix_A/A.9-chinese.html">
+            
+                    
+                    A.9 模板类参数的推导
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.10" data-path="../appendix_A/A.10-chinese.html">
+            
+                <a href="../appendix_A/A.10-chinese.html">
+            
+                    
+                    A.10 本章总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="../appendix_B/B.0-chinese.html">
+            
+                <a href="../appendix_B/B.0-chinese.html">
+            
+                    
+                    附录B 并发库简要对比
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="../appendix_C/C.0-chinese.html">
+            
+                <a href="../appendix_C/C.0-chinese.html">
+            
+                    
+                    附录C 消息传递框架与完整的ATM示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="D.0-chinese.html">
+            
+                <a href="D.0-chinese.html">
+            
+                    
+                    附录D C++线程类库参考
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.22.1" data-path="D.1-chinese.html">
+            
+                <a href="D.1-chinese.html">
+            
+                    
+                    D.1 chrono头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.2" data-path="D.2-chinese.html">
+            
+                <a href="D.2-chinese.html">
+            
+                    
+                    D.2 condition_variable头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.3" data-path="D.3-chinese.html">
+            
+                <a href="D.3-chinese.html">
+            
+                    
+                    D.3 atomic头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.4" data-path="D.4-chinese.html">
+            
+                <a href="D.4-chinese.html">
+            
+                    
+                    D.4 future头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.5" data-path="D.5-chinese.html">
+            
+                <a href="D.5-chinese.html">
+            
+                    
+                    D.5 mutex头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.6" data-path="D.6-chinese.html">
+            
+                <a href="D.6-chinese.html">
+            
+                    
+                    D.6 ratio头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.7" data-path="D.7-chinese.html">
+            
+                <a href="D.7-chinese.html">
+            
+                    
+                    D.7 thread头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >D.1 chrono头文件</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="d1-chrono&#x5934;&#x6587;&#x4EF6;">D.1 &lt;chrono&gt;&#x5934;&#x6587;&#x4EF6;</h1>
+<p>&lt;chrono&gt;&#x5934;&#x6587;&#x4EF6;&#x4F5C;&#x4E3A;<code>time_point</code>&#x7684;&#x63D0;&#x4F9B;&#x8005;&#xFF0C;&#x5177;&#x6709;&#x4EE3;&#x8868;&#x65F6;&#x95F4;&#x70B9;&#x7684;&#x7C7B;&#xFF0C;duration&#x7C7B;&#x548C;&#x65F6;&#x949F;&#x7C7B;&#x3002;&#x6BCF;&#x4E2A;&#x65F6;&#x949F;&#x90FD;&#x6709;&#x4E00;&#x4E2A;<code>is_steady</code>&#x9759;&#x6001;&#x6570;&#x636E;&#x6210;&#x5458;&#xFF0C;&#x8FD9;&#x4E2A;&#x6210;&#x5458;&#x7528;&#x6765;&#x8868;&#x793A;&#x8BE5;&#x65F6;&#x949F;&#x662F;&#x5426;&#x662F;&#x4E00;&#x4E2A;<em>&#x7A33;&#x5B9A;&#x7684;</em>&#x65F6;&#x949F;(&#x4EE5;&#x5300;&#x901F;&#x8BA1;&#x65F6;&#x7684;&#x65F6;&#x949F;&#xFF0C;&#x4E14;&#x4E0D;&#x53EF;&#x8C03;&#x8282;)&#x3002;<code>std::chrono::steady_clock</code>&#x662F;&#x552F;&#x4E00;&#x4E2A;&#x80FD;&#x4FDD;&#x8BC1;&#x7A33;&#x5B9A;&#x7684;&#x65F6;&#x949F;&#x7C7B;&#x3002;</p>
+<p>&#x5934;&#x6587;&#x4EF6;&#x6B63;&#x6587;</p>
+<pre><code class="lang-c++"><span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>
+{
+  <span class="hljs-keyword">namespace</span> chrono
+  {
+    <span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Rep,<span class="hljs-keyword">typename</span> Period = ratio&lt;<span class="hljs-number">1</span>&gt;&gt;
+    <span class="hljs-keyword">class</span> duration;
+    <span class="hljs-keyword">template</span>&lt;
+        <span class="hljs-keyword">typename</span> Clock,
+        <span class="hljs-keyword">typename</span> Duration = <span class="hljs-keyword">typename</span> Clock::duration&gt;
+    <span class="hljs-keyword">class</span> time_point;
+    <span class="hljs-keyword">class</span> system_clock;
+    <span class="hljs-keyword">class</span> steady_clock;
+    <span class="hljs-keyword">typedef</span> unspecified-clock-type high_resolution_clock;
+  }
+}
+</code></pre>
+<h2 id="d11-stdchronoduration&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.1.1 std::chrono::duration&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::chrono::duration</code>&#x7C7B;&#x6A21;&#x677F;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x8868;&#x793A;&#x65F6;&#x95F4;&#x3002;&#x6A21;&#x677F;&#x53C2;&#x6570;<code>Rep</code>&#x548C;<code>Period</code>&#x662F;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x6301;&#x7EED;&#x65F6;&#x95F4;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;<code>std::ratio</code>&#x5B9E;&#x4F8B;&#x4EE3;&#x8868;&#x4E86;&#x65F6;&#x95F4;&#x7684;&#x957F;&#x5EA6;(&#x51E0;&#x5206;&#x4E4B;&#x4E00;&#x79D2;)&#xFF0C;&#x5176;&#x8868;&#x793A;&#x4E86;&#x5728;&#x4E24;&#x6B21;&#x201C;&#x65F6;&#x949F;&#x6EF4;&#x7B54;&#x201D;&#x540E;&#x7684;&#x65F6;&#x95F4;(&#x65F6;&#x949F;&#x5468;&#x671F;)&#x3002;&#x56E0;&#x6B64;&#xFF0C;<code>std::chrono::duration&lt;int, std::milli&gt;</code>&#x5373;&#x4E3A;&#xFF0C;&#x65F6;&#x95F4;&#x4EE5;&#x6BEB;&#x79D2;&#x6570;&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x50A8;&#x5230;int&#x7C7B;&#x578B;&#x4E2D;&#xFF0C;&#x800C;<code>std::chrono::duration&lt;short, std::ratio&lt;1,50&gt;&gt;</code>&#x5219;&#x662F;&#x8BB0;&#x5F55;1/50&#x79D2;&#x7684;&#x4E2A;&#x6570;&#xFF0C;&#x5E76;&#x5C06;&#x4E2A;&#x6570;&#x5B58;&#x5165;short&#x7C7B;&#x578B;&#x7684;&#x53D8;&#x91CF;&#x4E2D;&#xFF0C;&#x8FD8;&#x6709;<code>std::chrono::duration &lt;long long, std::ratio&lt;60,1&gt;&gt;</code>&#x5219;&#x662F;&#x5C06;&#x5206;&#x949F;&#x6570;&#x5B58;&#x50A8;&#x5230;long long&#x7C7B;&#x578B;&#x7684;&#x53D8;&#x91CF;&#x4E2D;&#x3002;</p>
+<h3 id="&#x7C7B;&#x7684;&#x5B9A;&#x4E49;">&#x7C7B;&#x7684;&#x5B9A;&#x4E49;</h3>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep, <span class="hljs-keyword">class</span> Period=ratio&lt;<span class="hljs-number">1</span>&gt; &gt;
+<span class="hljs-keyword">class</span> duration
+{
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-keyword">typedef</span> Rep rep;
+  <span class="hljs-keyword">typedef</span> Period period;
+
+  <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-title">duration</span><span class="hljs-params">()</span> </span>= <span class="hljs-keyword">default</span>;
+  ~duration() = <span class="hljs-keyword">default</span>;
+
+  duration(<span class="hljs-keyword">const</span> duration&amp;) = <span class="hljs-keyword">default</span>;
+  duration&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> duration&amp;) = <span class="hljs-keyword">default</span>;
+
+  <span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep2&gt;
+  <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">explicit</span> <span class="hljs-title">duration</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Rep2&amp; r)</span></span>;
+
+  <span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+  <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-title">duration</span><span class="hljs-params">(<span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; d)</span></span>;
+
+  <span class="hljs-function"><span class="hljs-keyword">constexpr</span> rep <span class="hljs-title">count</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>;
+  <span class="hljs-keyword">constexpr</span> duration <span class="hljs-keyword">operator</span>+() <span class="hljs-keyword">const</span>;
+  <span class="hljs-keyword">constexpr</span> duration <span class="hljs-keyword">operator</span>-() <span class="hljs-keyword">const</span>;
+
+  duration&amp; <span class="hljs-keyword">operator</span>++();
+  duration <span class="hljs-keyword">operator</span>++(<span class="hljs-keyword">int</span>);
+  duration&amp; <span class="hljs-keyword">operator</span>--();
+  duration <span class="hljs-keyword">operator</span>--(<span class="hljs-keyword">int</span>);
+
+  duration&amp; <span class="hljs-keyword">operator</span>+=(<span class="hljs-keyword">const</span> duration&amp; d);
+  duration&amp; <span class="hljs-keyword">operator</span>-=(<span class="hljs-keyword">const</span> duration&amp; d);
+  duration&amp; <span class="hljs-keyword">operator</span>*=(<span class="hljs-keyword">const</span> rep&amp; rhs);
+  duration&amp; <span class="hljs-keyword">operator</span>/=(<span class="hljs-keyword">const</span> rep&amp; rhs);
+
+  duration&amp; <span class="hljs-keyword">operator</span>%=(<span class="hljs-keyword">const</span> rep&amp; rhs);
+  duration&amp; <span class="hljs-keyword">operator</span>%=(<span class="hljs-keyword">const</span> duration&amp; rhs);
+
+  <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">constexpr</span> duration <span class="hljs-title">zero</span><span class="hljs-params">()</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">constexpr</span> duration <span class="hljs-title">min</span><span class="hljs-params">()</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">constexpr</span> duration <span class="hljs-title">max</span><span class="hljs-params">()</span></span>;
+};
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>==(
+    <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+    <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+    <span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>!=(
+    <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+    <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+    <span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&lt;(
+    <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+    <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+    <span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&lt;=(
+    <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+    <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+    <span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&gt;(
+    <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+    <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+    <span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&gt;=(
+    <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+    <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> ToDuration, <span class="hljs-keyword">class</span> Rep, <span class="hljs-keyword">class</span> Period&gt;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> ToDuration <span class="hljs-title">duration_cast</span><span class="hljs-params">(<span class="hljs-keyword">const</span> duration&lt;Rep, Period&gt;&amp; d)</span></span>;
+</code></pre>
+<p><strong>&#x8981;&#x6C42;</strong></p>
+<p><code>Rep</code>&#x5FC5;&#x987B;&#x662F;&#x5185;&#x7F6E;&#x6570;&#x503C;&#x7C7B;&#x578B;&#xFF0C;&#x6216;&#x662F;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x7C7B;&#x6570;&#x503C;&#x7C7B;&#x578B;&#x3002;</p>
+<p><code>Period</code>&#x5FC5;&#x987B;&#x662F;<code>std::ratio&lt;&gt;</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<h3 id="stdchronodurationrep-&#x7C7B;&#x578B;">std::chrono::duration::Rep &#x7C7B;&#x578B;</h3>
+<p>&#x7528;&#x6765;&#x8BB0;&#x5F55;<code>dration</code>&#x4E2D;&#x65F6;&#x949F;&#x5468;&#x671F;&#x7684;&#x6570;&#x91CF;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">typedef</span> Rep rep;
+</code></pre>
+<p><code>rep</code>&#x7C7B;&#x578B;&#x7528;&#x6765;&#x8BB0;&#x5F55;<code>duration</code>&#x5BF9;&#x8C61;&#x5185;&#x90E8;&#x7684;&#x8868;&#x793A;&#x3002;</p>
+<h3 id="stdchronodurationperiod-&#x7C7B;&#x578B;">std::chrono::duration::Period &#x7C7B;&#x578B;</h3>
+<p>&#x8FD9;&#x4E2A;&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x662F;&#x4E00;&#x4E2A;<code>std::ratio</code>&#x7279;&#x5316;&#x5B9E;&#x4F8B;&#xFF0C;&#x7528;&#x6765;&#x8868;&#x793A;&#x5728;&#x7EE7;&#x7EED;&#x65F6;&#x95F4;&#x4E2D;&#xFF0C;1s&#x6240;&#x8981;&#x8BB0;&#x5F55;&#x7684;&#x6B21;&#x6570;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5F53;<code>period</code>&#x662F;<code>std::ratio&lt;1, 50&gt;</code>&#xFF0C;<code>duration</code>&#x53D8;&#x91CF;&#x7684;count()&#x5C31;&#x4F1A;&#x5728;N&#x79D2;&#x949F;&#x8FD4;&#x56DE;50N&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">typedef</span> Period period;
+</code></pre>
+<h3 id="stdchronoduration-&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;">std::chrono::duration &#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x503C;&#x6784;&#x9020;<code>std::chrono::duration</code>&#x5B9E;&#x4F8B;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-title">duration</span><span class="hljs-params">()</span> </span>= <span class="hljs-keyword">default</span>;
+</code></pre>
+<p><strong>&#x6548;&#x679C;</strong>
+<code>duration</code>&#x5185;&#x90E8;&#x503C;(&#x4F8B;&#x5982;<code>rep</code>&#x7C7B;&#x578B;&#x7684;&#x503C;)&#x90FD;&#x5DF2;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<h3 id="stdchronoduration-&#x9700;&#x8981;&#x8BA1;&#x6570;&#x503C;&#x7684;&#x8F6C;&#x6362;&#x6784;&#x9020;&#x51FD;&#x6570;">std::chrono::duration &#x9700;&#x8981;&#x8BA1;&#x6570;&#x503C;&#x7684;&#x8F6C;&#x6362;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x901A;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684;&#x6570;&#x503C;&#x6765;&#x6784;&#x9020;<code>std::chrono::duration</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep2&gt;;
+<span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">explicit</span> <span class="hljs-title">duration</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Rep2&amp; r)</span></span>;
+</code></pre>
+<p><strong>&#x6548;&#x679C;</strong></p>
+<p><code>duration</code>&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x90E8;&#x503C;&#x4F1A;&#x4F7F;&#x7528;<code>static_cast&lt;rep&gt;(r)</code>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p><strong>&#x7ED3;&#x679C;</strong>
+&#x5F53;Rep2&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x4E3A;Rep&#xFF0C;Rep&#x662F;&#x6D6E;&#x70B9;&#x7C7B;&#x578B;&#x6216;Rep2&#x4E0D;&#x662F;&#x6D6E;&#x70B9;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x4E2A;&#x6784;&#x9020;&#x51FD;&#x6570;&#x624D;&#x80FD;&#x4F7F;&#x7528;&#x3002;</p>
+<p><strong>&#x540E;&#x9A8C;&#x6761;&#x4EF6;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">this</span>-&gt;count()==<span class="hljs-keyword">static_cast</span>&lt;rep&gt;(r)
+</code></pre>
+<h3 id="stdchronoduration-&#x9700;&#x8981;&#x53E6;&#x4E00;&#x4E2A;stdchronoduration&#x503C;&#x7684;&#x8F6C;&#x5316;&#x6784;&#x9020;&#x51FD;&#x6570;">std::chrono::duration &#x9700;&#x8981;&#x53E6;&#x4E00;&#x4E2A;std::chrono::duration&#x503C;&#x7684;&#x8F6C;&#x5316;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x901A;&#x8FC7;&#x53E6;&#x4E00;&#x4E2A;<code>std::chrono::duration</code>&#x7C7B;&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;&#x8BA1;&#x6570;&#x503C;&#x6765;&#x6784;&#x9020;&#x4E00;&#x4E2A;<code>std::chrono::duration</code>&#x7C7B;&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period&gt;
+<span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-title">duration</span><span class="hljs-params">(<span class="hljs-keyword">const</span> duration&lt;Rep2,Period2&gt;&amp; d)</span></span>;
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<p>duration&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x90E8;&#x503C;&#x901A;&#x8FC7;<code>duration_cast&lt;duration&lt;Rep,Period&gt;&gt;(d).count()</code>&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p><strong>&#x8981;&#x6C42;</strong></p>
+<p>&#x5F53;Rep&#x662F;&#x4E00;&#x4E2A;&#x6D6E;&#x70B9;&#x7C7B;&#x6216;Rep2&#x4E0D;&#x662F;&#x6D6E;&#x70B9;&#x7C7B;&#xFF0C;&#x4E14;Period2&#x662F;Period&#x6570;&#x7684;&#x500D;&#x6570;(&#x6BD4;&#x5982;&#xFF0C;ratio_divide&lt;Period2,Period&gt;::den==1)&#x65F6;&#xFF0C;&#x624D;&#x80FD;&#x8C03;&#x7528;&#x8BE5;&#x91CD;&#x8F7D;&#x3002;&#x5F53;&#x4E00;&#x4E2A;&#x8F83;&#x5C0F;&#x7684;&#x6570;&#x636E;&#x8F6C;&#x6362;&#x4E3A;&#x4E00;&#x4E2A;&#x8F83;&#x5927;&#x7684;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x8BE5;&#x6784;&#x9020;&#x51FD;&#x6570;&#x5C31;&#x80FD;&#x907F;&#x514D;&#x6570;&#x4F4D;&#x622A;&#x65AD;&#x548C;&#x7CBE;&#x5EA6;&#x635F;&#x5931;&#x3002;</p>
+<p><strong>&#x540E;&#x9A8C;&#x6761;&#x4EF6;</strong></p>
+<p><code>this-&gt;count() == dutation_cast&amp;lt;duration&lt;Rep, Period&gt;&gt;(d).count()</code></p>
+<p><strong>&#x4F8B;&#x5B50;</strong></p>
+<pre><code class="lang-c++">duration&lt;<span class="hljs-keyword">int</span>, ratio&lt;<span class="hljs-number">1</span>, <span class="hljs-number">1000</span>&gt;&gt; ms(<span class="hljs-number">5</span>);  <span class="hljs-comment">// 5&#x6BEB;&#x79D2;</span>
+duration&lt;<span class="hljs-keyword">int</span>, ratio&lt;<span class="hljs-number">1</span>, <span class="hljs-number">1</span>&gt;&gt; s(ms);  <span class="hljs-comment">// &#x9519;&#x8BEF;&#xFF1A;&#x4E0D;&#x80FD;&#x5C06;ms&#x5F53;&#x505A;s&#x8FDB;&#x884C;&#x5B58;&#x50A8;</span>
+duration&lt;<span class="hljs-keyword">double</span>, ratio&lt;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&gt;&gt; s2(ms);  <span class="hljs-comment">// &#x5408;&#x6CD5;&#xFF1A;s2.count() == 0.005</span>
+duration&lt;<span class="hljs-keyword">int</span>, ration&lt;<span class="hljs-number">1</span>, <span class="hljs-number">1000000</span>&gt;&gt; us&lt;ms&gt;;  <span class="hljs-comment">// &#x5408;&#x6CD5;:us.count() == 5000</span>
+</code></pre>
+<h3 id="stdchronodurationcount-&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::duration::count &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x67E5;&#x8BE2;&#x6301;&#x7EED;&#x65F6;&#x957F;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">constexpr</span> rep <span class="hljs-title">count</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<p>&#x8FD4;&#x56DE;duration&#x7684;&#x5185;&#x90E8;&#x503C;&#xFF0C;&#x5176;&#x503C;&#x7C7B;&#x578B;&#x548C;rep&#x4E00;&#x6837;&#x3002;</p>
+<h3 id="stdchronodurationoperator-&#x52A0;&#x6CD5;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator+ &#x52A0;&#x6CD5;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x7A7A;&#x64CD;&#x4F5C;&#xFF1A;&#x53EA;&#x4F1A;&#x8FD4;&#x56DE;*this&#x7684;&#x526F;&#x672C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">constexpr</span> duration <span class="hljs-keyword">operator</span>+() <span class="hljs-keyword">const</span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronodurationoperator--&#x51CF;&#x6CD5;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator- &#x51CF;&#x6CD5;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x8FD4;&#x56DE;&#x5C06;&#x5185;&#x90E8;&#x503C;&#x53EA;&#x4E3A;&#x8D1F;&#x6570;&#x7684;*this&#x526F;&#x672C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">constexpr</span> duration <span class="hljs-keyword">operator</span>-() <span class="hljs-keyword">const</span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>duration(--this-&gt;count());</code></p>
+<h3 id="stdchronodurationoperator-&#x524D;&#x7F6E;&#x81EA;&#x52A0;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator++ &#x524D;&#x7F6E;&#x81EA;&#x52A0;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x589E;&#x52A0;&#x5185;&#x90E8;&#x8BA1;&#x6570;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">duration&amp; <span class="hljs-keyword">operator</span>++();
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code class="lang-c++">++<span class="hljs-keyword">this</span>-&gt;internal_count;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronodurationoperator-&#x540E;&#x7F6E;&#x81EA;&#x52A0;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator++ &#x540E;&#x7F6E;&#x81EA;&#x52A0;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x81EA;&#x52A0;&#x5185;&#x90E8;&#x8BA1;&#x6570;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x8FD8;&#x6CA1;&#x6709;&#x589E;&#x52A0;&#x524D;&#x7684;*this&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">duration <span class="hljs-keyword">operator</span>++(<span class="hljs-keyword">int</span>);
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function">duration <span class="hljs-title">temp</span><span class="hljs-params">(*<span class="hljs-keyword">this</span>)</span></span>;
+++(*<span class="hljs-keyword">this</span>);
+<span class="hljs-keyword">return</span> temp;
+</code></pre>
+<h3 id="stdchronodurationoperator---&#x524D;&#x7F6E;&#x81EA;&#x51CF;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator-- &#x524D;&#x7F6E;&#x81EA;&#x51CF;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x81EA;&#x51CF;&#x5185;&#x90E8;&#x8BA1;&#x6570;&#x503C;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">duration&amp; <span class="hljs-keyword">operator</span>--();
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code class="lang-c++">--<span class="hljs-keyword">this</span>-&gt;internal_count;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronodurationoperator---&#x524D;&#x7F6E;&#x81EA;&#x51CF;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator-- &#x524D;&#x7F6E;&#x81EA;&#x51CF;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x81EA;&#x51CF;&#x5185;&#x90E8;&#x8BA1;&#x6570;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x8FD8;&#x6CA1;&#x6709;&#x51CF;&#x5C11;&#x524D;&#x7684;*this&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">duration <span class="hljs-keyword">operator</span>--(<span class="hljs-keyword">int</span>);
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function">duration <span class="hljs-title">temp</span><span class="hljs-params">(*<span class="hljs-keyword">this</span>)</span></span>;
+--(*<span class="hljs-keyword">this</span>);
+<span class="hljs-keyword">return</span> temp;
+</code></pre>
+<h3 id="stdchronodurationoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator+= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x5C06;&#x5176;&#x4ED6;duration&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x5185;&#x90E8;&#x503C;&#x589E;&#x52A0;&#x5230;&#x73B0;&#x6709;duration&#x5BF9;&#x8C61;&#x5F53;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">duration&amp; <span class="hljs-keyword">operator</span>+=(duration <span class="hljs-keyword">const</span>&amp; other);
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code class="lang-c++">internal_count+=other.count();
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronodurationoperator--&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator-= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x73B0;&#x6709;duration&#x5BF9;&#x8C61;&#x51CF;&#x53BB;&#x5176;&#x4ED6;duration&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x5185;&#x90E8;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">duration&amp; <span class="hljs-keyword">operator</span>-=(duration <span class="hljs-keyword">const</span>&amp; other);
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code class="lang-c++">internal_count-=other.count();
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronodurationoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator*= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x5185;&#x90E8;&#x503C;&#x4E58;&#x4EE5;&#x4E00;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">duration&amp; <span class="hljs-keyword">operator</span>*=(rep <span class="hljs-keyword">const</span>&amp; rhs);
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code class="lang-c++">internal_count*=rhs;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronodurationoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator/= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x5185;&#x90E8;&#x503C;&#x9664;&#x4EE5;&#x4E00;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">duration&amp; <span class="hljs-keyword">operator</span>/=(rep <span class="hljs-keyword">const</span>&amp; rhs);
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code class="lang-c++">internal_count/=rhs;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronodurationoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration::operator%= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x5185;&#x90E8;&#x503C;&#x5BF9;&#x4E00;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x503C;&#x6C42;&#x4F59;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">duration&amp; <span class="hljs-keyword">operator</span>%=(rep <span class="hljs-keyword">const</span>&amp; rhs);
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code class="lang-c++">internal_count%=rhs;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronodurationoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;&#x91CD;&#x8F7D;">std::chrono::duration::operator%= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;(&#x91CD;&#x8F7D;)</h3>
+<p>&#x5185;&#x90E8;&#x503C;&#x5BF9;&#x53E6;&#x4E00;&#x4E2A;duration&#x7C7B;&#x7684;&#x5185;&#x90E8;&#x503C;&#x6C42;&#x4F59;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">duration&amp; <span class="hljs-keyword">operator</span>%=(duration <span class="hljs-keyword">const</span>&amp; rhs);
+</code></pre>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code class="lang-c++">internal_count%=rhs.count();
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronodurationzero-&#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::duration::zero &#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5185;&#x90E8;&#x503C;&#x4E3A;0&#x7684;duration&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">constexpr</span> duration <span class="hljs-title">zero</span><span class="hljs-params">()</span></span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<pre><code class="lang-c++">duration(duration_values&lt;rep&gt;::zero());
+</code></pre>
+<h3 id="stdchronodurationmin-&#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::duration::min &#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x8FD4;&#x56DE;duration&#x7C7B;&#x5B9E;&#x4F8B;&#x5316;&#x540E;&#x80FD;&#x8868;&#x793A;&#x7684;&#x6700;&#x5C0F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">constexpr</span> duration <span class="hljs-title">min</span><span class="hljs-params">()</span></span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<pre><code class="lang-c++">duration(duration_values&lt;rep&gt;::min());
+</code></pre>
+<h3 id="stdchronodurationmax-&#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::duration::max &#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x8FD4;&#x56DE;duration&#x7C7B;&#x5B9E;&#x4F8B;&#x5316;&#x540E;&#x80FD;&#x8868;&#x793A;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">constexpr</span> duration <span class="hljs-title">max</span><span class="hljs-params">()</span></span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<pre><code class="lang-c++">duration(duration_values&lt;rep&gt;::max());
+</code></pre>
+<h3 id="stdchronoduration-&#x7B49;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration &#x7B49;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;duration&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x76F8;&#x7B49;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>==(
+<span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+<span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+</code></pre>
+<p><strong>&#x8981;&#x6C42;</strong></p>
+<p><code>lhs</code>&#x548C;<code>rhs</code>&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x3002;&#x5F53;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x65E0;&#x6CD5;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#xFF0C;&#x6216;&#x662F;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8F6C;&#x6362;&#x7684;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;duration&#x7C7B;&#xFF0C;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E0D;&#x5408;&#x7406;&#x3002;</p>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<p>&#x5F53;<code>CommonDuration</code>&#x548C;<code>std::common_type&lt; duration&lt; Rep1, Period1&gt;, duration&lt; Rep2, Period2&gt;&gt;::type</code>&#x540C;&#x7C7B;&#xFF0C;&#x90A3;&#x4E48;<code>lhs==rhs</code>&#x5C31;&#x4F1A;&#x8FD4;&#x56DE;<code>CommonDuration(lhs).count()==CommonDuration(rhs).count()</code>&#x3002;</p>
+<h3 id="stdchronoduration-&#x4E0D;&#x7B49;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration &#x4E0D;&#x7B49;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;duration&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x4E0D;&#x76F8;&#x7B49;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>!=(
+   <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+   <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+</code></pre>
+<p><strong>&#x8981;&#x6C42;</strong></p>
+<p><code>lhs</code>&#x548C;<code>rhs</code>&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x3002;&#x5F53;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x65E0;&#x6CD5;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#xFF0C;&#x6216;&#x662F;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8F6C;&#x6362;&#x7684;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;duration&#x7C7B;&#xFF0C;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E0D;&#x5408;&#x7406;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>!(lhs==rhs)</code></p>
+<h3 id="stdchronoduration-&#x5C0F;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration &#x5C0F;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;duration&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x5C0F;&#x4E8E;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&lt;(
+   <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+   <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+</code></pre>
+<p><strong>&#x8981;&#x6C42;</strong></p>
+<p><code>lhs</code>&#x548C;<code>rhs</code>&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x3002;&#x5F53;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x65E0;&#x6CD5;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#xFF0C;&#x6216;&#x662F;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8F6C;&#x6362;&#x7684;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;duration&#x7C7B;&#xFF0C;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E0D;&#x5408;&#x7406;&#x3002;</p>
+<p><strong>&#x7ED3;&#x679C;</strong></p>
+<p>&#x5F53;<code>CommonDuration</code>&#x548C;<code>std::common_type&lt; duration&lt; Rep1, Period1&gt;, duration&lt; Rep2, Period2&gt;&gt;::type</code>&#x540C;&#x7C7B;&#xFF0C;&#x90A3;&#x4E48;<code>lhs&amp;lt;rhs</code>&#x5C31;&#x4F1A;&#x8FD4;&#x56DE;<code>CommonDuration(lhs).count()&amp;lt;CommonDuration(rhs).count()</code>&#x3002;</p>
+<h3 id="stdchronoduration-&#x5927;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration &#x5927;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;duration&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x5927;&#x4E8E;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&gt;(
+   <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+   <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+</code></pre>
+<p><strong>&#x8981;&#x6C42;</strong></p>
+<p><code>lhs</code>&#x548C;<code>rhs</code>&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x3002;&#x5F53;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x65E0;&#x6CD5;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#xFF0C;&#x6216;&#x662F;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8F6C;&#x6362;&#x7684;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;duration&#x7C7B;&#xFF0C;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E0D;&#x5408;&#x7406;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>rhs&lt;lhs</code></p>
+<h3 id="stdchronoduration-&#x5C0F;&#x4E8E;&#x7B49;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration &#x5C0F;&#x4E8E;&#x7B49;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;duration&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x5C0F;&#x4E8E;&#x7B49;&#x4E8E;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&lt;=(
+   <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+   <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+</code></pre>
+<p><strong>&#x8981;&#x6C42;</strong></p>
+<p><code>lhs</code>&#x548C;<code>rhs</code>&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x3002;&#x5F53;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x65E0;&#x6CD5;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#xFF0C;&#x6216;&#x662F;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8F6C;&#x6362;&#x7684;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;duration&#x7C7B;&#xFF0C;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E0D;&#x5408;&#x7406;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>!(rhs&lt;lhs)</code></p>
+<h3 id="stdchronoduration-&#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;">std::chrono::duration &#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;</h3>
+<p>&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;duration&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Rep1, <span class="hljs-keyword">class</span> Period1, <span class="hljs-keyword">class</span> Rep2, <span class="hljs-keyword">class</span> Period2&gt;
+<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&gt;=(
+   <span class="hljs-keyword">const</span> duration&lt;Rep1, Period1&gt;&amp; lhs,
+   <span class="hljs-keyword">const</span> duration&lt;Rep2, Period2&gt;&amp; rhs);
+</code></pre>
+<p><strong>&#x8981;&#x6C42;</strong></p>
+<p><code>lhs</code>&#x548C;<code>rhs</code>&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x3002;&#x5F53;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x65E0;&#x6CD5;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#xFF0C;&#x6216;&#x662F;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8F6C;&#x6362;&#x7684;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;duration&#x7C7B;&#xFF0C;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E0D;&#x5408;&#x7406;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>!(lhs&lt;rhs)</code></p>
+<h3 id="stdchronodurationcast-&#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::duration_cast &#x975E;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x663E;&#x793A;&#x5C06;&#x4E00;&#x4E2A;<code>std::chrono::duration</code>&#x5BF9;&#x8C61;&#x8F6C;&#x5316;&#x4E3A;&#x53E6;&#x4E00;&#x4E2A;<code>std::chrono::duration</code>&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> ToDuration, <span class="hljs-keyword">class</span> Rep, <span class="hljs-keyword">class</span> Period&gt;
+<span class="hljs-function"><span class="hljs-keyword">constexpr</span> ToDuration <span class="hljs-title">duration_cast</span><span class="hljs-params">(<span class="hljs-keyword">const</span> duration&lt;Rep, Period&gt;&amp; d)</span></span>;
+</code></pre>
+<p><strong>&#x8981;&#x6C42;</strong></p>
+<p>ToDuration&#x5FC5;&#x987B;&#x662F;<code>std::chrono::duration</code>&#x7684;&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<p>duration&#x7C7B;d&#x8F6C;&#x6362;&#x4E3A;&#x6307;&#x5B9A;&#x7C7B;&#x578B;ToDuration&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x540C;&#x5C3A;&#x5BF8;&#x548C;&#x8868;&#x793A;&#x7C7B;&#x578B;&#x7684;&#x8F6C;&#x6362;&#x4E2D;&#x5C3D;&#x53EF;&#x80FD;&#x51CF;&#x5C11;&#x7CBE;&#x5EA6;&#x635F;&#x5931;&#x3002;</p>
+<h2 id="d12-stdchronotimepoint&#x7C7B;&#x578B;&#x6A21;&#x677F;">D.1.2 std::chrono::time_point&#x7C7B;&#x578B;&#x6A21;&#x677F;</h2>
+<p><code>std::chrono::time_point</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#x901A;&#x8FC7;(&#x7279;&#x522B;&#x7684;)&#x65F6;&#x949F;&#x6765;&#x8868;&#x793A;&#x67D0;&#x4E2A;&#x65F6;&#x95F4;&#x70B9;&#x3002;&#x8FD9;&#x4E2A;&#x65F6;&#x949F;&#x4EE3;&#x8868;&#x7684;&#x662F;&#x4ECE;epoch(1970-01-01 00:00:00 UTC&#xFF0C;&#x4F5C;&#x4E3A;UNIX&#x7CFB;&#x5217;&#x7CFB;&#x7EDF;&#x7684;&#x7279;&#x5B9A;&#x65F6;&#x95F4;&#x6233;)&#x5230;&#x73B0;&#x5728;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x6A21;&#x677F;&#x53C2;&#x6570;Clock&#x4EE3;&#x8868;&#x4F7F;&#x7528;&#x7684;&#x4F7F;&#x7528;(&#x4E0D;&#x540C;&#x7684;&#x4F7F;&#x7528;&#x5FC5;&#x5B9A;&#x6709;&#x81EA;&#x5DF1;&#x72EC;&#x7279;&#x7684;&#x7C7B;&#x578B;)&#xFF0C;&#x800C;Duration&#x6A21;&#x677F;&#x53C2;&#x6570;&#x4F7F;&#x7528;&#x6765;&#x6D4B;&#x91CF;&#x4ECE;epoch&#x5230;&#x73B0;&#x5728;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5E76;&#x4E14;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x662F;<code>std::chrono::duration</code>&#x7C7B;&#x578B;&#x3002;Duration&#x9ED8;&#x8BA4;&#x5B58;&#x50A8;Clock&#x4E0A;&#x7684;&#x6D4B;&#x91CF;&#x503C;&#x3002;</p>
+<h3 id="&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Clock,<span class="hljs-keyword">class</span> Duration = <span class="hljs-keyword">typename</span> Clock::duration&gt;
+<span class="hljs-keyword">class</span> time_point
+{
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-keyword">typedef</span> Clock clock;
+  <span class="hljs-keyword">typedef</span> Duration duration;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">typename</span> duration::rep rep;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">typename</span> duration::period period;
+
+  time_point();
+  <span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">time_point</span><span class="hljs-params">(<span class="hljs-keyword">const</span> duration&amp; d)</span></span>;
+
+  <span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Duration2&gt;
+  time_point(<span class="hljs-keyword">const</span> time_point&lt;clock, Duration2&gt;&amp; t);
+
+  <span class="hljs-function">duration <span class="hljs-title">time_since_epoch</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>;
+
+  time_point&amp; <span class="hljs-keyword">operator</span>+=(<span class="hljs-keyword">const</span> duration&amp; d);
+  time_point&amp; <span class="hljs-keyword">operator</span>-=(<span class="hljs-keyword">const</span> duration&amp; d);
+
+  <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">constexpr</span> time_point <span class="hljs-title">min</span><span class="hljs-params">()</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">constexpr</span> time_point <span class="hljs-title">max</span><span class="hljs-params">()</span></span>;
+};
+</code></pre>
+<h3 id="stdchronotimepoint-&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;">std::chrono::time_point &#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x6784;&#x9020;time_point&#x4EE3;&#x8868;&#x7740;&#xFF0C;&#x4F7F;&#x7528;&#x76F8;&#x5173;&#x7684;Clock&#xFF0C;&#x8BB0;&#x5F55;&#x4ECE;epoch&#x5230;&#x73B0;&#x5728;&#x7684;&#x65F6;&#x95F4;&#xFF1B;&#x5176;&#x5185;&#x90E8;&#x8BA1;&#x65F6;&#x4F7F;&#x7528;Duration::zero()&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">time_point();
+</code></pre>
+<p><strong>&#x540E;&#x9A8C;&#x6761;&#x4EF6;</strong></p>
+<p>&#x5BF9;&#x4E8E;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;&#x6784;&#x9020;&#x51FA;&#x7684;time_point&#x5BF9;&#x8C61;tp&#xFF0C;<code>tp.time_since_epoch() == tp::duration::zero()</code>&#x3002;</p>
+<h3 id="stdchronotimepoint-&#x9700;&#x8981;&#x65F6;&#x95F4;&#x957F;&#x5EA6;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;">std::chrono::time_point &#x9700;&#x8981;&#x65F6;&#x95F4;&#x957F;&#x5EA6;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x6784;&#x9020;time_point&#x4EE3;&#x8868;&#x7740;&#xFF0C;&#x4F7F;&#x7528;&#x76F8;&#x5173;&#x7684;Clock&#xFF0C;&#x8BB0;&#x5F55;&#x4ECE;epoch&#x5230;&#x73B0;&#x5728;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">time_point</span><span class="hljs-params">(<span class="hljs-keyword">const</span> duration&amp; d)</span></span>;
+</code></pre>
+<p><strong>&#x540E;&#x9A8C;&#x6761;&#x4EF6;</strong></p>
+<p>&#x5F53;&#x6709;&#x4E00;&#x4E2A;time_point&#x5BF9;&#x8C61;tp&#xFF0C;&#x662F;&#x901A;&#x8FC7;duration d&#x6784;&#x9020;&#x51FA;&#x6765;&#x7684;(tp(d))&#xFF0C;&#x90A3;&#x4E48;<code>tp.time_since_epoch() == d</code>&#x3002;</p>
+<h3 id="stdchronotimepoint-&#x8F6C;&#x6362;&#x6784;&#x9020;&#x51FD;&#x6570;">std::chrono::time_point &#x8F6C;&#x6362;&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
+<p>&#x6784;&#x9020;time_point&#x4EE3;&#x8868;&#x7740;&#xFF0C;&#x4F7F;&#x7528;&#x76F8;&#x5173;&#x7684;Clock&#xFF0C;&#x8BB0;&#x5F55;&#x4ECE;epoch&#x5230;&#x73B0;&#x5728;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> Duration2&gt;
+time_point(<span class="hljs-keyword">const</span> time_point&lt;clock, Duration2&gt;&amp; t);
+</code></pre>
+<p><strong>&#x8981;&#x6C42;</strong></p>
+<p>Duration2&#x5FC5;&#x987B;&#x5462;&#x4E2A;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x4E3A;Duration&#x3002;</p>
+<p><strong>&#x6548;&#x679C;</strong></p>
+<p>&#x5F53;<code>time_point(t.time_since_epoch())</code>&#x5B58;&#x5728;&#xFF0C;&#x4ECE;t.time_since_epoch()&#x4E2D;&#x83B7;&#x53D6;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x53EF;&#x4EE5;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x6210;Duration&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x4E14;&#x8FD9;&#x4E2A;&#x503C;&#x53EF;&#x4EE5;&#x5B58;&#x50A8;&#x5728;&#x4E00;&#x4E2A;&#x65B0;&#x7684;time_point&#x5BF9;&#x8C61;&#x4E2D;&#x3002;</p>
+<p>(&#x6269;&#x5C55;&#x9605;&#x8BFB;&#xFF1A;<a href="http://stackoverflow.com/questions/15718262/what-exactly-is-the-as-if-rule" target="_blank">as-if&#x51C6;&#x5219;</a>)</p>
+<h3 id="stdchronotimepointtimesinceepoch-&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::time_point::time_since_epoch &#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x8FD4;&#x56DE;&#x5F53;&#x524D;time_point&#x4ECE;epoch&#x5230;&#x73B0;&#x5728;&#x7684;&#x5177;&#x4F53;&#x65F6;&#x957F;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function">duration <span class="hljs-title">time_since_epoch</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<p>duration&#x7684;&#x503C;&#x5B58;&#x50A8;&#x5728;*this&#x4E2D;&#x3002;</p>
+<h3 id="stdchronotimepointoperator-&#x590D;&#x5408;&#x8D4B;&#x503C;&#x51FD;&#x6570;">std::chrono::time_point::operator+= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x51FD;&#x6570;</h3>
+<p>&#x5C06;&#x6307;&#x5B9A;&#x7684;duration&#x7684;&#x503C;&#x4E0E;&#x539F;&#x5B58;&#x50A8;&#x5728;&#x6307;&#x5B9A;&#x7684;time_point&#x5BF9;&#x8C61;&#x4E2D;&#x7684;duration&#x76F8;&#x52A0;&#xFF0C;&#x5E76;&#x5C06;&#x52A0;&#x540E;&#x503C;&#x5B58;&#x50A8;&#x5728;*this&#x5BF9;&#x8C61;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">time_point&amp; <span class="hljs-keyword">operator</span>+=(<span class="hljs-keyword">const</span> duration&amp; d);
+</code></pre>
+<p><strong>&#x6548;&#x679C;</strong></p>
+<p>&#x5C06;d&#x7684;&#x503C;&#x548C;duration&#x5BF9;&#x8C61;&#x7684;&#x503C;&#x76F8;&#x52A0;&#xFF0C;&#x5B58;&#x50A8;&#x5728;*this&#x4E2D;&#xFF0C;&#x5C31;&#x5982;&#x540C;this-&gt;internal_duration += d;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronotimepointoperator--&#x590D;&#x5408;&#x8D4B;&#x503C;&#x51FD;&#x6570;">std::chrono::time_point::operator-= &#x590D;&#x5408;&#x8D4B;&#x503C;&#x51FD;&#x6570;</h3>
+<p>&#x5C06;&#x6307;&#x5B9A;&#x7684;duration&#x7684;&#x503C;&#x4E0E;&#x539F;&#x5B58;&#x50A8;&#x5728;&#x6307;&#x5B9A;&#x7684;time_point&#x5BF9;&#x8C61;&#x4E2D;&#x7684;duration&#x76F8;&#x51CF;&#xFF0C;&#x5E76;&#x5C06;&#x52A0;&#x540E;&#x503C;&#x5B58;&#x50A8;&#x5728;*this&#x5BF9;&#x8C61;&#x4E2D;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++">time_point&amp; <span class="hljs-keyword">operator</span>-=(<span class="hljs-keyword">const</span> duration&amp; d);
+</code></pre>
+<p><strong>&#x6548;&#x679C;</strong></p>
+<p>&#x5C06;d&#x7684;&#x503C;&#x548C;duration&#x5BF9;&#x8C61;&#x7684;&#x503C;&#x76F8;&#x51CF;&#xFF0C;&#x5B58;&#x50A8;&#x5728;*this&#x4E2D;&#xFF0C;&#x5C31;&#x5982;&#x540C;this-&gt;internal_duration -= d;</p>
+<p><strong>&#x8FD4;&#x56DE;</strong>
+<code>*this</code></p>
+<h3 id="stdchronotimepointmin-&#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::time_point::min &#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x83B7;&#x53D6;time_point&#x5BF9;&#x8C61;&#x53EF;&#x80FD;&#x8868;&#x793A;&#x7684;&#x6700;&#x5C0F;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">constexpr</span> time_point <span class="hljs-title">min</span><span class="hljs-params">()</span></span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<pre><code class="lang-c++">time_point(time_point::duration::min()) (see <span class="hljs-number">11.1</span><span class="hljs-number">.1</span><span class="hljs-number">.15</span>)
+</code></pre>
+<h3 id="stdchronotimepointmax-&#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::time_point::max &#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x83B7;&#x53D6;time_point&#x5BF9;&#x8C61;&#x53EF;&#x80FD;&#x8868;&#x793A;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">constexpr</span> time_point <span class="hljs-title">max</span><span class="hljs-params">()</span></span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<pre><code class="lang-c++">time_point(time_point::duration::max()) (see <span class="hljs-number">11.1</span><span class="hljs-number">.1</span><span class="hljs-number">.16</span>)
+</code></pre>
+<h2 id="d13-stdchronosystemclock&#x7C7B;">D.1.3 std::chrono::system_clock&#x7C7B;</h2>
+<p><code>std::chrono::system_clock</code>&#x7C7B;&#x63D0;&#x4F9B;&#x7ED9;&#x4E86;&#x4ECE;&#x7CFB;&#x7EDF;&#x5B9E;&#x65F6;&#x65F6;&#x949F;&#x4E0A;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x529F;&#x80FD;&#x3002;&#x53EF;&#x4EE5;&#x8C03;&#x7528;<code>std::chrono::system_clock::now()</code>&#x6765;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7684;&#x65F6;&#x95F4;&#x3002;<code>std::chrono::system_clock::time_point</code>&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>std::chrono::system_clock::to_time_t()</code>&#x548C;<code>std::chrono::system_clock::to_time_point()</code>&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x503C;&#x8F6C;&#x6362;&#x6210;time_t&#x7C7B;&#x578B;&#x3002;&#x7CFB;&#x7EDF;&#x65F6;&#x949F;&#x4E0D;&#x7A33;&#x5B9A;&#xFF0C;&#x6240;&#x4EE5;<code>std::chrono::system_clock::now()</code>&#x83B7;&#x53D6;&#x5230;&#x7684;&#x65F6;&#x95F4;&#x53EF;&#x80FD;&#x4F1A;&#x65E9;&#x4E8E;&#x4E4B;&#x524D;&#x7684;&#x4E00;&#x6B21;&#x8C03;&#x7528;(&#x6BD4;&#x5982;&#xFF0C;&#x65F6;&#x949F;&#x88AB;&#x624B;&#x52A8;&#x8C03;&#x6574;&#x8FC7;&#x6216;&#x4E0E;&#x5916;&#x90E8;&#x65F6;&#x949F;&#x8FDB;&#x884C;&#x4E86;&#x540C;&#x6B65;)&#x3002;</p>
+<h3 id="&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<pre><code class="lang-c++"><span class="hljs-keyword">class</span> system_clock
+{
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-keyword">typedef</span> unspecified-integral-type rep;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::ratio&lt;unspecified,unspecified&gt; period;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::chrono::duration&lt;rep,period&gt; duration;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::chrono::time_point&lt;system_clock&gt; time_point;
+  <span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">bool</span> is_steady=unspecified;
+
+  <span class="hljs-function"><span class="hljs-keyword">static</span> time_point <span class="hljs-title">now</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span></span>;
+
+  <span class="hljs-function"><span class="hljs-keyword">static</span> time_t <span class="hljs-title">to_time_t</span><span class="hljs-params">(<span class="hljs-keyword">const</span> time_point&amp; t)</span> <span class="hljs-keyword">noexcept</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">static</span> time_point <span class="hljs-title">from_time_t</span><span class="hljs-params">(time_t t)</span> <span class="hljs-keyword">noexcept</span></span>;
+};
+</code></pre>
+<h3 id="stdchronosystemclockrep-&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">std::chrono::system_clock::rep &#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<p>&#x5C06;&#x65F6;&#x95F4;&#x5468;&#x671F;&#x6570;&#x8BB0;&#x5F55;&#x5728;&#x4E00;&#x4E2A;duration&#x503C;&#x4E2D;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">typedef</span> unspecified-integral-type rep;
+</code></pre>
+<h3 id="stdchronosystemclockperiod-&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">std::chrono::system_clock::period &#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<p>&#x7C7B;&#x578B;&#x4E3A;<code>std::ratio</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#xFF0C;&#x901A;&#x8FC7;&#x5728;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7684;duration&#x6216;time_point&#x95F4;&#x7279;&#x5316;&#x6700;&#x5C0F;&#x79D2;&#x6570;(&#x6216;&#x5C06;1&#x79D2;&#x5206;&#x4E3A;&#x597D;&#x51E0;&#x4EFD;)&#x3002;period&#x6307;&#x5B9A;&#x4E86;&#x65F6;&#x949F;&#x7684;&#x7CBE;&#x5EA6;&#xFF0C;&#x800C;&#x975E;&#x65F6;&#x949F;&#x9891;&#x7387;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::ratio&lt;unspecified,unspecified&gt; period;
+</code></pre>
+<h3 id="stdchronosystemclockduration-&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">std::chrono::system_clock::duration &#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<p>&#x7C7B;&#x578B;&#x4E3A;<code>std::ratio</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#xFF0C;&#x901A;&#x8FC7;&#x7CFB;&#x7EDF;&#x5B9E;&#x65F6;&#x65F6;&#x949F;&#x83B7;&#x53D6;&#x4E24;&#x4E2A;&#x65F6;&#x95F4;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x65F6;&#x957F;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::chrono::duration&lt;
+   <span class="hljs-built_in">std</span>::chrono::system_clock::rep,
+   <span class="hljs-built_in">std</span>::chrono::system_clock::period&gt; duration;
+</code></pre>
+<h3 id="stdchronosystemclocktimepoint-&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">std::chrono::system_clock::time_point &#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<p>&#x7C7B;&#x578B;&#x4E3A;<code>std::ratio</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#xFF0C;&#x901A;&#x8FC7;&#x7CFB;&#x7EDF;&#x5B9E;&#x65F6;&#x65F6;&#x949F;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x70B9;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::chrono::time_point&amp;lt;<span class="hljs-built_in">std</span>::chrono::system_clock&amp;gt; time_point;
+</code></pre>
+<h3 id="stdchronosystemclocknow-&#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::system_clock::now &#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;&#x7CFB;&#x7EDF;&#x5B9E;&#x65F6;&#x65F6;&#x949F;&#x4E0A;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7684;&#x5916;&#x90E8;&#x8BBE;&#x5907;&#x663E;&#x793A;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function">time_point <span class="hljs-title">now</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span></span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<p>time_point&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x6765;&#x4EE3;&#x8868;&#x5F53;&#x524D;&#x7CFB;&#x7EDF;&#x5B9E;&#x65F6;&#x65F6;&#x949F;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong></p>
+<p>&#x5F53;&#x9519;&#x8BEF;&#x53D1;&#x751F;&#xFF0C;<code>std::system_error</code>&#x5F02;&#x5E38;&#x5C06;&#x4F1A;&#x629B;&#x51FA;&#x3002;</p>
+<h3 id="stdchronosystemclocktotimet-&#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::system_clock:to_time_t &#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x5C06;time_point&#x7C7B;&#x578B;&#x503C;&#x8F6C;&#x5316;&#x4E3A;time_t&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">time_t</span> <span class="hljs-keyword">to_time_t</span>(time_point <span class="hljs-keyword">const</span>&amp; t) <span class="hljs-keyword">noexcept</span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<p>&#x901A;&#x8FC7;&#x5BF9;t&#x8FDB;&#x884C;&#x820D;&#x5165;&#x6216;&#x622A;&#x65AD;&#x7CBE;&#x5EA6;&#xFF0C;&#x5C06;&#x5176;&#x8F6C;&#x5316;&#x4E3A;&#x4E00;&#x4E2A;time_t&#x7C7B;&#x578B;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong></p>
+<p>&#x5F53;&#x9519;&#x8BEF;&#x53D1;&#x751F;&#xFF0C;<code>std::system_error</code>&#x5F02;&#x5E38;&#x5C06;&#x4F1A;&#x629B;&#x51FA;&#x3002;</p>
+<h3 id="stdchronosystemclockfromtimet-&#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::system_clock::from_time_t &#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function">time_point <span class="hljs-title">from_time_t</span><span class="hljs-params">(time_t <span class="hljs-keyword">const</span>&amp; t)</span> <span class="hljs-keyword">noexcept</span></span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<p>time_point&#x4E2D;&#x7684;&#x503C;&#x4E0E;t&#x4E2D;&#x7684;&#x503C;&#x4E00;&#x6837;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong></p>
+<p>&#x5F53;&#x9519;&#x8BEF;&#x53D1;&#x751F;&#xFF0C;<code>std::system_error</code>&#x5F02;&#x5E38;&#x5C06;&#x4F1A;&#x629B;&#x51FA;&#x3002;</p>
+<h2 id="d14-stdchronosteadyclock&#x7C7B;">D.1.4 std::chrono::steady_clock&#x7C7B;</h2>
+<p><code>std::chrono::steady_clock</code>&#x80FD;&#x8BBF;&#x95EE;&#x7CFB;&#x7EDF;&#x7A33;&#x5B9A;&#x65F6;&#x949F;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8C03;&#x7528;<code>std::chrono::steady_clock::now()</code>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x8BBE;&#x5907;&#x4E0A;&#x663E;&#x793A;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x4E0E;&#x4F7F;&#x7528;<code>std::chrono::steady_clock::now()</code>&#x83B7;&#x53D6;&#x7684;&#x65F6;&#x95F4;&#x6CA1;&#x6709;&#x56FA;&#x5B9A;&#x7684;&#x5173;&#x7CFB;&#x3002;&#x7A33;&#x5B9A;&#x65F6;&#x949F;&#x662F;&#x65E0;&#x6CD5;&#x56DE;&#x8C03;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5728;<code>std::chrono::steady_clock::now()</code>&#x4E24;&#x6B21;&#x8C03;&#x7528;&#x540E;&#xFF0C;&#x7B2C;&#x4E8C;&#x6B21;&#x8C03;&#x7528;&#x83B7;&#x53D6;&#x7684;&#x65F6;&#x95F4;&#x5FC5;&#x5B9A;&#x7B49;&#x4E8E;&#x6216;&#x5927;&#x4E8E;&#x7B2C;&#x4E00;&#x6B21;&#x83B7;&#x5F97;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<h3 id="&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<pre><code class="lang-c++"><span class="hljs-keyword">class</span> steady_clock
+{
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-keyword">typedef</span> unspecified-integral-type rep;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::ratio&lt;
+      unspecified,unspecified&gt; period;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::chrono::duration&lt;rep,period&gt; duration;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::chrono::time_point&lt;steady_clock&gt;
+      time_point;
+  <span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">bool</span> is_steady=<span class="hljs-literal">true</span>;
+
+  <span class="hljs-function"><span class="hljs-keyword">static</span> time_point <span class="hljs-title">now</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span></span>;
+};
+</code></pre>
+<h3 id="stdchronosteadyclockrep-&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">std::chrono::steady_clock::rep &#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<p>&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x6574;&#x578B;&#xFF0C;&#x7528;&#x6765;&#x4FDD;&#x5B58;duration&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">typedef</span> unspecified-integral-type rep;
+</code></pre>
+<h3 id="stdchronosteadyclockperiod-&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">std::chrono::steady_clock::period &#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<p>&#x7C7B;&#x578B;&#x4E3A;<code>std::ratio</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#xFF0C;&#x901A;&#x8FC7;&#x5728;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7684;duration&#x6216;time_point&#x95F4;&#x7279;&#x5316;&#x6700;&#x5C0F;&#x79D2;&#x6570;(&#x6216;&#x5C06;1&#x79D2;&#x5206;&#x4E3A;&#x597D;&#x51E0;&#x4EFD;)&#x3002;period&#x6307;&#x5B9A;&#x4E86;&#x65F6;&#x949F;&#x7684;&#x7CBE;&#x5EA6;&#xFF0C;&#x800C;&#x975E;&#x65F6;&#x949F;&#x9891;&#x7387;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::ratio&lt;unspecified,unspecified&gt; period;
+</code></pre>
+<h3 id="stdchronosteadyclockduration-&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">std::chrono::steady_clock::duration &#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<p>&#x7C7B;&#x578B;&#x4E3A;<code>std::ratio</code>&#x7C7B;&#x578B;&#x6A21;&#x677F;&#xFF0C;&#x901A;&#x8FC7;&#x7CFB;&#x7EDF;&#x5B9E;&#x65F6;&#x65F6;&#x949F;&#x83B7;&#x53D6;&#x4E24;&#x4E2A;&#x65F6;&#x95F4;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x65F6;&#x957F;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::chrono::duration&lt;
+   <span class="hljs-built_in">std</span>::chrono::system_clock::rep,
+   <span class="hljs-built_in">std</span>::chrono::system_clock::period&gt; duration;
+</code></pre>
+<h3 id="stdchronosteadyclocktimepoint-&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">std::chrono::steady_clock::time_point &#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<p><code>std::chrono::time_point</code>&#x7C7B;&#x578B;&#x5B9E;&#x4F8B;&#xFF0C;&#x53EF;&#x4EE5;&#x5B58;&#x50A8;&#x4ECE;&#x7CFB;&#x7EDF;&#x7A33;&#x5B9A;&#x65F6;&#x949F;&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x95F4;&#x70B9;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::chrono::time_point&lt;<span class="hljs-built_in">std</span>::chrono::steady_clock&gt; time_point;
+</code></pre>
+<h3 id="stdchronosteadyclocknow-&#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;">std::chrono::steady_clock::now &#x9759;&#x6001;&#x6210;&#x5458;&#x51FD;&#x6570;</h3>
+<p>&#x4ECE;&#x7CFB;&#x7EDF;&#x7A33;&#x5B9A;&#x65F6;&#x949F;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x58F0;&#x660E;</strong></p>
+<pre><code class="lang-c++"><span class="hljs-function">time_point <span class="hljs-title">now</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span></span>;
+</code></pre>
+<p><strong>&#x8FD4;&#x56DE;</strong></p>
+<p>time_point&#x8868;&#x793A;&#x5F53;&#x524D;&#x7CFB;&#x7EDF;&#x7A33;&#x5B9A;&#x65F6;&#x949F;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><strong>&#x629B;&#x51FA;</strong>
+&#x5F53;&#x9047;&#x5230;&#x9519;&#x8BEF;&#xFF0C;&#x4F1A;&#x629B;&#x51FA;<code>std::system_error</code>&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x540C;&#x6B65;</strong>
+&#x5F53;&#x5148;&#x884C;&#x8C03;&#x7528;&#x8FC7;&#x4E00;&#x6B21;<code>std::chrono::steady_clock::now()</code>&#xFF0C;&#x90A3;&#x4E48;&#x4E0B;&#x4E00;&#x6B21;time_point&#x83B7;&#x53D6;&#x7684;&#x503C;&#xFF0C;&#x4E00;&#x5B9A;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x7B2C;&#x4E00;&#x6B21;&#x83B7;&#x53D6;&#x7684;&#x503C;&#x3002;</p>
+<h2 id="d15-stdchronohighresolutionclock&#x7C7B;&#x5B9A;&#x4E49;">D.1.5 std::chrono::high_resolution_clock&#x7C7B;&#x5B9A;&#x4E49;</h2>
+<p><code>td::chrono::high_resolution_clock</code>&#x7C7B;&#x80FD;&#x8BBF;&#x95EE;&#x7CFB;&#x7EDF;&#x9AD8;&#x7CBE;&#x5EA6;&#x65F6;&#x949F;&#x3002;&#x548C;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x65F6;&#x949F;&#x4E00;&#x6837;&#xFF0C;&#x901A;&#x8FC7;&#x8C03;&#x7528;<code>std::chrono::high_resolution_clock::now()</code>&#x6765;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x3002;<code>std::chrono::high_resolution_clock</code>&#x53EF;&#x80FD;&#x662F;<code>std::chrono::system_clock</code>&#x7C7B;&#x6216;<code>std::chrono::steady_clock</code>&#x7C7B;&#x7684;&#x522B;&#x540D;&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x5C31;&#x662F;&#x72EC;&#x7ACB;&#x7684;&#x4E00;&#x4E2A;&#x7C7B;&#x3002;</p>
+<p>&#x901A;&#x8FC7;<code>std::chrono::high_resolution_clock</code>&#x5177;&#x6709;&#x6240;&#x6709;&#x6807;&#x51C6;&#x5E93;&#x652F;&#x6301;&#x65F6;&#x949F;&#x4E2D;&#x6700;&#x9AD8;&#x7684;&#x7CBE;&#x5EA6;&#xFF0C;&#x8FD9;&#x5C31;&#x610F;&#x5473;&#x7740;&#x4F7F;&#x7528;
+<code>std::chrono::high_resolution_clock::now()</code>&#x8981;&#x82B1;&#x6389;&#x4E00;&#x4E9B;&#x65F6;&#x95F4;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5F53;&#x4F60;&#x518D;&#x8C03;&#x7528;<code>std::chrono::high_resolution_clock::now()</code>&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x51FD;&#x6570;&#x672C;&#x8EAB;&#x7684;&#x65F6;&#x95F4;&#x5F00;&#x9500;&#x3002;</p>
+<h3 id="&#x7C7B;&#x578B;&#x5B9A;&#x4E49;">&#x7C7B;&#x578B;&#x5B9A;&#x4E49;</h3>
+<pre><code class="lang-c++"><span class="hljs-keyword">class</span> high_resolution_clock
+{
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-keyword">typedef</span> unspecified-integral-type rep;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::ratio&lt;
+      unspecified,unspecified&gt; period;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::chrono::duration&lt;rep,period&gt; duration;
+  <span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::chrono::time_point&lt;
+      unspecified&gt; time_point;
+  <span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">bool</span> is_steady=unspecified;
+
+  <span class="hljs-function"><span class="hljs-keyword">static</span> time_point <span class="hljs-title">now</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span></span>;
+};
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="D.0-chinese.html" class="navigation navigation-prev " aria-label="Previous page: 附录D C++线程类库参考">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="D.2-chinese.html" class="navigation navigation-next " aria-label="Next page: D.2 condition_variable头文件">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"D.1 chrono头文件","level":"1.22.1","depth":2,"next":{"title":"D.2 condition_variable头文件","level":"1.22.2","depth":2,"path":"content/appendix_D/D.2-chinese.md","ref":"content/appendix_D/D.2-chinese.md","articles":[]},"previous":{"title":"附录D C++线程类库参考","level":"1.22","depth":1,"path":"content/appendix_D/D.0-chinese.md","ref":"content/appendix_D/D.0-chinese.md","articles":[{"title":"D.1 chrono头文件","level":"1.22.1","depth":2,"path":"content/appendix_D/D.1-chinese.md","ref":"content/appendix_D/D.1-chinese.md","articles":[]},{"title":"D.2 condition_variable头文件","level":"1.22.2","depth":2,"path":"content/appendix_D/D.2-chinese.md","ref":"content/appendix_D/D.2-chinese.md","articles":[]},{"title":"D.3 atomic头文件","level":"1.22.3","depth":2,"path":"content/appendix_D/D.3-chinese.md","ref":"content/appendix_D/D.3-chinese.md","articles":[]},{"title":"D.4 future头文件","level":"1.22.4","depth":2,"path":"content/appendix_D/D.4-chinese.md","ref":"content/appendix_D/D.4-chinese.md","articles":[]},{"title":"D.5 mutex头文件","level":"1.22.5","depth":2,"path":"content/appendix_D/D.5-chinese.md","ref":"content/appendix_D/D.5-chinese.md","articles":[]},{"title":"D.6 ratio头文件","level":"1.22.6","depth":2,"path":"content/appendix_D/D.6-chinese.md","ref":"content/appendix_D/D.6-chinese.md","articles":[]},{"title":"D.7 thread头文件","level":"1.22.7","depth":2,"path":"content/appendix_D/D.7-chinese.md","ref":"content/appendix_D/D.7-chinese.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"plugins":["katex","ace"],"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"msyh","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"陈晓伟 chenxiaowei","pdf":{"pageNumbers":false,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":10,"left":10,"top":10,"bottom":20}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"C++并发编程实战（第2版）","language":"zh-hans","gitbook":"*","description":"《C++ Concurrency In Action - SECOND EDITION》英文版的中文翻译版。","direction":"ltr"},"file":{"path":"content/appendix_D/D.1-chinese.md","mtime":"2022-11-19T02:54:31.285Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-11-19T07:50:48.148Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,34 @@
+{
+  "title": "《C++ Concurrency In Action - SECOND EDITION》中文版",
+
+  "author" : "陈晓伟 chenxiaowei",
+
+  "description":"作为对《C++ Concurrency In Action - SECOND EDITION》英文版的中文翻译。",
+
+  "language":"zh-hans",
+
+  "direction":"ltr",
+
+  "pluginsConfig": {
+    "fontSettings": {
+    "theme": "white",
+    "family": "msyh",
+    "size": 2
+    },
+    "plugins": [
+      "katex",
+      "ace"
+    ]
+  },
+  
+  "pdf": {
+    "pageNumbers": false,
+    "paperSize": "a4",
+    "margin": {
+      "right": 10,
+      "left": 10,
+      "top": 10,
+      "bottom": 20
+    }
+  }
+}
